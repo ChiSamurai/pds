@@ -1,0 +1,7 @@
+@use "../typography";
+
+$capitalized: typography.define(14px, 19px, normal, 2px, uppercase) !default;
+
+$capitalized-typography-map: (
+  "capitalized": $capitalized,
+);

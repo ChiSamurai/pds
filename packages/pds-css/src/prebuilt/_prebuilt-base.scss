@@ -1,0 +1,11 @@
+// please note that the files within the "sass/prebuilt" folder are not published in any regard, that
+// constraint enables us to actually use the relative "node_modules" path for the resolution of ress.
+// this is not possible when any sass file is imported into an external project scope
+@use "../../node_modules/ress/ress";
+
+@use "../styleguide";
+
+@include styleguide.core;
+@include styleguide.semantics;
+@include styleguide.class-semantics;
+@include styleguide.forms;

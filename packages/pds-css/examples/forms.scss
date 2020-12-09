@@ -1,0 +1,12 @@
+@use "constants" as *;
+@use "mixins" as *;
+
+@import "shared";
+
+.display-1 {
+  @include outer-spacing($space-6, y);
+}
+
+textarea {
+  resize: none;
+}

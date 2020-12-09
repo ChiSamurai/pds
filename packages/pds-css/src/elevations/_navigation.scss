@@ -1,0 +1,5 @@
+@use "../elevation";
+
+$navigation: elevation.define(500, 6px 0 10px -6px rgba(0, 0, 0, 0.2));
+$header: elevation.define(700, 0 6px 10px -6px rgba(0, 0, 0, 0.2));
+$footer: elevation.define(600, 0 -6px 10px -6px rgba(0, 0, 0, 0.2));

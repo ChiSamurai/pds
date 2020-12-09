@@ -1,0 +1,11 @@
+@mixin webkit-only {
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    @content;
+  }
+}
+
+@mixin moz-only {
+  @-moz-document url-prefix() {
+    @content;
+  }
+}

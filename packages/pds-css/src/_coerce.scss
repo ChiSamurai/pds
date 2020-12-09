@@ -1,0 +1,10 @@
+@function to($value, $type, $else) {
+  @return if(type_of($value) == $type, $value, $else);
+}
+
+@function to-str($value) {
+  @return to($value, string, $else: if($value != null, inspect($value), ""));
+}
+@function to-list($value) {
+  @return to($value, list, $else: ($value));
+}

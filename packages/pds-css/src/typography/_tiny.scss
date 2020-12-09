@@ -1,0 +1,7 @@
+@use "../typography";
+
+$tiny: typography.define(10px, 13px, bold, 0.02px) !default;
+
+$tiny-typography-map: (
+  "tiny": $tiny,
+);

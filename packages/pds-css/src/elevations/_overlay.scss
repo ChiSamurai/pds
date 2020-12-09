@@ -1,0 +1,6 @@
+@use "../elevation";
+
+$overlay: elevation.define(
+  1000,
+  (0 2px 8px 0 rgba(0, 0, 0, 0.08), 0 20px 32px 0 rgba(119, 119, 119, 0.24))
+);

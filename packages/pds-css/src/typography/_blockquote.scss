@@ -1,0 +1,7 @@
+@use "../typography";
+
+$blockquote: typography.define(20px, 28px, bold, -0.02px) !default;
+
+$blockquote-typography-map: (
+  "blockquote": $blockquote,
+);

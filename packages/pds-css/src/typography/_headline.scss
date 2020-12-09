@@ -1,0 +1,17 @@
+@use "../typography";
+
+$h1: typography.define(40px, 54px, bold, -0.02px);
+$h2: typography.define(32px, 44px, bold, -0.02px);
+$h3: typography.define(28px, 38px, bold, -0.02px);
+$h4: typography.define(24px, 32px, bold, -0.02px);
+$h5: typography.define(20px, 28px, bold, -0.02px);
+$h6: typography.define(16px, 22px, bold, -0.01px);
+
+$headline-typography-map: (
+  "h1": $h1,
+  "h2": $h2,
+  "h3": $h3,
+  "h4": $h4,
+  "h5": $h5,
+  "h6": $h6,
+);

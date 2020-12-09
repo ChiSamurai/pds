@@ -1,0 +1,46 @@
+@use "../constants" as *;
+@use "../color" as *;
+
+$blackberry: #37001a;
+$red-grape: #4b0023;
+$berry: #720035;
+$raspberry: #990047;
+$pinkberry: #c00059;
+
+// Tints <editor-fold>
+$berry-t1: tint($berry, $t1);
+$berry-t2: tint($berry, $t2);
+$berry-t3: tint($berry, $t3);
+$berry-t4: tint($berry, $t4);
+// </editor-fold>
+
+@function berrylicious-gradient() {
+  @return unquote("linear-gradient(45%, #{$berry} 0%, #{$pinkberry} 100%)");
+}
+
+$berry-light: $berry-t2 !default;
+$berry-lighter: $berry-t3 !default;
+$berry-lightest: $berry-t4 !default;
+
+// Maps <editor-fold>
+$berry-color-map: (
+  "blackberry": $blackberry,
+  "red-grape": $red-grape,
+  "berry": $berry,
+  "raspberry": $raspberry,
+  "pinkberry": $pinkberry,
+);
+
+$berry-color-tint-map: (
+  "berry-t1": $berry-t1,
+  "berry-t2": $berry-t2,
+  "berry-t3": $berry-t3,
+  "berry-t4": $berry-t4,
+);
+
+$berry-color-tint-alias-map: (
+  "berry-light": $berry-light,
+  "berry-lighter": $berry-lighter,
+  "berry-lightest": $berry-lightest,
+);
+// </editor-fold>

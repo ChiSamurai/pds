@@ -1,0 +1,5 @@
+examples/*.css
+
+# currently there's no css provided within the source code state of pds-css this can change
+# at any point, so feel free to adjust or remove this ignore pattern
+**/*.css

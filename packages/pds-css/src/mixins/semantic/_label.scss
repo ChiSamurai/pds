@@ -1,0 +1,11 @@
+@use "../typography" as *;
+
+@mixin label {
+  label {
+    display: block;
+    user-select: none;
+    color: var(--gray-dark);
+
+    @include typography-style(--lead);
+  }
+}

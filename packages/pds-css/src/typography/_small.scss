@@ -1,0 +1,7 @@
+@use "../typography";
+
+$small: typography.define(12px, 15px) !default;
+
+$small-typography-map: (
+  "small": $small,
+);

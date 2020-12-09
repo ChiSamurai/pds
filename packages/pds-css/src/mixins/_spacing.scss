@@ -1,0 +1,83 @@
+@use "utility/assert" as *;
+@use "../custom-property" as *;
+@use "../coerce" as *;
+@use "../list" as *;
+
+$spacing-types: (margin, padding);
+$spacing-anchors: (all, top, right, bottom, left, horizontal, vertical, x, y);
+
+@mixin inner-spacing($space, $anchors: all, $trim: false, $justify: false) {
+  @include spacing($space, $anchors, $trim, $justify, $type: padding);
+}
+@mixin outer-spacing($space, $anchors: all, $trim: false, $justify: false) {
+  @include spacing($space, $anchors, $trim, $justify, margin);
+}
+
+@mixin outer-sibling-spacing($space, $trim: false, $justify: false) {
+  & + & {
+    @include outer-spacing($space, left, $trim, $justify);
+  }
+}
+@mixin outer-child-spacing($space, $anchors: all, $trim: false, $justify: false) {
+  > * {
+    @include outer-spacing($space, $anchors, $trim, $justify);
+  }
+}
+
+@mixin spacing($space, $anchors: all, $trim: false, $justify: false, $type: margin) {
+  $space: calc(#{var-or-default($space)} * #{var(--spacing, 1)});
+  $anchors: to-list($anchors);
+
+  @include assert-some($spacing-anchors, $anchors...);
+  @include assert-some($spacing-types, $type);
+
+  @if some($anchors, all, top, vertical, y) {
+    #{$type}-top: $space;
+  }
+  @if some($anchors, all, left, horizontal, x) {
+    #{$type}-left: $space;
+  }
+  @if some($anchors, all, bottom, vertical, y) {
+    #{$type}-bottom: $space;
+  }
+  @if some($anchors, all, right, horizontal, x) {
+    #{$type}-right: $space;
+  }
+
+  @if $justify {
+    @include spacing-justify($anchors, $type);
+  }
+  @if $trim {
+    @include spacing-trim($anchors, $type);
+  }
+}
+@mixin spacing-justify($anchors, $type: margin) {
+  @include assert-some($spacing-anchors, $anchors);
+  @include assert-some($spacing-types, $type);
+
+  @if some($anchors, horizontal, x) {
+    &:not(:last-of-type) {
+      #{$type}-right: 0;
+    }
+  }
+  @if some($anchors, vertical, y) {
+    &:not(:last-of-type) {
+      #{$type}-bottom: 0;
+    }
+  }
+}
+@mixin spacing-trim($anchors: all, $type: margin) {
+  @include assert-some($spacing-anchors, $anchors);
+  @include assert-some($spacing-types, $type);
+
+  $is-vertical: some($anchors, vertical, y);
+
+  &:first-of-type {
+    $dir: if($is-vertical, top, left);
+    #{$type}-#{$dir}: 0;
+  }
+  &:last-of-type {
+    $dir: if($is-vertical, bottom, right);
+    #{$type}-#{$dir}: 0;
+  }
+}

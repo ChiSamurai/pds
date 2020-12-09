@@ -1,0 +1,17 @@
+@function any($list, $nth...) {
+  @each $n in $nth {
+    @if index($list, $n) == null {
+      @return false;
+    }
+  }
+  @return true;
+}
+
+@function some($list, $nth...) {
+  @each $n in $nth {
+    @if index($list, $n) != null {
+      @return true;
+    }
+  }
+  @return false;
+}

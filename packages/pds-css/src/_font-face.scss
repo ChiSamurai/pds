@@ -1,0 +1,38 @@
+@use "sass:map";
+@use "coerce" as *;
+@use "list" as *;
+
+$font-formats: (
+  "eot": "embedded-opentype",
+  "woff": "woff",
+  "woff2": "woff2",
+  "ttf": "truetype",
+);
+
+@function font-url($base-url, $file-name, $format, $fix-ie: true) {
+  $ie-fix: if($format == eot and $fix-ie, "?#iefix", "");
+  @return unquote('url("#{$base-url}/#{$file-name}.#{$format}#{$ie-fix}")');
+}
+
+@mixin font-src($base-url, $file-name, $formats, $fix-ie: true) {
+  @if some($formats, eot) {
+    src: font-url($base-url, $file-name, eot, $fix-ie);
+  }
+  $src: "";
+  @each $format in $formats {
+    $src: $src + '#{font-url($base-url, $file-name, $format, $fix-ie)} format("#{map-get($font-formats, $format)}")';
+    @if $format != nth($formats, length($formats)) {
+      // comma separator for intermediate src declarations
+      $src: $src + ",";
+    }
+  }
+  src: unquote($src);
+}
+@mixin font-face($base-url, $file-name, $family-name, $weight, $formats: $font-formats, $fix-ie: true) {
+  @font-face {
+    font-family: $family-name;
+    font-weight: if($weight, $weight, normal);
+
+    @include font-src($base-url, $file-name, to-list($formats), $fix-ie);
+  }
+}

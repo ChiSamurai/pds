@@ -1,0 +1,34 @@
+$system-yellow: #fcba04;
+
+// Tints <editor-fold>
+$system-yellow-t1: #fdcc43;
+$system-yellow-t2: #fdd668;
+$system-yellow-t3: #feeab3;
+$system-yellow-t4: #fef8e5;
+// </editor-fold>
+
+$system-yellow-outline: #ffcc00;
+
+$system-yellow-light: $system-yellow-t2;
+$system-yellow-lighter: $system-yellow-t3;
+$system-yellow-lightest: $system-yellow-t4;
+
+// Maps <editor-fold>
+$system-yellow-color-map: (
+  "system-yellow": $system-yellow,
+  "system-yellow-outline": $system-yellow-outline,
+);
+
+$system-yellow-color-tint-map: (
+  "system-yellow-t1": $system-yellow-t1,
+  "system-yellow-t2": $system-yellow-t2,
+  "system-yellow-t3": $system-yellow-t3,
+  "system-yellow-t4": $system-yellow-t4,
+);
+
+$system-yellow-color-tint-alias-map: (
+  "system-yellow-light": $system-yellow-light,
+  "system-yellow-lighter": $system-yellow-lighter,
+  "system-yellow-lightest": $system-yellow-lightest,
+);
+// </editor-fold>

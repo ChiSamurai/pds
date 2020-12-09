@@ -1,0 +1,7 @@
+@use "../typography" as *;
+
+@mixin blockquote {
+  blockquote {
+    @include typography-style(--blockquote);
+  }
+}

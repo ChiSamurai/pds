@@ -1,0 +1,52 @@
+@use "../../list" as *;
+
+/// Converts a single or a list of selector strings to become a "state" selector for the
+/// respective context they are used in. This function aims to simplify the enforcement
+/// of consistency across multiple state mixin shorthands (eg. disabled-state)
+///
+/// @param $state-selectors A single value or a list of selector strings
+/// @param [$within-parent] Optional flag to indicate whether the state should also
+//                          trigger if the parent matches the {@link $state-selectors}
+@mixin state($state-selectors, $within-parent: false) {
+  $result-selector: "";
+  @if type_of($state-selectors) == list {
+    @each $s in $state-selectors {
+      $next-selector: if($within-parent, "#{$s} &, &#{$s}", "&#{$s}");
+      // prettier-ignore
+      $result-selector: "#{$result-selector}#{if($result-selector == "", "", ",")}#{$next-selector}";
+    }
+  } @else if type_of($state-selectors) == string {
+    $result-selector: if($within-parent, "#{$state-selectors} &, &#{$state-selectors}", "&#{$state-selectors}");
+  } @else {
+    @error "Unable to convert \"#{$state-selectors}\" to a state selector. Unsupported type #{type_of($result-selector)}";
+  }
+  #{unquote($result-selector)} {
+    @content;
+  }
+}
+
+@mixin hover-state($within-parent: false) {
+  @include state((".hover", ":hover"), $within-parent) {
+    @content;
+  }
+}
+@mixin focus-state($within-parent: false) {
+  @include state((".focus", ":focus"), $within-parent) {
+    @content;
+  }
+}
+@mixin active-state($within-parent: false) {
+  @include state((".active", ":active"), $within-parent) {
+    @content;
+  }
+}
+@mixin disabled-state($within-parent: false) {
+  @include state((".disabled", ":disabled", "[disabled]"), $within-parent) {
+    @content;
+  }
+}
+@mixin read-only-state($within-parent: false) {
+  @include state((".read-only", ":read-only", "[read-only]"), $within-parent) {
+    @content;
+  }
+}

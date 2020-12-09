@@ -1,0 +1,34 @@
+$system-red: #e63535;
+
+// Tints <editor-fold>
+$system-red-t1: #ff3b3b;
+$system-red-t2: #ff5c5c;
+$system-red-t3: #ff8080;
+$system-red-t4: #ffe6e6;
+// </editor-fold>
+
+$system-red-outline: $system-red-t1;
+
+$system-red-light: $system-red-t2;
+$system-red-lighter: $system-red-t3;
+$system-red-lightest: $system-red-t4;
+
+// Maps <editor-fold>
+$system-red-color-map: (
+  "system-red": $system-red,
+  "system-red-outline": $system-red-outline,
+);
+
+$system-red-color-tint-map: (
+  "system-red-t1": $system-red-t1,
+  "system-red-t2": $system-red-t2,
+  "system-red-t3": $system-red-t3,
+  "system-red-t4": $system-red-t4,
+);
+
+$system-red-color-tint-alias-map: (
+  "system-red-light": $system-red-light,
+  "system-red-lighter": $system-red-lighter,
+  "system-red-lightest": $system-red-lightest,
+);
+// </editor-fold>

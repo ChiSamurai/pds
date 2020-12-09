@@ -1,0 +1,107 @@
+@use "../../constants" as *;
+@use "../../colors" as *;
+@use "../utility" as *;
+@use "../rounding" as *;
+@use "../typography" as *;
+@use "../spacing" as *;
+
+$button-height: var(--input-height) !default;
+$button-rounding: $button-height !default;
+$button-border: 1px solid !default;
+
+$button-min-width: 120px !default;
+$button-spacing-y: $space-1 !default;
+$button-spacing-x: $space-3 !default;
+
+@mixin button-base {
+  user-select: none;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  height: $button-height;
+  border: $button-border;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+
+  line-height: 1 !important;
+
+  @include typography-style(--button);
+}
+
+@mixin button-primary {
+  border-color: var(--primary);
+  background-color: var(--primary);
+  color: var(--primary-contrast);
+
+  @include hover-state {
+    background-color: var(--primary-light);
+    border-color: var(--primary-light);
+  }
+  @include focus-state {
+    background-color: var(--primary);
+    border-color: var(--primary-light);
+  }
+  @include active-state {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+  }
+  @include disabled-state {
+    background-color: var(--disabled);
+    border-color: var(--disabled);
+    color: $system-dark-t2;
+  }
+}
+@mixin button-secondary {
+  border-color: var(--gray-darker);
+  background-color: transparent;
+  color: var(--gray-darker);
+
+  @include hover-state {
+    background-color: rgba(#000, 0.1);
+  }
+  @include focus-state {
+    border-color: var(--primary-light);
+  }
+  @include active-state {
+    background-color: var(--gray-darker);
+    border-color: var(--gray-darker);
+    color: var(--gray-lighter);
+  }
+  @include disabled-state {
+    background-color: rgba(var(--gray-darkest-rgb), 0.05);
+    border-color: var(--disabled);
+    color: var(--disabled);
+  }
+}
+
+@mixin button {
+  @at-root :root {
+    --button-min-width: #{$button-min-width};
+  }
+
+  button,
+  .button {
+    @include button-base;
+    @include button-primary;
+
+    @include outer-sibling-spacing($space-4);
+    @include outer-child-spacing($space-2, x, $trim: true);
+    @include inner-spacing($button-spacing-x, x);
+    @include inner-spacing($button-spacing-y, y);
+    @include rounding($button-rounding);
+
+    &:not(.small) {
+      min-width: var(--button-min-width);
+    }
+
+    @content;
+
+    &.secondary {
+      @include button-secondary;
+    }
+    &.small {
+      height: var(--input-height-small, 24px);
+    }
+  }
+}

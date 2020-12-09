@@ -1,0 +1,16 @@
+$link: var(--primary) !default;
+$link-visited: var(--primary) !default;
+
+$link-hover: var(--link-visited) !default;
+$link-focus: var(--link-visited) !default;
+$link-active: var(--link-visited) !default;
+
+$link-color-map: (
+  "link": $link,
+  "link-visited": $link-visited,
+);
+$link-state-color-map: (
+  "link-hover": $link-hover,
+  "link-focus": $link-focus,
+  "link-active": $link-active,
+);

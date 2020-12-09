@@ -1,0 +1,9 @@
+@use "../../constants" as *;
+@use "../spacing" as *;
+
+@mixin paragraph($trim-spacing: true) {
+  p {
+    @include outer-spacing($space-4, vertical, $trim-spacing);
+    @content;
+  }
+}

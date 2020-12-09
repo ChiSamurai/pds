@@ -1,0 +1,36 @@
+@use "../custom-property" as *;
+
+@mixin custom-properties($custom-property-map, $prefix: null, $suffix: null) {
+  @each $property, $value in $custom-property-map {
+    @if type-of($value) == map {
+      @include custom-properties($value, $property);
+    } @else if $value != null {
+      #{normalize($property, $prefix, $suffix)}: #{var-or-default($value)};
+    }
+  }
+}
+
+@mixin custom-color-properties($custom-property-map, $prefix: null, $suffix: null, $rgb: true) {
+  @each $property, $color in $custom-property-map {
+    @if type-of($color) == map {
+      @include custom-color-properties($custom-property-map, $prefix, $suffix, $rgb);
+    } @else if not is-var-key($color) and not is-var($color) and type-of($color) != color {
+      @error "Unable to include custom color properties. Non color value provided for property \"#{$property}\"";
+    } @else if $color != null {
+      @include custom-color-property($property, $color, $prefix, $suffix, $rgb);
+    }
+  }
+}
+
+@mixin custom-color-property($property, $color, $prefix: null, $suffix: null, $rgb: true) {
+  #{normalize($property, $prefix, $suffix)}: #{var-or-default($color)};
+  @if $rgb {
+    $rgb-suffix: if($suffix, "#{$suffix}-rgb", "rgb");
+    $property: normalize($property, $prefix, $rgb-suffix);
+    @if is-var-key($color) or is-var($color) {
+      #{$property}: #{var-or-default($color, $prefix: $prefix, $suffix: $rgb-suffix)};
+    } @else {
+      #{$property}: #{unquote("#{red($color)},#{green($color)},#{blue($color)}")};
+    }
+  }
+}

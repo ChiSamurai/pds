@@ -1,0 +1,74 @@
+@import "../sass/colors"; // needs to be absolute in order to not resolve this file as they have identical names
+@import "constants";
+@import "mixins";
+
+@import "shared";
+
+.row {
+  .col {
+    flex: 1 1 auto;
+  }
+}
+
+.color-preview {
+  @include typography-style(--body-small);
+
+  display: block;
+  text-align: center;
+  min-height: 50px;
+
+  &.preview-primary {
+    min-height: 100px;
+  }
+  &.preview-contrast {
+    color: white;
+  }
+
+  &:first-of-type {
+    @include rounding($rounding-lg, top);
+  }
+  &:last-of-type {
+    @include rounding($rounding-lg, bottom);
+  }
+
+  // super special case just for visibility
+  &.bg-system-light-t1,
+  &.bg-system-light-t2 {
+    border: 2px solid $system-light;
+    border-top: none;
+
+    &.bg-system-light-t1 {
+      border-bottom: none;
+    }
+  }
+}
+
+@include background-color-accents($berry-color-map, "bg");
+@include background-color-accents($berry-color-tint-map, "bg");
+
+@include background-color-accents($petrol-color-map, "bg");
+@include background-color-accents($petrol-color-tint-map, "bg");
+
+@include background-color-accents($blue-color-map, "bg");
+@include background-color-accents($blue-color-tint-map, "bg");
+
+@include background-color-accents($system-red-color-map, "bg");
+@include background-color-accents($system-red-color-tint-map, "bg");
+
+@include background-color-accents($system-green-color-map, "bg");
+@include background-color-accents($system-green-color-tint-map, "bg");
+
+@include background-color-accents($system-blue-color-map, "bg");
+@include background-color-accents($system-blue-color-tint-map, "bg");
+
+@include background-color-accents($system-yellow-color-map, "bg");
+@include background-color-accents($system-yellow-color-tint-map, "bg");
+
+@include background-color-accents($system-orange-color-map, "bg");
+@include background-color-accents($system-orange-color-tint-map, "bg");
+
+@include background-color-accents($system-dark-color-map, "bg");
+@include background-color-accents($system-dark-color-tint-map, "bg");
+
+@include background-color-accents($system-light-color-map, "bg");
+@include background-color-accents($system-light-color-tint-map, "bg");

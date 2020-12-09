@@ -1,0 +1,44 @@
+@use "sass:map";
+@use "custom-property" as *;
+
+@function define(
+  $font-size,
+  $line-height: null,
+  $font-weight: null,
+  $letter-spacing: null,
+  $text-transform: null,
+  $font-family: null
+) {
+  @return (
+    "font-size": var-or-default($font-size),
+    "font-weight": var-or-default($font-weight),
+    "font-family": var-or-default($font-family),
+    "line-height": var-or-default($line-height),
+    "letter-spacing": var-or-default($letter-spacing),
+    "text-transform": var-or-default($text-transform)
+  );
+}
+
+@function get-font-size($typography) {
+  @return map.get($typography, "font-size");
+}
+
+@function get-font-weight($typography) {
+  @return map.get($typography, "font-weight");
+}
+
+@function get-font-family($typography) {
+  @return map.get($typography, "font-family");
+}
+
+@function get-line-height($typography) {
+  @return map.get($typography, "line-height");
+}
+
+@function get-letter-spacing($typography) {
+  @return map.get($typography, "letter-spacing");
+}
+
+@function get-text-transform($typography) {
+  @return map.get($typography, "text-transform");
+}

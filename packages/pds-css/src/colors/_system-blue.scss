@@ -1,0 +1,34 @@
+$system-blue: #0647f5;
+
+// Tints <editor-fold>
+$system-blue-t1: #2b62f6;
+$system-blue-t2: #6aa1f9;
+$system-blue-t3: #c1dbfc;
+$system-blue-t4: #e5f0ff;
+// </editor-fold>
+
+$system-blue-outline: #1476d8;
+
+$system-blue-light: $system-blue-t2;
+$system-blue-lighter: $system-blue-t3;
+$system-blue-lightest: $system-blue-t4;
+
+// Maps <editor-fold>
+$system-blue-color-map: (
+  "system-blue": $system-blue,
+  "system-blue-outline": $system-blue-outline,
+);
+
+$system-blue-color-tint-map: (
+  "system-blue-t1": $system-blue-t1,
+  "system-blue-t2": $system-blue-t2,
+  "system-blue-t3": $system-blue-t3,
+  "system-blue-t4": $system-blue-t4,
+);
+
+$system-blue-color-tint-alias-map: (
+  "system-blue-light": $system-blue-light,
+  "system-blue-lighter": $system-blue-lighter,
+  "system-blue-lightest": $system-blue-lightest,
+);
+// </editor-fold>

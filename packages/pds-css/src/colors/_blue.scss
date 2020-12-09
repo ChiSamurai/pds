@@ -1,0 +1,46 @@
+@use "../constants" as *;
+@use "../color" as *;
+
+$deep-blue: #152e39;
+$smokey-blue: #255263;
+$blue: #306980;
+$strong-blue: #3b809d;
+$bright-blue: #4598b9;
+
+// Tints <editor-fold>
+$blue-t1: tint($blue, $t1);
+$blue-t2: tint($blue, $t2);
+$blue-t3: tint($blue, $t3);
+$blue-t4: tint($blue, $t4);
+// </editor-fold>
+
+@function blue-motion-gradient() {
+  @return unquote("linear-gradient(45%, #{$blue} 0%, #{#00DEFF} 100%)");
+}
+
+$blue-light: $blue-t2 !default;
+$blue-lighter: $blue-t3 !default;
+$blue-lightest: $blue-t4 !default;
+
+// Maps <editor-fold>
+$blue-color-map: (
+  "deep-blue": $deep-blue,
+  "smokey-blue": $smokey-blue,
+  "blue": $blue,
+  "strong-blue": $strong-blue,
+  "bright-blue": $bright-blue,
+);
+
+$blue-color-tint-map: (
+  "blue-t1": $blue-t1,
+  "blue-t2": $blue-t2,
+  "blue-t3": $blue-t3,
+  "blue-t4": $blue-t4,
+);
+
+$blue-color-tint-alias-map: (
+  "blue-light": $blue-light,
+  "blue-lighter": $blue-lighter,
+  "blue-lightest": $blue-lightest,
+);
+// </editor-fold>

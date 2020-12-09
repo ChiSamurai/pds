@@ -1,0 +1,10 @@
+@use "../typography" as *;
+
+@mixin headline($from: 1, $through: 6) {
+  @for $n from $from through $through {
+    h#{$n} {
+      @include typography-style("--h#{$n}");
+      @content;
+    }
+  }
+}

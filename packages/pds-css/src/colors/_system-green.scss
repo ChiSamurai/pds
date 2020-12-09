@@ -1,0 +1,34 @@
+$system-green: #159f03;
+
+// Tints <editor-fold>
+$system-green-t1: #50b742;
+$system-green-t2: #8acf81;
+$system-green-t3: #c4e7c0;
+$system-green-t4: #e3fff1;
+// </editor-fold>
+
+$system-green-outline: $system-green;
+
+$system-green-light: $system-green-t2;
+$system-green-lighter: $system-green-t3;
+$system-green-lightest: $system-green-t4;
+
+// Maps <editor-fold>
+$system-green-color-map: (
+  "system-green": $system-green,
+  "system-green-outline": $system-green-outline,
+);
+
+$system-green-color-tint-map: (
+  "system-green-t1": $system-green-t1,
+  "system-green-t2": $system-green-t2,
+  "system-green-t3": $system-green-t3,
+  "system-green-t4": $system-green-t4,
+);
+
+$system-green-color-tint-alias-map: (
+  "system-green-light": $system-green-light,
+  "system-green-lighter": $system-green-lighter,
+  "system-green-lightest": $system-green-lightest,
+);
+// </editor-fold>

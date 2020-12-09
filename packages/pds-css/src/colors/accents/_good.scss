@@ -1,0 +1,11 @@
+@use "../system-green" as *;
+
+$good: $system-green !default;
+$good-outline: $system-green-outline !default;
+$good-contrast: white !default;
+
+$good-color-map: (
+  "good": $good,
+  "good-outline": $good-outline,
+  "good-contrast": $good-contrast,
+);

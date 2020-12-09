@@ -1,0 +1,14 @@
+{
+  "name": "@vitagroup/pds-css",
+  "version": "0.10.0",
+  "description": "Foundational CSS layer for further library and application integration",
+  "dependencies": {
+    "sass": "^1.30.0"
+  },
+  "peerDependencies": {
+    "ress": "^2.0.4"
+  },
+  "devDependencies": {
+    "postcss-preset-env": "^6.7.0"
+  }
+}

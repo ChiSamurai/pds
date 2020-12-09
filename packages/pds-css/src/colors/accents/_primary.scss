@@ -1,0 +1,24 @@
+@use "../berry" as *;
+@use "../../constants" as *;
+@use "../../color" as *;
+
+$primary-dark: $blackberry !default;
+$primary: $berry !default;
+$primary-light: $pinkberry !default;
+$primary-contrast: white !default;
+
+$primary-hover: $primary-light !default;
+$primary-focus: var(--primary) !default;
+$primary-active: $primary-dark !default;
+
+$primary-color-map: (
+  "primary-dark": $primary-dark,
+  "primary": $primary,
+  "primary-light": $primary-light,
+  "primary-contrast": $primary-contrast,
+);
+$primary-state-color-map: (
+  "primary-hover": $primary-hover,
+  "primary-focus": $primary-focus,
+  "primary-active": $primary-active,
+);

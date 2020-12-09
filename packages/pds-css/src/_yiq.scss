@@ -1,0 +1,24 @@
+$default-threshold: 128 !default;
+$default-light-contrast: #fff !default;
+$default-dark-contrast: #000 !default;
+
+@function is-light($color, $threshold: $default-threshold) {
+  $r: red($color);
+  $g: green($color);
+  $b: blue($color);
+  $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+  @return $yiq >= $threshold;
+}
+
+@function is-dark($color, $threshold: $default-threshold) {
+  @return not is-light($color, $threshold);
+}
+
+@function contrast-color(
+  $color,
+  $light-contrast: $default-light-contrast,
+  $dark-contrast: $default-dark-contrast,
+  $threshold: $default-threshold
+) {
+  @return if(is-light($color), $light-contrast, $dark-contrast);
+}

@@ -1,0 +1,8 @@
+@use "../colors/blue" as *;
+@use "../colors" as * with (
+  $primary-light: $strong-blue,
+  $primary: $blue,
+  $primary-dark: $smokey-blue
+);
+
+@import "prebuilt-base";

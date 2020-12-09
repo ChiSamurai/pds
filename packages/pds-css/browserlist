@@ -1,0 +1,4 @@
+# for more information about browserlist queries please refer to https://github.com/browserslist/browserslist#queries
+> 5% and > 1% in DE
+last 2 versions
+ie > 10

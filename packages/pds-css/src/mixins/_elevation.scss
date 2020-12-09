@@ -1,0 +1,8 @@
+@use "../elevation";
+
+@mixin elevation($elevation) {
+  $box-shadow: elevation.get-box-shadow($elevation);
+
+  z-index: elevation.get-z-index($elevation);
+  box-shadow: inspect($box-shadow);
+}

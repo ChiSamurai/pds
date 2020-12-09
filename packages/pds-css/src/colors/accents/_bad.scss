@@ -1,0 +1,11 @@
+@use "../system-red" as *;
+
+$bad: $system-red !default;
+$bad-outline: $system-red-outline !default;
+$bad-contrast: white !default;
+
+$bad-color-map: (
+  "bad": $bad,
+  "bad-outline": $bad-outline,
+  "bad-contrast": $bad-contrast,
+);

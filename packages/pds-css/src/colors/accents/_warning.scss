@@ -1,0 +1,11 @@
+@use "../system-yellow" as *;
+
+$warning: $system-yellow !default;
+$warning-outline: $system-yellow-outline !default;
+$warning-contrast: black !default;
+
+$warning-color-map: (
+  "warning": $warning,
+  "warning-outline": $warning-outline,
+  "warning-contrast": $warning-contrast,
+);
