@@ -10,7 +10,12 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["packages/pds-css/**/*.ts"]
+            "lintFilePatterns": [
+              "packages/pds-css/**/*.ts",
+              "packages/pds-css/src/**/*.html",
+              "packages/pds-css/src/**/*.html",
+              "packages/pds-css/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -18,7 +23,8 @@
           "options": {
             "jestConfig": "packages/pds-css/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/packages/pds-css"]
         },
         "build": {
           "builder": "@vitagroup-devkit/style:package",
@@ -26,7 +32,7 @@
             "outDir": "dist/packages/pds-css",
             "rootDir": "packages/pds-css",
             "prebuild": {
-              "files": [ "src/prebuilt/*.scss" ],
+              "files": ["src/prebuilt/*.scss"],
               "outDir": "dist/packages/pds-css/prebuilt"
             },
             "postcssConfig": "packages/pds-css/postcss.config.js",
