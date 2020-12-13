@@ -34,9 +34,13 @@ export class PreventNativeScrollbarOffset implements OnInit, DoCheck, OnDestroy 
     this.renderer.removeStyle(nativeElement, 'left');
   }
   apply(): void {
-    const { nativeElement } = this.elementRef;
-    this.renderer.setStyle(nativeElement, 'position', 'relative', RendererStyleFlags2.Important);
-    this.renderer.setStyle(nativeElement, 'left', `${this.getScrollbarWidth() / 2}px`, RendererStyleFlags2.Important);
+    const scrollbarWidth = this.getScrollbarWidth();
+
+    if (scrollbarWidth > 0) {
+      const { nativeElement } = this.elementRef;
+      this.renderer.setStyle(nativeElement, 'position', 'relative', RendererStyleFlags2.Important);
+      this.renderer.setStyle(nativeElement, 'left', `${scrollbarWidth / 2}px`, RendererStyleFlags2.Important);
+    }
   }
 
 }

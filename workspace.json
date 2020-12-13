@@ -55,7 +55,7 @@
       "projectType": "library",
       "root": "packages/common",
       "sourceRoot": "packages/common/src",
-      "prefix": "vitagroup",
+      "prefix": "",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -93,7 +93,7 @@
       "projectType": "library",
       "root": "packages/cdk",
       "sourceRoot": "packages/cdk/src",
-      "prefix": "vitagroup",
+      "prefix": "",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",

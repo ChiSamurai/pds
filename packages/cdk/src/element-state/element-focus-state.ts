@@ -1,14 +1,17 @@
 import { ElementState } from './element-state';
-import { ElementStateFilters } from './element-state-filter';
-import targetOutsideOf = ElementStateFilters.targetOutsideOf;
 
-export class ElementFocusState extends ElementState {
+// todo(@janunld): consider a platform independent token for this check?!
+function targetOutsideElement(target: any, element: any): boolean {
+  return !(element as Node).contains(target as Node);
+}
 
+export class ElementFocusState<T = any> extends ElementState<T> {
   className = 'focus';
 
   protected configureEventListener() {
-    this.unsetOn('document:mousedown', e => targetOutsideOf(this.nativeElement)(e) && this.isSet);
+    const unsetListener = e =>
+      targetOutsideElement(e.target, this.nativeElement) && this.isSet;
+    this.unsetOn('document:mousedown', unsetListener);
     this.setOn('mousedown');
   }
-
 }

@@ -1,7 +1,6 @@
-import { ElementRef, Renderer2 } from '@angular/core';
+import { ElementRef, Predicate, Renderer2 } from '@angular/core';
 import { EventUnlistener, PrimitiveBehaviorState } from '@vitagroup/common';
 import { Observable } from 'rxjs';
-import { ElementStateFilter } from './element-state-filter';
 
 export abstract class ElementState<T = any> {
   private _unlistener: EventUnlistener[] = [];
@@ -60,12 +59,12 @@ export abstract class ElementState<T = any> {
     return this.state.asObservable();
   }
 
-  protected setOn(eventName: string, filter?: ElementStateFilter): EventUnlistener {
+  protected setOn(eventName: string, filter?: Predicate<any>): EventUnlistener {
     return this.listen(eventName, e => {
       if (filter == null || filter(e)) this.set();
     });
   }
-  protected unsetOn(eventName: string, filter?: ElementStateFilter): EventUnlistener {
+  protected unsetOn(eventName: string, filter?: Predicate<any>): EventUnlistener {
     return this.listen(eventName, e => {
       if (filter == null || filter(e)) this.unset();
     });
@@ -80,5 +79,4 @@ export abstract class ElementState<T = any> {
     for (const unlisten of this._unlistener) unlisten();
     this._unlistener = [];
   }
-
 }

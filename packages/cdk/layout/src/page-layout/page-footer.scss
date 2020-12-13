@@ -1,0 +1,9 @@
+page-footer {
+  display: flex;
+  flex-direction: column;
+
+  fx-container {
+    flex-direction: column;
+    flex: 1 0 100%;
+  }
+}

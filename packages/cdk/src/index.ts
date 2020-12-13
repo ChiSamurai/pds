@@ -7,8 +7,13 @@ export * from './element-state/element-active-state';
 export * from './element-state/element-disabled-state';
 export * from './element-state/element-focus-state';
 export * from './element-state/element-readonly-state';
-export * from './element-state/element-state-filter';
 export * from './element-state/element-state';
+
+export * from './loading-state/module';
+export * from './loading-state/loading-indicator';
+export * from './loading-state/loading-overlay';
+export * from './loading-state/loading-state';
+export * from './loading-state/element-loading-state';
 
 export * from './selection/module';
 export * from './selection/selection-control';
