@@ -15,7 +15,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@vitagroup/common": ["packages/common/src/index.ts"],
+      "@vitagroup/common/http": ["packages/common/http/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

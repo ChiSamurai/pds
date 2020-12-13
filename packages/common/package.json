@@ -1,0 +1,15 @@
+{
+  "name": "@vitagroup/common",
+  "version": "0.3.0",
+  "peerDependencies": {
+    "@angular/platform-browser": "^11.0.4",
+    "@angular/router": "^11.0.4",
+    "@angular/common": "^11.0.4",
+    "@angular/core": "^11.0.4",
+    "rxjs": "~6.5.5"
+  },
+  "dependencies": {
+    "@ng-web-apis/common": "^1.9.0",
+    "tslib": "^2.0.0"
+  }
+}
