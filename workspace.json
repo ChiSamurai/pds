@@ -88,6 +88,44 @@
           }
         }
       }
+    },
+    "cdk": {
+      "projectType": "library",
+      "root": "packages/cdk",
+      "sourceRoot": "packages/cdk/src",
+      "prefix": "vitagroup",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "packages/cdk/tsconfig.lib.json",
+            "project": "packages/cdk/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/cdk/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "packages/cdk/tsconfig.lib.json",
+              "packages/cdk/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!packages/cdk/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/packages/cdk"],
+          "options": {
+            "jestConfig": "packages/cdk/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

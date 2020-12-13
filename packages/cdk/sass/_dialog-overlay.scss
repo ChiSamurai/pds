@@ -1,0 +1,5 @@
+@import "~@angular/cdk/overlay";
+
+@mixin dialog-overlay {
+  @include cdk-overlay;
+}
