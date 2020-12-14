@@ -1,4 +1,13 @@
-import { Directive, ElementRef, Inject, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Renderer2,
+  ViewEncapsulation
+} from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { coerceCSSUnit } from '@vitagroup/common';
 import { Subject } from 'rxjs';
@@ -10,13 +19,20 @@ import {
   MediaFlexContainerState
 } from './flex-container-state';
 
-@Directive({ selector: '[fxContainer], fx-container' })
+@Component({
+  selector: 'fx-container, [fx-container]',
+  styleUrls: [ './flex-container.scss' ],
+  encapsulation: ViewEncapsulation.None,
+  template: `
+    <ng-container *encapsulateTemplateOutlet></ng-container>
+    <ng-content></ng-content>
+  `
+})
 export class FlexContainer implements OnInit, OnDestroy {
   protected readonly ngDestroys = new Subject<void>();
 
   constructor(
-    @Optional()
-    @Inject(MEDIA_FLEX_CONTAINER_STATES)
+    @Optional() @Inject(MEDIA_FLEX_CONTAINER_STATES)
     private _mediaStates: MediaFlexContainerState[],
     @Optional() @Inject(FLEX_CONTAINER_STATE) private _defaultState: FlexContainerState,
     protected readonly elementRef: ElementRef<HTMLElement>,
@@ -26,9 +42,6 @@ export class FlexContainer implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._setStyle('width', '100%');
-    this._setStyle('margin', '0 auto');
-    this._setStyle('display', 'flex');
     if (this._defaultState != null) {
       this.setContainerState(this._defaultState);
     }
@@ -39,12 +52,8 @@ export class FlexContainer implements OnInit, OnDestroy {
         .subscribe(() => this.checkMediaStates());
     }
   }
-
   ngOnDestroy(): void {
     this.clearContainerState();
-    this._removeStyle('margin');
-    this._removeStyle('display');
-    this._removeStyle('width');
 
     this.ngDestroys.next();
     this.ngDestroys.complete();
@@ -58,7 +67,6 @@ export class FlexContainer implements OnInit, OnDestroy {
     this._setStyle('padding-right', padding);
     this._setStyle('padding-left', padding);
   }
-
   clearContainerState(): void {
     this._removeStyle('max-width');
     this._removeStyle('padding-right');
@@ -69,7 +77,6 @@ export class FlexContainer implements OnInit, OnDestroy {
     const aliases = Array.isArray(breakpoint) ? breakpoint : [ breakpoint ];
     return aliases.some((alias) => this.media.isActive(alias));
   }
-
   checkMediaStates(): boolean {
     let didMatchSomething = false;
     for (const state of this._mediaStates) {
@@ -89,7 +96,6 @@ export class FlexContainer implements OnInit, OnDestroy {
   private _setStyle(style: string, value: any): void {
     this.renderer.setStyle(this.elementRef.nativeElement, style, value);
   }
-
   private _removeStyle(style: string): void {
     this.renderer.removeStyle(this.elementRef.nativeElement, style);
   }
