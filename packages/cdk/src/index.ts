@@ -23,3 +23,17 @@ export * from './selection/selection-value';
 export * from './selection/triggers/selection-deselect';
 export * from './selection/triggers/selection-select';
 export * from './selection/triggers/selection-toggle';
+
+export * from './sort/module';
+export * from './sort/sort-group';
+export * from './sort/sort-toggle';
+export * from './sort/sort-order';
+export * from './sort/sort-model';
+export * from './sort/sort';
+export * from './sort/property-sort';
+export * from './sort/sort-param-parser';
+
+export * from './svg-icon/module';
+export * from './svg-icon/svg-icon';
+export * from './svg-icon/svg-icon-host';
+export * from './svg-icon/svg-icon-registry';
