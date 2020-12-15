@@ -1,0 +1,41 @@
+@import 'elevations';
+@import 'constants';
+@import 'mixins';
+
+$nav-background: var(--gray-lighter) !default;
+$nav-elevation: $navigation !default;
+$nav-entry-active-indicator-width: 4px !default;
+$nav-entry-active-background: var(--gray-light) !default;
+$nav-secondary-entry-divider: 1px solid var(--gray-light) !default;
+
+pds-main-menu {
+  @if $nav-elevation != null {
+    @include elevation($navigation);
+  }
+
+  background: $nav-background;
+
+  > .nav-entries {
+    &.nav-entries-static {
+      .nav-entry {
+        border-top: $nav-secondary-entry-divider;
+      }
+    }
+
+    .nav-entry {
+      @include inner-spacing($space-5 - $nav-entry-active-indicator-width, x);
+
+      font-weight: normal;
+      transition: 60ms ease-out;
+      // to not cause disruption when applying outer borders for active states we initially set the border values here
+      border-right: $nav-entry-active-indicator-width solid transparent;
+      border-left: $nav-entry-active-indicator-width solid transparent;
+
+      @include active-state {
+        background: $nav-entry-active-background;
+        border-left: $nav-entry-active-indicator-width solid var(--primary);
+        font-weight: bold;
+      }
+    }
+  }
+}
