@@ -1,0 +1,17 @@
+@import "constants";
+@import "mixins";
+
+pds-modal-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  &, fx-container {
+    position: relative;
+  }
+
+  svg-icon#close {
+    transform: translateY(-50%);
+    right: 0; top: 50%;
+  }
+}

@@ -1,0 +1,9 @@
+pds-modal-footer {
+  display: flex;
+  width: 100%;
+
+  &, fx-container {
+    justify-content: center;
+    align-self: center;
+  }
+}

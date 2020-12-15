@@ -1,0 +1,66 @@
+@import 'constants';
+@import 'mixins';
+
+pds-modal {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  background-color: var(--dialog-background, var(--background));
+  position: relative;
+
+  &:not(.fullscreen) {
+    @include rounding($rounding-lg);
+
+    min-width: 42vw;
+    min-height: 42vh;
+  }
+  &.fullscreen {
+    --spacing: 1.75;
+
+    min-height: 100vh;
+    min-width: 100vw;
+
+    pds-modal-header {
+      background-color: var(--dialog-fullscreen-header-background, var(--gray-darker));
+      color: var(--gray-lightest);
+    }
+    pds-modal-footer {
+      background-color: var(--dialog-fullscreen-footer-background, var(--gray-light));
+    }
+  }
+
+  main {
+    @include inner-spacing($space-4, y);
+
+    flex: 1 0 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  pds-modal-header,
+  pds-modal-footer {
+    flex-shrink: 0;
+  }
+  pds-modal-header {
+    @include inner-spacing($space-4, top);
+    @include inner-spacing($space-4, bottom);
+  }
+  pds-modal-footer {
+    @include inner-spacing($space-4, top);
+    @include inner-spacing($space-4, bottom);
+  }
+
+  > svg-icon#close {
+    top: 0;
+    right: 0;
+  }
+  svg-icon#close {
+    @include inner-spacing($space-5);
+
+    position: absolute;
+    cursor: pointer;
+
+    @include active-state {
+      color: var(--primary-light);
+    }
+  }
+}

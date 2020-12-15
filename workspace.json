@@ -126,6 +126,44 @@
           }
         }
       }
+    },
+    "pds-components": {
+      "projectType": "library",
+      "root": "packages/pds-components",
+      "sourceRoot": "packages/pds-components/src",
+      "prefix": "vitagroup",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "packages/pds-components/tsconfig.lib.json",
+            "project": "packages/pds-components/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/pds-components/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "packages/pds-components/tsconfig.lib.json",
+              "packages/pds-components/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!packages/pds-components/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/packages/pds-components"],
+          "options": {
+            "jestConfig": "packages/pds-components/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

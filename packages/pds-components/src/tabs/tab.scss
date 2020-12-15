@@ -1,0 +1,29 @@
+@import "constants";
+@import "mixins";
+
+$tab-active-indicator-width: 4px !default;
+
+pds-tab {
+  @include inner-spacing($space-3, y);
+
+  user-select: none;
+  transition: 100ms ease-in;
+  border-bottom: $tab-active-indicator-width solid transparent;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:not(:first-child) {
+    margin-left: $space_8;
+  }
+
+  @include hover-state {
+    border-color: var(--primary);
+  }
+  @include active-state {
+    border-color: var(--primary-light);
+  }
+  @include disabled_state( $within_parent: true ) {
+    border-color: var(--disabled);
+    color: var(--disabled);
+  }
+}

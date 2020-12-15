@@ -1,0 +1,11 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [true, "attribute", "pds", "camelCase"],
+    "component-selector": [true, "element", "pds", "kebab-case"],
+    "no-inferrable-types": false
+  },
+  "linterOptions": {
+    "exclude": ["!**/*"]
+  }
+}

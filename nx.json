@@ -34,6 +34,9 @@
     },
     "cdk": {
       "tags": []
+    },
+    "pds-components": {
+      "tags": []
     }
   },
   "workspaceLayout": {

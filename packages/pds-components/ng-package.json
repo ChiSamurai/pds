@@ -1,0 +1,13 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/packages/pds-components",
+  "whitelistedNonPeerDependencies": [
+    "@vitagroup/pds-css",
+    "@vitagroup/common",
+    "@vitagroup/cdk"
+  ],
+  "lib": {
+    "entryFile": "src/index.ts",
+    "styleIncludePaths": [ "../pds-css/src" ]
+  }
+}
