@@ -15,6 +15,17 @@ export * from './loading-state/loading-overlay';
 export * from './loading-state/loading-state';
 export * from './loading-state/element-loading-state';
 
+export * from './navigation/module';
+export * from './navigation/navigation-entries';
+export * from './navigation/navigation-entry';
+export * from './navigation/navigation-entry-container';
+export * from './navigation/navigation-entry-def';
+export * from './navigation/navigation-entry-link';
+export * from './navigation/navigation-entry-outlet';
+
+export * from './navigation-menu/module';
+export * from './navigation-menu/navigation-menu';
+
 export * from './selection/module';
 export * from './selection/selection-control';
 export * from './selection/selection-model';

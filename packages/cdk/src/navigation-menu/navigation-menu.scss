@@ -1,0 +1,22 @@
+nav-menu {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  height: 100%;
+
+  > .nav-entries {
+    flex-direction: column;
+    display: flex;
+
+    &:not(.nav-entries-static) {
+      flex: 1 0 auto;
+    }
+
+    .nav-entry {
+      min-height: 48px;
+      align-items: center;
+      color: currentColor;
+      cursor: pointer;
+    }
+  }
+}
