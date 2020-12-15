@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import { merge } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { NavigationMenu } from '../navigation-menu/navigation-menu';
 import { NavigationEntries } from './navigation-entries';
 import { NavigationEntry } from './navigation-entry';
 import { NavigationEntryContainer } from './navigation-entry-container';
@@ -42,7 +41,7 @@ export class NavigationEntryOutlet extends NavigationEntryContainer {
    */
   protected readonly customState = new NavigationEntries();
 
-  /** Gets the {@link Observable} of {@link NavigationEntry}s that's used for rendering */
+  /** Gets the stream of {@link NavigationEntry}s that's used for rendering */
   readonly viewEntries = merge(this.customState, this.state).pipe(map(() => {
     const entries = this.customState.length ? this.customState.snapshot : this.state.snapshot;
     return typeof this.filter === 'function'
@@ -64,12 +63,12 @@ export class NavigationEntryOutlet extends NavigationEntryContainer {
   constructor(
     protected injector: Injector,
     protected readonly state: NavigationEntries,
-    @Optional() protected readonly menu?: NavigationMenu
+    @Optional() protected readonly parent?: NavigationEntryContainer
   ) {
     super();
   }
 
   resolveEntryTemplate(entry: NavigationEntry): TemplateRef<NavigationEntryDefContext> | null {
-    return this.menu?.resolveEntryTemplate(entry) || super.resolveEntryTemplate(entry);
+    return this.parent?.resolveEntryTemplate(entry) || super.resolveEntryTemplate(entry);
   }
 }

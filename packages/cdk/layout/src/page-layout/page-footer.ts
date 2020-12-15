@@ -1,5 +1,5 @@
 import { Component, Inject, InjectionToken, Input, Optional, Type, ViewEncapsulation } from '@angular/core';
-import { PAGE_ENCAPSULATION, PageEncapsulation } from './page-encapsulation';
+import { PAGE_ENCAPSULATION } from './page-encapsulation';
 
 export type PageFooterPosition = 'fixed' | 'fluid' | 'none';
 
@@ -17,24 +17,23 @@ export const PAGE_FOOTER_POSITION = new InjectionToken<PageFooterPosition>('PAGE
       <ng-content></ng-content>
     </ng-template>
     <ng-template #defaultComponentOrContentTemplate>
-      <ng-container *ngIf='component != null; else ngContentTemplate'>
-        <ng-container *ngComponentOutlet='component'></ng-container>
+      <ng-container *ngIf="component != null; else ngContentTemplate">
+        <ng-container *ngComponentOutlet="component"></ng-container>
       </ng-container>
     </ng-template>
 
-    <ng-container *ngIf="encapsulation === 'fx-container'; else defaultComponentOrContentTemplate">
-      <fx-container>
-        <ng-container *ngTemplateOutlet='defaultComponentOrContentTemplate'></ng-container>
-      </fx-container>
-    </ng-container>`
+    <ng-container *encapsulate="encapsulation">
+      <ng-container *ngTemplateOutlet="defaultComponentOrContentTemplate"></ng-container>
+    </ng-container>
+  `
 })
 export class PageFooter {
-  @Input() encapsulation: PageEncapsulation;
+  @Input() encapsulation: string;
 
   constructor(
-    @Inject(PAGE_ENCAPSULATION) encapsulation: /* @dynamic */ PageEncapsulation,
-    @Optional() @Inject(PAGE_FOOTER_COMPONENT) readonly component: Type<any>
+    @Optional() @Inject(PAGE_ENCAPSULATION) encapsulation?: /* @dynamic */ string,
+    @Optional() @Inject(PAGE_FOOTER_COMPONENT) readonly component?: Type<any>
   ) {
-    this.encapsulation = encapsulation;
+    if (encapsulation) this.encapsulation = encapsulation;
   }
 }

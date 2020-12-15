@@ -1,19 +1,15 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { PreventNativeScrollbarOffsetModule } from '@vitagroup/cdk/a11y';
-import { StringInterpolateModule } from '@vitagroup/common';
-import { FlexContainerModule } from '../flex-container/module';
+import { TemplateEncapsulationModule } from '../encapsulation/module';
 import { PageContent } from './page-content';
 import { PageFooter } from './page-footer';
 import { PageHeader } from './page-header';
-import { PageHeaderContent } from './page-header-content';
 import { PageLayout } from './page-layout';
 
 const declarations = [
-  PageHeader,
-  PageHeaderContent,
   PageLayout,
+  PageHeader,
   PageFooter,
   PageContent
 ];
@@ -23,10 +19,8 @@ const declarations = [
   exports: declarations,
   imports: [
     CommonModule,
-    StringInterpolateModule,
-    PreventNativeScrollbarOffsetModule,
-    FlexContainerModule,
-    RouterModule
+    ScrollingModule,
+    TemplateEncapsulationModule
   ]
 })
 export class PageLayoutModule {

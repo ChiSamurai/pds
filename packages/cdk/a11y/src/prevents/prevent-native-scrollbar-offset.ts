@@ -1,13 +1,28 @@
-import { Directive, DoCheck, ElementRef, Input, NgModule, OnDestroy, OnInit, Renderer2, RendererStyleFlags2 } from '@angular/core';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import {
+  Directive,
+  DoCheck,
+  ElementRef,
+  Input,
+  NgModule,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Renderer2,
+  RendererStyleFlags2
+} from '@angular/core';
 
-@Directive({ selector: '[preventScrollbarOffset]' })
+@Directive({ selector: '[preventNativeScrollbarOffset]' })
 export class PreventNativeScrollbarOffset implements OnInit, DoCheck, OnDestroy {
-  @Input('preventScrollbarOffset') scrollContainer: ElementRef | HTMLElement = this.elementRef;
+  @Input('preventNativeScrollbarOffset') scrollContainer: ElementRef | HTMLElement = this.elementRef;
 
   constructor(
     protected elementRef: ElementRef,
-    protected renderer: Renderer2
+    protected renderer: Renderer2,
+    @Optional() scrollable: CdkScrollable
   ) {
+    if (scrollable != null)
+      this.scrollContainer = scrollable.getElementRef();
   }
 
   ngOnInit(): void {

@@ -21,7 +21,8 @@
       "@vitagroup/cdk": ["packages/cdk/src/index.ts"],
       "@vitagroup/cdk/a11y": ["packages/cdk/a11y/src/index.ts"],
       "@vitagroup/cdk/forms": ["packages/cdk/forms/src/index.ts"],
-      "@vitagroup/cdk/layout": ["packages/cdk/layout/src/index.ts"]
+      "@vitagroup/cdk/layout": ["packages/cdk/layout/src/index.ts"],
+      "@vitagroup/pds-components": ["packages/pds-components/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
