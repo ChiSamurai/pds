@@ -5,15 +5,19 @@ import {
   InjectionToken,
   Input,
   Optional,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
-import { NavigationEntries, NavigationEntry, NavigationEntryContainer } from '@vitagroup/cdk';
+import { NavigationEntries } from '../navigation/navigation-entries';
+import { NavigationEntry } from '../navigation/navigation-entry';
+import { NavigationEntryContainer } from '../navigation/navigation-entry-container';
 
 /**
  * Holds a reference to the static {@link NavigationEntry}s that are displayed in a separate
  * region of the `nav-menu` instance
  */
-export const STATIC_NAVIGATION_ENTRIES = new InjectionToken<NavigationEntry[]>('STATIC_NAVIGATION_ENTRIES');
+export const STATIC_NAVIGATION_ENTRIES = new InjectionToken<NavigationEntry[]>(
+  'STATIC_NAVIGATION_ENTRIES'
+);
 
 export const NAV_MENU_TEMPLATE = `
     <ng-content></ng-content>
@@ -32,10 +36,10 @@ export const NAV_MENU_TEMPLATE = `
 
 @Component({
   selector: 'nav-menu',
-  styleUrls: [ './navigation-menu.scss' ],
+  styleUrls: ['./navigation-menu.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  template: NAV_MENU_TEMPLATE
+  template: NAV_MENU_TEMPLATE,
 })
 export class NavigationMenu extends NavigationEntryContainer {
   readonly staticState = new NavigationEntries();
@@ -50,7 +54,9 @@ export class NavigationMenu extends NavigationEntryContainer {
 
   constructor(
     readonly state: NavigationEntries,
-    @Optional() @Inject(STATIC_NAVIGATION_ENTRIES) staticEntries?: NavigationEntry[]
+    @Optional()
+    @Inject(STATIC_NAVIGATION_ENTRIES)
+    staticEntries?: NavigationEntry[]
   ) {
     super();
 

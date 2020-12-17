@@ -26,7 +26,6 @@ export const SVG_ICON_SIZE_ALIASES = new InjectionToken<SvgIconSizeAliases>('SVG
     </ng-template>`
 })
 export class SvgIcon {
-
   @Input() id: string;
   @Input() size: string | number = 18;
 
@@ -64,5 +63,4 @@ export class SvgIcon {
   ) {
     if (size != null) this.size = size;
   }
-
 }
