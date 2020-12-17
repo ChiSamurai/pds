@@ -1,0 +1,14 @@
+pds-step-counter {
+  color: currentColor;
+  display: inline-flex;
+  align-items: center;
+
+  .counter-divider {
+    margin: 0 5px 0 8px;
+  }
+
+  .counter-divider,
+  .counter-max-value {
+    opacity: 0.42;
+  }
+}

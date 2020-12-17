@@ -1,0 +1,51 @@
+pds-ring-loader {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  > svg {
+    animation: rotate 2s linear infinite;
+    transform-origin: center;
+
+    > circle {
+      fill: none;
+      stroke-dashoffset: 0;
+      stroke-miterlimit: 10;
+      stroke-dasharray: 1, 200;
+      stroke-linecap: round;
+      animation-fill-mode: both;
+      animation: dash 1.5s infinite ease-in-out, color 1.5s infinite ease-in-out;
+    }
+  }
+}
+
+// todo: consider separating the animations into something more reusable?!
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 1, 200;
+  }
+  100% {
+    stroke-dashoffset: -140;
+    stroke-dasharray: 140, 200;
+  }
+}
+
+@keyframes color {
+  33.33% {
+    stroke: var(--primary-dark);
+  }
+  66.66% {
+    stroke: var(--primary);
+  }
+  99.99% {
+    stroke: var(--primary-light);
+  }
+}

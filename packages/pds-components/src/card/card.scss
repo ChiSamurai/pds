@@ -1,0 +1,38 @@
+@import "elevations";
+@import "constants";
+@import "mixins";
+
+$card-padding-x: $space-3 !default;
+$card-padding-y: $space-3 !default;
+
+pds-card {
+  @include elevation($raised);
+  @include rounding($rounding-lg);
+  @include inner-spacing($card-padding-x, x);
+  @include inner-spacing($card-padding-y, y);
+
+  display: block;
+  overflow: hidden;
+  background: var(--gray-lightest);
+
+  pds-card-header > label {
+    display: inline-flex;
+    align-items: center;
+
+    > svg-icon {
+      margin-right: $space-3;
+    }
+  }
+
+  pds-card-header {
+    @include inner-spacing($card-padding-y, bottom);
+
+    display: flex;
+    justify-content: space-between;
+  }
+  pds-card-footer {
+    @include inner-spacing($card-padding-y, top);
+
+    display: flex;
+  }
+}

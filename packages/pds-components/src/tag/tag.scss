@@ -1,0 +1,17 @@
+@import "constants";
+@import "mixins";
+
+$tag-height: 30px !default;
+
+pds-tag {
+  @include typography(--body-small);
+  @include inner-spacing($space-3, x);
+  @include rounding($tag-height * 0.5);
+
+  user-select: none;
+  align-items: center;
+  display: inline-flex;
+  background-color: rgba(#000, 0.05);
+  color: currentColor;
+  height: $tag-height;
+}

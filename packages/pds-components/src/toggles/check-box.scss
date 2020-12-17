@@ -1,0 +1,25 @@
+@import 'mixins';
+@import 'toggle-base';
+
+pds-check-box {
+  @include toggle-base;
+
+  .toggle-indicator {
+    @include rounding($rounding-sm);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-lighter);
+
+    svg {
+      fill: currentColor;
+      height: $toggle-size / 2;
+      width: $toggle-size / 2;
+    }
+  }
+
+  &.intermediate {
+    // todo
+  }
+}

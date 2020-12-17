@@ -1,0 +1,51 @@
+@import 'constants';
+@import 'mixins';
+
+$toggle-size: 30px !default;
+
+@mixin toggle-base {
+  user-select: none;
+  display: inline-flex;
+  height: var(--input-height);
+  align-items: center;
+  cursor: pointer;
+
+  label {
+    @include outer-spacing($space-3, left);
+
+    cursor: pointer;
+    color: var(--foreground) !important;
+    font: inherit;
+  }
+  .toggle-indicator {
+    width: $toggle-size;
+    height: $toggle-size;
+    border: 1px solid var(--gray-dark);
+    background-color: var(--gray-lighter);
+  }
+
+  &:hover,
+  &:focus {
+    .toggle-indicator {
+      border-color: var(--gray-darker);
+    }
+  }
+  &.checked {
+    .toggle-indicator {
+      border-color: var(--gray-darker);
+      background-color: var(--gray-darker);
+      color: var(--gray-lighter);
+    }
+  }
+
+  // todo: @include error_state( $within_parent: true ) { }
+
+  @include disabled-state($within_parent: true) {
+    color: var(--disabled);
+
+    .toggle-indicator {
+      background-color: var(--disabled);
+      color: rgba(#000, 0.1);
+    }
+  }
+}
