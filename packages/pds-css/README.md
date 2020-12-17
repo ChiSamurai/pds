@@ -13,7 +13,7 @@ the `@vitagroup/pds-css` package anyway. So feel free to import it inside your a
 ## Installation
 
 ```
-> npm i @vitagroup/pds-css --registry "https://artifactory.vitasystems.dev/artifactory/api/npm/npm/"
+> npm i @vitagroup/pds-css
 ```
 
 ## Integration
@@ -48,7 +48,7 @@ $purplish: #582ab3;
   $spacing: 1,
   // disabled, enable or scale the rounding as desired
   $rounding: 1,
-  // enables or disables the output of custom color properties with a coresponding "#{$property}-rgb"
+  // enables or disables the output of custom color properties with a corresponding "#{$property}-rgb"
   // variable sibling to extend up on like `color: rgba(var(--primary-rgb), 0.42)`
   $custom-color-properties-rgb: true
 );
