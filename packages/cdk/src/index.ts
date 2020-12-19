@@ -48,3 +48,5 @@ export * from './svg-icon/module';
 export * from './svg-icon/svg-icon';
 export * from './svg-icon/svg-icon-host';
 export * from './svg-icon/svg-icon-registry';
+
+export * from './utils';
