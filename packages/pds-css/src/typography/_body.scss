@@ -1,9 +1,0 @@
-@use "../typography";
-
-$body: typography.define(16px, 23px, normal, -0.01px) !default;
-$body-small: typography.define(14px, 20px, normal, -0.01px) !default;
-
-$body-typography-map: (
-  "body": $body,
-  "body-small": $body-small,
-);

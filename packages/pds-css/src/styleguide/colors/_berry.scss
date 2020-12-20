@@ -1,0 +1,31 @@
+@use "styleguide/color-mods" as *;
+
+@use "util/color";
+
+
+$blackberry: #37001a;
+$red-grape: #4b0023;
+$berry: #720035;
+$raspberry: #990047;
+$pinkberry: #c00059;
+
+$berry-t1: color.tint($berry, $t1);
+$berry-t2: color.tint($berry, $t2);
+$berry-t3: color.tint($berry, $t3);
+$berry-t4: color.tint($berry, $t4);
+
+@function berrylicious() {
+  @return unquote("45%, #{$berry} 0%, #{$pinkberry} 100%");
+}
+
+$berry-color-map: (
+  "blackberry": $blackberry,
+  "red-grape": $red-grape,
+  "berry": $berry,
+  "berry-t1": $berry-t1,
+  "berry-t2": $berry-t2,
+  "berry-t3": $berry-t3,
+  "berry-t4": $berry-t4,
+  "raspberry": $raspberry,
+  "pinkberry": $pinkberry,
+);

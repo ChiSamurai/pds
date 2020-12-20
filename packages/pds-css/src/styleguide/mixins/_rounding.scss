@@ -1,0 +1,38 @@
+@use "util/mixins" as *;
+@use "util/custom-property" as *;
+@use "util/list" as *;
+@use "util/coerce";
+
+$rounding-anchors: (
+  all,
+  top,
+  right,
+  bottom,
+  left,
+  top-right,
+  top-left,
+  bottom-right,
+  bottom-left,
+  cross-left,
+  cross-right
+);
+
+@mixin rounding($rounding, $anchors: all) {
+  $rounding: calc(#{var-or-default($rounding)} * #{var(--rounding, 1)});
+  $anchors: coerce.to-list($anchors);
+
+  @include assert-some($rounding-anchors, $anchors...);
+
+  @if some($anchors, all, top, left, top-left, cross-left) {
+    border-top-left-radius: $rounding;
+  }
+  @if some($anchors, all, top, right, top-right, cross-right) {
+    border-top-right-radius: $rounding;
+  }
+  @if some($anchors, all, bottom, left, bottom-left, cross-right) {
+    border-bottom-left-radius: $rounding;
+  }
+  @if some($anchors, all, bottom, right, bottom-right, cross-left) {
+    border-bottom-right-radius: $rounding;
+  }
+}

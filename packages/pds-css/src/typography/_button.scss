@@ -1,7 +1,0 @@
-@use "../typography";
-
-$button: typography.define(--body-font-size, --body-line-height, 500, 0.69px) !default;
-
-$button-typography-map: (
-  "button": $button,
-);

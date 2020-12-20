@@ -1,0 +1,30 @@
+@use "styleguide/color-mods" as *;
+
+@use "util/color";
+
+$deep-blue: #152e39;
+$smokey-blue: #255263;
+$blue: #306980;
+$strong-blue: #3b809d;
+$bright-blue: #4598b9;
+
+$blue-t1: color.tint($blue, $t1);
+$blue-t2: color.tint($blue, $t2);
+$blue-t3: color.tint($blue, $t3);
+$blue-t4: color.tint($blue, $t4);
+
+@function blue-motion() {
+  @return unquote("45%, #{$blue} 0%, #{$bright-blue} 100%");
+}
+
+$blue-color-map: (
+  "deep-blue": $deep-blue,
+  "smokey-blue": $smokey-blue,
+  "blue": $blue,
+  "blue-t1": $blue-t1,
+  "blue-t2": $blue-t2,
+  "blue-t3": $blue-t3,
+  "blue-t4": $blue-t4,
+  "strong-blue": $strong-blue,
+  "bright-blue": $bright-blue,
+);

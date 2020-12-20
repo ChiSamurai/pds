@@ -1,0 +1,11 @@
+@use "util/list" as *;
+@use "util/coerce";
+
+@mixin assert-some($expected, $values...) {
+  $expected: coerce.to-list($expected);
+  @each $value in $values {
+    @if not some($expected, $value) {
+      @error "Invalid value \"#{$value}\". Expected values are #{coerce.to-str($expected)}";
+    }
+  }
+}

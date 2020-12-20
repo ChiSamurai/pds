@@ -1,39 +1,47 @@
+@forward "styleguide/mixins";
+@forward "styleguide/typography" as typography-*;
+@forward "styleguide/elevation" as elevation-*;
+@forward "styleguide/theme" as theme-*;
+
+@forward "styleguide/color-mods" as color-mod-*;
+@forward "styleguide/colors" as color-*;
+
+@forward "styleguide/typographies";
+@forward "styleguide/elevations";
+@forward "styleguide/roundings";
+@forward "styleguide/spacings";
+@forward "styleguide/inputs";
+
 @use "sass:list";
 @use "sass:string";
 
-@use "typography";
-@use "custom-property" as *;
+@use "util/mixins" as *;
+@use "util/custom-property" as *;
 
-@use "colors" as *;
-@use "typographies" as *;
-@use "constants" as *;
-@use "mixins" as *;
+@use "styleguide/theme";
+@use "styleguide/elevation";
+@use "styleguide/typography";
+@use "styleguide/mixins" as *;
 
-$colors: (
-  $gray-color-map,
-  $primary-color-map,
-  $link-color-map,
-  $disabled-color-map,
-  $good-color-map,
-  $warning-color-map,
-  $bad-color-map
-) !default;
-$typography: (
-  $body-typography-map,
-  $display-typography-map,
-  $headline-typography-map,
-  $capitalized-typography-map,
-  $lead-typography-map,
-  $small-typography-map,
-  $tiny-typography-map,
-  $blockquote-typography-map,
-  $button-typography-map
-) !default;
-
-$custom-color-properties-rgb: true !default;
+@use "styleguide/colors" as *;
+@use "styleguide/color-mods" as *;
+@use "styleguide/typographies" as *;
+@use "styleguide/elevations" as *;
+@use "styleguide/roundings" as *;
+@use "styleguide/spacings" as *;
+@use "styleguide/inputs" as *;
 
 $spacing: $spacing !default;
 $rounding: $rounding !default;
+
+$colors: ($common-color-map, $system-color-map) !default;
+$color-classes: ("primary", "primary-dark", "primary-light", "good", "warning", "bad") !default;
+$color-rgb: false !default;
+
+$typography: $typography-map !default;
+$typography-classes: ("body-small", "capitalized", "lead", "small", "tiny") !default;
+
+$custom-properties: null !default;
 
 $body-typography: --body !default;
 
@@ -42,26 +50,14 @@ $background-color: --gray-lighter !default;
 
 $font-family: "PT Sans", sans-serif !default;
 
+$default-theme: theme.define($colors, $typography, $custom-properties) !default;
+
 @mixin core {
   @at-root {
     :root {
-      --spacing: #{var-or-default($spacing)};
-      --rounding: #{var-or-default($rounding)};
-
-      @include custom-color-property(--foreground, $foreground-color, $rgb: $custom-color-properties-rgb);
-      @include custom-color-property(--background, $background-color, $rgb: $custom-color-properties-rgb);
-
-      // custom color properties
-      @each $color-map in $colors {
-        @if $color-map != null and type-of($color-map) == map {
-          @include custom-color-properties($color-map, $rgb: $custom-color-properties-rgb);
-        }
-      }
-      // custom typography properties
-      @each $typography-map in $typography {
-        @if $typography-map != null and type-of($typography-map) == map {
-          @include custom-properties($typography-map);
-        }
+      @include theme($default-theme) {
+        @include custom-color-property(--foreground, $foreground-color, $rgb: $color-rgb);
+        @include custom-color-property(--background, $background-color, $rgb: $color-rgb);
       }
     }
 
@@ -70,7 +66,6 @@ $font-family: "PT Sans", sans-serif !default;
       -moz-osx-font-smoothing: grayscale;
 
       @if $font-family == null {
-        // prettier-ignore
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
       } @else {
         font-family: var-or-default($font-family);
@@ -82,8 +77,8 @@ $font-family: "PT Sans", sans-serif !default;
       color: var(--foreground);
     }
 
-    *:focus {
-      outline: none;
+    * {
+      &:focus { outline: none }
     }
   }
 }
@@ -98,20 +93,23 @@ $font-family: "PT Sans", sans-serif !default;
 }
 
 @mixin class-semantics {
-  @include typography-variants(("body-small", "capitalized", "lead", "small", "tiny"));
-  @include text-color-accents(("primary", "primary-dark", "primary-light", "good", "warning", "bad"));
+  @include typography-variants($typography-classes);
+  @include text-color-accents($color-classes);
 }
 
 @mixin forms {
   @at-root :root {
     --input-height: #{$input-height};
     --input-spacing: #{$input-spacing};
+    --input-rounding: #{$input-rounding};
   }
 
   @include button {
     --spacing: var(--input-spacing);
+    --rounding: var(--input-rounding);
   }
   @include input {
     --spacing: var(--input-spacing);
+    --rounding: var(--input-rounding);
   }
 }

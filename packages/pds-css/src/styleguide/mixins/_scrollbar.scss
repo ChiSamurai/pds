@@ -1,0 +1,55 @@
+@use "styleguide/roundings" as *;
+@use "util/mixins" as *;
+
+@use "./rounding" as *;
+
+$scrollbar-size: 8px !default;
+$scrollbar-rounding: $rounding-sm !default;
+$scrollbar-track-color: var(--gray-light) !default;
+$scrollbar-thumb-color: var(--gray-dark) !default;
+$scrollbar-thumb-color-hover: var(--gray-darkest) !default;
+
+@mixin webkit-scrollbar {
+  ::-webkit-scrollbar {
+    height: $scrollbar-size;
+    width: $scrollbar-size;
+  }
+  ::-webkit-scrollbar-track {
+    @include rounding($scrollbar-rounding);
+
+    background-color: $scrollbar-track-color;
+  }
+  ::-webkit-scrollbar-thumb {
+    @include rounding($scrollbar-rounding);
+
+    background-color: $scrollbar-thumb-color;
+    border: 1px solid transparent;
+
+    &:hover {
+      background-color: $scrollbar-thumb-color-hover;
+    }
+  }
+}
+@mixin moz-scrollbar {
+  scrollbar-color: $scrollbar-thumb-color $scrollbar-track-color;
+  scrollbar-width: thin;
+
+  &:hover {
+    scrollbar-color: $scrollbar-thumb-color-hover $scrollbar-track-color;
+  }
+}
+
+@mixin custom-scrollbar {
+  @include webkit-only {
+    @include webkit-scrollbar;
+  }
+  @include moz-only {
+    @if & {
+      @include moz-scrollbar;
+    } @else {
+      * {
+        @include moz-scrollbar;
+      }
+    }
+  }
+}

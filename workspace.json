@@ -35,6 +35,9 @@
               "files": ["src/prebuilt/*.scss"],
               "outDir": "dist/packages/pds-css/prebuilt"
             },
+            "stylePreprocessorOptions": {
+              "includePaths": ["packages/pds-css/src"]
+            },
             "postcssConfig": "packages/pds-css/postcss.config.js",
             "copy": [
               "packages/pds-css/assets",

@@ -1,0 +1,94 @@
+$system-light: #ebebeb;
+$system-light-t1: #f5f5f5;
+$system-light-t2: #ffffff;
+$system-light-outline: $system-light;
+
+$system-dark: #000000;
+$system-dark-t1: #232323;
+$system-dark-t2: #777777;
+$system-dark-t3: #a3a3a3;
+$system-dark-t4: #c8c8c8;
+$system-dark-outline: $system-dark-t2;
+
+$system-red: #e63535;
+$system-red-t1: #ff3b3b;
+$system-red-t2: #ff5c5c;
+$system-red-t3: #ff8080;
+$system-red-t4: #ffe6e6;
+$system-red-outline: $system-red-t1;
+
+$system-green: #159f03;
+$system-green-t1: #50b742;
+$system-green-t2: #8acf81;
+$system-green-t3: #c4e7c0;
+$system-green-t4: #e3fff1;
+$system-green-outline: $system-green;
+
+$system-blue: #0647f5;
+$system-blue-t1: #2b62f6;
+$system-blue-t2: #6aa1f9;
+$system-blue-t3: #c1dbfc;
+$system-blue-t4: #e5f0ff;
+$system-blue-outline: #1476d8;
+
+$system-orange: #e67a00;
+$system-orange-t1: #ff8800;
+$system-orange-t2: #fdac42;
+$system-orange-t3: #fccc75;
+$system-orange-t4: #fff8e6;
+$system-orange-outline: #de6800;
+
+$system-yellow: #fcba04;
+$system-yellow-t1: #fdcc43;
+$system-yellow-t2: #fdd668;
+$system-yellow-t3: #feeab3;
+$system-yellow-t4: #fef8e5;
+$system-yellow-outline: #ffcc00;
+
+$system-color-map: (
+  "light": $system-light,
+  "light-t1": $system-light-t1,
+  "light-t2": $system-light-t2,
+
+  "dark": $system-dark,
+  "dark-t1": $system-dark-t1,
+  "dark-t2": $system-dark-t2,
+  "dark-t3": $system-dark-t3,
+  "dark-t4": $system-dark-t4,
+  "dark-outline": $system-dark-outline,
+
+  "red": $system-red,
+  "red-t1": $system-red-t1,
+  "red-t2": $system-red-t2,
+  "red-t3": $system-red-t3,
+  "red-t4": $system-red-t4,
+  "red-outline": $system-red-outline,
+
+  "green": $system-green,
+  "green-t1": $system-green-t1,
+  "green-t2": $system-green-t2,
+  "green-t3": $system-green-t3,
+  "green-t4": $system-green-t4,
+  "green-outline": $system-green-outline,
+
+  "blue": $system-blue,
+  "blue-t1": $system-blue-t1,
+  "blue-t2": $system-blue-t2,
+  "blue-t3": $system-blue-t3,
+  "blue-t4": $system-blue-t4,
+  "blue-outline": $system-blue-outline,
+
+  "orange": $system-orange,
+  "orange-t1": $system-orange-t1,
+  "orange-t2": $system-orange-t2,
+  "orange-t3": $system-orange-t3,
+  "orange-t4": $system-orange-t4,
+  "orange-outline": $system-orange-outline,
+
+  "yellow": $system-yellow,
+  "yellow-t1": $system-yellow-t1,
+  "yellow-t2": $system-yellow-t2,
+  "yellow-t3": $system-yellow-t3,
+  "yellow-t4": $system-yellow-t4,
+  "yellow-outline": $system-yellow-outline,
+);

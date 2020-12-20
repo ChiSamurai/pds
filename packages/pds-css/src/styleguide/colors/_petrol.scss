@@ -1,0 +1,30 @@
+@use "styleguide/color-mods" as *;
+
+@use "util/color";
+
+$dark-green: #003a34;
+$fir-green: #006157;
+$petrol: #009c8c;
+$turquoise: #00c3af;
+$light-turquoise: #00ead2;
+
+$petrol-t1: color.tint($petrol, $t1);
+$petrol-t2: color.tint($petrol, $t2);
+$petrol-t3: color.tint($petrol, $t3);
+$petrol-t4: color.tint($petrol, $t4);
+
+@function petrolicum() {
+  @return unquote("45%, #{$petrol} 0%, #{#00FFE5} 100%");
+}
+
+$petrol-color-map: (
+  "dark-green": $dark-green,
+  "fir-green": $fir-green,
+  "petrol": $petrol,
+  "petrol-t1": $petrol-t1,
+  "petrol-t2": $petrol-t2,
+  "petrol-t3": $petrol-t3,
+  "petrol-t4": $petrol-t4,
+  "turquoise": $turquoise,
+  "light-turquoise": $light-turquoise,
+);

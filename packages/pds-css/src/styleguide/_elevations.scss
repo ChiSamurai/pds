@@ -1,0 +1,26 @@
+@use "./elevation";
+
+$base-elevation: elevation.define(0);
+
+$nav-elevation: elevation.define(500, 6px 0 10px -6px rgba(0, 0, 0, 0.2));
+$header-elevation: elevation.define(700, 0 6px 10px -6px rgba(0, 0, 0, 0.2));
+$footer-elevation: elevation.define(600, 0 -6px 10px -6px rgba(0, 0, 0, 0.2));
+
+$overlay-elevation: elevation.define(1000, (
+  0 2px 8px 0 rgba(0, 0, 0, 0.08),
+  0 20px 32px 0 rgba(119, 119, 119, 0.24)
+));
+
+$raised-elevation: elevation.define(200, (
+  0 0 1px 0 rgba(0, 0, 0, 0.04),
+  0 3px 10px -3px rgba(0, 0, 0, 0.2)
+));
+
+$elevation-map: (
+  "base": $base-elevation,
+  "navigation": $nav-elevation,
+  "header": $header-elevation,
+  "footer": $footer-elevation,
+  "overlay": $overlay-elevation,
+  "raised": $raised-elevation
+) !default;

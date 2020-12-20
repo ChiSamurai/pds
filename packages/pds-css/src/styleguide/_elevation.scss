@@ -1,0 +1,15 @@
+@use "sass:map";
+
+@use "util/custom-property" as *;
+
+@function define($z-index, $box-shadow: null) {
+  @return ("z-index": var-or-default($z-index), "box-shadow": var-or-default($box-shadow));
+}
+
+@function get-z-index($elevation) {
+  @return map.get($elevation, "z-index");
+}
+
+@function get-box-shadow($elevation) {
+  @return map.get($elevation, "box-shadow");
+}

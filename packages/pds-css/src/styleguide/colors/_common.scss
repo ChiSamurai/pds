@@ -1,0 +1,58 @@
+@use "./system" as *;
+@use "./berry" as *;
+
+$primary-dark: $blackberry !default;
+$primary: $berry !default;
+$primary-light: $pinkberry !default;
+$primary-contrast: white !default;
+
+$gray-darkest: var(--system-dark) !default;
+$gray-darker: var(--system-dark-t1) !default;
+$gray-dark: var(--system-dark-t2) !default;
+$gray: var(--system-dark-t4) !default;
+$gray-light: var(--system-light) !default;
+$gray-lighter: var(--system-light-t1) !default;
+$gray-lightest: var(--system-light-t2) !default;
+
+$good: var(--green) !default;
+$good-outline: var(--green-outline) !default;
+$good-contrast: white !default;
+
+$warning: var(--yellow) !default;
+$warning-outline: var(--yellow-outline) !default;
+$warning-contrast: black !default;
+
+$bad: var(--red) !default;
+$bad-outline: var(--red-outline) !default;
+$bad-contrast: white !default;
+
+$link: var(--primary) !default;
+$link-visited: var(--primary) !default;
+
+$common-color-map: (
+  "primary-dark": $primary-dark,
+  "primary": $primary,
+  "primary-light": $primary-light,
+  "primary-contrast": $primary-contrast,
+
+  "gray-darkest": $gray-darkest,
+  "gray-darker": $gray-darker,
+  "gray-dark": $gray-dark,
+  "gray": $gray,
+  "gray-light": $gray-light,
+  "gray-lighter": $gray-lighter,
+  "gray-lightest": $gray-lightest,
+
+  "good": $good,
+  "good-outline": $good-outline,
+  "good-contrast": $good-contrast,
+  "warning": $warning,
+  "warning-outline": $warning-outline,
+  "warning-contrast": $warning-contrast,
+  "bad": $bad,
+  "bad-outline": $bad-outline,
+  "bad-contrast": $bad-contrast,
+
+  "link": $link,
+  "link-visited": $link-visited,
+) !default;

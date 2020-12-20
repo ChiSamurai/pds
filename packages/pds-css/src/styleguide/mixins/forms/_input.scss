@@ -1,0 +1,88 @@
+@use "styleguide/spacings" as *;
+@use "styleguide/roundings" as *;
+@use "util/mixins" as *;
+
+@use "../rounding" as *;
+@use "../spacing" as *;
+
+$input-padding-x: $space-3 !default;
+$input-padding-y: $space-2 !default;
+
+@mixin input {
+  select,
+  textarea,
+  input:not([type="checkbox"]):not([type="radio"]) {
+    @include input-base;
+
+    caret-color: var(--primary);
+
+    @include hover-state {
+      @include input-hover;
+    }
+    @include read-only-state {
+      @include input-read-only;
+    }
+    @include focus-state {
+      @include input-focus;
+    }
+
+    @include disabled-state {
+      @include input-disabled;
+    }
+
+    @content;
+
+    // todo: @include error_state( $within_parent: true ) { }
+    .error &,
+    &.error {
+      @include input-error;
+    }
+  }
+
+  select,
+  input:not([type="checkbox"]):not([type="radio"]) {
+    height: var(--input-height);
+  }
+  textarea {
+    min-height: var(--input-height);
+  }
+}
+
+@mixin input-base {
+  @include inner-spacing($input-padding-x, x);
+  @include inner-spacing($input-padding-y, y);
+  @include rounding($rounding-sm);
+
+  appearance: none;
+  box-sizing: border-box;
+  background-color: var(--background);
+  border: 1px solid var(--gray-dark);
+  color: var(--foreground);
+
+  &::placeholder {
+    color: rgba(#000, 0.42);
+    user-select: none;
+  }
+}
+
+@mixin input-disabled {
+  // background-color: $gray-5;
+  border-color: var(--disabled);
+  color: var(--disabled);
+  pointer-events: none;
+}
+@mixin input-read-only {
+  border-color: var(--disabled) !important;
+}
+
+@mixin input-error {
+  color: var(--bad);
+  border-color: var(--bad);
+}
+
+@mixin input-hover {
+  border-color: var(--gray-darker);
+}
+@mixin input-focus {
+  border-color: var(--primary-light);
+}

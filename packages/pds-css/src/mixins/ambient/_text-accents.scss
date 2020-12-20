@@ -1,5 +1,0 @@
-@use "../utility" as *;
-
-@mixin text-color-accents($accents) {
-  @include color-accents($accents, "text");
-}

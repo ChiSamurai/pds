@@ -1,5 +1,5 @@
-@use "../colors/blue" as *;
-@use "../colors" as * with (
+@use "styleguide/colors/blue" as *;
+@use "styleguide/colors" as * with (
   $primary-light: $strong-blue,
   $primary: $blue,
   $primary-dark: $smokey-blue

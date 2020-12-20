@@ -1,7 +1,0 @@
-@use "../typography";
-
-$lead: typography.define(14px, 24px, bold, -0.01px) !default;
-
-$lead-typography-map: (
-  "lead": $lead,
-);

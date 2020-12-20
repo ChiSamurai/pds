@@ -1,0 +1,19 @@
+@use "sass:map";
+
+@function define($colors, $typography: null, $custom-properties: null) {
+  @return (
+    "colors": $colors,
+    "typography": $typography,
+    "custom-properties": $custom-properties,
+  );
+}
+
+@function get-colors($theme) {
+  @return map.get($theme, "colors");
+}
+@function get-typography($theme) {
+  @return map.get($theme, "typography");
+}
+@function get-custom-properties($theme) {
+  @return map.get($theme, "custom-properties");
+}

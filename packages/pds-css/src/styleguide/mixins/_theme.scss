@@ -1,0 +1,22 @@
+@use "util/mixins" as *;
+@use "../theme";
+
+$color-rgb: false !default;
+
+@mixin theme($theme) {
+  $colors: theme.get-colors($theme);
+  $typography: theme.get-typography($theme);
+  $custom-properties: theme.get-custom-properties($theme);
+
+  @if $colors {
+    @include custom-color-properties($colors, $rgb: $color-rgb);
+  }
+  @if $typography {
+    @include custom-properties($typography);
+  }
+  @if $custom-properties {
+    @include custom-properties($custom-properties);
+  }
+
+  @content;
+}
