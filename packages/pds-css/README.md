@@ -55,8 +55,6 @@ $purplish: #582ab3;
   $color-classes: ("primary", "primary-dark", "primary-light", "good", "warning", "bad")
   // Customizable typography class list (requires corresponding $typography definitions), default to:
   $typography-classes: ("body-small", "capitalized", "lead", "small", "tiny")
-  // List or map of custom properties to be rendered (and normalized) additionally
-  $custom-properties: ()
 );
 
 // Includes the foundational style as well as respective custom properties
