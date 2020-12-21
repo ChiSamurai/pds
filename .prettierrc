@@ -1,5 +1,6 @@
 {
   "singleQuote": true,
   "bracketSpacing": true,
+  "htmlWhitespaceSensitivity": "ignore",
   "printWidth": 120
 }
