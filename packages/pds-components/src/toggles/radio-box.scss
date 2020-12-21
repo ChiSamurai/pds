@@ -1,5 +1,5 @@
-@import 'mixins';
-@import 'toggle-base';
+@use "styleguide" as pds;
+@use 'toggle-base' as *;
 
 $radio_box_indicator_size: 12px !default;
 

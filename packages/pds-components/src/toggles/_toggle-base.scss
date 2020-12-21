@@ -1,5 +1,5 @@
-@import 'constants';
-@import 'mixins';
+@use "styleguide" as pds;
+@use "util";
 
 $toggle-size: 30px !default;
 
@@ -11,11 +11,16 @@ $toggle-size: 30px !default;
   cursor: pointer;
 
   label {
-    @include outer-spacing($space-3, left);
-
     cursor: pointer;
     color: var(--foreground) !important;
     font: inherit;
+
+    &:first-child {
+      @include pds.outer-spacing(pds.$space-3, right);
+    }
+    &:last-child {
+      @include pds.outer-spacing(pds.$space-3, left);
+    }
   }
   .toggle-indicator {
     width: $toggle-size;
@@ -40,7 +45,7 @@ $toggle-size: 30px !default;
 
   // todo: @include error_state( $within_parent: true ) { }
 
-  @include disabled-state($within_parent: true) {
+  @include util.disabled-state($within_parent: true) {
     color: var(--disabled);
 
     .toggle-indicator {

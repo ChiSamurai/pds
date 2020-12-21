@@ -1,6 +1,6 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Directive, EventEmitter, HostBinding, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { ControlValueAccessorBase } from "@vitagroup/cdk/forms";
+import { ControlValueAccessorBase } from '@vitagroup/cdk/forms';
 
 export interface ToggleCheckOptions {
   emitTouch?: boolean;
@@ -21,7 +21,6 @@ export abstract class ToggleBase<T = any> extends ControlValueAccessorBase<T> im
     if (coerceBooleanProperty(value)) this.check();
     else this.uncheck();
   }
-
   get checked(): boolean {
     return this._checked;
   }
@@ -48,7 +47,6 @@ export abstract class ToggleBase<T = any> extends ControlValueAccessorBase<T> im
       if (options == null || options.emitChange) this.changeControlValue();
     }
   }
-
   uncheck(options?: ToggleCheckOptions): void {
     if (this.checked) {
       this._checked = false;
@@ -57,7 +55,6 @@ export abstract class ToggleBase<T = any> extends ControlValueAccessorBase<T> im
       if (options == null || options.emitChange) this.changeControlValue();
     }
   }
-
   toggle(): void {
     if (this.checked) this.uncheck();
     else this.check();

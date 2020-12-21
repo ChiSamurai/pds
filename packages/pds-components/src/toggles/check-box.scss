@@ -1,11 +1,11 @@
-@import 'mixins';
-@import 'toggle-base';
+@use "styleguide" as pds;
+@use 'toggle-base' as *;
 
 pds-check-box {
   @include toggle-base;
 
   .toggle-indicator {
-    @include rounding($rounding-sm);
+    @include pds.rounding(pds.$rounding-sm);
 
     display: flex;
     align-items: center;

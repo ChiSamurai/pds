@@ -1,5 +1,5 @@
-@import 'constants';
-@import 'mixins';
+@use "styleguide" as pds;
+@use "util";
 
 pds-modal {
   display: flex;
@@ -9,7 +9,7 @@ pds-modal {
   position: relative;
 
   &:not(.fullscreen) {
-    @include rounding($rounding-lg);
+    @include pds.rounding(pds.$rounding-lg);
 
     min-width: 42vw;
     min-height: 42vh;
@@ -30,7 +30,7 @@ pds-modal {
   }
 
   main {
-    @include inner-spacing($space-4, y);
+    @include pds.inner-spacing(pds.$space-4, y);
 
     flex: 1 0 0;
     overflow-y: scroll;
@@ -41,12 +41,12 @@ pds-modal {
     flex-shrink: 0;
   }
   pds-modal-header {
-    @include inner-spacing($space-4, top);
-    @include inner-spacing($space-4, bottom);
+    @include pds.inner-spacing(pds.$space-4, top);
+    @include pds.inner-spacing(pds.$space-4, bottom);
   }
   pds-modal-footer {
-    @include inner-spacing($space-4, top);
-    @include inner-spacing($space-4, bottom);
+    @include pds.inner-spacing(pds.$space-4, top);
+    @include pds.inner-spacing(pds.$space-4, bottom);
   }
 
   > svg-icon#close {
@@ -54,12 +54,12 @@ pds-modal {
     right: 0;
   }
   svg-icon#close {
-    @include inner-spacing($space-5);
+    @include pds.inner-spacing(pds.$space-5);
 
     position: absolute;
     cursor: pointer;
 
-    @include active-state {
+    @include util.active-state {
       color: var(--primary-light);
     }
   }

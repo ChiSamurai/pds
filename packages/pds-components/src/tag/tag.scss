@@ -1,12 +1,12 @@
-@import "constants";
-@import "mixins";
+@use "styleguide" as pds;
+@use "util";
 
 $tag-height: 30px !default;
 
 pds-tag {
-  @include typography(--body-small);
-  @include inner-spacing($space-3, x);
-  @include rounding($tag-height * 0.5);
+  @include pds.typography(--body-small);
+  @include pds.inner-spacing(pds.$space-3, x);
+  @include pds.rounding($tag-height * 0.5);
 
   user-select: none;
   align-items: center;

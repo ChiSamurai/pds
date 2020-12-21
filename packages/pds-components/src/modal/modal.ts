@@ -11,7 +11,7 @@ import {
   Output,
   TemplateRef,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { DialogOverlay, DialogRef } from '@vitagroup/cdk';
 import { MODAL_ENCAPSULATION } from './modal-encapsulation';
@@ -20,7 +20,7 @@ import { ModalHeader } from './modal-header';
 
 @Component({
   selector: 'pds-modal',
-  styleUrls: [ './modal.scss' ],
+  styleUrls: ['./modal.scss'],
   encapsulation: ViewEncapsulation.None,
   template: `
     <ng-template #ngContentTemplate>
@@ -29,7 +29,8 @@ import { ModalHeader } from './modal-header';
     <ng-template #closeTemplate>
       <svg-icon *ngIf="closable" (click)="close()" id="close" viewBox="0 0 22 22">
         <svg:path
-          d="M20.7 18.7c.6.6.6 1.4 0 1.9-.3.3-.6.4-1 .4s-.7-.1-1-.4L11 12.9l-7.7 7.7c-.3.4-.6.5-1 .5s-.7-.1-1-.4c-.5-.5-.5-1.4 0-1.9L9.1 11 1.3 3.3c-.5-.5-.5-1.5 0-2 .6-.5 1.5-.5 2 0L11 9.1l7.7-7.7c.5-.5 1.4-.5 1.9 0s.5 1.4 0 1.9L12.9 11l7.8 7.7z" />
+          d="M20.7 18.7c.6.6.6 1.4 0 1.9-.3.3-.6.4-1 .4s-.7-.1-1-.4L11 12.9l-7.7 7.7c-.3.4-.6.5-1 .5s-.7-.1-1-.4c-.5-.5-.5-1.4 0-1.9L9.1 11 1.3 3.3c-.5-.5-.5-1.5 0-2 .6-.5 1.5-.5 2 0L11 9.1l7.7-7.7c.5-.5 1.4-.5 1.9 0s.5 1.4 0 1.9L12.9 11l7.8 7.7z"
+        />
       </svg-icon>
     </ng-template>
 
@@ -43,7 +44,8 @@ import { ModalHeader } from './modal-header';
     </main>
     <ng-container *ngIf="footer != null">
       <ng-content select="pds-modal-footer"></ng-content>
-    </ng-container>`
+    </ng-container>
+  `,
 })
 export class Modal implements AfterContentChecked {
   @ContentChild(ModalHeader, { static: true }) private _staticHeader: ModalHeader;
@@ -54,6 +56,7 @@ export class Modal implements AfterContentChecked {
   @ViewChild('closeTemplate') private _closeTemplateRef: TemplateRef<any>;
 
   private _fullscreen: boolean = false;
+  private _closeable: boolean = false;
 
   /** Gets the {@link ModalHeader} component instance, preferring any dynamically added references */
   get header(): ModalHeader | null {
@@ -76,8 +79,12 @@ export class Modal implements AfterContentChecked {
     return this._fullscreen;
   }
 
+  @Input()
+  set closable(value: boolean) {
+    this._closeable = coerceBooleanProperty(value);
+  }
   get closable(): boolean {
-    return this.dialogRef?.config?.closable;
+    return this._closeable;
   }
 
   @Output() readonly closes = new EventEmitter<any>();
@@ -108,7 +115,7 @@ export class Modal implements AfterContentChecked {
     );
     this.dialogRef.overlayRef.updateSize({
       height: this.fullscreen ? '100vh' : null,
-      width: this.fullscreen ? '100vw' : null
+      width: this.fullscreen ? '100vw' : null,
     });
   }
 }

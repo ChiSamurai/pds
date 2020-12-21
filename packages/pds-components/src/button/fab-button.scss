@@ -1,18 +1,16 @@
-@import "elevations";
-@import "constants";
-@import "mixins";
+@use "styleguide" as pds;
 
 $fab-button-size: 60px !default;
-$fab-button-spacing: $space-9 !default;
+$fab-button-spacing: pds.$space-9 !default;
 $fab-button-rounding: $fab-button-size * 0.5 !default;
 
 pds-fab-button {
-  @include button-base;
-  @include button-primary;
-  @include outer-spacing($fab-button-spacing, bottom);
-  @include outer-spacing($fab-button-spacing, right);
-  @include rounding($fab-button-rounding);
-  @include elevation($overlay);
+  @include pds.button-base;
+  @include pds.button-primary;
+  @include pds.outer-spacing($fab-button-spacing, bottom);
+  @include pds.outer-spacing($fab-button-spacing, right);
+  @include pds.rounding($fab-button-rounding);
+  @include pds.elevation(pds.$overlay-elevation);
 
   position: fixed;
   bottom: 0; right: 0;

@@ -1,10 +1,9 @@
-@import "constants";
-@import "mixins";
-
+@use "styleguide" as pds;
+@use "util";
 $tab-active-indicator-width: 4px !default;
 
 pds-tab {
-  @include inner-spacing($space-3, y);
+  @include pds.inner-spacing(pds.$space-3, y);
 
   user-select: none;
   transition: 100ms ease-in;
@@ -13,16 +12,16 @@ pds-tab {
   cursor: pointer;
 
   &:not(:first-child) {
-    margin-left: $space_8;
+    margin-left: pds.$space_8;
   }
 
-  @include hover-state {
+  @include util.hover-state {
     border-color: var(--primary);
   }
-  @include active-state {
+  @include util.active-state {
     border-color: var(--primary-light);
   }
-  @include disabled_state( $within_parent: true ) {
+  @include util.disabled_state( $within_parent: true ) {
     border-color: var(--disabled);
     color: var(--disabled);
   }

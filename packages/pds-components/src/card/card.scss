@@ -1,15 +1,13 @@
-@import "elevations";
-@import "constants";
-@import "mixins";
+@use "styleguide" as pds;
 
-$card-padding-x: $space-3 !default;
-$card-padding-y: $space-3 !default;
+$card-padding-x: pds.$space-3 !default;
+$card-padding-y: pds.$space-3 !default;
 
 pds-card {
-  @include elevation($raised);
-  @include rounding($rounding-lg);
-  @include inner-spacing($card-padding-x, x);
-  @include inner-spacing($card-padding-y, y);
+  @include pds.elevation(pds.$raised-elevation);
+  @include pds.rounding(pds.$rounding-lg);
+  @include pds.inner-spacing($card-padding-x, x);
+  @include pds.inner-spacing($card-padding-y, y);
 
   display: block;
   overflow: hidden;
@@ -20,18 +18,18 @@ pds-card {
     align-items: center;
 
     > svg-icon {
-      margin-right: $space-3;
+      margin-right: pds.$space-3;
     }
   }
 
   pds-card-header {
-    @include inner-spacing($card-padding-y, bottom);
+    @include pds.inner-spacing($card-padding-y, bottom);
 
     display: flex;
     justify-content: space-between;
   }
   pds-card-footer {
-    @include inner-spacing($card-padding-y, top);
+    @include pds.inner-spacing($card-padding-y, top);
 
     display: flex;
   }
