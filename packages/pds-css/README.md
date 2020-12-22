@@ -74,8 +74,8 @@ $purplish: #582ab3;
 
 // Defining an examplary dark theme
 $dark-theme: pds.theme-define((
-  "foreground": pds.$color-system-light,
-  "background": pds.$color-system-dark-t1
+  "foreground": --light,
+  "background": --dark-t1
 ), (
   // Optional typography overwrites
 ), (
