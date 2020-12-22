@@ -2,6 +2,7 @@
 @forward "util/font-face";
 @forward "util/custom-property";
 
+@forward "util/string" as str-*;
 @forward "util/coerce" as coerce-*;
 @forward "util/color" as color-*;
 @forward "util/yiq" as yiq-*;
