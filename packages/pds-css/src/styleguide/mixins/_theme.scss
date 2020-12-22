@@ -3,7 +3,7 @@
 
 $color-rgb: false !default;
 
-@mixin theme($theme) {
+@mixin theme($theme, $color-rgb: $color-rgb) {
   $colors: theme.get-colors($theme);
   $typography: theme.get-typography($theme);
   $custom-properties: theme.get-custom-properties($theme);

@@ -6,13 +6,13 @@ $primary: $berry !default;
 $primary-light: $pinkberry !default;
 $primary-contrast: white !default;
 
-$gray-darkest: var(--system-dark) !default;
-$gray-darker: var(--system-dark-t1) !default;
-$gray-dark: var(--system-dark-t2) !default;
-$gray: var(--system-dark-t4) !default;
-$gray-light: var(--system-light) !default;
-$gray-lighter: var(--system-light-t1) !default;
-$gray-lightest: var(--system-light-t2) !default;
+$gray-darkest: var(--dark) !default;
+$gray-darker: var(--dark-t1) !default;
+$gray-dark: var(--dark-t2) !default;
+$gray: var(--dark-t4) !default;
+$gray-light: var(--light) !default;
+$gray-lighter: var(--light-t1) !default;
+$gray-lightest: var(--light-t2) !default;
 
 $good: var(--green) !default;
 $good-outline: var(--green-outline) !default;

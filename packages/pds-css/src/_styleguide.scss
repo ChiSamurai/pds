@@ -1,9 +1,7 @@
 // Forwards <editor-fold>
-@forward "styleguide/mixins";
+@forward "styleguide/theme" as theme-*;
 @forward "styleguide/typography" as typography-*;
 @forward "styleguide/elevation" as elevation-*;
-@forward "styleguide/theme" as theme-*;
-
 @forward "styleguide/color-mods" as color-mod-*;
 @forward "styleguide/colors" as color-*;
 
@@ -12,6 +10,7 @@
 @forward "styleguide/roundings";
 @forward "styleguide/spacings";
 @forward "styleguide/inputs";
+@forward "styleguide/mixins";
 // </editor-fold>
 // Usages <editor-fold>
 @use "sass:list";
@@ -73,7 +72,7 @@ $font-family: "PT Sans", sans-serif !default;
 
   @at-root {
     :root {
-      @include theme($default-theme) {
+      @include theme($default-theme, $color-rgb) {
         @include custom-color-property(--foreground, $foreground-color, $rgb: $color-rgb);
         @include custom-color-property(--background, $background-color, $rgb: $color-rgb);
       }
@@ -93,6 +92,7 @@ $font-family: "PT Sans", sans-serif !default;
       }
       background-color: var(--background);
       color: var(--foreground);
+      margin: 0;
     }
 
     * {

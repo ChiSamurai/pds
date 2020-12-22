@@ -10,13 +10,13 @@
       @if type-of($value) == map {
         @include custom-properties($value, $property);
       } @else if $value != null {
-        #{normalize($property, $prefix, $suffix)}: #{var-or-default($value)};
+        #{normalize-var($property, $prefix, $suffix)}: #{var-or-default($value)};
       }
     }
   }
 }
 
-@mixin custom-color-properties($custom-property-map, $prefix: null, $suffix: null, $rgb: true) {
+@mixin custom-color-properties($custom-property-map, $prefix: null, $suffix: null, $rgb: false) {
   @if type-of($custom-property-map) == list {
     @each $map in $custom-property-map {
       @include custom-color-properties($map, $prefix, $suffix, $rgb);
@@ -34,11 +34,11 @@
   }
 }
 
-@mixin custom-color-property($property, $color, $prefix: null, $suffix: null, $rgb: true) {
-  #{normalize($property, $prefix, $suffix)}: #{var-or-default($color)};
+@mixin custom-color-property($property, $color, $prefix: null, $suffix: null, $rgb: false) {
+  #{normalize-var($property, $prefix, $suffix)}: #{var-or-default($color)};
   @if $rgb {
     $rgb-suffix: if($suffix, "#{$suffix}-rgb", "rgb");
-    $property: normalize($property, $prefix, $rgb-suffix);
+    $property: normalize-var($property, $prefix, $rgb-suffix);
     @if is-var-key($color) or is-var($color) {
       #{$property}: #{var-or-default($color, $prefix: $prefix, $suffix: $rgb-suffix)};
     } @else {
