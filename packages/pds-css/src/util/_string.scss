@@ -1,9 +1,8 @@
 @use "sass:string" as str;
-@use "list" as *;
 @use "coerce";
 
 /** Replaces any $substr occurrence inside $str with the $replace value */
-@function replace($str, $substr, $replace: '') {
+@function replace($str, $substr, $replace: "") {
   $str: coerce.to-str($str);
   $substr: coerce.to-str($substr);
   $index: str.index($str, $substr);
@@ -14,56 +13,27 @@
   @return $str;
 }
 
-/** Splits $str using the $separator value */
-@function split($str, $separator) {
-  $separator: coerce.to-str($separator);
+/** Trims the $token value from the start of the $str value */
+@function trim-start($str, $token: " ") {
   $str: coerce.to-str($str);
-  $split-list: ();
-  // first index of separator in string
-  $index: str-index($str, $separator);
-  // keep splitting as long as we have an index
-  @while $index != null {
-    // get the substring from the first character to the separator
-    $item: str-slice($str, 1, $index - 1);
-    $split-list: append($split-list, $item);
-    // remove item and separator from string
-    $str: str-slice($str, $index + 1);
-    // find new index of separator
-    $index: str-index($str, $separator);
-  }
-  // add the remaining string to list (the last item)
-  $split-list: append($split-list, $str);
-  @return $split-list;
-}
-
-/** Tokenizes $str into a character list */
-@function tokenize($str) {
-  @return split($str, "");
-}
-
-/** Trims any " " or "\t" value from the start of $str */
-@function trim-start($str, $tokens: " \t") {
-  $str: coerce.to-str($str);
-  $tokens: tokenize($tokens);
-  @if some($tokens, str-slice($str, 1, 1)) {
+  @if str-slice($str, 1, 1) == $token {
     @return trim-start(str-slice($str, 2));
   } @else {
     @return $str;
   }
 }
 
-/** Trims any " " or "\t" value from the end of $str */
-@function trim-end($str, $tokens: " \t") {
+/** Trims the $token value from the end of the $str value */
+@function trim-end($str, $token: " ") {
   $str: coerce.to-str($str);
-  $tokens: tokenize($tokens);
-  @if some($tokens, str-slice($str, str-length($str), -1)) {
+  @if str-slice($str, str-length($str), -1) == $token {
     @return trim-end(str-slice($str, 1, -2));
   } @else {
     @return $str;
   }
 }
 
-/** Trims any " " or "\t" value from $str */
-@function trim($str, $tokens: " \t") {
-  @return trim-start(trim-end($str, $tokens), $tokens);
+/** Trims the $token value from the start and end of the $str value */
+@function trim($str, $token: " ") {
+  @return trim-start(trim-end($str, $token), $token);
 }
