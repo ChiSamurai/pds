@@ -25,14 +25,14 @@ in `@vitagroup/pds-css/prebuilt/*`.
 ### Creating a Styleguide
 
 ```scss
-@use "~@vitagroup/pds-css/sass/util/color";
+@use "~@vitagroup/pds-css/sass/util";
 
 $purplish: #582ab3;
 
 @use "~@vitagroup/pds-css/sass/styleguide/colors" with (
-  $primary-light: color.tint($purplish, 25%),
+  $primary-light: util.color-tint($purplish, 25%),
   $primary: $purplish,
-  $primary-dark: color.shade($purplish, 25%)
+  $primary-dark: util.color-shade($purplish, 25%)
 );
 
 @use "~@vitagroup/pds-css/sass/styleguide" as pds with (
@@ -74,10 +74,21 @@ $purplish: #582ab3;
 
 // Defining an examplary dark theme
 $dark-theme: pds.theme-define((
+  // Mandatory color overwrites
   "foreground": --light,
-  "background": --dark-t1
+  "background": --dark-t1,
+  
+  "gray-darkest": --light-t1,
+  "gray-darker": --light-t2,
+  "gray-dark": --dark-t4,
+  "gray": --dark-t3,
+  "gray-light": --dark-t2,
+  "gray-lighter": --dark-t1,
+  "gray-lightest": --dark
 ), (
   // Optional typography overwrites
+  "body": pds.typography-define(20px),
+  "body-small": pds.typography-define(15px, 500)
 ), (
   // Optional other custom property overwrites
 ));
