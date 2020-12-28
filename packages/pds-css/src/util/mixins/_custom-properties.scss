@@ -7,8 +7,8 @@
     }
   } @else {
     @each $property, $value in $custom-property-map {
-      @if type-of($value) == map {
-        @include custom-properties($value, $property);
+      @if type-of($value) == map or type-of($value) == list {
+        @include custom-properties($value, prefix($prefix, $property), $suffix);
       } @else if $value != null {
         #{normalize-var($property, $prefix, $suffix)}: #{var-or-default($value)};
       }
@@ -23,8 +23,8 @@
     }
   } @else {
     @each $property, $color in $custom-property-map {
-      @if type-of($color) == map {
-        @include custom-color-properties($custom-property-map, $prefix, $suffix, $rgb);
+      @if type-of($color) == map or type-of($color) == list {
+        @include custom-color-properties($color, prefix($prefix, $property), $suffix, $rgb);
       } @else if not is-var-key($color) and not is-var($color) and type-of($color) != color {
         @error "Unable to include custom color properties. Non color value provided for property \"#{$property}\"";
       } @else if $color != null {

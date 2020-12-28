@@ -1,59 +1,71 @@
 @use "string" as str;
 @use "coerce";
 
-/**
- * Normalizes a custom property key. The $var parameter value can, but may not
- * be prefixed with `--`. This function will make sure it is thought.
- *
- * @example
- * ```scss
- * $prefix: null; // optional
- * $suffix: "bar"; // optional
- *
- * $var: normalize-var("foo", $prefix, $suffix);
- * // -> "--foo-bar"
- * $var: normalize-var("-foo", $prefix, $suffix);
- * // -> "---foo-bar"
- * $var: normalize-var("--foo", $prefix, $suffix);
- * // -> "--foo-bar"
- * $var: normalize-var("--   fo  o", $prefix, $suffix);
- * // -> "--foo-bar"
- * ```
- */
+@function prefix($var, $prefix) {
+  $has-prefix: $prefix and str.trim($prefix);
+  $has-var: $var and str.trim($var);
+
+  @if $has-var {
+    @return if($has-prefix, "#{$prefix}-#{$var}", $var);
+  } @else if $has-prefix {
+    @return $prefix;
+  }
+}
+@function suffix($var, $suffix) {
+  $has-suffix: $suffix and str.trim($suffix);
+  $has-var: $var and str.trim($var);
+
+  @if $has-var {
+    @return if($has-suffix, "#{$var}-#{$suffix}", $var);
+  } @else if $has-suffix {
+    @return $suffix;
+  }
+}
+@function affix($var, $prefix, $suffix) {
+  @return prefix(suffix($var, $suffix), $prefix);
+}
+
+/// Normalizes a custom property key. The $var parameter value can, but may not
+/// be prefixed with `--`. This function will make sure it is thought.
+///
+/// @example
+/// ```scss
+/// $prefix: null; // optional
+/// $suffix: "bar"; // optional
+///
+/// $var: normalize-var("foo", $prefix, $suffix);
+/// // -> "--foo-bar"
+/// $var: normalize-var("-foo", $prefix, $suffix);
+/// // -> "---foo-bar"
+/// $var: normalize-var("--foo", $prefix, $suffix);
+/// // -> "--foo-bar"
+/// $var: normalize-var("--   fo  o", $prefix, $suffix);
+/// // -> "--foo-bar"
+/// ```
 @function normalize-var($var, $prefix: null, $suffix: null) {
   // 1. coerce the var to a string value. returns an empty string if null
   $var: str.replace($var, " ");
   // 2. check and remove the "--" custom property prefix
   $var: if(str-index($var, "--") == 1, str-slice($var, 3), $var);
-  // 3. check if we have a prefix and if so, append it to the var name
-  @if $prefix != null {
-    // 3.1. check if the var name is truthy and if so, append the dash delimiter and prefix value
-    $var: if($var != null and $var != "", "#{$prefix}-#{$var}", $prefix);
-  }
-  // 4. check if we have a suffix and if so, append it to the var name
-  @if $suffix != null {
-    // 4.1. check if the var name is truthy and if so, append the dash delimiter and suffix value
-    $var: if($var != null and $var != "", "#{$var}-#{$suffix}", $suffix);
-  }
-  // 5. check if the var name is falsy after all the necessary normalization steps and if NOT, then throw
+  // 3. check if we have any affix and if so, append it to the var name
+  $var: affix($var, $prefix, $suffix);
+  // 4. check if the var name is falsy after all the necessary normalization steps and if NOT, then throw
   @if not $var {
     @error "Illegal custom property normalization. Cannot normalize nothing";
   }
-  // 6. return the normalized custom property, unquoted
+  // 5. return the normalized custom property, unquoted
   @return unquote("--#{$var}");
 }
 
-/**
- * Unwraps the inner custom property key of a `var()` expression.
- *
- * @example
- * ```scss
- * $var: unwrap-var("var(--foo)");
- * // -> "--foo"
- * $var: unwrap-var("var(--foo, var(--bar))");
- * // -> "--foo"
- * ```
- */
+/// Unwraps the inner custom property key of a `var()` expression.
+///
+/// @example
+/// ```scss
+/// $var: unwrap-var("var(--foo)");
+/// // -> "--foo"
+/// $var: unwrap-var("var(--foo, var(--bar))");
+/// // -> "--foo"
+/// ```
 @function unwrap-var($var) {
   $var: coerce.to-str($var);
   @if is-var($var) {
@@ -66,17 +78,15 @@
     @return $var;
   }
 }
-/**
- * Unwraps the fallback value of a `var()` expression.
- *
- * @example
- * ```scss
- * $var: unwrap-var-fallback("var(--foo)");
- * // -> null
- * $var: unwrap-var-fallback("var(--foo, var(--bar))");
- * // -> "var(--bar)"
- * ```
- */
+/// Unwraps the fallback value of a `var()` expression.
+///
+/// @example
+/// ```scss
+/// $var: unwrap-var-fallback("var(--foo)");
+/// // -> null
+/// $var: unwrap-var-fallback("var(--foo, var(--bar))");
+/// // -> "var(--bar)"
+/// ```
 @function unwrap-var-fallback($var) {
   $var: coerce.to-str($var);
   $start: str-index($var, ",");
@@ -89,21 +99,19 @@
   }
 }
 
-/**
- * Normalizes and wraps the $var parameter inside a `var()` expression, also
- * accepting any $fallback, $prefix or $suffix parameter values.
- *
- * @example
- * ```scss
- * $prefix: null; // optional
- * $suffix: "bar"; // optional
- *
- * $var: var("foo", $prefix: $prefix, $suffix: $suffix);
- * // -> var(--foo-bar)
- * $var: var("foo", var("bar"), $prefix, $suffix);
- * // -> "var(--foo-bar, var(--bar))"
- * ```
- */
+/// Normalizes and wraps the $var parameter inside a `var()` expression, also
+/// accepting any $fallback, $prefix or $suffix parameter values.
+///
+/// @example
+/// ```scss
+/// $prefix: null; // optional
+/// $suffix: "bar"; // optional
+///
+/// $var: var("foo", $prefix: $prefix, $suffix: $suffix);
+/// // -> var(--foo-bar)
+/// $var: var("foo", var("bar"), $prefix, $suffix);
+/// // -> "var(--foo-bar, var(--bar))"
+/// ```
 @function var($var, $fallback: null, $prefix: null, $suffix: null) {
   $var: normalize-var($var, $prefix, $suffix);
   @if $fallback != null {
@@ -113,14 +121,12 @@
   }
 }
 
-/**
- * Normalizes and wraps *any* variable expression (eg. `var(--foo)`, `--foo`
- * or `foo`) also accepting any $fallback, $prefix or $suffix value. If no
- * of the mentioned notations is provided, the function will return the
- * input $var value as default instead
- *
- * @example Same as {@link var} examples for variable expressions
- */
+/// Normalizes and wraps *any* variable expression (eg. `var(--foo)`, `--foo`
+/// or `foo`) also accepting any $fallback, $prefix or $suffix value. If no
+/// of the mentioned notations is provided, the function will return the
+/// input $var value as default instead
+///
+/// @example Same as {@link var} examples for variable expressions
 @function var-or-default($var, $fallback: null, $prefix: null, $suffix: null) {
   @if is-var-key($var) {
     @return var($var, $fallback, $prefix, $suffix);
@@ -134,12 +140,12 @@
   }
 }
 
-/** Checks whether the $value is a custom property key (starting with `--`) */
+/// Checks whether the $value is a custom property key (starting with `--`)
 @function is-var-key($value) {
   $value: str.replace($value, " ");
   @return str-index($value, "--") == 1;
 }
-/** Checks whether the $value is a var expression (starting with `var`) */
+/// Checks whether the $value is a var expression (starting with `var`)
 @function is-var($value) {
   $value: str.replace($value, " ");
   @return str-index($value, "var") == 1;

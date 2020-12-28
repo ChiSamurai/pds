@@ -14,7 +14,7 @@ $petrol-t3: color.tint($petrol, $t3);
 $petrol-t4: color.tint($petrol, $t4);
 
 @function petrolicum() {
-  @return unquote("45%, #{$petrol} 0%, #{#00FFE5} 100%");
+  @return unquote("#{$petrol} 0%, #{#00FFE5} 100%");
 }
 
 $petrol-color-map: (

@@ -15,7 +15,7 @@ $berry-t3: color.tint($berry, $t3);
 $berry-t4: color.tint($berry, $t4);
 
 @function berrylicious() {
-  @return unquote("45%, #{$berry} 0%, #{$pinkberry} 100%");
+  @return unquote("#{$berry} 0%, #{$pinkberry} 100%");
 }
 
 $berry-color-map: (

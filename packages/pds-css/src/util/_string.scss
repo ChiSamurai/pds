@@ -1,7 +1,7 @@
 @use "sass:string" as str;
 @use "coerce";
 
-/** Replaces any $substr occurrence inside $str with the $replace value */
+/// Replaces any $substr occurrence inside $str with the $replace value
 @function replace($str, $substr, $replace: "") {
   $str: coerce.to-str($str);
   $substr: coerce.to-str($substr);
@@ -13,7 +13,7 @@
   @return $str;
 }
 
-/** Trims the $token value from the start of the $str value */
+/// Trims the $token value from the start of the $str value
 @function trim-start($str, $token: " ") {
   $str: coerce.to-str($str);
   @if str-slice($str, 1, 1) == $token {
@@ -23,7 +23,7 @@
   }
 }
 
-/** Trims the $token value from the end of the $str value */
+/// Trims the $token value from the end of the $str value
 @function trim-end($str, $token: " ") {
   $str: coerce.to-str($str);
   @if str-slice($str, str-length($str), -1) == $token {
@@ -33,7 +33,7 @@
   }
 }
 
-/** Trims the $token value from the start and end of the $str value */
+/// Trims the $token value from the start and end of the $str value
 @function trim($str, $token: " ") {
   @return trim-start(trim-end($str, $token), $token);
 }

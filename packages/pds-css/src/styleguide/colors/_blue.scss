@@ -14,7 +14,7 @@ $blue-t3: color.tint($blue, $t3);
 $blue-t4: color.tint($blue, $t4);
 
 @function blue-motion() {
-  @return unquote("45%, #{$blue} 0%, #{$bright-blue} 100%");
+  @return unquote("#{$blue} 0%, #{$bright-blue} 100%");
 }
 
 $blue-color-map: (
