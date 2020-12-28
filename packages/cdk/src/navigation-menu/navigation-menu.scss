@@ -5,6 +5,7 @@ nav-menu {
   height: 100%;
 
   > .nav-entries {
+    user-select: none;
     flex-direction: column;
     display: flex;
 
@@ -13,9 +14,9 @@ nav-menu {
     }
 
     .nav-entry {
+      display: flex;
       min-height: 48px;
       align-items: center;
-      color: currentColor;
       cursor: pointer;
     }
   }

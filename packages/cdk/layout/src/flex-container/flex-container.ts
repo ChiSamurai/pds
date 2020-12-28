@@ -6,7 +6,7 @@ import {
   OnInit,
   Optional,
   Renderer2,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { coerceCSSUnit } from '@vitagroup/common';
@@ -16,30 +16,30 @@ import {
   FLEX_CONTAINER_STATE,
   FlexContainerState,
   MEDIA_FLEX_CONTAINER_STATES,
-  MediaFlexContainerState
+  MediaFlexContainerState,
 } from './flex-container-state';
 
 @Component({
   selector: 'fx-container, [fx-container]',
-  styleUrls: [ './flex-container.scss' ],
+  styleUrls: ['./flex-container.scss'],
   encapsulation: ViewEncapsulation.None,
   template: `
     <ng-container *encapsulateTemplateOutlet></ng-container>
     <ng-content></ng-content>
-  `
+  `,
 })
 export class FlexContainer implements OnInit, OnDestroy {
   protected readonly ngDestroys = new Subject<void>();
 
   constructor(
-    @Optional() @Inject(MEDIA_FLEX_CONTAINER_STATES)
+    @Optional()
+    @Inject(MEDIA_FLEX_CONTAINER_STATES)
     private _mediaStates: MediaFlexContainerState[],
     @Optional() @Inject(FLEX_CONTAINER_STATE) private _defaultState: FlexContainerState,
     protected readonly elementRef: ElementRef<HTMLElement>,
     protected readonly media: MediaObserver,
     protected readonly renderer: Renderer2
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     if (this._defaultState != null) {
@@ -74,7 +74,7 @@ export class FlexContainer implements OnInit, OnDestroy {
   }
 
   checkMediaStateBreakpoints({ breakpoint }: MediaFlexContainerState): boolean {
-    const aliases = Array.isArray(breakpoint) ? breakpoint : [ breakpoint ];
+    const aliases = Array.isArray(breakpoint) ? breakpoint : [breakpoint];
     return aliases.some((alias) => this.media.isActive(alias));
   }
   checkMediaStates(): boolean {

@@ -6,7 +6,7 @@ import {
   Optional,
   Predicate,
   TemplateRef,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { merge } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -28,9 +28,10 @@ import { NavigationEntryDefContext } from './navigation-entry-def';
 
     <ng-container *ngFor="let entry of viewEntries | async">
       <ng-container
-        *ngTemplateOutlet="resolveEntryTemplate(entry) || fallbackEntryTemplate; context: { $implicit: entry }">
-      </ng-container>
-    </ng-container>`
+        *ngTemplateOutlet="resolveEntryTemplate(entry) || fallbackEntryTemplate; context: { $implicit: entry }"
+      ></ng-container>
+    </ng-container>
+  `,
 })
 export class NavigationEntryOutlet extends NavigationEntryContainer {
   /**
@@ -42,12 +43,12 @@ export class NavigationEntryOutlet extends NavigationEntryContainer {
   protected readonly customState = new NavigationEntries();
 
   /** Gets the stream of {@link NavigationEntry}s that's used for rendering */
-  readonly viewEntries = merge(this.customState, this.state).pipe(map(() => {
-    const entries = this.customState.length ? this.customState.snapshot : this.state.snapshot;
-    return typeof this.filter === 'function'
-      ? entries.filter(this.filter)
-      : entries;
-  }));
+  readonly viewEntries = merge(this.customState, this.state).pipe(
+    map(() => {
+      const entries = this.customState.length ? this.customState.snapshot : this.state.snapshot;
+      return typeof this.filter === 'function' ? entries.filter(this.filter) : entries;
+    })
+  );
 
   @Input()
   set entries(value: NavigationEntry[]) {
@@ -61,7 +62,6 @@ export class NavigationEntryOutlet extends NavigationEntryContainer {
   @Input() filter: Predicate<NavigationEntry>;
 
   constructor(
-    protected injector: Injector,
     protected readonly state: NavigationEntries,
     @Optional() protected readonly parent?: NavigationEntryContainer
   ) {

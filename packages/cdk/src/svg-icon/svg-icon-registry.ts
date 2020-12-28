@@ -4,20 +4,6 @@ import { ReplaySubject } from 'rxjs';
 
 export type SvgIconData = string;
 
-export interface SvgIconImportConfig<Icon = any> {
-  icons: Icon[];
-  idSelector: string[] | string;
-  idRewrite?: Array<{
-    replace: RegExp | string;
-    with: string;
-  }>;
-  dataSelector: string[] | string;
-}
-
-export const SVG_ICON_IMPORT = new InjectionToken<SvgIconImportConfig>(
-  'SVG_ICON_IMPORT'
-);
-
 @Injectable({ providedIn: 'root' })
 export class SvgIconRegistry {
   protected readonly state = new BehaviorState<any>();
@@ -29,47 +15,21 @@ export class SvgIconRegistry {
   readonly registers = new ReplaySubject<[string, SvgIconData]>();
   readonly unregisters = new ReplaySubject<[string, SvgIconData]>();
 
-  constructor(
-    @Optional()
-    @Inject(SVG_ICON_IMPORT)
-    importConfig: /* @dynamic */ SvgIconImportConfig
-  ) {
-    if (importConfig != null) this.import(importConfig);
+  resolve(name: string): SvgIconData | null {
+    return this.icons?.find((iconEntry) => iconEntry[0] === name)?.[1];
   }
 
-  resolve(id: string): SvgIconData | null {
-    return this.icons?.find((iconEntry) => iconEntry[0] === id)?.[1];
+  register(name: string, data: SvgIconData): void {
+    this.state.patch({ [name]: data });
+    this.registers.next([name, data]);
   }
-
-  register(id: string, data: SvgIconData): void {
-    this.state.patch({ [id]: data });
-    this.registers.next([id, data]);
-  }
-  unregister(id: string): void {
+  unregister(name: string): void {
     const icons = this.state.snapshot;
-    if (id in icons) {
-      this.unregisters.next([id, icons[id]]);
+    if (name in icons) {
+      this.unregisters.next([name, icons[name]]);
 
-      delete icons[id];
+      delete icons[name];
       this.state.patch(icons);
-    }
-  }
-
-  import(config: SvgIconImportConfig): void {
-    const { idSelector, idRewrite, dataSelector } = config;
-    for (const icon of config.icons) {
-      const data = resolveObjectPropertyPath(icon, dataSelector);
-      let id = resolveObjectPropertyPath(icon, idSelector)?.toString();
-      if (id == null || id.trim() === '')
-        throw new Error(
-          `Unable to import svg icons. Failed to select id for "${icon}"`
-        );
-      if (idRewrite != null) {
-        for (const { replace, with: rWith } of config.idRewrite) {
-          id = id.replace(replace, rWith);
-        }
-      }
-      this.register(id, data);
     }
   }
 }

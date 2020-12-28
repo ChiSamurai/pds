@@ -5,12 +5,13 @@ export type PageFooterPosition = 'fixed' | 'fluid' | 'none';
 
 export const PAGE_FOOTER_COMPONENT = new InjectionToken<Type<any>>('PAGE_FOOTER_COMPONENT');
 export const PAGE_FOOTER_POSITION = new InjectionToken<PageFooterPosition>('PAGE_FOOTER_POSITION', {
-  providedIn: 'root', factory: /* @dynamic */ () => 'none'
+  providedIn: 'root',
+  factory: /* @dynamic */ () => 'none',
 });
 
 @Component({
   selector: 'page-footer',
-  styleUrls: [ './page-footer.scss' ],
+  styleUrls: ['./page-footer.scss'],
   encapsulation: ViewEncapsulation.None,
   template: `
     <ng-template #ngContentTemplate>
@@ -25,7 +26,7 @@ export const PAGE_FOOTER_POSITION = new InjectionToken<PageFooterPosition>('PAGE
     <ng-container *encapsulate="encapsulation">
       <ng-container *ngTemplateOutlet="defaultComponentOrContentTemplate"></ng-container>
     </ng-container>
-  `
+  `,
 })
 export class PageFooter {
   @Input() encapsulation: string;

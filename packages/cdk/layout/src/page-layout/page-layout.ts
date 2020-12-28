@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   ElementRef,
@@ -7,7 +8,7 @@ import {
   OnChanges,
   Renderer2,
   SimpleChanges,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { PreventNativeTitleTooltip } from '@vitagroup/cdk/a11y';
 import { PAGE_ENCAPSULATION } from './page-encapsulation';
@@ -16,7 +17,7 @@ import { PageHeader } from './page-header';
 
 @Component({
   selector: 'page-layout',
-  styleUrls: [ './page-layout.scss' ],
+  styleUrls: ['./page-layout.scss'],
   encapsulation: ViewEncapsulation.None,
   template: `
     <ng-template #footerTemplate>
@@ -44,8 +45,8 @@ import { PageHeader } from './page-header';
       <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
     </ng-container>
     <main cdkScrollable>
-      <ng-container *encapsulate="encapsulation">
-        <ng-container *ngTemplateOutlet="ngContentTemplate"></ng-container>
+      <ng-container *encapsulate="encapsulation; ngClass: 'page-content'">
+        <ng-container *templateOutlet="ngContentTemplate"></ng-container>
       </ng-container>
       <ng-container *ngIf="footerPosition === 'fluid'">
         <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
@@ -53,7 +54,8 @@ import { PageHeader } from './page-header';
     </main>
     <ng-container *ngIf="footerPosition === 'fixed'">
       <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
-    </ng-container>`
+    </ng-container>
+  `,
 })
 export class PageLayout extends PreventNativeTitleTooltip implements OnChanges {
   @ContentChild(PageHeader, { static: true }) private _staticHeader: PageHeader;

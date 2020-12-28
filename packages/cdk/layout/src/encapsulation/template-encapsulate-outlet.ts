@@ -3,9 +3,10 @@ import {
   DoCheck,
   EmbeddedViewRef,
   Inject,
-  InjectionToken, OnDestroy,
+  InjectionToken,
+  OnDestroy,
   TemplateRef,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
 
 /** @internal */
@@ -19,12 +20,10 @@ export class TemplateEncapsulateOutlet implements DoCheck, OnDestroy {
     @Inject(ENCAPSULATE_TEMPLATE)
     protected template: TemplateRef<any>,
     protected viewContainer: ViewContainerRef
-  ) {
-  }
+  ) {}
 
   protected destroyEmbeddedView(): void {
-    if (this.embeddedView != null && !this.embeddedView.destroyed)
-      this.embeddedView.destroy();
+    if (this.embeddedView != null && !this.embeddedView.destroyed) this.embeddedView.destroy();
   }
 
   ngDoCheck() {

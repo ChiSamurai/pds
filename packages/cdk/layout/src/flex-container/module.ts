@@ -1,11 +1,12 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { TemplateEncapsulationModule } from '../encapsulation/module';
 import { FlexBreak } from './flex-break';
 import { FlexContainer } from './flex-container';
 import {
   FLEX_CONTAINER_STATE,
   FlexContainerState,
   MEDIA_FLEX_CONTAINER_STATES,
-  MediaFlexContainerState
+  MediaFlexContainerState,
 } from './flex-container-state';
 
 export interface FlexContainerModuleConfig {
@@ -13,14 +14,12 @@ export interface FlexContainerModuleConfig {
   default?: FlexContainerState;
 }
 
-const declarations = [
-  FlexContainer,
-  FlexBreak
-];
+const declarations = [FlexContainer, FlexBreak];
 
 @NgModule({
   exports: declarations,
-  declarations
+  declarations,
+  imports: [TemplateEncapsulationModule],
 })
 export class FlexContainerModule {
   static forRoot(config: FlexContainerModuleConfig): ModuleWithProviders<FlexContainerModule> {
@@ -28,8 +27,8 @@ export class FlexContainerModule {
       ngModule: FlexContainerModule,
       providers: [
         { provide: MEDIA_FLEX_CONTAINER_STATES, useValue: config.media },
-        { provide: FLEX_CONTAINER_STATE, useValue: config.default }
-      ]
+        { provide: FLEX_CONTAINER_STATE, useValue: config.default },
+      ],
     };
   }
 }

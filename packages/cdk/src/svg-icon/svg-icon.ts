@@ -2,7 +2,7 @@ import { Component, Inject, InjectionToken, Input, Optional, ViewEncapsulation }
 import { SvgIconData, SvgIconRegistry } from './svg-icon-registry';
 
 export interface SvgIconSizeAliases {
-  [ key: string ]: string | number;
+  [key: string]: string | number;
 }
 
 export const SVG_ICON_SIZE = new InjectionToken<string | number>('SVG_ICON_SIZE');
@@ -12,7 +12,7 @@ export const SVG_ICON_SIZE_ALIASES = new InjectionToken<SvgIconSizeAliases>('SVG
   selector: 'svg-icon',
   styles: [
     'svg-icon { display: inline-flex; align-items: center; justify-content: center }',
-    'svg-icon > svg { fill: currentColor; stroke: none }'
+    'svg-icon > svg { fill: currentColor; stroke: none }',
   ],
   encapsulation: ViewEncapsulation.None,
   template: `
@@ -23,10 +23,14 @@ export const SVG_ICON_SIZE_ALIASES = new InjectionToken<SvgIconSizeAliases>('SVG
     </svg>
     <ng-template #ngContentTemplate>
       <ng-content></ng-content>
-    </ng-template>`
+    </ng-template>
+  `,
 })
 export class SvgIcon {
+  /** @deprecated Use {@link name} instead */
   @Input() id: string;
+
+  @Input() name: string;
   @Input() size: string | number = 18;
 
   /**
@@ -36,24 +40,17 @@ export class SvgIcon {
   @Input() viewBox: string;
 
   get href(): string {
-    return this.id && `#${ this.id }`;
+    return this.name && `#${this.name}`;
   }
-
   get data(): SvgIconData {
-    return this.registry.resolve(this.id);
+    return this.registry.resolve(this.name);
   }
-
   get sizeAsNumber(): number {
-    const size = this.sizeAliases != null && typeof this.size === 'string'
-      ? this.sizeAliases[ this.size ]
-      : this.size;
-    return typeof size === 'string'
-      ? parseFloat(size)
-      : size;
+    const size = this.sizeAliases != null && typeof this.size === 'string' ? this.sizeAliases[this.size] : this.size;
+    return typeof size === 'string' ? parseFloat(size) : size;
   }
-
   get registered(): boolean {
-    return this.id && this.data != null;
+    return this.name && this.data != null;
   }
 
   constructor(

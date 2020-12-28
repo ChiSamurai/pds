@@ -8,12 +8,17 @@ import {
   Inject,
   Injector,
   Input,
+  IterableDiffers,
+  KeyValueDiffers,
+  OnChanges,
   OnDestroy,
   Optional,
+  Renderer2,
+  SimpleChanges,
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
-import { assertMultiProvider } from '@vitagroup/common';
+import { assertMultiProvider, TemplateOutlet } from '@vitagroup/common';
 import { ENCAPSULATE_TEMPLATE } from './template-encapsulate-outlet';
 import { TEMPLATE_ENCAPSULATIONS, TemplateEncapsulation } from './template-encapsulation';
 
@@ -24,22 +29,27 @@ export function resolveEncapsulateTemplate(dir: TemplateEncapsulate): TemplateRe
 @Directive({
   selector: '[encapsulate]',
   exportAs: 'encapsulate',
+  inputs: ['ngClass: encapsulateNgClass', 'ngStyle: encapsulateNgStyle'],
   providers: [
     {
+      // the ENCAPSULATE_TEMPLATE is provided additionally here to also properly
+      // support any `*encapsulateTemplateOutlet` usages inside the given template
       provide: ENCAPSULATE_TEMPLATE,
       useFactory: resolveEncapsulateTemplate,
       deps: [TemplateEncapsulate],
     },
   ],
 })
-export class TemplateEncapsulate implements DoCheck, OnDestroy {
+export class TemplateEncapsulate extends TemplateOutlet implements OnChanges, OnDestroy {
+  protected readonly injector: Injector;
   protected container: ComponentRef<any> | EmbeddedViewRef<any>;
-  protected embeddedView: EmbeddedViewRef<any>;
 
   @Input('encapsulate') encapsulationName: string;
 
+  context: never;
+
   get encapsulation(): TemplateEncapsulation | null {
-    return this.encapsulations?.find((te) => te.name === name);
+    return this.encapsulations?.find((te) => te.name === this.encapsulationName);
   }
 
   protected get containerFactory(): ComponentFactory<any> | null {
@@ -48,15 +58,24 @@ export class TemplateEncapsulate implements DoCheck, OnDestroy {
   }
 
   constructor(
+    injector: Injector,
     readonly template: TemplateRef<any>,
-    protected injector: Injector,
-    protected viewContainer: ViewContainerRef,
+    protected renderer: Renderer2,
+    protected viewContainerRef: ViewContainerRef,
     protected factoryResolver: ComponentFactoryResolver,
+    protected iterableDiffers: IterableDiffers,
+    protected keyValueDiffers: KeyValueDiffers,
     @Optional()
     @Inject(TEMPLATE_ENCAPSULATIONS)
     protected encapsulations: /* @dynamic */ TemplateEncapsulation[]
   ) {
+    super(renderer, iterableDiffers, keyValueDiffers, viewContainerRef);
     assertMultiProvider(encapsulations, TEMPLATE_ENCAPSULATIONS.toString());
+    // create a local injector instance holding the ENCAPSULATE_TEMPLATE reference
+    this.injector = Injector.create({
+      parent: injector,
+      providers: [{ provide: ENCAPSULATE_TEMPLATE, useValue: template }],
+    });
   }
 
   protected destroyContainer(): void {
@@ -69,24 +88,28 @@ export class TemplateEncapsulate implements DoCheck, OnDestroy {
       else this.container.destroy();
     }
   }
-  protected destroyEmbeddedView(): void {
-    if (this.embeddedView != null && !this.embeddedView.destroyed) this.embeddedView.destroy();
-  }
 
-  ngDoCheck() {
-    if (this.encapsulation != null) {
+  ngOnChanges(changes: SimpleChanges) {
+    const shouldRecreate =
+      'encapsulationName' in changes &&
+      changes.encapsulationName.previousValue !== changes.encapsulationName.currentValue;
+
+    if (this.encapsulation != null && shouldRecreate) {
       this.destroyContainer();
-      this.container =
-        this.encapsulation.container instanceof TemplateRef
-          ? this.viewContainer.createEmbeddedView(this.encapsulation.container)
-          : this.viewContainer.createComponent(this.containerFactory);
-    } else {
-      this.destroyEmbeddedView();
-      this.embeddedView = this.viewContainer.createEmbeddedView(this.template);
-    }
+
+      let rootNodes: any[];
+      if (this.encapsulation.container instanceof TemplateRef) {
+        this.container = this.viewContainerRef.createEmbeddedView(this.encapsulation.container);
+        rootNodes = this.container.rootNodes;
+      } else {
+        this.container = this.viewContainerRef.createComponent(this.containerFactory, null, this.injector);
+        rootNodes = [this.container.location.nativeElement];
+      }
+      this.updateNgClasses(rootNodes);
+      this.updateNgStyles(rootNodes);
+    } else super.ngOnChanges(changes);
   }
   ngOnDestroy() {
     this.destroyContainer();
-    this.destroyEmbeddedView();
   }
 }

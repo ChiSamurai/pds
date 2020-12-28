@@ -2,12 +2,13 @@ import {
   Attribute,
   Directive,
   ElementRef,
+  inject,
   Inject,
   InjectionToken,
   Injector,
   Input,
   Optional,
-  Renderer2
+  Renderer2,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
@@ -19,9 +20,7 @@ export const NAVIGATION_LINK_URL_PARAMS = new InjectionToken<Params>('NAVIGATION
 
 @Directive({
   selector: '[navEntryLink]',
-  providers: [
-    { provide: RouterLink, useExisting: NavigationEntryLink }
-  ]
+  providers: [{ provide: RouterLink, useExisting: NavigationEntryLink }],
 })
 export class NavigationEntryLink extends RouterLinkOrHref {
   private _entry: NavigationEntry;
@@ -34,9 +33,7 @@ export class NavigationEntryLink extends RouterLinkOrHref {
       this.routerLinkOrHref = value?.linkUrl;
 
       if (value?.linkUrl != null)
-        this.routerLinkOrHref = this.interpolateLinkUrl(
-          this.router2.serializeUrl(this.urlTree)
-        );
+        this.routerLinkOrHref = this.interpolateLinkUrl(inject(Router).serializeUrl(this.urlTree));
     }
 
     this._entry = value;
@@ -46,9 +43,8 @@ export class NavigationEntryLink extends RouterLinkOrHref {
   }
 
   constructor(
-    // see {@link RouterLinkOrHref} comment...
-    protected router2: Router,
-    protected route2: ActivatedRoute,
+    router: Router,
+    route: ActivatedRoute,
     protected renderer: Renderer2,
     protected element: ElementRef,
     protected sanitizer: DomSanitizer,
@@ -56,10 +52,11 @@ export class NavigationEntryLink extends RouterLinkOrHref {
     protected stringInterpolator: StringInterpolator,
     @Inject(WINDOW) protected window: /* @dynamic */ Window,
     @Attribute('tab-index') tabIndex: string,
-    @Optional() @Inject(NAVIGATION_LINK_URL_PARAMS)
+    @Optional()
+    @Inject(NAVIGATION_LINK_URL_PARAMS)
     readonly linkUrlParams?: any
   ) {
-    super(router2, route2, renderer, element, sanitizer, window, tabIndex);
+    super(router, route, renderer, element, sanitizer, window, tabIndex);
   }
 
   interpolateLinkUrl(value: string): string {
@@ -68,7 +65,7 @@ export class NavigationEntryLink extends RouterLinkOrHref {
 
   onClick(): boolean {
     if (typeof this._entry.action === 'function') {
-      const deps = this._entry.deps?.map(dep => this.injector.get(dep));
+      const deps = this._entry.deps?.map((dep) => this.injector.get(dep));
       this._entry.action(...deps);
     }
     return super.onClick();

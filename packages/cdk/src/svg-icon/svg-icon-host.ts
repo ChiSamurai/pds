@@ -5,9 +5,8 @@ import { SvgIconData, SvgIconRegistry } from './svg-icon-registry';
 const SVG_ELEMENT_START_TAG: RegExp = /(<\s*)(svg)(\s*)/i;
 const SVG_ELEMENT_END_TAG: RegExp = /(<\/\s*)(svg)(\s*>)/i;
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: 'any' })
 export class SvgIconHost {
-
   protected readonly parser: DOMParser = new DOMParser();
 
   protected readonly svg: SVGSVGElement;
@@ -26,8 +25,8 @@ export class SvgIconHost {
     // called internally to initially attach
     this.reattach();
     // listen for any registration changes
-    this.registry.unregisters.subscribe(([ id, data ]) => this.onIconUnregister(id, data));
-    this.registry.registers.subscribe(([ id, data ]) => this.onIconRegister(id, data));
+    this.registry.unregisters.subscribe(([id, data]) => this.onIconUnregister(id, data));
+    this.registry.registers.subscribe(([id, data]) => this.onIconRegister(id, data));
   }
 
   addSymbol(id: string, data: SvgIconData): void {
@@ -41,9 +40,8 @@ export class SvgIconHost {
     }
   }
   removeSymbol(id: string): void {
-    this.svg.childNodes.forEach(node => {
-      if (node instanceof SVGSymbolElement && node.id === id)
-        this.svg.removeChild(node);
+    this.svg.childNodes.forEach((node) => {
+      if (node instanceof SVGSymbolElement && node.id === id) this.svg.removeChild(node);
     });
   }
 
@@ -60,5 +58,4 @@ export class SvgIconHost {
   protected onIconUnregister(id: string, data: SvgIconData): void {
     this.removeSymbol(id);
   }
-
 }
