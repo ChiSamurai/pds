@@ -6,9 +6,7 @@ import { isAbsoluteURL } from '../utils/is-absolute-url';
 
 @Directive({
   selector: '[routerLinkOrHref]',
-  providers: [
-    { provide: RouterLink, useExisting: RouterLinkOrHref }
-  ]
+  providers: [{ provide: RouterLink, useExisting: RouterLinkOrHref }],
 })
 export class RouterLinkOrHref extends RouterLink {
   private _isRouterLink = false;
@@ -37,17 +35,15 @@ export class RouterLinkOrHref extends RouterLink {
   }
 
   constructor(
-    // due to the unfortunate fact, that the `RouterLink` does declare the properties "router" and
-    // "route" privately, we need to given them another name here...
-    protected router2: Router,
-    protected route2: ActivatedRoute,
+    router: Router,
+    route: ActivatedRoute,
     protected renderer: Renderer2,
     protected element: ElementRef,
     protected sanitizer: DomSanitizer,
     @Inject(WINDOW) protected window: /* @dynamic */ Window,
     @Attribute('tab-index') tabIndex: string
   ) {
-    super(router2, route2, tabIndex, renderer, element);
+    super(router, route, tabIndex, renderer, element);
   }
 
   protected resetRouterLink(): void {
@@ -71,8 +67,7 @@ export class RouterLinkOrHref extends RouterLink {
 }
 
 @NgModule({
-  declarations: [ RouterLinkOrHref ],
-  exports: [ RouterLinkOrHref ]
+  declarations: [RouterLinkOrHref],
+  exports: [RouterLinkOrHref],
 })
-export class RouterLinkOrHrefModule {
-}
+export class RouterLinkOrHrefModule {}

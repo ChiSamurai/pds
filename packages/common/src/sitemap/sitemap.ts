@@ -1,5 +1,7 @@
-import { InjectionToken } from '@angular/core';
-import { Routes } from '@angular/router';
+import { InjectionToken, Predicate } from '@angular/core';
+import { Route, Routes } from '@angular/router';
+import { resolveObjectPropertyPath } from '../reflection/resolve-object-property-path';
+import { ObjectPropertySelector, resolveObjectPropertySelector } from '../reflection/resolve-object-property-selector';
 import { ArrayBehaviorState } from '../rx';
 import { normalizeUrl } from '../utils/normalize-url';
 
@@ -9,6 +11,21 @@ export interface SitemapDescriptor {
   routes?: Routes;
   lazyChildren?: Record<string, SitemapDescriptor>;
   routeParamOptions?: Record<string, string[]>;
+  /**
+   * Defines how to and what property of the {@link Route} should be used to
+   * retrieve the {@link SiteRef.title} value. Defaults to {@link Route.data.title}
+   */
+  titleSelector?: ObjectPropertySelector<Route>;
+  /**
+   * Defines how to and what property of the {@link Route} should be used to
+   * retrieve the {@link SiteRef.key} value. Defaults to {@link Route.path}
+   */
+  keySelector?: ObjectPropertySelector<Route>;
+  /**
+   * Defines a filter predicate that determines whether or not to include a {@link Route}
+   * into the {@link SiteRef} generation process
+   */
+  filter?: Predicate<Route>;
 }
 
 /** @internal */
@@ -26,21 +43,22 @@ export interface SiteRef {
 function createSiteRefs(descriptor: SitemapDescriptor): SiteRef[] {
   const siteRefs: SiteRef[] = [];
   if (descriptor.routes != null) {
+    const { titleSelector, keySelector, filter } = descriptor;
+
     for (const route of descriptor.routes) {
-      const routeKey = route.data?.[ 'sitemapKey' ] || route.path;
-      const routeDescriptor = descriptor.lazyChildren?.[ routeKey ];
-      const routeTitle = route.data?.[ 'title' ] || route.data?.[ 'sitemapTitle' ];
+      const routeKey = resolveObjectPropertySelector(route, keySelector, route.path);
+      const routeDescriptor = descriptor.lazyChildren?.[routeKey];
+      const routeTitle = resolveObjectPropertySelector(route, titleSelector, route.data?.title);
 
       const hasEmptyRoutePath = !route.path;
-      // const hasRedirect = !!route.redirectTo;
       const hasWildcardPath = route.path?.includes('*');
-      const isAllowed = route.data?.[ 'sitemap' ] !== false;
+      const isFiltered = filter?.(route);
 
-      if (!hasEmptyRoutePath && !hasWildcardPath && isAllowed) {
+      if (!hasEmptyRoutePath && !hasWildcardPath && !isFiltered) {
         const isParameterized = route.path?.includes(':');
-        const routeParamOptions = descriptor.routeParamOptions?.[ routeKey ];
+        const routeParamOptions = descriptor.routeParamOptions?.[routeKey];
         const routes = (route.children || []).concat(routeDescriptor?.routes || []);
-        const resolveBaseUrl = path => {
+        const resolveBaseUrl = (path) => {
           const { baseUrl } = descriptor as NestedSitemapDescriptor;
           return baseUrl != null ? normalizeUrl('/', baseUrl, path) : normalizeUrl('/', path);
         };
@@ -48,9 +66,11 @@ function createSiteRefs(descriptor: SitemapDescriptor): SiteRef[] {
         if (isParameterized && routeParamOptions != null) {
           for (const paramValue of routeParamOptions) {
             const baseUrl = resolveBaseUrl(paramValue);
-            const title = typeof routeTitle === 'object' ? routeTitle[ paramValue ] : null;
+            const title = typeof routeTitle === 'object' ? routeTitle[paramValue] : null;
             const children = createSiteRefs({
-              ...routeDescriptor, baseUrl, routes
+              ...routeDescriptor,
+              baseUrl,
+              routes,
             } as NestedSitemapDescriptor);
 
             siteRefs.push({ children, title, linkUrl: baseUrl, key: paramValue });
@@ -59,7 +79,9 @@ function createSiteRefs(descriptor: SitemapDescriptor): SiteRef[] {
           const baseUrl = resolveBaseUrl(route.path);
           const title = typeof routeTitle === 'string' ? routeTitle : null;
           const children = createSiteRefs({
-            ...routeDescriptor, baseUrl, routes
+            ...routeDescriptor,
+            baseUrl,
+            routes,
           } as NestedSitemapDescriptor);
 
           siteRefs.push({ children, title, linkUrl: baseUrl, key: routeKey });
@@ -81,7 +103,7 @@ export class Sitemap implements Iterable<SiteRef> {
     return this.state.reset(...createSiteRefs(descriptor));
   }
 
-  [ Symbol.iterator ](): Iterator<SiteRef> {
-    return this.state.snapshot[ Symbol.iterator ]();
+  [Symbol.iterator](): Iterator<SiteRef> {
+    return this.state.snapshot[Symbol.iterator]();
   }
 }
