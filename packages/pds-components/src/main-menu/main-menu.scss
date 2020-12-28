@@ -1,38 +1,56 @@
 @use "styleguide" as pds;
 @use "util";
 
-$nav-background: var(--gray-lighter) !default;
-$nav-elevation: pds.$nav-elevation !default;
-$nav-entry-active-indicator-width: 4px !default;
-$nav-entry-active-background: var(--gray-light) !default;
-$nav-secondary-entry-divider: 1px solid var(--gray-light) !default;
+$active-indicator-width: 4px;
+$static-entry-divider: 1px solid;
 
 pds-main-menu {
-  @if $nav-elevation != null {
-    @include pds.elevation($nav-elevation);
-  }
+  @include util.custom-color-properties((
+    "pds-main-menu": (
+      "foreground": --foreground,
+      "background": --gray-lighter,
+      "primary": --primary,
+      "secondary": --gray-light
+    )
+  ));
 
-  background: $nav-background;
+  display: flex;
+  flex-direction: column;
+  background: var(--pds-main-menu-background);
+  color: var(--pds-main-menu-foreground);
+  height: 100%;
 
   > .nav-entries {
+    user-select: none;
+    flex-direction: column;
+    display: flex;
+
+    &:not(.nav-entries-static) {
+      flex: 1 0 auto;
+    }
+
     &.nav-entries-static {
       .nav-entry {
-        border-top: $nav-secondary-entry-divider;
+        border-top: $static-entry-divider var(--pds-main-menu-secondary);
       }
     }
 
     .nav-entry {
-      @include pds.inner-spacing(pds.$space-5 - $nav-entry-active-indicator-width, x);
+      @include pds.inner-spacing(pds.$space-5, x);
 
+      display: flex;
+      cursor: pointer;
+      min-height: 48px;
+      align-items: center;
       font-weight: normal;
       transition: 60ms ease-out;
       // to not cause disruption when applying outer borders for active states we initially set the border values here
-      border-right: $nav-entry-active-indicator-width solid transparent;
-      border-left: $nav-entry-active-indicator-width solid transparent;
+      border-right: $active-indicator-width solid transparent;
+      border-left: $active-indicator-width solid transparent;
 
       @include util.active-state {
-        background: $nav-entry-active-background;
-        border-left: $nav-entry-active-indicator-width solid var(--primary);
+        background: var(--pds-main-menu-secondary);
+        border-left: $active-indicator-width solid var(--pds-main-menu-primary);
         font-weight: bold;
       }
     }

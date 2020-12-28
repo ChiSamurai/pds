@@ -3,15 +3,11 @@ import { NgModule } from '@angular/core';
 import { NavigationModule } from '@vitagroup/cdk';
 import { MainMenu } from './main-menu';
 
-const declarations = [ MainMenu ];
+const declarations = [MainMenu];
 
 @NgModule({
   declarations,
   exports: declarations,
-  imports: [
-    NavigationModule,
-    CommonModule
-  ]
+  imports: [NavigationModule, CommonModule],
 })
-export class MainMenuModule {
-}
+export class MainMenuModule {}
