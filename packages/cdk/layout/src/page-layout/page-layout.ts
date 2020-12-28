@@ -19,6 +19,7 @@ import { PageHeader } from './page-header';
   selector: 'page-layout',
   styleUrls: ['./page-layout.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-template #footerTemplate>
       <ng-container *ngIf="footer != null; else defaultFooterTemplate">
