@@ -1,0 +1,17 @@
+{
+  "conversionType": "constants",
+  "srcFiles": ["./svg-icons/**/*.svg"],
+  "outputDirectory": "./src",
+  "interfaceName": "AppIcon",
+  "typeName": "AppIconNames",
+  "prefix": "svgIcon",
+  "fileName": "svg-icons",
+  "delimiter": "KEBAB",
+  "svgoConfig": {
+    "plugins": [
+      {
+        "cleanupAttrs": true
+      }
+    ]
+  }
+}

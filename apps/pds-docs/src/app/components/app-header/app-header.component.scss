@@ -1,0 +1,20 @@
+@use "styleguide" as pds;
+
+pds-app-header {
+  height: var(--app-header-height);
+
+  display: flex;
+  flex: 1 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  .page-headline {
+    user-select: none;
+    color: var(--gray-dark);
+
+    .page-title {
+      color: var(--gray-darkest);
+    }
+  }
+}

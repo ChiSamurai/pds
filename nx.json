@@ -37,6 +37,13 @@
     },
     "pds-components": {
       "tags": []
+    },
+    "pds-docs": {
+      "tags": []
+    },
+    "pds-docs-e2e": {
+      "tags": [],
+      "implicitDependencies": ["pds-docs"]
     }
   },
   "workspaceLayout": {

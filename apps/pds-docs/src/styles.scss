@@ -1,0 +1,37 @@
+@use "util";
+@use "styleguide" as pds with (
+  $color-rgb: true,
+
+  $foreground-color: --dark,
+  $background-color: white,
+
+  $custom-properties: (
+    "app-header-height": 142px,
+    "app-menu-width": 320px
+  )
+);
+
+@include pds.core;
+@include pds.semantics;
+@include pds.class-semantics;
+@include pds.forms;
+
+@include pds.custom-scrollbar;
+
+@at-root .dark {
+  $dark-theme: pds.theme-define((
+    "foreground": #f2f2f2,
+    "background": --gray-lightest,
+    "link": --primary-light,
+
+    "gray-darkest": #808080,
+    "gray-darker": #6b6b6b,
+    "gray-dark": #525252,
+    "gray": #404040,
+    "gray-light": #212121,
+    "gray-lighter": #1a1a1a,
+    "gray-lightest": #141414,
+  ));
+
+  @include pds.theme($dark-theme);
+}

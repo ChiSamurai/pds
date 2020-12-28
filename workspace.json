@@ -7,25 +7,6 @@
       "projectType": "library",
       "schematics": {},
       "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "packages/pds-css/**/*.ts",
-              "packages/pds-css/src/**/*.html",
-              "packages/pds-css/src/**/*.html",
-              "packages/pds-css/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "packages/pds-css/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/packages/pds-css"]
-        },
         "build": {
           "builder": "@vitagroup-devkit/style:package",
           "options": {
@@ -75,10 +56,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "packages/common/tsconfig.lib.json",
-              "packages/common/tsconfig.spec.json"
-            ],
+            "tsConfig": ["packages/common/tsconfig.lib.json", "packages/common/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!packages/common/**/*"]
           }
         },
@@ -113,10 +91,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "packages/cdk/tsconfig.lib.json",
-              "packages/cdk/tsconfig.spec.json"
-            ],
+            "tsConfig": ["packages/cdk/tsconfig.lib.json", "packages/cdk/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!packages/cdk/**/*"]
           }
         },
@@ -151,10 +126,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "packages/pds-components/tsconfig.lib.json",
-              "packages/pds-components/tsconfig.spec.json"
-            ],
+            "tsConfig": ["packages/pds-components/tsconfig.lib.json", "packages/pds-components/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!packages/pds-components/**/*"]
           }
         },
@@ -167,6 +139,117 @@
           }
         }
       }
+    },
+    "pds-docs": {
+      "projectType": "application",
+      "root": "apps/pds-docs",
+      "sourceRoot": "apps/pds-docs/src",
+      "prefix": "vitagroup",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/pds-docs",
+            "index": "apps/pds-docs/src/index.html",
+            "main": "apps/pds-docs/src/main.ts",
+            "polyfills": "apps/pds-docs/src/polyfills.ts",
+            "tsConfig": "apps/pds-docs/tsconfig.app.json",
+            "aot": true,
+            "assets": ["apps/pds-docs/src/favicon.ico", "apps/pds-docs/src/assets"],
+            "styles": ["apps/pds-docs/src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["packages/pds-css/src"]
+            },
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/pds-docs/src/environments/environment.ts",
+                  "with": "apps/pds-docs/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "pds-docs:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "pds-docs:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "pds-docs:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/pds-docs/src/**/*.ts", "apps/pds-docs/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/pds-docs"],
+          "options": {
+            "jestConfig": "apps/pds-docs/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "pds-docs-e2e": {
+      "root": "apps/pds-docs-e2e",
+      "sourceRoot": "apps/pds-docs-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/pds-docs-e2e/cypress.json",
+            "tsConfig": "apps/pds-docs-e2e/tsconfig.e2e.json",
+            "devServerTarget": "pds-docs:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "pds-docs:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/pds-docs-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
     }
   },
   "cli": {
@@ -174,10 +257,14 @@
   },
   "schematics": {
     "@nrwl/angular:application": {
-      "unitTestRunner": "jest"
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
     },
     "@nrwl/angular:library": {
       "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
     }
   }
 }

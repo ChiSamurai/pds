@@ -1,0 +1,21 @@
+@use "styleguide" as pds;
+
+page-footer {
+  background: var(--gray-lighter);
+  height: 64px;
+}
+
+pds-app-footer {
+  width: 100%;
+  flex: 1 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+
+  .app-legal-links {
+    @include pds.outer-child-spacing(pds.$space-3, $trim: true);
+  }
+  .app-legal-claims {
+    color: var(--gray-darker);
+  }
+}
