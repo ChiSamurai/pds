@@ -1,11 +1,12 @@
-import { Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ToggleBase, ToggleCheckOptions } from './toggle-base';
+import { ToggleBase } from './toggle-base';
 
 @Component({
   selector: 'pds-radio-box',
   styleUrls: ['./radio-box.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: RadioBox, multi: true }],
   template: `
     <ng-template #labelTemplate>
@@ -29,8 +30,4 @@ import { ToggleBase, ToggleCheckOptions } from './toggle-base';
 export class RadioBox extends ToggleBase {
   @Input() label: string | null;
   @Input() labelAlign: 'left' | 'right' = 'right';
-
-  @HostListener('click') check(option?: ToggleCheckOptions): void {
-    super.check(option);
-  }
 }

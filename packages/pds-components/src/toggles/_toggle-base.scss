@@ -9,6 +9,7 @@ $toggle-size: 30px !default;
   height: var(--input-height);
   align-items: center;
   cursor: pointer;
+  line-height: 1;
 
   label {
     cursor: pointer;
@@ -25,26 +26,31 @@ $toggle-size: 30px !default;
   .toggle-indicator {
     width: $toggle-size;
     height: $toggle-size;
-    border: 1px solid var(--gray-dark);
-    background-color: var(--gray-lighter);
+    border: 1px solid var(--gray-light);
+    background-color: var(--gray-light);
+    transition: 100ms ease-out;
   }
 
-  &:hover,
-  &:focus {
-    .toggle-indicator {
-      border-color: var(--gray-darker);
-    }
-  }
   &.checked {
     .toggle-indicator {
-      border-color: var(--gray-darker);
-      background-color: var(--gray-darker);
-      color: var(--gray-lighter);
+      color: var(--primary-light);
     }
   }
 
   // todo: @include error_state( $within_parent: true ) { }
-
+  @include util.hover-state {
+    .toggle-indicator {
+      border-color: var(--gray);
+    }
+  }
+  @include util.focus-state {
+    .toggle-indicator {
+      box-shadow: 0 0 0 1px var(--primary-light);
+      border-color: var(--primary-light);
+      color: var(--primary-light);
+      background: var(--background);
+    }
+  }
   @include util.disabled-state($within_parent: true) {
     color: var(--disabled);
 

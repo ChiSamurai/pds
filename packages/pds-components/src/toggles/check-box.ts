@@ -1,5 +1,5 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Component, HostBinding, HostListener, Input, ViewEncapsulation } from '@angular/core';
+import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ToggleBase } from './toggle-base';
 
@@ -9,6 +9,18 @@ import { ToggleBase } from './toggle-base';
   encapsulation: ViewEncapsulation.None,
   providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: CheckBox, multi: true }],
   template: `
+    <ng-template #labelTemplate>
+      <ng-container *ngIf="label != null; else projectLabelContent">
+        <label>{{ label }}</label>
+      </ng-container>
+      <ng-template #projectLabelContent>
+        <ng-content select="label"></ng-content>
+      </ng-template>
+    </ng-template>
+
+    <ng-container *ngIf="labelAlign == 'left'">
+      <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+    </ng-container>
     <div class="toggle-indicator">
       <!-- the intermediate state is currently handled using the css ":before" pseudo -->
       <svg viewBox="0 0 16 16" *ngIf="checked">
@@ -17,12 +29,9 @@ import { ToggleBase } from './toggle-base';
         />
       </svg>
     </div>
-    <ng-container *ngIf="label != null; else projectLabelContent">
-      <label>{{ label }}</label>
+    <ng-container *ngIf="labelAlign == 'right'">
+      <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
     </ng-container>
-    <ng-template #projectLabelContent>
-      <ng-content select="label"></ng-content>
-    </ng-template>
   `,
 })
 export class CheckBox extends ToggleBase {
@@ -38,9 +47,5 @@ export class CheckBox extends ToggleBase {
   }
   get intermediate(): boolean {
     return this._intermediate;
-  }
-
-  @HostListener('click') toggle(): void {
-    super.toggle();
   }
 }
