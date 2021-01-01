@@ -9,9 +9,7 @@ export class ElementFocusState<T = any> extends ElementState<T> {
   className = 'focus';
 
   protected configureEventListener() {
-    const unsetListener = e =>
-      targetOutsideElement(e.target, this.nativeElement) && this.isSet;
-    this.unsetOn('document:mousedown', unsetListener);
+    this.unsetOn('document:mousedown', (e) => this.isSet && targetOutsideElement(e.target, this.nativeElement));
     this.setOn('mousedown');
   }
 }

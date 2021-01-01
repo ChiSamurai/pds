@@ -30,24 +30,18 @@ export abstract class ElementState<T = any> {
    * @param renderer Gets the {@link Renderer2} of the element state instance
    */
   constructor(element: ElementRef<T> | T, protected renderer: Renderer2) {
-    this.nativeElement = element instanceof ElementRef
-      ? element.nativeElement
-      : element;
-    if (this.configureEventListener != null)
-      this.configureEventListener();
+    this.nativeElement = element instanceof ElementRef ? element.nativeElement : element;
+    if (this.configureEventListener != null) this.configureEventListener();
   }
 
-  protected configureEventListener(): void {
-  };
+  protected configureEventListener(): void {}
 
   set(): void {
-    if (this.hasClassName)
-      this.renderer.addClass(this.nativeElement, this.className);
-    if (!this.isUnset) this.state.patch(true);
+    if (this.hasClassName) this.renderer.addClass(this.nativeElement, this.className);
+    if (this.isUnset) this.state.patch(true);
   }
   unset(): void {
-    if (this.hasClassName)
-      this.renderer.removeClass(this.nativeElement, this.className);
+    if (this.hasClassName) this.renderer.removeClass(this.nativeElement, this.className);
     if (this.isSet) this.state.patch(false);
   }
 
@@ -60,18 +54,24 @@ export abstract class ElementState<T = any> {
   }
 
   protected setOn(eventName: string, filter?: Predicate<any>): EventUnlistener {
-    return this.listen(eventName, e => {
+    return this.listen(eventName, (e) => {
       if (filter == null || filter(e)) this.set();
     });
   }
   protected unsetOn(eventName: string, filter?: Predicate<any>): EventUnlistener {
-    return this.listen(eventName, e => {
+    return this.listen(eventName, (e) => {
       if (filter == null || filter(e)) this.unset();
     });
   }
 
   protected listen(eventName: string, listener: EventListener): EventUnlistener {
-    const unlistener = this.renderer.listen(this.nativeElement, eventName, listener);
+    let target: T | string = this.nativeElement;
+    if (eventName.includes(':')) {
+      const [globalTarget, actualEventName] = eventName.split(':');
+      eventName = actualEventName;
+      target = globalTarget;
+    }
+    const unlistener = this.renderer.listen(target, eventName, listener);
     this._unlistener.push(unlistener);
     return unlistener;
   }

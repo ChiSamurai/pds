@@ -1,4 +1,13 @@
-import { Component, Inject, InjectionToken, Input, Optional, Type, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  InjectionToken,
+  Input,
+  Optional,
+  Type,
+  ViewEncapsulation,
+} from '@angular/core';
 import { PAGE_ENCAPSULATION } from './page-encapsulation';
 
 export type PageFooterPosition = 'fixed' | 'fluid' | 'none';
@@ -12,6 +21,7 @@ export const PAGE_FOOTER_POSITION = new InjectionToken<PageFooterPosition>('PAGE
 @Component({
   selector: 'page-footer',
   styleUrls: ['./page-footer.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   template: `
     <ng-template #ngContentTemplate>

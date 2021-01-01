@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   Inject,
@@ -22,6 +23,7 @@ import {
 @Component({
   selector: 'fx-container, [fx-container]',
   styleUrls: ['./flex-container.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   template: `
     <ng-container *encapsulateTemplateOutlet></ng-container>

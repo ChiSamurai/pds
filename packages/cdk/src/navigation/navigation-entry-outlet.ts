@@ -28,7 +28,7 @@ import { NavigationEntryDefContext } from './navigation-entry-def';
 
     <ng-container *ngFor="let entry of viewEntries | async">
       <ng-container
-        *ngTemplateOutlet="resolveEntryTemplate(entry) || fallbackEntryTemplate; context: { $implicit: entry }"
+        *ngTemplateOutlet="resolveEntryTemplate(entry) || fallbackEntryTemplate; context: resolveEntryContext(entry)"
       ></ng-container>
     </ng-container>
   `,
@@ -58,6 +58,8 @@ export class NavigationEntryOutlet extends NavigationEntryContainer {
     return this.customState.snapshot || this.state.snapshot;
   }
 
+  @Input() context?: Omit<NavigationEntryDefContext, '$implicit'>;
+
   /** Gets or sets a filter {@link Predicate} for the rendered {@link NavigationEntry}s */
   @Input() filter: Predicate<NavigationEntry>;
 
@@ -70,5 +72,8 @@ export class NavigationEntryOutlet extends NavigationEntryContainer {
 
   resolveEntryTemplate(entry: NavigationEntry): TemplateRef<NavigationEntryDefContext> | null {
     return this.parent?.resolveEntryTemplate(entry) || super.resolveEntryTemplate(entry);
+  }
+  resolveEntryContext(entry: NavigationEntry): NavigationEntryDefContext {
+    return { ...this.context, $implicit: entry };
   }
 }

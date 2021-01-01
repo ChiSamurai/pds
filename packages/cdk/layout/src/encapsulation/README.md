@@ -20,13 +20,11 @@ export const PARAGRAPH_ENCAPSULATION_PROVIDER: Provider = {
 };
 export const TEXT_ENCAPSULATION_PROVIDER: Provider = {
   provide: TEMPLATE_ENCAPSULATIONS,
-  useValue: { name: 'txt', container: ParagraphComponent },
+  useValue: { name: 'txt', container: TextComponent },
   multi: true
 };
 ```
 ```html
-<ng-container *encapsulate="'p'; if isParagraph; else 'txt'">Hello World!</ng-container>
-<ng-container *encapsulate="'p'; if isParagraph">Hello World!</ng-container>
 <ng-container *encapsulate="'p'">Hello World!</ng-container>
 ```
 

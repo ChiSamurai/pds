@@ -47,7 +47,7 @@ import { PageHeader } from './page-header';
     </ng-container>
     <main cdkScrollable>
       <ng-container *encapsulate="encapsulation; ngClass: 'page-content'">
-        <ng-container *templateOutlet="ngContentTemplate"></ng-container>
+        <ng-container *ngTemplateOutlet="ngContentTemplate"></ng-container>
       </ng-container>
       <ng-container *ngIf="footerPosition === 'fluid'">
         <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>

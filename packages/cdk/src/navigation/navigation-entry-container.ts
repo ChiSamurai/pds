@@ -15,8 +15,11 @@ export abstract class NavigationEntryContainer implements OnDestroy {
   }
 
   resolveEntryTemplate(entry: NavigationEntry): TemplateRef<NavigationEntryDefContext> | null {
-    return this.contentEntryDefs?.find((entryDef) => entryDef.when?.(entry))?.template
-      || this.defaultEntryTemplate;
+    return (
+      this.contentEntryDefs?.find((entryDef) => {
+        return typeof entryDef.when === 'function' ? entryDef.when(entry) : entryDef.when;
+      })?.template || this.defaultEntryTemplate
+    );
   }
 
   ngOnDestroy() {

@@ -15,9 +15,7 @@ import { NavigationEntryContainer } from '../navigation/navigation-entry-contain
  * Holds a reference to the static {@link NavigationEntry}s that are displayed in a separate
  * region of the `nav-menu` instance
  */
-export const STATIC_NAVIGATION_ENTRIES = new InjectionToken<NavigationEntry[]>(
-  'STATIC_NAVIGATION_ENTRIES'
-);
+export const STATIC_NAVIGATION_ENTRIES = new InjectionToken<NavigationEntry[]>('STATIC_NAVIGATION_ENTRIES');
 
 export const NAV_MENU_TEMPLATE = `
     <ng-content></ng-content>
@@ -29,7 +27,7 @@ export const NAV_MENU_TEMPLATE = `
     </ng-container>
     <ng-container *ngIf="staticState.asObservable() | async as staticEntries">
       <div class="nav-entries nav-entries-static" *ngIf="staticEntries.length > 0">
-        <nav-entry-outlet [entries]="staticEntries"></nav-entry-outlet>
+        <nav-entry-outlet [entries]="staticEntries" [context]="{ static: true }"></nav-entry-outlet>
       </div>
     </ng-container>
 `;
@@ -37,6 +35,7 @@ export const NAV_MENU_TEMPLATE = `
 @Component({
   selector: 'nav-menu',
   styleUrls: ['./navigation-menu.scss'],
+  providers: [{ provide: NavigationEntryContainer, useExisting: NavigationMenu }],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   template: NAV_MENU_TEMPLATE,
