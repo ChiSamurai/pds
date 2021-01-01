@@ -4,7 +4,6 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
-  HostBinding,
   Input,
   OnChanges,
   OnDestroy,
@@ -13,9 +12,9 @@ import {
   Renderer2,
   SimpleChanges,
 } from '@angular/core';
-import { ElementActiveState, ElementDisabledState, ElementFocusState } from '@vitagroup/cdk';
-import { ControlValueAccessorBase } from '@vitagroup/cdk/forms';
 import { EventUnlistener } from '@vitagroup/common';
+import { ElementActiveState, ElementDisabledState, ElementFocusState, ElementReadonlyState } from '../element-state';
+import { ControlValueAccessorBase } from '../utils';
 
 export interface ToggleCheckOptions {
   emitTouch?: boolean;
@@ -32,6 +31,7 @@ export abstract class ToggleBase<T = any> extends ControlValueAccessorBase<T> im
 
   readonly active = new ElementActiveState(this.elementRef, this.renderer);
   readonly focused = new ElementFocusState(this.elementRef, this.renderer);
+  readonly readOnly = new ElementReadonlyState(this.elementRef, this.renderer);
   readonly disabled = new ElementDisabledState(this.elementRef, this.renderer);
 
   @Input() value: T;

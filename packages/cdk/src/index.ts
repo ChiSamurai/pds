@@ -50,4 +50,9 @@ export * from './svg-icon/svg-icon-host';
 export * from './svg-icon/svg-icon-importer';
 export * from './svg-icon/svg-icon-registry';
 
+export * from './toggles/toggle-base';
+export * from './toggles/check-box-base';
+export * from './toggles/radio-box-base';
+export * from './toggles/radio-group-base';
+
 export * from './utils';
