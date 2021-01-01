@@ -14,12 +14,8 @@ pds-check-box {
 
     svg {
       fill: currentColor;
-      height: $toggle-size / 2;
-      width: $toggle-size / 2;
+      height: $toggle-size * 0.6;
+      width: $toggle-size * 0.6;
     }
-  }
-
-  &.intermediate {
-    // todo
   }
 }

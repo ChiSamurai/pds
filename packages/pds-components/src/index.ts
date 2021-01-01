@@ -26,7 +26,6 @@ export * from './tabs/tab';
 export * from './tag/module';
 export * from './tag/tag';
 
-export * from './toggles/toggle-base';
 export * from './toggles/check-box-module';
 export * from './toggles/check-box';
 export * from './toggles/radio-box-module';

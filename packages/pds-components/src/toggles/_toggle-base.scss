@@ -31,12 +31,6 @@ $toggle-size: 30px !default;
     transition: 100ms ease-out;
   }
 
-  &.checked {
-    .toggle-indicator {
-      color: var(--primary-light);
-    }
-  }
-
   // todo: @include error_state( $within_parent: true ) { }
   @include util.hover-state {
     .toggle-indicator {
@@ -47,16 +41,27 @@ $toggle-size: 30px !default;
     .toggle-indicator {
       box-shadow: 0 0 0 1px var(--primary-light);
       border-color: var(--primary-light);
-      color: var(--primary-light);
       background: var(--background);
     }
   }
+
+  &.intermediate {
+    .toggle-indicator {
+      color: var(--foreground);
+    }
+  }
+  &.checked {
+    .toggle-indicator {
+      color: var(--primary-light);
+    }
+  }
+
   @include util.disabled-state($within_parent: true) {
-    color: var(--disabled);
+    color: var(--disabled, var(--gray));
+    pointer-events: none;
 
     .toggle-indicator {
-      background-color: var(--disabled);
-      color: rgba(#000, 0.1);
+      color: var(--disabled, var(--gray));
     }
   }
 }
