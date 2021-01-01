@@ -1,5 +1,6 @@
+@use "colors/berry" as *;
+
 @use "./system" as *;
-@use "./berry" as *;
 
 $primary-dark: $blackberry !default;
 $primary: $berry !default;

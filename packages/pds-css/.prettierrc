@@ -1,0 +1,5 @@
+{
+  "parser": "scss",
+  "bracketSpacing": false,
+  "printWidth": 120
+}

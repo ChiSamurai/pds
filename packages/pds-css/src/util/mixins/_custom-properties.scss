@@ -1,27 +1,31 @@
 @use "util/custom-property" as *;
 
-@mixin custom-properties($custom-property-map, $prefix: null, $suffix: null) {
-  @if $custom-property-map == list {
-    @each $map in $custom-property-map {
-      @include custom-properties($map, $prefix, $suffix);
+@mixin custom-properties($custom-properties, $prefix: null, $suffix: null) {
+  $input-type: type-of($custom-properties);
+  @if $input-type == list {
+    @each $map-or-list in $custom-properties {
+      @include custom-properties($map-or-list, $prefix, $suffix);
     }
-  } @else {
-    @each $property, $value in $custom-property-map {
+  } @else if $input-type == map {
+    @each $property, $value in $custom-properties {
       @if type-of($value) == map or type-of($value) == list {
         @include custom-properties($value, prefix($prefix, $property), $suffix);
       } @else if $value != null {
         #{normalize-var($property, $prefix, $suffix)}: #{var-or-default($value)};
       }
     }
+  } @else {
+    @error "Failed to include custom properties. Invalid input type \"#{$input-type}\". Expected list or map";
   }
 }
 
 @mixin custom-color-properties($custom-property-map, $prefix: null, $suffix: null, $rgb: false) {
-  @if type-of($custom-property-map) == list {
+  $input-type: type-of($custom-property-map);
+  @if $input-type == list {
     @each $map in $custom-property-map {
       @include custom-color-properties($map, $prefix, $suffix, $rgb);
     }
-  } @else {
+  } @else if $input-type == map {
     @each $property, $color in $custom-property-map {
       @if type-of($color) == map or type-of($color) == list {
         @include custom-color-properties($color, prefix($prefix, $property), $suffix, $rgb);
@@ -31,6 +35,8 @@
         @include custom-color-property($property, $color, $prefix, $suffix, $rgb);
       }
     }
+  } @else {
+    @error "Failed to include custom color properties. Invalid input type \"#{$input-type}\". Expected list or map";
   }
 }
 

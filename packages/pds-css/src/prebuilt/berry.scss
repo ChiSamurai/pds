@@ -1,1 +1,8 @@
-@import "prebuilt-base";
+@use "styleguide" as pds with (
+  $color-rgb: true
+);
+
+@include pds.core;
+@include pds.semantics;
+@include pds.class-semantics;
+@include pds.forms;

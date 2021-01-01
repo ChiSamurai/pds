@@ -2,7 +2,6 @@
 @forward "styleguide/theme" as theme-*;
 @forward "styleguide/typography" as typography-*;
 @forward "styleguide/elevation" as elevation-*;
-@forward "styleguide/color-mods" as color-mod-*;
 @forward "styleguide/colors" as color-*;
 
 @forward "styleguide/typographies";
@@ -25,7 +24,6 @@
 @use "styleguide/mixins" as *;
 
 @use "styleguide/colors" as *;
-@use "styleguide/color-mods" as *;
 @use "styleguide/typographies" as *;
 @use "styleguide/elevations" as *;
 @use "styleguide/roundings" as *;
@@ -37,7 +35,6 @@
 $spacing: $spacing !default;
 /// Disables, enables or scales the global rounding. Can be any floating point number (must be unit-less)
 $rounding: $rounding !default;
-
 
 /// Gets or sets a map or a list of maps containing color properties that will be generated as so called
 /// "custom color properties". Will generate 2 custom properties for each definition when $color-rgb is set
@@ -54,7 +51,7 @@ $typography: $typography-map !default;
 $typography-classes: ("body-small", "capitalized", "lead", "small", "tiny") !default;
 
 /// Gets or sets a map or a list of maps of additional custom properties to generate
-$custom-properties: null !default;
+$custom-properties: ($spacing-map, $rounding-map) !default;
 
 /// Gets or sets the typography property name to use for the body
 $body-typography: --body !default;

@@ -11,3 +11,15 @@ $space-1: 4px !default;
 
 /// Global spacing factor applied to all `@include spacing(...)` usages
 $spacing: 1 !default;
+
+$spacing-map: (
+  "space-9": $space-9,
+  "space-8": $space-8,
+  "space-7": $space-7,
+  "space-6": $space-6,
+  "space-5": $space-5,
+  "space-4": $space-4,
+  "space-3": $space-3,
+  "space-2": $space-2,
+  "space-1": $space-1,
+) !default;

@@ -8,3 +8,13 @@ $rounding-xxs: 1px !default;
 
 /// Global rounding factor applied to all `@include rounding(...)` usages
 $rounding: 1 !default;
+
+$rounding-map: (
+  "rounding-xxl": $rounding-xxl,
+  "rounding-xl": $rounding-xl,
+  "rounding-lg": $rounding-lg,
+  "rounding-md": $rounding-md,
+  "rounding-sm": $rounding-sm,
+  "rounding-xs": $rounding-xs,
+  "rounding-xxs": $rounding-xxs,
+) !default;

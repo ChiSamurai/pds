@@ -1,8 +1,14 @@
-@use "styleguide/colors/blue" as *;
-@use "styleguide/colors" as * with (
-  $primary-light: $strong-blue,
-  $primary: $blue,
-  $primary-dark: $smokey-blue
+@use "colors/blue" as *;
+@use "styleguide" as pds with (
+  $color-rgb: true,
+
+  $color-primary-light: $strong-blue,
+  $color-primary: $blue,
+  $color-primary-dark: $smokey-blue
 );
 
-@import "prebuilt-base";
+@include pds.core;
+@include pds.semantics;
+@include pds.class-semantics;
+@include pds.forms;
+

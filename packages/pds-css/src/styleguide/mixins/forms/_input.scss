@@ -8,6 +8,8 @@
 $input-padding-x: $space-3 !default;
 $input-padding-y: $space-2 !default;
 
+$input-border: 1px solid var(--gray-light) !default;
+
 @mixin input {
   select,
   textarea,
@@ -37,6 +39,11 @@ $input-padding-y: $space-2 !default;
     &.error {
       @include input-error;
     }
+
+    &::placeholder {
+      color: var(--gray-dark);
+      user-select: none;
+    }
   }
 
   select,
@@ -57,13 +64,8 @@ $input-padding-y: $space-2 !default;
   box-sizing: border-box;
   transition: 100ms ease-out;
   background-color: var(--gray-light);
-  border: 1px solid var(--gray-light);
   color: var(--foreground);
-
-  &::placeholder {
-    color: var(--gray-dark);
-    user-select: none;
-  }
+  border: $input-border;
 }
 
 @mixin input-disabled {

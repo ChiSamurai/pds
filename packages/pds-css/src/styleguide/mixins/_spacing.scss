@@ -5,30 +5,69 @@
 
 $spacing-types: (margin, padding);
 $spacing-anchors: (all, top, right, bottom, left, horizontal, vertical, x, y);
+$spacing-pseudo-modes: (child, of-type); // eg. "last-OF-TYPE" or "first-CHILD"
 
-@mixin inner-spacing($space, $anchors: all, $trim: false, $justify: false) {
-  @include spacing($space, $anchors, $trim, $justify, $type: padding);
-}
-@mixin outer-spacing($space, $anchors: all, $trim: false, $justify: false) {
-  @include spacing($space, $anchors, $trim, $justify, margin);
+$_default-anchor: all !default;
+$_default-pseudo-mode: child !default;
+$_default-justify: false !default;
+$_default-trim: false !default;
+
+@mixin inner-spacing(
+  $space,
+  $anchors: $_default-anchor,
+  $trim: $_default-trim,
+  $justify: $_default-justify,
+  $pseudo-mode: $_default-pseudo-mode
+) {
+  @include spacing($space, padding, $anchors, $trim, $justify, $pseudo-mode);
 }
 
-@mixin outer-sibling-spacing($space, $trim: false, $justify: false) {
+@mixin outer-spacing(
+  $space,
+  $anchors: $_default-anchor,
+  $trim: $_default-trim,
+  $justify: $_default-justify,
+  $pseudo-mode: $_default-pseudo-mode
+) {
+  @include spacing($space, margin, $anchors, $trim, $justify, $pseudo-mode);
+}
+
+@mixin outer-sibling-spacing(
+  $space,
+  $trim: $_default-trim,
+  $justify: $_default-justify,
+  $pseudo-mode: $_default-pseudo-mode
+) {
   & + & {
-    @include outer-spacing($space, left, $trim, $justify);
-  }
-}
-@mixin outer-child-spacing($space, $anchors: all, $trim: false, $justify: false) {
-  > * {
-    @include outer-spacing($space, $anchors, $trim, $justify);
+    @include outer-spacing($space, left, $trim, $justify, $pseudo-mode);
   }
 }
 
-@mixin spacing($space, $anchors: all, $trim: false, $justify: false, $type: margin) {
+@mixin outer-child-spacing(
+  $space,
+  $anchors: $_default-anchor,
+  $trim: $_default-trim,
+  $justify: $_default-justify,
+  $pseudo-mode: $_default-pseudo-mode
+) {
+  > * {
+    @include outer-spacing($space, $anchors, $trim, $justify, $pseudo-mode);
+  }
+}
+
+@mixin spacing(
+  $space,
+  $type,
+  $anchors: $_default-anchor,
+  $trim: $_default-trim,
+  $justify: $_default-justify,
+  $pseudo-mode: $_default-pseudo-mode
+) {
   $space: calc(#{var-or-default($space)} * #{var(--spacing, 1)});
   $anchors: coerce.to-list($anchors);
 
   @include assert-some($spacing-anchors, $anchors...);
+  @include assert-some($spacing-pseudo-modes, $pseudo-mode);
   @include assert-some($spacing-types, $type);
 
   @if some($anchors, all, top, vertical, y) {
@@ -45,38 +84,42 @@ $spacing-anchors: (all, top, right, bottom, left, horizontal, vertical, x, y);
   }
 
   @if $justify {
-    @include spacing-justify($anchors, $type);
+    @include spacing-justify($anchors, $type, $pseudo-mode);
   }
   @if $trim {
-    @include spacing-trim($anchors, $type);
+    @include spacing-trim($anchors, $type, $pseudo-mode);
   }
 }
-@mixin spacing-justify($anchors, $type: margin) {
-  @include assert-some($spacing-anchors, $anchors);
+
+@mixin spacing-justify($anchors, $type, $pseudo-mode: $_default-pseudo-mode) {
+  @include assert-some($spacing-anchors, $anchors...);
+  @include assert-some($spacing-pseudo-modes, $pseudo-mode);
   @include assert-some($spacing-types, $type);
 
   @if some($anchors, horizontal, x) {
-    &:not(:last-of-type) {
+    &:not(:last-#{$pseudo-mode}) {
       #{$type}-right: 0;
     }
   }
   @if some($anchors, vertical, y) {
-    &:not(:last-of-type) {
+    &:not(:last-#{$pseudo-mode}) {
       #{$type}-bottom: 0;
     }
   }
 }
-@mixin spacing-trim($anchors: all, $type: margin) {
-  @include assert-some($spacing-anchors, $anchors);
+
+@mixin spacing-trim($anchors, $type, $pseudo-mode: $_default-pseudo-mode) {
+  @include assert-some($spacing-anchors, $anchors...);
+  @include assert-some($spacing-pseudo-modes, $pseudo-mode);
   @include assert-some($spacing-types, $type);
 
   $is-vertical: some($anchors, vertical, y);
 
-  &:first-of-type {
+  &:first-#{$pseudo-mode} {
     $dir: if($is-vertical, top, left);
     #{$type}-#{$dir}: 0;
   }
-  &:last-of-type {
+  &:last-#{$pseudo-mode} {
     $dir: if($is-vertical, bottom, right);
     #{$type}-#{$dir}: 0;
   }

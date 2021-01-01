@@ -1,0 +1,16 @@
+@use "util/color";
+
+$blackberry: #37001a;
+$red-grape: #4b0023;
+$berry: #720035;
+$raspberry: #990047;
+$pinkberry: #c00059;
+
+$berry-t1: color.tint($berry, 15%);
+$berry-t2: color.tint($berry, 25%);
+$berry-t3: color.tint($berry, 50%);
+$berry-t4: color.tint($berry, 90%);
+
+@function berrylicious() {
+  @return unquote("#{$berry} 0%, #{$pinkberry} 100%");
+}

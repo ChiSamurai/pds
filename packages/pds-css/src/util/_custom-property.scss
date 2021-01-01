@@ -122,7 +122,7 @@
 }
 
 /// Normalizes and wraps *any* variable expression (eg. `var(--foo)`, `--foo`
-/// or `foo`) also accepting any $fallback, $prefix or $suffix value. If no
+/// or `foo`) also accepting any $fallback, $prefix or $suffix value. If none
 /// of the mentioned notations is provided, the function will return the
 /// input $var value as default instead
 ///

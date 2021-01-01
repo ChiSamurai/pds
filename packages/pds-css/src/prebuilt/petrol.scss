@@ -1,8 +1,13 @@
-@use "styleguide/colors/petrol" as *;
-@use "styleguide/colors" as * with (
-  $primary-light: $turquoise,
-  $primary: $petrol,
-  $primary-dark: $fir-green
+@use "colors/petrol" as *;
+@use "styleguide" as pds with (
+  $color-rgb: true,
+
+  $color-primary-light: $turquoise,
+  $color-primary: $petrol,
+  $color-primary-dark: $fir-green
 );
 
-@import "prebuilt-base";
+@include pds.core;
+@include pds.semantics;
+@include pds.class-semantics;
+@include pds.forms;
