@@ -1,0 +1,33 @@
+@use "styleguide" as pds;
+@use "util";
+
+@mixin pds-text-box-base {
+  @include pds.outer-child-spacing(pds.$input-padding-x, horizontal, $trim: true, $justify: true);
+  @include pds.input-base;
+
+  height: var(--input-height);
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+
+  input {
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    flex: 1 0 auto;
+  }
+
+  @include util.hover-state {
+    @include pds.input-hover;
+  }
+  @include util.focus-state {
+    @include pds.input-focus;
+  }
+  @include util.read-only-state($with-pseudo: false) {
+    @include pds.input-read-only;
+  }
+  @include util.disabled-state {
+    @include pds.input-disabled;
+  }
+}

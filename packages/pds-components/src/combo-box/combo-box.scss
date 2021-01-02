@@ -1,0 +1,15 @@
+@use "styleguide" as pds;
+@use "../text-box/text-box-base" as *;
+
+pds-combo-box {
+  @include pds-text-box-base;
+
+  > div {
+    @include pds.outer-child-spacing(--space-1, horizontal, $trim: true, $justify: true);
+
+    flex: 1 0 0;
+    align-items: inherit;
+    overflow: hidden;
+    display: flex;
+  }
+}

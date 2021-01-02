@@ -3,7 +3,7 @@
 
 $toggle-size: 30px !default;
 
-@mixin toggle-base {
+@mixin pds-toggle-base {
   user-select: none;
   display: inline-flex;
   height: var(--input-height);

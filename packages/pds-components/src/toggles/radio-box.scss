@@ -4,7 +4,7 @@
 $radio_box_indicator_size: 12px !default;
 
 pds-radio-box {
-  @include toggle-base;
+  @include pds-toggle-base;
 
   .toggle-indicator {
     border-radius: 15px;

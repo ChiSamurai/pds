@@ -1,0 +1,5 @@
+@use "text-box-base" as *;
+
+pds-text-box {
+  @include pds-text-box-base;
+}

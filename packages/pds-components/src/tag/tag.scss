@@ -1,7 +1,7 @@
 @use "styleguide" as pds;
 @use "util";
 
-$tag-height: 30px !default;
+$tag-height: 23px !default;
 
 pds-tag {
   @include pds.typography(--body-small);
@@ -11,7 +11,7 @@ pds-tag {
   user-select: none;
   align-items: center;
   display: inline-flex;
-  background-color: rgba(#000, 0.05);
+  background-color: var(--gray);
   color: currentColor;
   height: $tag-height;
 }

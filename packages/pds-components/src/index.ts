@@ -4,6 +4,9 @@ export * from './card/module';
 export * from './card/card-content';
 export * from './card/card';
 
+export * from './combo-box/module';
+export * from './combo-box/combo-box';
+
 export * from './main-menu/module';
 export * from './main-menu/main-menu';
 
@@ -25,6 +28,9 @@ export * from './tabs/tab';
 
 export * from './tag/module';
 export * from './tag/tag';
+
+export * from './text-box/module';
+export * from './text-box/text-box';
 
 export * from './toggles/check-box-module';
 export * from './toggles/check-box';

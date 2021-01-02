@@ -2,7 +2,7 @@
 @use 'toggle-base' as *;
 
 pds-check-box {
-  @include toggle-base;
+  @include pds-toggle-base;
 
   .toggle-indicator {
     @include pds.rounding(pds.$rounding-sm);
