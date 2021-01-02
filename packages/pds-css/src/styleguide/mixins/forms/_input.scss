@@ -16,7 +16,7 @@ $input-border: 1px solid var(--gray-light) !default;
   input:not([type="checkbox"]):not([type="radio"]) {
     @include input-base;
 
-    caret-color: var(--primary);
+    caret-color: var(--primary-light);
 
     @include hover-state {
       @include input-hover;
