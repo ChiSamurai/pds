@@ -1,3 +1,6 @@
+export * from './combo-box/combo-box-base';
+export * from './combo-box/combo-def-base';
+
 export * from './dialog/module';
 export * from './dialog/dialog-dispose';
 export * from './dialog/dialog-overlay';
@@ -6,7 +9,7 @@ export * from './dialog/dialog-ref';
 export * from './element-state/element-active-state';
 export * from './element-state/element-disabled-state';
 export * from './element-state/element-focus-state';
-export * from './element-state/element-readonly-state';
+export * from './element-state/element-read-only-state';
 export * from './element-state/element-state';
 
 export * from './loading-state/module';
@@ -49,6 +52,8 @@ export * from './svg-icon/svg-icon';
 export * from './svg-icon/svg-icon-host';
 export * from './svg-icon/svg-icon-importer';
 export * from './svg-icon/svg-icon-registry';
+
+export * from './text-box/text-box-base';
 
 export * from './toggles/toggle-base';
 export * from './toggles/check-box-base';

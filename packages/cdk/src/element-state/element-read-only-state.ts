@@ -1,5 +1,5 @@
 import { ElementState } from './element-state';
 
-export class ElementReadonlyState<T = any> extends ElementState<T> {
+export class ElementReadOnlyState<T = any> extends ElementState<T> {
   className = 'read-only';
 }
