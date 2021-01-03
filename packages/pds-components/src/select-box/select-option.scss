@@ -1,0 +1,23 @@
+@use "styleguide" as pds;
+@use "util";
+
+pds-select-option {
+  @include pds.inner-spacing(pds.$input-padding-x, x);
+  @include pds.inner-spacing(pds.$input-padding-y, y);
+
+  display: flex;
+  transition: 100ms ease-out;
+  align-items: center;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--gray-light);
+  }
+
+  @include util.hover-state {
+    background: var(--gray-light);
+  }
+  @include util.active-state {
+    background: var(--primary-light);
+    color: var(--primary-contrast);
+  }
+}

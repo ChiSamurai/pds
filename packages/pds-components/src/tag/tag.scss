@@ -1,7 +1,7 @@
 @use "styleguide" as pds;
 @use "util";
 
-$tag-height: 23px !default;
+$tag-height: 24px !default;
 
 pds-tag {
   @include pds.typography(--body-small);

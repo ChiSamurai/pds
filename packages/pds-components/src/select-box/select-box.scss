@@ -1,0 +1,42 @@
+@use "styleguide" as pds;
+@use "util";
+
+@use "../text-box/text-box-base" as *;
+
+pds-select-box {
+  @include pds-text-box-base;
+
+  cursor: default;
+
+  .pds-select-box-value {
+    flex: 1 0 0;
+    align-items: inherit;
+    display: flex;
+  }
+  .pds-select-box-placeholder {
+    color: var(--placeholder, var(--gray-dark));
+    pointer-events: none;
+    user-select: none;
+  }
+  .pds-select-box-toggle {
+    align-self: stretch;
+    cursor: pointer;
+  }
+}
+
+.pds-select-box-overlay-container {
+  @include pds.elevation(pds.$raised-elevation);
+  @include pds.rounding(--rounding-sm);
+
+  overflow: hidden;
+  border: 1px solid var(--gray-light);
+  background: var(--gray-lighter);
+  width: 100%;
+
+  .top & {
+    @include pds.outer-spacing(--space-1, bottom);
+  }
+  .bottom & {
+    @include pds.outer-spacing(--space-1, top);
+  }
+}

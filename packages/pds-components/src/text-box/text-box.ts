@@ -1,14 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { TextBoxBase } from '@vitagroup/cdk';
-import { EventUnlistener } from '@vitagroup/common';
 
 @Component({
   selector: 'pds-text-box',
@@ -28,19 +19,11 @@ import { EventUnlistener } from '@vitagroup/common';
     <ng-content select="[textSuffix]"></ng-content>
   `,
 })
-export class TextBox extends TextBoxBase<string> implements OnInit, OnDestroy {
+export class TextBox extends TextBoxBase<string> implements OnInit {
   @ViewChild('inputElement', { static: true }) protected readonly inputRef: ElementRef<HTMLInputElement>;
 
-  protected unlistenInput: EventUnlistener | null;
-
   ngOnInit() {
-    super.ngOnInit();
-    this.unlistenInput = this.renderer.listen(this.inputRef.nativeElement, 'input', () => {
-      this.setValue(this.inputRef.nativeElement?.value);
-    });
-  }
-  ngOnDestroy() {
-    super.ngOnDestroy();
-    this.unlistenInput?.();
+    this.listenUntilDestroyed(this.elementRef, 'click', () => this.inputRef.nativeElement.focus());
+    this.listenUntilDestroyed(this.inputRef, 'input', () => this.setValue(this.inputRef.nativeElement?.value));
   }
 }

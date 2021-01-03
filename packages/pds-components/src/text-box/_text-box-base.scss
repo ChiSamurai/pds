@@ -5,17 +5,21 @@
   @include pds.outer-child-spacing(pds.$input-padding-x, horizontal, $trim: true, $justify: true);
   @include pds.input-base;
 
+  min-width: 60px;
+  white-space: nowrap;
   height: var(--input-height);
   display: inline-flex;
   align-items: center;
   overflow: hidden;
+  cursor: text;
 
   input {
+    font: inherit;
     padding: 0 !important;
     border: none !important;
     background: transparent !important;
     box-shadow: none !important;
-    flex: 1 0 auto;
+    flex: 1 1 auto;
   }
 
   @include util.hover-state {

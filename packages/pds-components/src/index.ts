@@ -19,6 +19,9 @@ export * from './modal/modal';
 export * from './ring-loader/ring-loader';
 export * from './ring-loader/module';
 
+export * from './select-box/select-box';
+export * from './select-box/module';
+
 export * from './step-counter/step-counter';
 export * from './step-counter/module';
 
