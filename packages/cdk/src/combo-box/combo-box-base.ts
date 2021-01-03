@@ -1,51 +1,43 @@
 import { ContentChildren, Directive, Input, OnDestroy, OnInit, QueryList, TemplateRef } from '@angular/core';
 import { EventUnlistener } from '@vitagroup/common';
+import { Subject } from 'rxjs';
 import { TextBoxBase } from '../text-box/text-box-base';
 import { ComboDefBase, ComboDefContext } from './combo-def-base';
 
 @Directive()
-export abstract class ComboBoxBase<T> extends TextBoxBase<T[]> implements OnInit, OnDestroy {
+export abstract class ComboBoxBase<T, C extends ComboDefContext<T> = ComboDefContext<T>> extends TextBoxBase<T[]> {
   @ContentChildren(ComboDefBase, { descendants: true })
-  protected readonly comboDefs: QueryList<ComboDefBase<T>>;
+  protected readonly defs: QueryList<ComboDefBase<T, C>>;
 
-  protected unlistenKeyUp: EventUnlistener;
-
-  @Input() inputValueParser: (str: string) => T = (str) => str as any;
-
-  get defaultComboTemplate(): TemplateRef<ComboDefContext<T>> | null {
-    return this.comboDefs?.find((def) => def.when == null)?.template;
+  get defaultTemplate(): TemplateRef<C> | null {
+    return this.defs?.find((def) => def.when == null)?.template as TemplateRef<C>;
   }
 
-  protected onKeyUp(event: KeyboardEvent): void {
-    const { value: inputValue } = this.inputRef.nativeElement;
-
-    if (inputValue && event.key === 'Enter') {
-      const value = this.inputValueParser(inputValue);
-      this.value = this.value != null ? [...this.value, value] : [value];
-      this.inputRef.nativeElement.value = null;
-    } else if (!inputValue?.trim() && event.key === 'Backspace') {
-      this.value = this.value.slice(0, this.value.length - 1);
-    }
+  push(value: T): T[] {
+    this.value = this.value != null ? [...this.value, value] : [value];
     this.changeDetectorRef.detectChanges();
+    return this.value;
+  }
+  pop(): T | null {
+    const it = this.value.pop();
+    this.changeDetectorRef.detectChanges();
+    return it;
   }
 
-  resolveComboTemplate(value: T): TemplateRef<ComboDefContext<T>> | null {
-    return this.comboDefs?.find((def) => def.when?.(value))?.template || this.defaultComboTemplate;
+  removeAt(index: number): T | null {
+    const value = this.value?.[index];
+    this.value = [...this.value.slice(0, index - 1), ...this.value.slice(index + 1)];
+    return value;
   }
-  resolveComboContext(value: T, index: number): ComboDefContext<T> {
+
+  resolveTemplate(value: T): TemplateRef<ComboDefContext<T>> | null {
+    return this.defs?.find((def) => def.when?.(value))?.template || this.defaultTemplate;
+  }
+  resolveTemplateContext(value: T, index: number): ComboDefContext<T> {
     const count = this.value?.length || 0;
     const first = index === 0;
-    const last = index === count;
+    const last = index === count - 1;
 
     return { $implicit: value, index, count, first, last };
-  }
-
-  ngOnInit() {
-    super.ngOnInit();
-    this.renderer.listen(this.inputRef.nativeElement, 'keyup', this.onKeyUp.bind(this));
-  }
-  ngOnDestroy() {
-    super.ngOnDestroy();
-    this.unlistenKeyUp?.();
   }
 }

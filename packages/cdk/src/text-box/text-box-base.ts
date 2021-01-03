@@ -8,17 +8,20 @@ import {
   Renderer2,
   EventEmitter,
   ChangeDetectorRef,
+  inject,
+  NgZone,
 } from '@angular/core';
 import { EventUnlistener } from '@vitagroup/common';
+import { Subject } from 'rxjs';
 import { ElementActiveState, ElementDisabledState, ElementFocusState, ElementReadOnlyState } from '../element-state';
 import { ControlValueAccessorBase } from '../utils';
 
 @Directive()
-export abstract class TextBoxBase<T = any> extends ControlValueAccessorBase<T> implements OnInit, OnDestroy {
-  protected abstract readonly inputRef: ElementRef<HTMLInputElement>;
+export abstract class TextBoxBase<T = any> extends ControlValueAccessorBase<T> implements OnDestroy {
+  protected readonly inputRef: ElementRef<HTMLInputElement> | null;
+  protected readonly ngDestroys = new Subject<void>();
 
-  protected unlistenClick: EventUnlistener | null;
-
+  private _unlistener: EventUnlistener[] = [];
   private _value: T;
 
   readonly active = new ElementActiveState(this.elementRef, this.renderer);
@@ -46,13 +49,14 @@ export abstract class TextBoxBase<T = any> extends ControlValueAccessorBase<T> i
     super();
   }
 
+  protected listenUntilDestroyed(target: ElementRef | any, eventName: string, listener: EventListener): void {
+    if (target instanceof ElementRef) target = target.nativeElement;
+    this._unlistener.push(this.renderer.listen(target, eventName, listener));
+  }
+
   protected setValue(value: T): void {
     this.changeControlValue(value);
     this._value = value;
-  }
-
-  protected onClick(event: Event): void {
-    this.inputRef?.nativeElement?.focus?.();
   }
 
   writeValue(obj: any) {
@@ -60,10 +64,11 @@ export abstract class TextBoxBase<T = any> extends ControlValueAccessorBase<T> i
     this.valueChange.emit(this._value);
   }
 
-  ngOnInit() {
-    this.unlistenClick = this.renderer.listen(this.elementRef.nativeElement, 'click', this.onClick.bind(this));
-  }
   ngOnDestroy() {
-    this.unlistenClick();
+    for (const unlisten of this._unlistener) unlisten();
+    this._unlistener = [];
+
+    this.ngDestroys.next();
+    this.ngDestroys.complete();
   }
 }

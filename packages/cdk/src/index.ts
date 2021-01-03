@@ -29,6 +29,10 @@ export * from './navigation/navigation-entry-outlet';
 export * from './navigation-menu/module';
 export * from './navigation-menu/navigation-menu';
 
+export * from './select-box/select-box-base';
+export * from './select-box/select-def-base';
+export * from './select-box/select-option-base';
+
 export * from './selection/module';
 export * from './selection/selection-control';
 export * from './selection/selection-model';

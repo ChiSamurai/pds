@@ -1,4 +1,3 @@
-import { NgForOfContext } from '@angular/common';
 import { Directive, Input, Predicate, TemplateRef } from '@angular/core';
 
 export interface ComboDefContext<T = any> {
@@ -10,7 +9,7 @@ export interface ComboDefContext<T = any> {
 }
 
 @Directive()
-export class ComboDefBase<T = any> {
+export class ComboDefBase<T, C extends ComboDefContext<T> = ComboDefContext<T>> {
   @Input() when: Predicate<T> | null;
 
   constructor(readonly template: TemplateRef<ComboDefContext<T>>) {}
