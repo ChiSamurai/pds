@@ -11,7 +11,7 @@ export const SVG_ICON_SIZE_ALIASES = new InjectionToken<SvgIconSizeAliases>('SVG
 @Component({
   selector: 'svg-icon',
   styles: [
-    'svg-icon { display: inline-flex; align-items: center; justify-content: center }',
+    'svg-icon { display: inline-flex; align-items: center; justify-content: center; line-height: 1 }',
     'svg-icon > svg { fill: currentColor; stroke: none }',
   ],
   encapsulation: ViewEncapsulation.None,

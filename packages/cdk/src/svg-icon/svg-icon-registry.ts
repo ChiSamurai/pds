@@ -1,6 +1,6 @@
-import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
-import { BehaviorState, resolveObjectPropertyPath } from '@vitagroup/common';
-import { ReplaySubject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorState } from '@vitagroup/common';
+import { Subject } from 'rxjs';
 
 export type SvgIconData = string;
 
@@ -12,8 +12,8 @@ export class SvgIconRegistry {
     return this.state.snapshot && Object.entries(this.state.snapshot);
   }
 
-  readonly registers = new ReplaySubject<[string, SvgIconData]>();
-  readonly unregisters = new ReplaySubject<[string, SvgIconData]>();
+  readonly registers = new Subject<[string, SvgIconData]>();
+  readonly unregisters = new Subject<[string, SvgIconData]>();
 
   resolve(name: string): SvgIconData | null {
     return this.icons?.find((iconEntry) => iconEntry[0] === name)?.[1];
