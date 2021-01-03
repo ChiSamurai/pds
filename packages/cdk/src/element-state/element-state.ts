@@ -45,6 +45,11 @@ export abstract class ElementState<T = any> {
     if (this.isSet) this.state.patch(false);
   }
 
+  toggle(): void {
+    if (this.isUnset) this.set();
+    else this.unset();
+  }
+
   dispose(): void {
     this.unlistenAll();
   }
