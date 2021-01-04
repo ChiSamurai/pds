@@ -5,7 +5,7 @@ import { SvgIconData, SvgIconRegistry } from './svg-icon-registry';
 const SVG_ELEMENT_START_TAG: RegExp = /(<\s*)(svg)(\s*)/i;
 const SVG_ELEMENT_END_TAG: RegExp = /(<\/\s*)(svg)(\s*>)/i;
 
-@Injectable({ providedIn: 'any' })
+@Injectable({ providedIn: 'root' })
 export class SvgIconHost {
   protected readonly parser: DOMParser = new DOMParser();
 
