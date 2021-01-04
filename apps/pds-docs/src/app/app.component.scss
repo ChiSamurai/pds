@@ -37,7 +37,7 @@ pds-app {
     }
   }
 
-  pds-main-menu {
+  pds-nav {
     @include pds.elevation(pds.$nav-elevation);
     @include pds.theme($main-menu-theme);
 
@@ -45,8 +45,8 @@ pds-app {
     background: linear-gradient(45deg, var(--primary) 0%, var(--primary-light) 100%);
     width: var(--app-menu-width);
 
-    .nav-entry svg-icon {
-      @include pds.outer-spacing(--space-5, right);
+    pds-nav-entry svg-icon {
+      margin-right: var(--space-4) !important;
     }
   }
   router-outlet + * {

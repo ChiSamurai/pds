@@ -1,30 +1,25 @@
-import { Component, Predicate, ViewEncapsulation } from '@angular/core';
-import { NavigationEntry } from '@vitagroup/cdk';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'pds-app',
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
   template: `
-    <pds-main-menu>
+    <pds-nav>
       <div class="pds-app-branding">
         <svg-icon name="vitagroup-signet" size="32px"></svg-icon>
-        <div class="pds-app-brand">
+        <span class="pds-app-brand">
           <strong>PDS</strong>
           &nbsp;Docs
-        </div>
+        </span>
       </div>
 
-      <ng-container *navEntryDef="let entry; when: isIconEntry">
-        <div class="nav-entry" [navEntryLink]="entry">
-          <svg-icon [name]="entry.iconName"></svg-icon>
-          <span>{{ entry.name }}</span>
-        </div>
-      </ng-container>
-    </pds-main-menu>
+      <pds-nav-entry *navEntryDef="let entry" [entry]="entry" routerLinkActive="active">
+        <svg-icon *ngIf="entry.iconName" [name]="entry.iconName"></svg-icon>
+        <span>{{ entry.name }}</span>
+      </pds-nav-entry>
+    </pds-nav>
     <router-outlet></router-outlet>
   `,
 })
-export class AppComponent {
-  readonly isIconEntry: Predicate<NavigationEntry> = (entry) => entry.iconName != null;
-}
+export class AppComponent {}

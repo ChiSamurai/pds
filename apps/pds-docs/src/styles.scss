@@ -4,7 +4,11 @@
 @use "colors/blue" as *;
 @use "styleguide" as pds with (
   $foreground-color: --dark,
-  $background-color: #f5f5f5
+  $background-color: #f5f5f5,
+
+  $color-primary-dark: $deep-blue,
+  $color-primary: $blue,
+  $color-primary-light: $bright-blue,
 );
 
 @at-root :root {
