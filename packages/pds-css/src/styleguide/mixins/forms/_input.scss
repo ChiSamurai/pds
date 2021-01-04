@@ -8,7 +8,8 @@
 $input-padding-x: $space-3 !default;
 $input-padding-y: $space-2 !default;
 
-$input-border: 1px solid var(--gray-light) !default;
+$input-border: 1px solid var(--gray) !default;
+$input-placeholder: var(--gray-dark) !default;
 
 @mixin input {
   select,
@@ -41,7 +42,7 @@ $input-border: 1px solid var(--gray-light) !default;
     }
 
     &::placeholder {
-      color: var(--gray-dark);
+      color: $input-placeholder;
       user-select: none;
     }
   }
@@ -55,21 +56,22 @@ $input-border: 1px solid var(--gray-light) !default;
   }
 }
 
-@mixin input-base {
-  @include inner-spacing($input-padding-x, x);
-  @include inner-spacing($input-padding-y, y);
+@mixin input-base($spacing: true) {
   @include rounding($rounding-sm);
+  @if $spacing {
+    @include inner-spacing($input-padding-x, x);
+    @include inner-spacing($input-padding-y, y);
+  }
 
   appearance: none;
   box-sizing: border-box;
   transition: 100ms ease-out;
-  background-color: var(--gray-light);
+  background-color: var(--gray);
   color: var(--foreground);
   border: $input-border;
 }
 
 @mixin input-disabled {
-  // background-color: $gray-5;
   border-color: var(--disabled);
   color: var(--disabled);
   pointer-events: none;
@@ -84,7 +86,7 @@ $input-border: 1px solid var(--gray-light) !default;
 }
 
 @mixin input-hover {
-  border-color: var(--gray);
+  border-color: var(--gray-dark);
 }
 @mixin input-focus {
   box-shadow: 0 0 0 1px var(--primary-light);

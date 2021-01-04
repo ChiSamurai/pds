@@ -12,7 +12,7 @@
   @if type_of($state-selectors) == list {
     @each $s in $state-selectors {
       $next-selector: if($within-parent, "#{$s} &, &#{$s}", "&#{$s}");
-      $result-selector: "#{$result-selector}#{if($result-selector == "", "", ",")}#{$next-selector}";
+      $result-selector: "#{$result-selector}#{if($result-selector == "", "", ", ")}#{$next-selector}";
     }
   } @else if type_of($state-selectors) == string {
     $result-selector: if($within-parent, "#{$state-selectors} &, &#{$state-selectors}", "&#{$state-selectors}");
@@ -48,8 +48,12 @@
   }
 }
 
-@mixin read-only-state($within-parent: false) {
-  @include state((".read-only", ":read-only", "[read-only]"), $within-parent) {
+@mixin read-only-state($within-parent: false, $with-pseudo: true) {
+  $selectors: (".read-only", "[readonly]");
+  @if $with-pseudo {
+    $selectors: append($selectors, ":read-only");
+  }
+  @include state($selectors, $within-parent) {
     @content;
   }
 }
