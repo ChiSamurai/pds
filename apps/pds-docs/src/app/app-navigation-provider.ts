@@ -6,7 +6,7 @@ export const APP_NAV_ENTRY_PROVIDER: Provider = {
   useValue: [
     {
       name: 'Overview',
-      linkUrl: '/search',
+      linkUrl: '/',
     },
     {
       name: 'Guides',
@@ -41,10 +41,12 @@ export const APP_STATIC_NAV_ENTRY_PROVIDER: Provider = {
     {
       name: 'Github',
       linkUrl: 'https://github.com/vitagroupag',
+      iconName: 'github',
     },
     {
       name: 'Homepage',
       linkUrl: 'https://vitagroup.ag',
+      iconName: 'globe',
     },
   ] as NavigationEntry[],
 };

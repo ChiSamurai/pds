@@ -4,7 +4,7 @@
   "overrides": [
     {
       "files": ["*.ts"],
-      "excludedFiles": ["svg-icons.ts"],
+      "excludedFiles": ["icons/*-icons.ts"],
       "extends": ["plugin:@nrwl/nx/angular", "plugin:@angular-eslint/template/process-inline-templates"],
       "parserOptions": { "project": ["apps/pds-docs/tsconfig.*?.json"] },
       "rules": {

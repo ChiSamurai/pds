@@ -12,7 +12,9 @@ import { Component, ViewEncapsulation } from '@angular/core';
       <span class="page-title">{{ 'title' | routeData | async }}</span>
     </div>
     <div class="app-search">
-      <input placeholder="Search anything..." />
+      <pds-text-box placeholder="Search...">
+        <svg-icon name="search" textSuffix></svg-icon>
+      </pds-text-box>
     </div>
   `,
 })

@@ -37,3 +37,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# svg-to-ts generated files
+apps/**/src/icons/*-icons.ts

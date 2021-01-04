@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { SvgIconModule } from '@vitagroup/cdk';
+import { NavigationModule, SvgIconModule } from '@vitagroup/cdk';
 import {
   FlexContainer,
   FlexContainerModule,
@@ -10,7 +10,7 @@ import {
   TemplateEncapsulation,
 } from '@vitagroup/cdk/layout';
 import { RouteDataPipeModule, TemplateOutletModule } from '@vitagroup/common';
-import { MainMenuModule } from '@vitagroup/pds-components';
+import { CheckBoxModule, ComboBoxModule, MainMenuModule, TagModule, TextBoxModule } from '@vitagroup/pds-components';
 import { APP_ICON_IMPORT_PROVIDER } from './app-icon-provider';
 import { APP_NAV_ENTRY_PROVIDER, APP_STATIC_NAV_ENTRY_PROVIDER } from './app-navigation-provider';
 import {
@@ -39,6 +39,9 @@ import { AppHeaderComponent } from './components/app-header/app-header.component
     PageLayoutModule,
     SvgIconModule,
     RouteDataPipeModule,
+    NavigationModule,
+    TextBoxModule,
+    TagModule,
   ],
   providers: [
     {

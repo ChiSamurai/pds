@@ -17,4 +17,9 @@ pds-app-header {
       color: var(--gray-darkest);
     }
   }
+
+  .app-search {
+    display: flex;
+    align-items: center;
+  }
 }

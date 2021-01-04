@@ -3,13 +3,15 @@
 $nav-spacing-x: pds.$space-6 !default;
 $nav-spacing-y: pds.$space-8 !default;
 
-$main-menu-theme: pds.theme-define((
-  "pds-main-menu": (
-    "foreground": --primary-contrast,
-    "primary": --light,
-    "secondary": --primary-light
+$main-menu-theme: pds.theme-define(
+  (
+    'pds-main-menu': (
+      'foreground': --primary-contrast,
+      'primary': --light,
+      'secondary': --primary-light,
+    ),
   )
-));
+);
 
 pds-app {
   display: flex;
@@ -40,8 +42,12 @@ pds-app {
     @include pds.theme($main-menu-theme);
 
     flex: 0 0 auto;
+    background: linear-gradient(45deg, var(--primary) 0%, var(--primary-light) 100%);
     width: var(--app-menu-width);
-    background: linear-gradient(45deg, #{pds.color-berrylicious()})
+
+    .nav-entry svg-icon {
+      @include pds.outer-spacing(--space-5, right);
+    }
   }
   router-outlet + * {
     display: block;

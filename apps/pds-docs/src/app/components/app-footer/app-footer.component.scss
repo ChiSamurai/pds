@@ -1,7 +1,7 @@
 @use "styleguide" as pds;
 
 page-footer {
-  background: var(--gray-lighter);
+  @include pds.outer-spacing(--space-6 top);
   height: 64px;
 }
 
@@ -13,7 +13,7 @@ pds-app-footer {
   display: flex;
 
   .app-legal-links {
-    @include pds.outer-child-spacing(pds.$space-3, $trim: true);
+    @include pds.outer-child-spacing(--space-3, $trim: true);
   }
   .app-legal-claims {
     color: var(--gray-darker);

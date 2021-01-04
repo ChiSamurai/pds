@@ -1,13 +1,13 @@
 {
   "conversionType": "constants",
   "srcFiles": [
-    "./svg-icons/**/*.svg"
+    "../../node_modules/@fortawesome/fontawesome-free/svgs/solid/*.svg"
   ],
   "outputDirectory": "./src/icons",
-  "interfaceName": "AppIcon",
-  "typeName": "AppIconNames",
-  "prefix": "appIcon",
-  "fileName": "app-icons",
+  "interfaceName": "FaSolidIcon",
+  "typeName": "FaSolidIconNames",
+  "prefix": "faSolidIcon",
+  "fileName": "fa-solid-icons",
   "delimiter": "KEBAB",
   "svgoConfig": {
     "plugins": [
