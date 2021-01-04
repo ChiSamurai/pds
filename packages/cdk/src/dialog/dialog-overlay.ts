@@ -1,35 +1,30 @@
-import { Overlay, OverlayConfig, OverlayPositionBuilder, ScrollStrategyOptions } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
+import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { Injectable, Injector, Type } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { ComponentProps } from '../utils';
-import { ConnectedDialogRef, DialogRef } from './dialog-ref';
+import { DialogRef } from './dialog-ref';
 
-/** Configurable options during the creation of a {@link DialogRef} */
+/** Configurable options for the creation of a {@link DialogRef} */
 export interface DialogOverlayConfig<C = any> {
   injector?: Injector;
   overlay?: OverlayConfig;
   disposeOnBackdropClick?: boolean;
   props?: ComponentProps<C>;
+  fullscreen?: boolean;
 }
 
 @Injectable()
 export class DialogOverlay {
-  /** See {@link Overlay.scrollStrategies} */
-  get scrollStrategies(): ScrollStrategyOptions {
-    return this.overlay.scrollStrategies;
-  }
-
   constructor(protected overlay: Overlay, protected injector: Injector) {}
 
-  /** See {@link Overlay.position} */
-  position(): OverlayPositionBuilder {
-    return this.overlay.position();
-  }
-
-  create<R = any, T = any>(componentType: Type<T>, config?: DialogOverlayConfig<T>): ConnectedDialogRef<R, T> {
-    const overlayRef = this.overlay.create(this.createOverlayConfig(config || {}));
-    const dialogRef = new DialogRef<R>(overlayRef, config);
+  create<R = any, T = any>(componentType: Type<T>, config?: DialogOverlayConfig<T>): DialogRef<R, T> {
+    const overlayRef = this.overlay.create(
+      this.createOverlayConfig({
+        injector: this.injector,
+        ...config,
+      })
+    );
+    const dialogRef = new DialogRef<R>(componentType, overlayRef, config);
 
     if (config && config.disposeOnBackdropClick) {
       overlayRef
@@ -38,24 +33,20 @@ export class DialogOverlay {
         .subscribe(() => dialogRef.dispose());
     }
 
-    const portal = new ComponentPortal(componentType, null, this.createInjector(dialogRef, config?.injector));
-    return new ConnectedDialogRef(dialogRef, portal);
+    return dialogRef;
   }
 
   createOverlayConfig(config: DialogOverlayConfig = {}): OverlayConfig {
     return new OverlayConfig({
-      scrollStrategy: this.scrollStrategies.block(),
+      scrollStrategy: this.overlay.scrollStrategies.block(),
+      positionStrategy: config?.fullscreen
+        ? this.overlay.position().global().top().left()
+        : this.overlay.position().global().centerVertically().centerHorizontally(),
+      height: config?.fullscreen ? '100vh' : null,
+      width: config?.fullscreen ? '100vw' : null,
       hasBackdrop: true,
 
       ...config.overlay,
-    });
-  }
-  createInjector(dialogRef: DialogRef, parent?: Injector): Injector {
-    // we definitely want to force a "default" parent injector even when "null" is given!
-    parent = parent || this.injector;
-    return Injector.create({
-      parent,
-      providers: [{ provide: DialogRef, useValue: dialogRef }],
     });
   }
 }

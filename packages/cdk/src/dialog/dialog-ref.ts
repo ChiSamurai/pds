@@ -1,13 +1,28 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef } from '@angular/core';
+import { ComponentRef, Injector, Type } from '@angular/core';
 import { Observable, Subject, Subscriber, TeardownLogic } from 'rxjs';
+import { ComponentProps } from '../utils/component-props';
 import { DialogOverlayConfig } from './dialog-overlay';
 
-export class DialogRef<R = any> extends Observable<R> {
-  protected subject = new Subject<R>();
+export class DialogRef<R = any, T = any> extends Observable<R> {
+  private _componentRef: ComponentRef<T>;
 
-  constructor(readonly overlayRef: OverlayRef, readonly config?: DialogOverlayConfig) {
+  protected readonly subject = new Subject<R>();
+  protected readonly injector = Injector.create({
+    parent: this.config.injector,
+    providers: [{ provide: DialogRef, useValue: this }],
+  });
+
+  get componentRef(): ComponentRef<T> | null {
+    return this._componentRef;
+  }
+
+  constructor(
+    readonly componentType: Type<any>,
+    readonly overlayRef: OverlayRef,
+    readonly config: DialogOverlayConfig
+  ) {
     super((subscriber) => this.subject.subscribe(subscriber));
   }
 
@@ -17,36 +32,17 @@ export class DialogRef<R = any> extends Observable<R> {
     this.overlayRef.dispose();
   }
 
-  toSubject(): Subject<R> {
-    return this.subject;
-  }
-}
-
-export class ConnectedDialogRef<R = any, T = any> extends DialogRef<R> {
-  private _componentRef: ComponentRef<T>;
-
-  get componentRef(): ComponentRef<T> | null {
-    return this._componentRef;
-  }
-
-  constructor(origin: DialogRef, protected portal: ComponentPortal<T>) {
-    super(origin.overlayRef, origin.config);
-    this.subject = origin.toSubject();
-  }
-
-  setProps(): void {
+  setProps(props: ComponentProps<T> = this.config?.props): void {
     // transfer input property values if there are any
-    if (this.config?.props != null) {
-      for (const [key, value] of Object.entries(this.config.props)) {
-        // todo: consider a property validation using the component factory?!
-        this._componentRef.instance[key] = value;
-      }
+    for (const [key, value] of Object.entries(props)) {
+      // consider a property validation using the component factory?!
+      this._componentRef.instance[key] = value;
     }
   }
 
   reattach(): ComponentRef<T> {
     if (!this.overlayRef.hasAttached()) {
-      this._componentRef = this.overlayRef.attach(this.portal);
+      this._componentRef = this.overlayRef.attach(new ComponentPortal(this.componentType, null, this.injector));
     }
     return this._componentRef;
   }
@@ -56,7 +52,8 @@ export class ConnectedDialogRef<R = any, T = any> extends DialogRef<R> {
   }
 
   _subscribe(subscriber: Subscriber<any>): TeardownLogic {
-    this._componentRef = this.overlayRef.attach(this.portal);
+    this.reattach();
+    this.setProps();
     return super._subscribe(subscriber);
   }
 }
