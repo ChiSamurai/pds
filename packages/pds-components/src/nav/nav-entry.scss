@@ -1,0 +1,25 @@
+@use "styleguide" as pds;
+@use "util";
+
+$active-indicator-width: 4px;
+
+pds-nav-entry {
+  @include pds.outer-child-spacing(pds.$space-2, x, $trim: true, $justify: true);
+  @include pds.inner-spacing(pds.$space-5, x);
+
+  display: flex;
+  cursor: pointer;
+  min-height: 48px;
+  align-items: center;
+  font-weight: normal;
+  transition: 60ms ease-out;
+  // to not cause disruption when applying outer borders for active states we initially set the border values here
+  border-right: $active-indicator-width solid transparent;
+  border-left: $active-indicator-width solid transparent;
+
+  @include util.active-state {
+    background: var(--pds-main-menu-secondary);
+    border-left: $active-indicator-width solid var(--pds-main-menu-primary);
+    font-weight: bold;
+  }
+}

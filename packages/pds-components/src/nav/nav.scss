@@ -1,0 +1,39 @@
+@use "styleguide" as pds;
+@use "util";
+
+$static-entry-divider: 1px solid;
+
+pds-nav {
+  @include util.custom-color-properties(
+    (
+      'pds-main-menu': (
+        'foreground': --foreground,
+        'background': --gray-lighter,
+        'primary': --primary,
+        'secondary': --gray-light,
+      ),
+    )
+  );
+
+  display: flex;
+  flex-direction: column;
+  background: var(--pds-main-menu-background);
+  color: var(--pds-main-menu-foreground);
+  height: 100%;
+
+  > nav-entry-outlet {
+    user-select: none;
+    flex-direction: column;
+    display: flex;
+
+    &:first-of-type {
+      flex: 1 0 auto;
+    }
+
+    &:last-of-type {
+      pds-nav-entry {
+        border-top: $static-entry-divider var(--pds-main-menu-secondary);
+      }
+    }
+  }
+}

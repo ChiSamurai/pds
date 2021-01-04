@@ -7,8 +7,8 @@ export * from './card/card';
 export * from './combo-box/module';
 export * from './combo-box/combo-box';
 
-export * from './main-menu/module';
-export * from './main-menu/main-menu';
+export * from './nav/module';
+export * from './nav/nav';
 
 export * from './modal/module';
 export * from './modal/modal-encapsulation';
