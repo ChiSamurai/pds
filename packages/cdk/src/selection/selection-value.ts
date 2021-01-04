@@ -1,13 +1,7 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Directive, Inject, InjectionToken, Input } from '@angular/core';
 import { SELECTION_MODEL } from './selection-control';
-import {
-  DeselectOptions,
-  SelectionModel,
-  SelectionOptions,
-  SelectOptions,
-  ToggleOptions,
-} from './selection-model';
+import { DeselectOptions, SelectionModel, SelectionOptions, SelectOptions, ToggleOptions } from './selection-model';
 
 export const SELECTION_VALUE = new InjectionToken<SelectionValue>('adk:SELECTION_VALUE');
 
@@ -34,7 +28,7 @@ export class SelectionValue<T = any> {
     return this.value != null && this.parentModel.isSelected(this.value);
   }
 
-  constructor(@Inject(SELECTION_MODEL) readonly parentModel: SelectionModel<T>) {}
+  constructor(readonly parentModel: SelectionModel<T>) {}
 
   select(options?: SelectOptions): void {
     if (this.value != null) this.parentModel.select(this.value, options || this.options);

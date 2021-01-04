@@ -1,39 +1,42 @@
 import { ConnectedPosition, Overlay } from '@angular/cdk/overlay';
-import { Portal, TemplatePortal } from '@angular/cdk/portal';
+import { TemplatePortal } from '@angular/cdk/portal';
 import {
+  AfterContentInit,
   ChangeDetectorRef,
+  ContentChild,
   ContentChildren,
   Directive,
-  ElementRef,
   Inject,
   InjectionToken,
+  isDevMode,
   QueryList,
   Renderer2,
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
+import { WINDOW } from '@ng-web-apis/common';
+import { takeUntil } from 'rxjs/operators';
 import { ComboBoxBase } from '../combo-box/combo-box-base';
+import { SelectionChange, SelectionModel } from '../selection/selection-model';
 import { SelectDefBase, SelectDefContext } from './select-def-base';
-import { SelectOptionBase } from './select-option-base';
 
-export const SELECT_BOX_CONNECTED_POSITIONS = new InjectionToken<ConnectedPosition[]>(
-  'SELECT_BOX_CONNECTED_POSITIONS',
-  {
-    providedIn: 'root',
-    factory: () => [
-      { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', panelClass: 'bottom' },
-      { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', panelClass: 'top' },
-    ],
-  }
-);
+export const SELECT_BOX_OVERLAY_POSITIONS = new InjectionToken<ConnectedPosition[]>('SELECT_BOX_OVERLAY_POSITIONS', {
+  providedIn: 'root',
+  factory: () => [
+    { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', panelClass: 'bottom' },
+    { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', panelClass: 'top' },
+  ],
+});
 
 @Directive()
-export abstract class SelectBoxBase<T, C extends SelectDefContext<T> = SelectDefContext<T>> extends ComboBoxBase<T, C> {
+export abstract class SelectBoxBase<T, C extends SelectDefContext<T> = SelectDefContext<T>>
+  extends ComboBoxBase<T, C>
+  implements AfterContentInit {
   @ContentChildren(SelectDefBase, { descendants: true }) protected readonly defs: QueryList<SelectDefBase<T, C>>;
-  @ContentChildren(SelectOptionBase, { descendants: true }) readonly options: QueryList<SelectOptionBase<T>>;
+  @ContentChild(SelectionModel) readonly selectionModel: SelectionModel<T>;
 
-  protected abstract optionsTemplate: TemplateRef<any>;
-  protected readonly optionsOverlayRef = this.overlay.create({
+  protected abstract overlayTemplate: TemplateRef<any>;
+  protected readonly overlayRef = this.overlay.create({
     scrollStrategy: this.overlay.scrollStrategies.close(),
     positionStrategy: this.overlay
       .position()
@@ -42,12 +45,13 @@ export abstract class SelectBoxBase<T, C extends SelectDefContext<T> = SelectDef
       .withPush(false),
   });
 
-  get hasAttachedOptions(): boolean {
-    return this.optionsOverlayRef.hasAttached();
+  get hasAttachedOverlay(): boolean {
+    return this.overlayRef.hasAttached();
   }
 
   constructor(
-    @Inject(SELECT_BOX_CONNECTED_POSITIONS)
+    @Inject(WINDOW) protected window: /* @dynamic */ Window,
+    @Inject(SELECT_BOX_OVERLAY_POSITIONS)
     protected connectedPositions: /* @dynamic */ ConnectedPosition[],
     protected viewContainerRef: ViewContainerRef,
     protected changeDetectorRef: ChangeDetectorRef,
@@ -57,21 +61,31 @@ export abstract class SelectBoxBase<T, C extends SelectDefContext<T> = SelectDef
     super(viewContainerRef.element, changeDetectorRef, renderer);
   }
 
-  attachOptions(): void {
-    if (!this.hasAttachedOptions) {
-      const { clientWidth: width } = this.elementRef.nativeElement as HTMLElement;
-      this.optionsOverlayRef.updateSize({ width });
-      this.optionsOverlayRef.attach(new TemplatePortal(this.optionsTemplate, this.viewContainerRef));
+  protected onSelectionChange(change: SelectionChange): void {
+    this.setValue(change.source.toArray());
+  }
+
+  attachOverlay(): void {
+    if (!this.hasAttachedOverlay) {
+      const { width } = this.window.getComputedStyle(this.elementRef.nativeElement);
+      this.overlayRef.updateSize({ width });
+      this.overlayRef.attach(new TemplatePortal(this.overlayTemplate, this.viewContainerRef));
     }
   }
-  detachOptions(): void {
-    if (this.hasAttachedOptions) {
-      this.optionsOverlayRef.detach();
+  detachOverlay(): void {
+    if (this.hasAttachedOverlay) {
+      this.overlayRef.detach();
     }
   }
 
-  toggleOptions(): void {
-    if (this.hasAttachedOptions) this.detachOptions();
-    else this.attachOptions();
+  toggleOverlay(): void {
+    if (this.hasAttachedOverlay) this.detachOverlay();
+    else this.attachOverlay();
+  }
+
+  ngAfterContentInit() {
+    if (isDevMode() && this.selectionModel == null)
+      console.warn(`${this.constructor.name} instantiated without a selection model inside it`);
+    else this.selectionModel.changes.pipe(takeUntil(this.ngDestroys)).subscribe(this.onSelectionChange.bind(this));
   }
 }

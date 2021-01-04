@@ -26,7 +26,8 @@ export abstract class ComboBoxBase<T, C extends ComboDefContext<T> = ComboDefCon
 
   removeAt(index: number): T | null {
     const value = this.value?.[index];
-    this.value = [...this.value.slice(0, index - 1), ...this.value.slice(index + 1)];
+    this.value = [...this.value.slice(0, index > 0 ? index - 1 : 0), ...this.value.slice(index + 1)];
+    this.changeDetectorRef.detectChanges();
     return value;
   }
 

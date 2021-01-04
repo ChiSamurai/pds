@@ -1,15 +1,7 @@
 import { coerceNumberProperty } from '@angular/cdk/coercion';
-import {
-  Directive,
-  EventEmitter,
-  InjectionToken,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
+import { Directive, EventEmitter, InjectionToken, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { SelectionChange, SelectionModel, SelectOptions } from './selection-model';
 
 export const SELECTION_MODEL = new InjectionToken<SelectionModel>('adk:SELECTION_MODEL');
@@ -17,14 +9,16 @@ export const SELECTION_MODEL = new InjectionToken<SelectionModel>('adk:SELECTION
 @Directive({
   exportAs: 'selectionControl',
   selector: '[selectionControl]',
-  providers: [{ provide: SELECTION_MODEL, useExisting: SelectionControl }],
+  providers: [{ provide: SelectionModel, useExisting: SelectionControl }],
+  inputs: ['model: selectionControl', 'mode: selectionMode', 'limit: selectionLimit'],
+  outputs: ['modelChange: selectionControlChange', 'change: selectionChange'],
 })
 export class SelectionControl<T> extends SelectionModel<T> implements OnInit, OnDestroy {
   private _limit: number | null;
 
   protected readonly ngDestroys = new Subject<void>();
 
-  @Input('selectionControl') set model(value: T[]) {
+  @Input() set model(value: T[]) {
     if (value != null) {
       this.deselect({ emitEvent: false });
       for (const entry of value) {
@@ -32,11 +26,11 @@ export class SelectionControl<T> extends SelectionModel<T> implements OnInit, On
       }
     }
   }
-  @Output('selectionControlChange') readonly modelChange = new EventEmitter<T[]>();
+  @Output() readonly modelChange = new EventEmitter<T[]>();
 
-  @Input('selectionMode') mode: 'single' | 'preservedSingle' | 'multiple' = 'multiple';
+  @Input() mode: 'single' | 'preservedSingle' | 'multiple' = 'multiple';
 
-  @Input('selectionLimit')
+  @Input()
   set limit(value: number | null) {
     this._limit = coerceNumberProperty(value, null);
   }
@@ -44,7 +38,7 @@ export class SelectionControl<T> extends SelectionModel<T> implements OnInit, On
     return this._limit;
   }
 
-  @Output('selectionChange') readonly changes = new EventEmitter<SelectionChange<T>>();
+  @Output() readonly changes = new EventEmitter<SelectionChange<T>>();
 
   constructor() {
     super([]);

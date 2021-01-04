@@ -35,10 +35,7 @@ export class SelectionModel<T = any> extends Observable<T[]> {
 
   constructor(trackBy?: PrimitiveTrackByFn<T>);
   constructor(initialValue?: Iterable<T>, trackBy?: PrimitiveTrackByFn<T>);
-  constructor(
-    initialValueOrTrackBy?: Iterable<T> | PrimitiveTrackByFn<T>,
-    trackBy?: PrimitiveTrackByFn<T>
-  ) {
+  constructor(initialValueOrTrackBy?: Iterable<T> | PrimitiveTrackByFn<T>, trackBy?: PrimitiveTrackByFn<T>) {
     super((subscriber) => {
       this._changes.pipe(map(() => this.toArray())).subscribe(subscriber);
     });
@@ -49,7 +46,7 @@ export class SelectionModel<T = any> extends Observable<T[]> {
   }
 
   isSelected(value: T): boolean {
-    return this.value.some((value2) => this.compareValueIdentity(value, value2));
+    return this.value.some((value2) => this.equalValueIdentity(value, value2));
   }
 
   select(value: T, options?: SelectOptions): void {
@@ -67,7 +64,7 @@ export class SelectionModel<T = any> extends Observable<T[]> {
       this.value = [];
       if (this.shouldEmit(options)) this.emitChange('clear');
     } else if (this.isSelected(value)) {
-      this.value = this.value.filter((value2) => !this.compareValueIdentity(value, value2));
+      this.value = this.value.filter((value2) => !this.equalValueIdentity(value, value2));
       if (this.shouldEmit(options)) this.emitChange('deselect', value);
     }
   }
@@ -88,13 +85,13 @@ export class SelectionModel<T = any> extends Observable<T[]> {
     this._changes.next({ source: this, type, value });
   }
 
-  protected compareValueIdentity(value1: T, value2: T): boolean {
+  protected equalValueIdentity(value1: T, value2: T): boolean {
     return this.trackBy(value1) === this.trackBy(value2);
   }
 
   private _isOptionsObject(obj: any): obj is SelectionOptions {
     // todo: keep up to date with the SelectionOptions interface!
-    return obj != null && 'emitEvent' in obj;
+    return obj != null && obj.hasOwnProperty('emitEvent');
   }
 }
 
