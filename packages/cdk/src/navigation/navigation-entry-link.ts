@@ -21,11 +21,12 @@ export const NAVIGATION_LINK_URL_PARAMS = new InjectionToken<Params>('NAVIGATION
 @Directive({
   selector: '[navEntryLink]',
   providers: [{ provide: RouterLink, useExisting: NavigationEntryLink }],
+  inputs: ['entry: navEntryLink'],
 })
 export class NavigationEntryLink extends RouterLinkOrHref {
   private _entry: NavigationEntry;
 
-  @Input('navEntryLink')
+  @Input()
   set entry(value: NavigationEntry) {
     if (typeof value?.linkUrl === 'string') {
       this.routerLinkOrHref = this.interpolateLinkUrl(value?.linkUrl);

@@ -1,4 +1,4 @@
-export interface NavigationEntry extends Record<PropertyKey, any> {
+export interface NavigationEntry {
   /** Gets or sets the name of the entry */
   name: string;
   /**
@@ -13,4 +13,7 @@ export interface NavigationEntry extends Record<PropertyKey, any> {
   action?: (...deps: any[]) => any;
   /** Gets or sets the dependency tokens for the {@link action} function */
   deps?: any[];
+
+  /** Optional properties to build the navigation functionality */
+  [propertyKey: string]: any;
 }

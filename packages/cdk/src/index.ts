@@ -26,8 +26,7 @@ export * from './navigation/navigation-entry-def';
 export * from './navigation/navigation-entry-link';
 export * from './navigation/navigation-entry-outlet';
 
-export * from './navigation-menu/module';
-export * from './navigation-menu/navigation-menu';
+export * from './nav/nav-base';
 
 export * from './select-box/select-box-base';
 export * from './select-box/select-def-base';

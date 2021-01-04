@@ -21,9 +21,9 @@ import { NavigationEntryDefContext } from './navigation-entry-def';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-template #fallbackEntryTemplate let-entry>
-      <div class="nav-entry" [navEntryLink]="entry" routerLinkActive="active" target="_blank">
+      <a [navEntryLink]="entry" target="_blank">
         {{ entry.name }}
-      </div>
+      </a>
     </ng-template>
 
     <ng-container *ngFor="let entry of viewEntries | async">
