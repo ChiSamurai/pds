@@ -30,11 +30,11 @@ import { takeUntil } from 'rxjs/operators';
     <ng-content select="[selectSuffix]"></ng-content>
     <svg-icon
       class="pds-select-box-toggle"
-      [name]="'pds-select-box-' + (hasAttachedOptions ? 'detach-toggle' : 'attach-toggle')"
+      [name]="'pds-select-box-' + (hasAttachedOverlay ? 'detach-toggle' : 'attach-toggle')"
       viewBox="0 0 18 18"
-      (click)="toggleOptions()"
+      (click)="toggleOverlay()"
     >
-      <ng-container *ngIf="hasAttachedOptions; else attachToggleTemplate">
+      <ng-container *ngIf="hasAttachedOverlay; else attachToggleTemplate">
         <svg:path
           d="M14.8,13.1c-0.3,0-0.6-0.1-0.8-0.3l-5-5l-5,5c-0.5,0.5-1.2,0.5-1.6,0c-0.5-0.5-0.5-1.2,0-1.6l5.8-5.8c0.5-0.5,1.2-0.5,1.6,0l5.8,5.8c0.5,0.5,0.5,1.2,0,1.6C15.4,13,15.1,13.1,14.8,13.1z"
         />
@@ -50,15 +50,15 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class SelectBox<T = any> extends SelectBoxBase<T> implements OnInit {
   @ViewChild('selectOptionsTemplate', { static: true })
-  protected optionsTemplate: TemplateRef<any>;
+  protected overlayTemplate: TemplateRef<any>;
 
   @Input() inputValue: string;
 
   ngOnInit() {
-    this.focus.ancestors.add(this.optionsOverlayRef.overlayElement);
+    this.focus.ancestors.add(this.overlayRef.overlayElement);
     this.focus
       .asObservable()
       .pipe(takeUntil(this.ngDestroys))
-      .subscribe((isFocused) => !isFocused && this.detachOptions());
+      .subscribe((isFocused) => !isFocused && this.detachOverlay());
   }
 }

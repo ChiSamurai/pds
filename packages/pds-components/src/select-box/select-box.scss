@@ -9,12 +9,14 @@ pds-select-box {
   cursor: default;
 
   .pds-select-box-value {
+    @include pds.outer-child-spacing(--space-1, x, $trim: true, $justify: true);
+
     flex: 1 0 0;
     align-items: inherit;
     display: flex;
   }
   .pds-select-box-placeholder {
-    color: var(--placeholder, var(--gray-dark));
+    color: var(--placeholder, pds.$input-placeholder);
     pointer-events: none;
     user-select: none;
   }
@@ -26,11 +28,8 @@ pds-select-box {
 
 .pds-select-box-overlay-container {
   @include pds.elevation(pds.$raised-elevation);
-  @include pds.rounding(--rounding-sm);
 
-  overflow: hidden;
-  border: 1px solid var(--gray-light);
-  background: var(--gray-lighter);
+  min-width: 120px;
   width: 100%;
 
   .top & {

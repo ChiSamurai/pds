@@ -5,14 +5,16 @@ $active-indicator-width: 4px;
 $static-entry-divider: 1px solid;
 
 pds-main-menu {
-  @include util.custom-color-properties((
-    "pds-main-menu": (
-      "foreground": --foreground,
-      "background": --gray-lighter,
-      "primary": --primary,
-      "secondary": --gray-light
+  @include util.custom-color-properties(
+    (
+      'pds-main-menu': (
+        'foreground': --foreground,
+        'background': --gray-lighter,
+        'primary': --primary,
+        'secondary': --gray-light,
+      ),
     )
-  ));
+  );
 
   display: flex;
   flex-direction: column;

@@ -70,16 +70,6 @@ export class Modal implements AfterContentChecked {
   @Input() encapsulation: string;
 
   @Input()
-  @HostBinding('class.fullscreen')
-  set fullscreen(value: boolean) {
-    this._fullscreen = coerceBooleanProperty(value);
-    this.updateFullscreenOverlayConfig();
-  }
-  get fullscreen(): boolean {
-    return this._fullscreen;
-  }
-
-  @Input()
   set closable(value: boolean) {
     this._closeable = coerceBooleanProperty(value);
   }
@@ -87,10 +77,14 @@ export class Modal implements AfterContentChecked {
     return this._closeable;
   }
 
+  @HostBinding('class.fullscreen')
+  get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
   @Output() readonly closes = new EventEmitter<any>();
 
   constructor(
-    @Optional() protected readonly dialog: DialogOverlay,
     @Optional() protected readonly dialogRef: DialogRef,
     @Optional() @Inject(MODAL_ENCAPSULATION) encapsulation: string
   ) {
@@ -105,17 +99,5 @@ export class Modal implements AfterContentChecked {
   ngAfterContentChecked() {
     if (this.header != null && this.header.closeTemplate.getValue() !== this._closeTemplateRef)
       this.header.closeTemplate.next(this._closeTemplateRef);
-  }
-
-  protected updateFullscreenOverlayConfig() {
-    this.dialogRef.overlayRef.updatePositionStrategy(
-      this.fullscreen
-        ? this.dialog.position().global().top().left()
-        : this.dialog.position().global().centerVertically().centerHorizontally()
-    );
-    this.dialogRef.overlayRef.updateSize({
-      height: this.fullscreen ? '100vh' : null,
-      width: this.fullscreen ? '100vw' : null,
-    });
   }
 }

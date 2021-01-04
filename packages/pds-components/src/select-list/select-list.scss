@@ -1,0 +1,11 @@
+@use "styleguide" as pds;
+
+pds-select-list {
+  @include pds.rounding(--rounding-sm);
+
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--gray);
+  background: var(--gray-light);
+  width: 100%;
+}

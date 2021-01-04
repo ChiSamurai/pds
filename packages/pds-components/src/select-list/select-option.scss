@@ -2,20 +2,19 @@
 @use "util";
 
 pds-select-option {
+  @include pds.outer-child-spacing(pds.$input-padding-x, x, $trim: true, $justify: true);
   @include pds.inner-spacing(pds.$input-padding-x, x);
   @include pds.inner-spacing(pds.$input-padding-y, y);
 
   display: flex;
   transition: 100ms ease-out;
   align-items: center;
+  cursor: default;
 
   &:not(:last-child) {
-    border-bottom: 1px solid var(--gray-light);
+    border-bottom: 1px solid var(--gray);
   }
 
-  @include util.hover-state {
-    background: var(--gray-light);
-  }
   @include util.active-state {
     background: var(--primary-light);
     color: var(--primary-contrast);

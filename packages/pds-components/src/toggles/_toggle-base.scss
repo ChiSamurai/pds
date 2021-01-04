@@ -26,15 +26,15 @@ $toggle-size: 30px !default;
   .toggle-indicator {
     width: $toggle-size;
     height: $toggle-size;
-    border: 1px solid var(--gray-light);
-    background-color: var(--gray-light);
+    border: 1px solid var(--gray);
+    background-color: var(--gray);
     transition: 100ms ease-out;
   }
 
   // todo: @include error_state( $within_parent: true ) { }
   @include util.hover-state {
     .toggle-indicator {
-      border-color: var(--gray);
+      border-color: var(--gray-dark);
     }
   }
   @include util.focus-state {
@@ -57,11 +57,11 @@ $toggle-size: 30px !default;
   }
 
   @include util.disabled-state($within_parent: true) {
-    color: var(--disabled, var(--gray));
+    color: var(--disabled, var(--gray-dark));
     pointer-events: none;
 
     .toggle-indicator {
-      color: var(--disabled, var(--gray));
+      color: var(--disabled, var(--gray-dark));
     }
   }
 }
