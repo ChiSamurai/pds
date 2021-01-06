@@ -48,6 +48,9 @@ pds-app {
     pds-nav-entry svg-icon {
       margin-right: var(--space-4) !important;
     }
+    .nav-entry-children pds-nav-entry {
+      @include pds.inner-spacing(--space-7, left);
+    }
   }
   router-outlet + * {
     display: block;

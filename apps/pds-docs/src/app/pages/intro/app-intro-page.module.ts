@@ -4,30 +4,22 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule, Routes } from '@angular/router';
 import { SvgIconModule } from '@vitagroup/cdk';
 import { PageLayoutModule } from '@vitagroup/cdk/layout';
-import {
-  CardModule,
-  CheckBoxModule,
-  ComboBoxModule,
-  SelectBoxModule,
-  SelectListModule,
-  TagModule,
-  TextBoxModule,
-} from '@vitagroup/pds-components';
-import { AppOverviewPageComponent } from './app-overview-page.component';
+import { SelectBoxModule, SelectListModule, TagModule } from '@vitagroup/pds-components';
+import { AppIntroPageComponent } from './app-intro-page.component';
 
 export const APP_SEARCH_PAGE_ROUTES: Routes = [
   {
     path: '',
-    component: AppOverviewPageComponent,
+    component: AppIntroPageComponent,
     data: {
-      title: $localize`Overview`,
+      title: $localize`Introduction`,
     },
   },
 ];
 
 @NgModule({
-  exports: [AppOverviewPageComponent],
-  declarations: [AppOverviewPageComponent],
+  exports: [AppIntroPageComponent],
+  declarations: [AppIntroPageComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(APP_SEARCH_PAGE_ROUTES),
@@ -39,4 +31,4 @@ export const APP_SEARCH_PAGE_ROUTES: Routes = [
     SvgIconModule,
   ],
 })
-export class AppOverviewPageModule {}
+export class AppIntroPageModule {}

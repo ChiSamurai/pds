@@ -2,11 +2,11 @@ import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'pds-app-overview-page',
-  styleUrls: ['app-overview-page.component.scss'],
-  templateUrl: 'app-overview-page.component.html',
+  styleUrls: ['app-intro-page.component.scss'],
+  templateUrl: 'app-intro-page.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class AppOverviewPageComponent {
+export class AppIntroPageComponent {
   readonly packageInfos = [
     { name: 'PDS Components', description: 'Collection of reusable components integrating the PDS CSS styleguide' },
     { name: 'PDS CSS', description: 'Generic (S)CSS layer for simplified styleguide adoption' },

@@ -5,32 +5,29 @@ export const APP_NAV_ENTRY_PROVIDER: Provider = {
   provide: NAVIGATION_ENTRIES,
   useValue: [
     {
-      name: 'Overview',
-      linkUrl: '/',
-    },
-    {
-      name: 'Guides',
-      linkUrl: '/guides',
+      name: 'Getting Started',
+      children: [
+        {
+          name: 'Introduction',
+          linkUrl: '/',
+        },
+        {
+          name: 'Installation',
+          linkUrl: '/install',
+        },
+      ] as NavigationEntry[],
     },
     {
       name: 'Components',
-      linkUrl: '/components',
+      linkUrl: '/pds-components',
     },
     {
-      name: 'Schematics',
-      linkUrl: '/schematics',
+      name: 'CSS',
+      linkUrl: '/pds-css',
     },
     {
       name: 'CDK',
       linkUrl: '/cdk',
-    },
-    {
-      name: 'CSS',
-      linkUrl: '/css',
-    },
-    {
-      name: 'Devkit',
-      linkUrl: '/devkit',
     },
   ] as NavigationEntry[],
 };

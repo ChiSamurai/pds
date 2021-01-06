@@ -14,10 +14,20 @@ import { Component, ViewEncapsulation } from '@angular/core';
         </span>
       </div>
 
-      <pds-nav-entry *navEntryDef="let entry" [entry]="entry" routerLinkActive="active">
-        <svg-icon *ngIf="entry.iconName" [name]="entry.iconName"></svg-icon>
-        <span>{{ entry.name }}</span>
-      </pds-nav-entry>
+      <ng-template #navEntryWithIcon let-entry>
+        <pds-nav-entry [entry]="entry" routerLinkActive="active">
+          <svg-icon *ngIf="entry.iconName" [name]="entry.iconName"></svg-icon>
+          <span>{{ entry.name }}</span>
+        </pds-nav-entry>
+      </ng-template>
+      <ng-container *navEntryDef="let entry">
+        <ng-container *ngTemplateOutlet="navEntryWithIcon; context: { $implicit: entry }"></ng-container>
+        <div class="nav-entry-children" *ngIf="entry.children?.length > 0">
+          <ng-container *ngFor="let childEntry of entry.children">
+            <ng-container *ngTemplateOutlet="navEntryWithIcon; context: { $implicit: childEntry }"></ng-container>
+          </ng-container>
+        </div>
+      </ng-container>
     </pds-nav>
     <router-outlet></router-outlet>
   `,
