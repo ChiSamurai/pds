@@ -22,7 +22,7 @@ import { SelectDefBase, SelectDefContext } from './select-def-base';
 
 export const SELECT_BOX_OVERLAY_POSITIONS = new InjectionToken<ConnectedPosition[]>('SELECT_BOX_OVERLAY_POSITIONS', {
   providedIn: 'root',
-  factory: () => [
+  factory: /* @dynamic */ () => [
     { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', panelClass: 'bottom' },
     { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', panelClass: 'top' },
   ],
@@ -85,7 +85,7 @@ export abstract class SelectBoxBase<T, C extends SelectDefContext<T> = SelectDef
 
   ngAfterContentInit() {
     if (isDevMode() && this.selectionModel == null)
-      console.warn(`${this.constructor.name} instantiated without a selection model inside it`);
+      console.warn(`${this.constructor.name} instantiated without a selection model as content child`);
     else this.selectionModel.changes.pipe(takeUntil(this.ngDestroys)).subscribe(this.onSelectionChange.bind(this));
   }
 }
