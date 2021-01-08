@@ -79,7 +79,8 @@ $font-family: "PT Sans", sans-serif !default;
       -moz-osx-font-smoothing: grayscale;
 
       @if $font-family == null {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+          "Helvetica Neue", sans-serif;
       } @else {
         font-family: var-or-default($font-family);
       }
@@ -94,35 +95,36 @@ $font-family: "PT Sans", sans-serif !default;
     * {
       box-sizing: border-box;
 
-      &:focus { outline: none }
+      &:focus {
+        outline: none;
+      }
     }
   }
 }
 
-/// Includes semantic text level style rules
-@mixin semantics {
-  @include blockquote;
+/// Includes all generally implemented html 5 elements (eg. content sectioning, text content or inline text semantics)
+@mixin html5 {
+  // content-sectioning
   @include headline;
+
+  // text-content
+  @include blockquote;
   @include paragraph;
-  @include label;
+  @include pre;
+
+  // inline text-semantics
   @include link;
-  @include display;
-}
 
-/// Includes utility classes, mainly typography variants and color accents
-@mixin class-semantics {
-  @include typography-variants($typography-classes);
-  @include text-color-accents($color-classes);
-}
+  // content-sectioning
+  @include headline-display;
+  @include label;
 
-/// Includes form related style rules
-@mixin forms {
+  // forms
   @at-root :root {
     --input-height: #{$input-height};
     --input-spacing: #{$input-spacing};
     --input-rounding: #{$input-rounding};
   }
-
   @include button {
     --spacing: var(--input-spacing);
     --rounding: var(--input-rounding);
@@ -131,4 +133,14 @@ $font-family: "PT Sans", sans-serif !default;
     --spacing: var(--input-spacing);
     --rounding: var(--input-rounding);
   }
+}
+
+/// Includes utility classes based on the value of `$color-classes`
+@mixin color-classes {
+  @include text-color-accents($color-classes);
+}
+
+/// Includes utility classes based on the value of `$typography-classes`
+@mixin typography-classes {
+  @include typography-variants($typography-classes);
 }

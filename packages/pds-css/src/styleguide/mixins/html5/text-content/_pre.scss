@@ -1,0 +1,18 @@
+@use "styleguide/spacings" as *;
+
+@use "../../spacing" as *;
+@use "../../rounding" as *;
+
+@mixin pre {
+  pre {
+    @include rounding(--rounding-sm);
+    @include outer-spacing(--space-4, y, $trim: true);
+    @include inner-spacing(--space-4, x);
+    @include inner-spacing(--space-3, y);
+
+    background: var(--pre, var(--gray));
+    font-size: var(--body-small-font-size, inherit);
+
+    @content;
+  }
+}

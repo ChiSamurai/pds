@@ -1,8 +1,6 @@
-@use "styleguide" as pds with (
-  $color-rgb: true
-);
+@use "styleguide" as pds;
 
 @include pds.core;
-@include pds.semantics;
-@include pds.class-semantics;
-@include pds.forms;
+@include pds.html5;
+@include pds.color-classes;
+@include pds.typography-classes;

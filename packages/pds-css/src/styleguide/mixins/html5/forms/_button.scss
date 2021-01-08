@@ -1,9 +1,9 @@
 @use "styleguide/spacings" as *;
 @use "util/mixins" as *;
 
-@use "../typography" as *;
-@use "../rounding" as *;
-@use "../spacing" as *;
+@use "../../typography" as *;
+@use "../../rounding" as *;
+@use "../../spacing" as *;
 
 $button-height: var(--input-height) !default;
 $button-rounding: $button-height !default;

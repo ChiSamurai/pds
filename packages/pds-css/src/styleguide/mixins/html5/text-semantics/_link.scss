@@ -1,0 +1,48 @@
+@use "util";
+
+@mixin link {
+  a {
+    @include link-base;
+  }
+}
+
+@mixin link-base {
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--link);
+  cursor: pointer;
+
+  &:link {
+    @include link-default;
+  }
+  &:visited {
+    @include link-visited;
+  }
+
+  @include util.hover-state {
+    @include link-hover;
+  }
+  @include util.focus-state {
+    @include link-focus;
+  }
+  @include util.active-state {
+    @include link-active;
+  }
+}
+
+@mixin link-default {
+  color: var(--link-hover, var(--link));
+}
+@mixin link-visited {
+  color: var(--link-visited, var(--link));
+}
+
+@mixin link-hover {
+  color: var(--link-hover, var(--link));
+}
+@mixin link-focus {
+  color: var(--link-focus, var(--link));
+}
+@mixin link-active {
+  color: var(--link-active, var(--link));
+}

@@ -1,13 +1,11 @@
 @use "colors/petrol" as *;
 @use "styleguide" as pds with (
-  $color-rgb: true,
-
   $color-primary-light: $turquoise,
   $color-primary: $petrol,
   $color-primary-dark: $fir-green
 );
 
 @include pds.core;
-@include pds.semantics;
-@include pds.class-semantics;
-@include pds.forms;
+@include pds.html5;
+@include pds.color-classes;
+@include pds.typography-classes;

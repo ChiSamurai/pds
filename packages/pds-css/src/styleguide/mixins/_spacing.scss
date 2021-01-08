@@ -87,7 +87,7 @@ $_default-trim: false !default;
     @include spacing-justify($anchors, $type, $pseudo-mode);
   }
   @if $trim {
-    @include spacing-trim($anchors, $type, $pseudo-mode);
+    @include spacing-trim($anchors, $type, $pseudo-mode, $trim);
   }
 }
 
@@ -108,19 +108,23 @@ $_default-trim: false !default;
   }
 }
 
-@mixin spacing-trim($anchors, $type, $pseudo-mode: $_default-pseudo-mode) {
+@mixin spacing-trim($anchors, $type, $pseudo-mode: $_default-pseudo-mode, $only: null) {
   @include assert-some($spacing-anchors, $anchors...);
   @include assert-some($spacing-pseudo-modes, $pseudo-mode);
   @include assert-some($spacing-types, $type);
 
   $is-vertical: some($anchors, vertical, y);
 
-  &:first-#{$pseudo-mode} {
-    $dir: if($is-vertical, top, left);
-    #{$type}-#{$dir}: 0;
+  @if type-of($only) != string or $only == start {
+    &:first-#{$pseudo-mode} {
+      $dir: if($is-vertical, top, left);
+      #{$type}-#{$dir}: 0;
+    }
   }
-  &:last-#{$pseudo-mode} {
-    $dir: if($is-vertical, bottom, right);
-    #{$type}-#{$dir}: 0;
+  @if type-of($only) != string or $only == end {
+    &:last-#{$pseudo-mode} {
+      $dir: if($is-vertical, bottom, right);
+      #{$type}-#{$dir}: 0;
+    }
   }
 }

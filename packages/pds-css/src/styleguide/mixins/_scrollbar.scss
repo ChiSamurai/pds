@@ -39,7 +39,7 @@ $scrollbar-thumb-color-hover: var(--gray-darkest) !default;
   }
 }
 
-@mixin custom-scrollbar {
+@mixin browser-scrollbar {
   @include webkit-only {
     @include webkit-scrollbar;
   }

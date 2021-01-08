@@ -59,12 +59,12 @@ $purplish: #582ab3;
 
 // Includes the foundational style as well as respective custom properties
 @include pds.core;
-// Includes semantic text level style (eg. blockquote, label, p, etc.)
-@include pds.semantics;
-// Includes a variety of utility classes (eg. .text-primary, text-*, body-small, tiny, etc.)
-@include pds.class-semantics;
-// Includes form related style (eg. buttons, inputs, etc.)
-@include pds.forms;
+// Includes html5 level element styling (eg. content-sectioning, text-content or inline-text-semantics, etc.)
+@include pds.html5;
+// Includes color utility classes (eg. text-primary, text-*, etc.)
+@include pds.color-classes;
+// Includes typography utility classes (eg. body-small, tiny, etc.)
+@include pds.typography-classes;
 ```
 
 ### Creating a Styleguide Theme

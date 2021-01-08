@@ -6,12 +6,14 @@
 
 @forward "mixins/scrollbar";
 
-@forward "mixins/forms/input";
-@forward "mixins/forms/button";
+@forward "mixins/html5/content-sectioning/headline";
 
-@forward "mixins/semantic/display";
-@forward "mixins/semantic/paragraph";
-@forward "mixins/semantic/link";
-@forward "mixins/semantic/label";
-@forward "mixins/semantic/headline";
-@forward "mixins/semantic/blockquote";
+@forward "mixins/html5/text-content/blockquote";
+@forward "mixins/html5/text-content/paragraph";
+@forward "mixins/html5/text-content/pre";
+
+@forward "mixins/html5/text-semantics/link";
+
+@forward "mixins/html5/forms/label";
+@forward "mixins/html5/forms/button";
+@forward "mixins/html5/forms/input";

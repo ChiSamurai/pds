@@ -1,14 +1,11 @@
 @use "colors/blue" as *;
 @use "styleguide" as pds with (
-  $color-rgb: true,
-
   $color-primary-light: $strong-blue,
   $color-primary: $blue,
   $color-primary-dark: $smokey-blue
 );
 
 @include pds.core;
-@include pds.semantics;
-@include pds.class-semantics;
-@include pds.forms;
-
+@include pds.html5;
+@include pds.color-classes;
+@include pds.typography-classes;

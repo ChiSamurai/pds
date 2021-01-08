@@ -2,8 +2,8 @@
 @use "styleguide/roundings" as *;
 @use "util/mixins" as *;
 
-@use "../rounding" as *;
-@use "../spacing" as *;
+@use "../../rounding" as *;
+@use "../../spacing" as *;
 
 $input-padding-x: $space-3 !default;
 $input-padding-y: $space-2 !default;

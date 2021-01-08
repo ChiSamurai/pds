@@ -1,0 +1,10 @@
+@use "styleguide/spacings" as *;
+
+@use "../../spacing" as *;
+
+@mixin paragraph {
+  p {
+    @include outer-spacing(--space-4, y, $trim: true);
+    @content;
+  }
+}
