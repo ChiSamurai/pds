@@ -15,7 +15,11 @@ import { Component, ViewEncapsulation } from '@angular/core';
       </div>
 
       <ng-template #navEntryWithIcon let-entry>
-        <pds-nav-entry [entry]="entry" routerLinkActive="active">
+        <pds-nav-entry
+          [entry]="entry"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: entry.linkUrl === '/' }"
+        >
           <svg-icon *ngIf="entry.iconName" [name]="entry.iconName"></svg-icon>
           <span>{{ entry.name }}</span>
         </pds-nav-entry>

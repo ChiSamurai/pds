@@ -8,7 +8,7 @@ import { RouterLinkOrHrefModule } from '@vitagroup/common';
 import { CardModule, SelectBoxModule, SelectListModule, TagModule } from '@vitagroup/pds-components';
 import { AppIntroPageComponent } from './app-intro-page.component';
 
-export const APP_SEARCH_PAGE_ROUTES: Routes = [
+export const APP_INTRO_PAGE_ROUTES: Routes = [
   {
     path: '',
     component: AppIntroPageComponent,
@@ -23,7 +23,7 @@ export const APP_SEARCH_PAGE_ROUTES: Routes = [
   declarations: [AppIntroPageComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(APP_SEARCH_PAGE_ROUTES),
+    RouterModule.forChild(APP_INTRO_PAGE_ROUTES),
     PageLayoutModule,
     FlexLayoutModule,
     SelectBoxModule,
