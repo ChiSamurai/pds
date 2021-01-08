@@ -3,15 +3,26 @@ import { Component, ViewEncapsulation } from '@angular/core';
 @Component({
   selector: 'pds-card-header',
   encapsulation: ViewEncapsulation.None,
-  template: `<ng-content></ng-content>`
+  template: `
+    <ng-content></ng-content>
+  `,
 })
-export class CardHeader {
-}
+export class CardHeader {}
+
+@Component({
+  selector: 'pds-card-content',
+  encapsulation: ViewEncapsulation.None,
+  template: `
+    <ng-content></ng-content>
+  `,
+})
+export class CardContent {}
 
 @Component({
   selector: 'pds-card-footer',
   encapsulation: ViewEncapsulation.None,
-  template: `<ng-content></ng-content>`
+  template: `
+    <ng-content></ng-content>
+  `,
 })
-export class CardFooter {
-}
+export class CardFooter {}

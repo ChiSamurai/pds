@@ -1,28 +1,34 @@
 import { Component, ContentChild, Input, ViewEncapsulation } from '@angular/core';
-import { CardFooter, CardHeader } from './card-content';
+import { CardContent, CardFooter, CardHeader } from './card-content';
 
 @Component({
   selector: 'pds-card',
-  styleUrls: [ './card.scss' ],
+  styleUrls: ['./card.scss'],
   encapsulation: ViewEncapsulation.None,
   template: `
     <ng-container *ngIf="header != null; else viewHeader">
-      <ng-content select="card-header"></ng-content>
+      <ng-content select="pds-card-header"></ng-content>
     </ng-container>
     <ng-template #viewHeader>
       <pds-card-header *ngIf="label != null">
-        <label *ngIf="label != null;">{{ label }}</label>
+        <label *ngIf="label != null">{{ label }}</label>
       </pds-card-header>
     </ng-template>
+    <ng-content select="pds-card-content"></ng-content>
     <ng-content></ng-content>
-    <ng-content select="card-footer"></ng-content>`
+    <ng-content select="pds-card-footer"></ng-content>
+  `,
 })
 export class Card {
-
   @ContentChild(CardHeader, { static: false })
   private _dynamicHeader: CardHeader | null;
   @ContentChild(CardHeader, { static: true })
   private _staticHeader: CardHeader | null;
+
+  @ContentChild(CardContent, { static: false })
+  private _dynamicContent: CardContent | null;
+  @ContentChild(CardContent, { static: true })
+  private _staticContent: CardContent | null;
 
   @ContentChild(CardFooter, { static: false })
   private _dynamicFooter: CardFooter | null;
@@ -31,13 +37,13 @@ export class Card {
 
   @Input() label: string;
 
-  /** Gets the actively projected {@link CardHeader} instance. Any dynamic {@link ContentChild} is preferred over a static one */
   get header(): CardHeader | null {
     return this._dynamicHeader || this._staticHeader;
   }
-  /** Gets the actively projected {@link CardFooter} instance. Any dynamic {@link ContentChild} is preferred over a static one */
-  get footer(): CardHeader | null {
+  get content(): CardContent | null {
+    return this._dynamicContent || this._staticContent;
+  }
+  get footer(): CardFooter | null {
     return this._dynamicFooter || this._staticFooter;
   }
-
 }

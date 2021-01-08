@@ -6,7 +6,7 @@ $static-entry-divider: 1px solid;
 pds-nav {
   @include util.custom-color-properties(
     (
-      'pds-main-menu': (
+      'pds-nav': (
         'foreground': --foreground,
         'background': --gray-lighter,
         'primary': --primary,
@@ -17,8 +17,8 @@ pds-nav {
 
   display: flex;
   flex-direction: column;
-  background: var(--pds-main-menu-background);
-  color: var(--pds-main-menu-foreground);
+  background: var(--pds-nav-background);
+  color: var(--pds-nav-foreground);
   height: 100%;
 
   > nav-entry-outlet {
@@ -32,7 +32,7 @@ pds-nav {
 
     &:last-of-type {
       pds-nav-entry {
-        border-top: $static-entry-divider var(--pds-main-menu-secondary);
+        border-top: $static-entry-divider var(--pds-nav-secondary);
       }
     }
   }

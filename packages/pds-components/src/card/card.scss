@@ -1,36 +1,39 @@
 @use "styleguide" as pds;
 
-$card-padding-x: pds.$space-3 !default;
-$card-padding-y: pds.$space-3 !default;
+$card-padding-x: var(--space-5) !default;
+$card-padding-y: var(--space-5) !default;
 
 pds-card {
   @include pds.elevation(pds.$raised-elevation);
   @include pds.rounding(pds.$rounding-lg);
-  @include pds.inner-spacing($card-padding-x, x);
-  @include pds.inner-spacing($card-padding-y, y);
 
   display: block;
   overflow: hidden;
-  background: var(--gray-lightest);
-
-  pds-card-header > label {
-    display: inline-flex;
-    align-items: center;
-
-    > svg-icon {
-      margin-right: pds.$space-3;
-    }
-  }
+  background: var(--gray-light);
 
   pds-card-header {
-    @include pds.inner-spacing($card-padding-y, bottom);
+    @include pds.inner-spacing($card-padding-x, x);
+    @include pds.inner-spacing($card-padding-y, y);
 
     display: flex;
     justify-content: space-between;
   }
+  pds-card-content {
+    @include pds.inner-spacing($card-padding-x, x);
+    @include pds.inner-spacing($card-padding-y, bottom);
+
+    display: block;
+
+    &:first-child {
+      @include pds.inner-spacing($card-padding-y, top);
+    }
+  }
   pds-card-footer {
-    @include pds.inner-spacing($card-padding-y, top);
+    @include pds.inner-spacing($card-padding-x, x);
+    @include pds.inner-spacing($card-padding-y, y);
 
     display: flex;
+    justify-content: flex-end;
+    background: var(--gray-lighter);
   }
 }

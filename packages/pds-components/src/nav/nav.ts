@@ -23,9 +23,11 @@ import { NavBase, NavigationEntryContainer } from '@vitagroup/cdk';
     </ng-container>
 
     <ng-container *ngIf="staticState.asObservable() | async as staticEntries">
-      <nav-entry-outlet [entries]="staticEntries" [context]="{ static: true }">
+      <nav-entry-outlet class="static" [entries]="staticEntries" [context]="{ static: true }">
         <ng-container *navEntryDef="let entry">
-          <ng-container *ngTemplateOutlet="fallbackEntryTemplate; context: { $implicit: entry }"></ng-container>
+          <ng-container
+            *templateOutlet="fallbackEntryTemplate; context: { $implicit: entry }; ngClass: 'static'"
+          ></ng-container>
         </ng-container>
       </nav-entry-outlet>
     </ng-container>

@@ -18,8 +18,8 @@ pds-nav-entry {
   border-left: $active-indicator-width solid transparent;
 
   @include util.active-state {
-    background: var(--pds-main-menu-secondary);
-    border-left: $active-indicator-width solid var(--pds-main-menu-primary);
+    background: var(--pds-nav-secondary);
+    border-left: $active-indicator-width solid var(--pds-nav-primary);
     font-weight: bold;
   }
 }
