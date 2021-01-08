@@ -11,8 +11,9 @@ page-layout {
     overflow-y: scroll;
     overflow-x: hidden;
 
+    page-content,
     .page-content {
-      flex: 1 0 auto;
+      flex: 1 0 0;
     }
     page-footer {
       flex: 0 1 auto;
