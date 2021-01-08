@@ -16,6 +16,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 
+/* eslint-disable @angular-eslint/no-conflicting-lifecycle */
 @Directive({
   selector: '[templateOutlet]',
   exportAs: 'templateOutlet',

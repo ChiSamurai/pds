@@ -8,11 +8,16 @@ import { getStringFormat, traverse } from '../utils';
 export type BrowserTitleFallbackResolver = (route: ActivatedRouteSnapshot, title: any) => any;
 
 export const BROWSER_TITLE_FORMAT = new InjectionToken<string>('BROWSER_TITLE_FORMAT', {
-  providedIn: 'root', factory: /* @dynamic */ () => 'TTT'
+  providedIn: 'root',
+  factory: /* @dynamic */ () => 'TTT',
 });
-export const BROWSER_TITLE_FALLBACK_RESOLVER = new InjectionToken<BrowserTitleFallbackResolver>('BROWSER_TITLE_FALLBACK_RESOLVER', {
-  providedIn: 'root', factory: /* @dynamic */ () => (snapshot, title) => snapshot.url[ 0 ]?.path
-});
+export const BROWSER_TITLE_FALLBACK_RESOLVER = new InjectionToken<BrowserTitleFallbackResolver>(
+  'BROWSER_TITLE_FALLBACK_RESOLVER',
+  {
+    providedIn: 'root',
+    factory: /* @dynamic */ () => (snapshot, title) => snapshot.url[0]?.path,
+  }
+);
 
 @Injectable()
 export class BrowserTitle {
@@ -20,7 +25,8 @@ export class BrowserTitle {
 
   constructor(
     protected title: Title,
-    router: Router, activatedRoute: ActivatedRoute,
+    router: Router,
+    activatedRoute: ActivatedRoute,
     @Inject(BROWSER_TITLE_FALLBACK_RESOLVER)
     protected resolveFallback: /* @dynamic */ BrowserTitleFallbackResolver,
     @Inject(BROWSER_TITLE_FORMAT)
@@ -28,8 +34,12 @@ export class BrowserTitle {
   ) {
     if (format != null) this.format = format;
 
-    router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
-      const lastChild = traverse(activatedRoute.snapshot, s => s.firstChild, s => s.firstChild == null);
+    router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe(() => {
+      const lastChild = traverse(
+        activatedRoute.snapshot,
+        (s) => s.firstChild,
+        (s) => s.firstChild == null
+      );
       this.onNavigationEnd(lastChild);
     });
   }
@@ -38,14 +48,11 @@ export class BrowserTitle {
     const { data } = snapshot;
     let title = data?.browserTitle || data?.windowTitle || data?.title;
 
-    if (typeof title !== 'string' && typeof title !== 'function')
-      title = this.resolveFallback(snapshot, title);
+    if (typeof title !== 'string' && typeof title !== 'function') title = this.resolveFallback(snapshot, title);
 
-    if (typeof title === 'function')
-      title = title(data);
+    if (typeof title === 'function') title = title(data);
 
-    if (title != null)
-      this.title.setTitle(getStringFormat(title, this.format, { TTT: value => value }));
+    if (title != null) this.title.setTitle(getStringFormat(title, this.format, { TTT: (value) => value }));
     else this.reset();
   }
 
@@ -58,11 +65,12 @@ export class BrowserTitle {
 export class BrowserTitleModule {
   static forRoot(): ModuleWithProviders<BrowserTitleModule> {
     return {
-      ngModule: BrowserTitleModule, providers: [ BrowserTitle ]
+      ngModule: BrowserTitleModule,
+      providers: [BrowserTitle],
     };
   }
 
   // todo(@janunld): refactor this to be called in an APP_BOOTSTRAP_LISTENER!
-  constructor(browserTitle: BrowserTitle) {
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars
+  constructor(browserTitle: BrowserTitle) {}
 }

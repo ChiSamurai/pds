@@ -13,6 +13,10 @@ export class Sort<T = any> {
     this._defaultOrder = defaultOrder;
   }
 
+  static noop(): Sort {
+    return new Sort(() => 0, null);
+  }
+
   setComparator(fn: ComparatorFn<T>, defaultOrder: SortOrder): void {
     if (fn != null) {
       this._comparator = fn;
@@ -35,24 +39,6 @@ export class Sort<T = any> {
   }
 
   protected getSortComparator(): SortComparatorFn<T> {
-    return (a: T, b: T, order: SortOrder) =>
-      this._comparator(a, b) * (this._defaultOrder !== order ? -1 : 1);
-  }
-
-  static noop(): Sort<any> {
-    return new Sort(() => 0, null);
-  }
-  /** @experimental not tested at all */
-  static compose<T>(...sorts: Sort<T>[]): Sort<T> {
-    return sorts.length === 0
-      ? Sort.noop()
-      : sorts.reduce((prev, next) => {
-          const prevSort = prev.getSortComparator();
-          const nextSort = next.getComparator();
-          return new Sort(
-            (a, b) => prevSort(a, b, prev.getDefaultOrder()) || nextSort(a, b),
-            next.getDefaultOrder()
-          );
-        }, Sort.noop());
+    return (a: T, b: T, order: SortOrder) => this._comparator(a, b) * (this._defaultOrder !== order ? -1 : 1);
   }
 }

@@ -1,15 +1,8 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { ElementLoadingState } from './element-loading-state';
-import {
-  LOADING_INDICATOR_COMPONENT,
-  LoadingIndicatorOutlet,
-} from './loading-indicator';
-import {
-  LOADING_OVERLAY_STRATEGY,
-  LoadingOverlay,
-  LoadingOverlayStrategy,
-} from './loading-overlay';
+import { LOADING_INDICATOR_COMPONENT, LoadingIndicatorOutlet } from './loading-indicator';
+import { LOADING_OVERLAY_STRATEGY, LoadingOverlay, LoadingOverlayStrategy } from './loading-overlay';
 
 const declarations = [LoadingIndicatorOutlet, ElementLoadingState];
 
@@ -32,14 +25,10 @@ export interface LoadingStateModuleConfig {
 @NgModule({
   declarations,
   exports: declarations,
-  imports: [
-    OverlayModule
-  ]
+  imports: [OverlayModule],
 })
 export class LoadingStateModule {
-  static forRoot(
-    config: LoadingStateModuleConfig
-  ): ModuleWithProviders<LoadingStateModule> {
+  static forRoot(config: LoadingStateModuleConfig): ModuleWithProviders<LoadingStateModule> {
     return {
       ngModule: LoadingStateModule,
       providers: [
@@ -49,6 +38,6 @@ export class LoadingStateModule {
     };
   }
 
-  constructor(overlay: LoadingOverlay) {
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars
+  constructor(overlay: LoadingOverlay) {}
 }

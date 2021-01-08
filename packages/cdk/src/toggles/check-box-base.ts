@@ -2,6 +2,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Directive, Input } from '@angular/core';
 import { ToggleBase } from './toggle-base';
 
+/* eslint-disable max-len */
 export const CHECK_BOX_TEMPLATE = `
   <ng-template #labelTemplate>
     <ng-container *ngIf="label != null; else projectLabelContent">
@@ -30,6 +31,7 @@ export const CHECK_BOX_TEMPLATE = `
     <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
   </ng-container>
 `;
+/* eslint-enable max-len */
 
 @Directive()
 export abstract class CheckBoxBase extends ToggleBase {

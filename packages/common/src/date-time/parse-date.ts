@@ -6,8 +6,7 @@
  * @experimental
  */
 export function parseDate(str: string, format = 'YYYY-MM-DD HH:mm:ss.SSS', base: Date = new Date()): Date {
-  // tslint:disable-next-line:one-variable-per-declaration
-  let delimiter, formatTokens, strTokens, month, date, year, hours, minutes, seconds, ms;
+  let delimiter, month, date, year, hours, minutes, seconds, ms;
   const pm = /pm/i.test(str);
   // assign base date values if available
   if (base != null) {
@@ -22,8 +21,8 @@ export function parseDate(str: string, format = 'YYYY-MM-DD HH:mm:ss.SSS', base:
   // find custom delimiter by excluding relevant date property values
   delimiter = /[^YMDHmsS]/g.exec(format).filter((d, i, m) => m.indexOf(d) === i);
   delimiter = new RegExp(`[${delimiter.join()}]`, 'g');
-  formatTokens = format.split(delimiter);
-  strTokens = str.split(delimiter);
+  const formatTokens = format.split(delimiter);
+  const strTokens = str.split(delimiter);
   for (let i = 0, len = strTokens.length; i < len; i++) {
     // assigning values based on the format array
     if (/Y/.test(formatTokens[i])) year = parseInt(strTokens[i], 10);

@@ -34,6 +34,7 @@ export abstract class ElementState<T = any> {
     if (this.configureEventListener != null) this.configureEventListener();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   protected configureEventListener(): void {}
 
   set(): void {

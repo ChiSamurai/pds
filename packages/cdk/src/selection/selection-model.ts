@@ -21,9 +21,10 @@ export class SelectionModel<T = any> extends Observable<T[]> {
   private _changes = new Subject<SelectionChange<T>>();
 
   protected value: T[];
-  protected readonly trackBy: PrimitiveTrackByFn<T> = (value) => value;
 
   readonly changes: Observable<SelectionChange<T>> = this._changes.asObservable();
+
+  protected readonly trackBy: PrimitiveTrackByFn<T> = (value) => value;
 
   get isEmpty(): boolean {
     return this.size === 0;
@@ -91,7 +92,7 @@ export class SelectionModel<T = any> extends Observable<T[]> {
 
   private _isOptionsObject(obj: any): obj is SelectionOptions {
     // todo: keep up to date with the SelectionOptions interface!
-    return obj != null && obj.hasOwnProperty('emitEvent');
+    return obj != null && Object.keys(obj).every((key) => ['emitEvent'].includes(key));
   }
 }
 

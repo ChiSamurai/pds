@@ -10,6 +10,13 @@ import { SortParamParser } from './sort-param-parser';
   exportAs: 'sortGroup',
   selector: '[sortGroup]',
   providers: [SortModel],
+  inputs: [
+    '_initValue: sortGroup',
+    'emitInitChange: sortGroupEmitInitChange',
+    'allowsMultiple: sortGroupAllowsMultiple',
+    'preferredOrder: sortGroupPreferredOrder',
+  ],
+  outputs: ['changes: sortGroupChanges'],
 })
 export class SortGroup implements OnInit, OnDestroy {
   private _emitInitEvent = false;
@@ -17,13 +24,13 @@ export class SortGroup implements OnInit, OnDestroy {
   protected readonly ngDestroys = new Subject<void>();
   protected initValues: Array<SortState | string>;
 
-  @Input('sortGroup')
+  @Input()
   private set _initValue(value: Array<SortState | string> | SortState | string) {
     if (Array.isArray(value)) this.initValues = value;
     else if (value != null) this.initValues = [value];
   }
 
-  @Input('sortGroupEmitInitChange')
+  @Input()
   set emitInitChange(value: boolean) {
     this._emitInitEvent = coerceBooleanProperty(value);
   }
@@ -32,7 +39,7 @@ export class SortGroup implements OnInit, OnDestroy {
     return this._emitInitEvent;
   }
 
-  @Input('sortGroupAllowsMultiple')
+  @Input()
   set allowsMultiple(value: boolean) {
     this.model.allowsMultiple = coerceBooleanProperty(value);
   }
@@ -41,9 +48,9 @@ export class SortGroup implements OnInit, OnDestroy {
     return this.model.allowsMultiple;
   }
 
-  @Input('sortGroupPreferredOrder') preferredOrder: SortOrder = 'ascending';
+  @Input() preferredOrder: SortOrder = 'ascending';
 
-  @Output('sortGroupChanges') readonly changes = new EventEmitter<SortModelChange>();
+  @Output() readonly changes = new EventEmitter<SortModelChange>();
 
   constructor(protected paramParser: SortParamParser, readonly model: SortModel) {
     model.changes.pipe(takeUntil(this.ngDestroys)).subscribe(this.changes);
@@ -52,10 +59,7 @@ export class SortGroup implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.initValues != null) {
       for (const stateOrParam of this.initValues) {
-        const state =
-          typeof stateOrParam === 'string'
-            ? this.paramParser.parseParam(stateOrParam)
-            : stateOrParam;
+        const state = typeof stateOrParam === 'string' ? this.paramParser.parseParam(stateOrParam) : stateOrParam;
         this.model.set(state.key, state.order || this.preferredOrder, {
           emitChange: this._emitInitEvent,
         });

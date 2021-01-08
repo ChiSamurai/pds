@@ -1,4 +1,3 @@
-
 /** Selector function to determine the value of a group key */
 export type GroupBySelectorFn<T> = (obj: T) => any;
 /**
@@ -20,19 +19,22 @@ export type GroupByResult<T, K extends string> = [
  * @param iterable The {@link Iterable} values that should be grouped by their respective keys
  * @param groupBySelectorFn The selector function that should resolve the desired group key values
  */
-export function groupBy<T, K extends string = string>(iterable: Iterable<T>, groupBySelectorFn: GroupBySelectorFn<T>): GroupByResult<T, K>  {
+export function groupBy<T, K extends string = string>(
+  iterable: Iterable<T>,
+  groupBySelectorFn: GroupBySelectorFn<T>
+): GroupByResult<T, K> {
   const foreign: T[] = [];
   const groups = Array.from(iterable).reduce<Record<K, T[]>>((acc, obj) => {
     const groupKey = groupBySelectorFn(obj);
-    const group = acc[ groupKey ] || [];
+    const group = acc[groupKey] || [];
 
     if (!groupKey) {
       foreign.push(obj);
       return acc;
     } else {
-      return { ...acc, [ groupKey ]: [ ...group, obj ] };
+      return { ...acc, [groupKey]: [...group, obj] };
     }
   }, {} as any);
 
-  return [ groups, foreign ];
+  return [groups, foreign];
 }

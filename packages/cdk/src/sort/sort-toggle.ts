@@ -5,12 +5,16 @@ import { SortModel } from './sort-model';
 import { SortOrder } from './sort-order';
 import { SortGroup } from './sort-group';
 
-@Directive({ selector: '[sort]' })
+@Directive({
+  selector: '[sort]',
+  inputs: ['key: sort', 'canUnset: sortCanUnset', 'preferredOrder: sortPreferredOrder'],
+  outputs: ['changes: sortChanges'],
+})
 export class SortToggle {
   private _key: string;
   private _canUnset = false;
 
-  @Input('sort')
+  @Input()
   set key(value: string) {
     this._key = value;
   }
@@ -18,7 +22,7 @@ export class SortToggle {
     return this._key || this.columnDef.name;
   }
 
-  @Input('sortCanUnset')
+  @Input()
   set canUnset(value: boolean) {
     this._canUnset = coerceBooleanProperty(value);
   }
@@ -26,13 +30,13 @@ export class SortToggle {
     return this._canUnset;
   }
 
-  @Input('sortPreferredOrder') preferredOrder: SortOrder = 'ascending';
+  @Input() preferredOrder: SortOrder = 'ascending';
 
   get order(): SortOrder | null {
     return this.sortModel.getOrder(this.key);
   }
 
-  @Output('sortChanges')
+  @Output()
   readonly changes = new EventEmitter<SortOrder | null>();
 
   constructor(
@@ -52,6 +56,7 @@ export class SortToggle {
     this.changes.emit(null);
   }
 
+  // todo(@janunld): use Renderer2 + ElementRef instead of @HostListener
   @HostListener('click') toggle(): void {
     if (!this.sortModel.isSet(this.key)) this.set(this.preferredOrder);
     else if (this.sortModel.isSet(this.key, this.preferredOrder))
