@@ -1,6 +1,5 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, Inject, InjectionToken, Input } from '@angular/core';
-import { SELECTION_MODEL } from './selection-control';
+import { Directive, InjectionToken, Input } from '@angular/core';
 import { DeselectOptions, SelectionModel, SelectionOptions, SelectOptions, ToggleOptions } from './selection-model';
 
 export const SELECTION_VALUE = new InjectionToken<SelectionValue>('adk:SELECTION_VALUE');
@@ -9,14 +8,15 @@ export const SELECTION_VALUE = new InjectionToken<SelectionValue>('adk:SELECTION
   exportAs: 'selectionValue',
   selector: '[selectionValue]',
   providers: [{ provide: SELECTION_VALUE, useExisting: SelectionValue }],
+  inputs: ['value: selectionValue', 'options: selectionOptions', 'disabled: selectionDisabled'],
 })
 export class SelectionValue<T = any> {
-  private _isDisabled: boolean = false;
+  private _isDisabled = false;
 
-  @Input('selectionValue') value: T;
-  @Input('selectionOptions') options: SelectionOptions;
+  @Input() value: T;
+  @Input() options: SelectionOptions;
 
-  @Input('selectionDisabled')
+  @Input()
   set isDisabled(value: boolean) {
     this._isDisabled = coerceBooleanProperty(value);
   }

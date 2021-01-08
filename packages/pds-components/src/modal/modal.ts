@@ -22,6 +22,7 @@ import { ModalHeader } from './modal-header';
   selector: 'pds-modal',
   styleUrls: ['./modal.scss'],
   encapsulation: ViewEncapsulation.None,
+  /* eslint-disable max-len */
   template: `
     <ng-template #ngContentTemplate>
       <ng-content></ng-content>
@@ -46,6 +47,7 @@ import { ModalHeader } from './modal-header';
       <ng-content select="pds-modal-footer"></ng-content>
     </ng-container>
   `,
+  /* eslint-enable max-len */
 })
 export class Modal implements AfterContentChecked {
   @ContentChild(ModalHeader, { static: true }) private _staticHeader: ModalHeader;
@@ -55,8 +57,8 @@ export class Modal implements AfterContentChecked {
 
   @ViewChild('closeTemplate') private _closeTemplateRef: TemplateRef<any>;
 
-  private _fullscreen: boolean = false;
-  private _closeable: boolean = false;
+  private _fullscreen = false;
+  private _closeable = false;
 
   /** Gets the {@link ModalHeader} component instance, preferring any dynamically added references */
   get header(): ModalHeader | null {

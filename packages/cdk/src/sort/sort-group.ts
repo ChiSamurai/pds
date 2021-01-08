@@ -12,7 +12,7 @@ import { SortParamParser } from './sort-param-parser';
   providers: [SortModel],
 })
 export class SortGroup implements OnInit, OnDestroy {
-  private _emitInitEvent: boolean = false;
+  private _emitInitEvent = false;
 
   protected readonly ngDestroys = new Subject<void>();
   protected initValues: Array<SortState | string>;

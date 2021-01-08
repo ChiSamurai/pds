@@ -1,4 +1,4 @@
-import { NgModule, Pipe, PipeTransform } from "@angular/core";
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { normalizeUrl } from '../../utils';
 
 @Pipe({ name: 'normalizeUrl' })

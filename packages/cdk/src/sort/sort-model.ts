@@ -28,7 +28,7 @@ export class SortModel {
 
   readonly changes = new EventEmitter<SortModelChange>();
 
-  allowsMultiple: boolean = false;
+  allowsMultiple = false;
 
   get value(): SortState[] {
     return this.activeStates.snapshot;

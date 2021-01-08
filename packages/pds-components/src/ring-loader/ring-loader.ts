@@ -10,7 +10,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 		</svg>`
 })
 export class RingLoader {
-  @Input() width: number = 5;
+  @Input() width = 5;
   @Input() size: string | number = 64;
 
   get radius(): number {

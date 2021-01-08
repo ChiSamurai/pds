@@ -14,11 +14,11 @@ import { SELECTION_VALUE, SelectionValue } from './selection-value';
 
 @Directive()
 export abstract class SelectionTrigger<T = any> implements OnInit, OnChanges, OnDestroy {
-  private _isDisabled: boolean = false;
+  private _isDisabled = false;
   private _detachTriggerEventListener: () => void;
   private _event: Event | null;
 
-  triggerEvent: string = 'click';
+  triggerEvent = 'click';
   options: SelectionOptions | null;
 
   set isDisabled(value: boolean) {

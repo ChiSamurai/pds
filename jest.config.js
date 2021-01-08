@@ -5,5 +5,6 @@ module.exports = {
     '<rootDir>/packages/cdk',
     '<rootDir>/packages/pds-components',
     '<rootDir>/apps/pds-docs',
+    '<rootDir>/packages/eslint-test',
   ],
 };

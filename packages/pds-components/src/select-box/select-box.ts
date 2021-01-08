@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'pds-select-box',
   styleUrls: ['select-box.scss'],
   encapsulation: ViewEncapsulation.None,
+  /* eslint-disable max-len */
   template: `
     <ng-template #fallbackTemplate let-value let-last="last">
       <span>{{ value }}{{ !last ? ', ' : '' }}</span>
@@ -47,6 +48,7 @@ import { takeUntil } from 'rxjs/operators';
     </svg-icon>
     <ng-content select="[selectToggleSuffix]"></ng-content>
   `,
+  /* eslint-enable max-len */
 })
 export class SelectBox<T = any> extends SelectBoxBase<T> implements OnInit {
   @ViewChild('selectOptionsTemplate', { static: true })

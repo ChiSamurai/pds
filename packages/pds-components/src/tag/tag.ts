@@ -1,10 +1,11 @@
-import { Component, ViewEncapsulation } from "@angular/core";
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'pds-tag',
-  styleUrls: [ './tag.scss' ],
+  styleUrls: ['./tag.scss'],
   encapsulation: ViewEncapsulation.None,
-  template: `<ng-content></ng-content>`
+  template: `
+    <ng-content></ng-content>
+  `,
 })
-export class Tag {
-}
+export class Tag {}

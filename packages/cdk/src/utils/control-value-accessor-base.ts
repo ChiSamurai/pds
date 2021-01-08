@@ -1,7 +1,7 @@
 import { ControlValueAccessor } from '@angular/forms';
 
 export abstract class ControlValueAccessorBase<T = any> implements ControlValueAccessor {
-  private _isDisabled: boolean = false;
+  private _isDisabled = false;
   private _emitChange: (value: any) => void;
   private _emitTouch: () => void;
 

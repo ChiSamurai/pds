@@ -7,7 +7,7 @@ import {
   StringInterpolator
 } from './string-interpolator';
 
-@Pipe({ name: "interpolate" })
+@Pipe({ name: 'interpolate' })
 export class StringInterpolatePipe implements PipeTransform {
 
   constructor(

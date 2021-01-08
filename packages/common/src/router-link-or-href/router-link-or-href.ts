@@ -13,7 +13,7 @@ export class RouterLinkOrHref extends RouterLink {
   private _href: string;
 
   // tslint:disable-next-line:no-inferrable-types
-  @Input() target: string = '_blank';
+  @Input() target = '_blank';
 
   @Input() set routerLinkOrHref(value: any[] | string) {
     if (typeof value === 'string' && isAbsoluteURL(value)) {
