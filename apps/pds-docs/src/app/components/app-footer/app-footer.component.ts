@@ -6,11 +6,16 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styleUrls: ['app-footer.component.scss'],
   template: `
     <div class="app-legal-links">
-      <a>Impressum</a>
-      <a>Datenschutz</a>
+      <a routerLink="/imprint">Imprint</a>
+      <a routerLink="/privacy">Privacy</a>
+    </div>
+    <div class="app-love-indicator">
+      made with
+      <span>❤</span>
+      in Germany
     </div>
     <div class="app-legal-claims small">
-      <span>vitagroup AG &copy; 2020</span>
+      <span>&copy; vitagroup AG 2020-2021</span>
       &mdash;
       <span>
         licensed under

@@ -1,16 +1,48 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'pds-app-overview-page',
+  selector: 'pds-app-intro-page',
   styleUrls: ['app-intro-page.component.scss'],
   templateUrl: 'app-intro-page.component.html',
   encapsulation: ViewEncapsulation.None,
 })
 export class AppIntroPageComponent {
-  readonly packageInfos = [
-    { name: 'PDS Components', description: 'Collection of reusable components integrating the PDS CSS styleguide' },
-    { name: 'PDS CSS', description: 'Generic (S)CSS layer for simplified styleguide adoption' },
-    { name: 'Common', description: 'Collection of commonly as well as partially experimental features' },
-    { name: 'CDK', description: 'Component Development Kit also featuring the components' },
+  readonly guideShortcuts = [
+    {
+      headline: 'Getting Started',
+      linkUrl: '/guides/getting-started',
+      linkLabel: `Let's go`,
+      description: 'Taking first steps with the PDS ecosystem. Mainly boilerplating',
+    },
+    {
+      headline: 'Hello World',
+      linkUrl: '/guides/hello-world',
+      linkLabel: 'Inspect',
+      description: 'Exemplary application, integrating some of the main PDS principles.',
+    },
+    {
+      headline: 'Page Layout',
+      linkUrl: '/guides/page-layout',
+      linkLabel: 'Read',
+      description: 'A brief summary of the page layout features and possibilities.',
+    },
+    {
+      headline: 'Navigation',
+      linkUrl: '/guides/layout',
+      linkLabel: 'Read',
+      description: 'A brief summary of the navigation features and possibilities.',
+    },
+    {
+      headline: 'SVG Icons',
+      linkUrl: '/guides/svg-icons',
+      linkLabel: 'Read',
+      description: 'A brief summary of the svg-icon features and possibilities.',
+    },
+    {
+      headline: 'SCSS',
+      linkUrl: '/guides/scss',
+      linkLabel: 'Read',
+      description: 'A brief summary of the pds-css features and possibilities.',
+    },
   ];
 }

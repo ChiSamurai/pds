@@ -5,28 +5,23 @@ export const APP_NAV_ENTRY_PROVIDER: Provider = {
   provide: NAVIGATION_ENTRIES,
   useValue: [
     {
-      name: 'Getting Started',
-      children: [
-        {
-          name: 'Introduction',
-          linkUrl: '/',
-        },
-        {
-          name: 'Installation',
-          linkUrl: '/install',
-        },
-      ] as NavigationEntry[],
+      name: $localize`Introduction`,
+      linkUrl: '/',
     },
     {
-      name: 'Components',
+      name: $localize`Guides`,
+      linkUrl: '/guides',
+    },
+    {
+      name: $localize`Components`,
       linkUrl: '/pds-components',
     },
     {
-      name: 'CSS',
+      name: $localize`CSS`,
       linkUrl: '/pds-css',
     },
     {
-      name: 'CDK',
+      name: $localize`CDK`,
       linkUrl: '/cdk',
     },
   ] as NavigationEntry[],

@@ -1,12 +1,48 @@
 <page-layout>
-  <page-content fxLayout="row wrap">
-    <section fxFlex="100">
-      <h4>Guides</h4>
-      <ol>
-        <li><a>Getting Started</a></li>
-        <li><a>Installation</a></li>
-        <li>...</li>
-      </ol>
+  <page-content fxLayout="row wrap" fxLayoutGap="42px grid">
+
+    <section>
+      <h1>TLDR;</h1>
+      <p>
+        The main goal of the <strong>Product Design System</strong> is to collect and generalize various user interface
+        behaviors and components, used within <a href="https://vitagroup.ag">vitagroup</a> frontend applications. The
+        core technology used to build the ecosystem is <a href="https://angular.io">Angular</a>.
+      </p>
     </section>
+
+    <section fxFlex="100">
+      <h1>Guides</h1>
+      <div fxLayout="row wrap" fxLayoutGap="32px grid">
+        <ng-container *ngFor="let guide of guideShortcuts">
+          <div fxFlex="33.33">
+            <pds-card>
+              <pds-card-header>
+                <h5>{{ guide.headline }}</h5>
+              </pds-card-header>
+              <pds-card-content>
+                <p>{{ guide.description }}</p>
+              </pds-card-content>
+              <pds-card-footer>
+                <button [routerLinkOrHref]="guide.linkUrl">{{ guide.linkLabel }}</button>
+              </pds-card-footer>
+            </pds-card>
+          </div>
+        </ng-container>
+      </div>
+    </section>
+
+    <section fxFlex="50">
+      <h2>Feedback</h2>
+      <p>
+        You are very welcome to throw your feedback at us at any time, using any of our public <a routerLink="/contact">
+        contact info</a>. If you're into a particular topic, try to have a look around the
+        <a href="https://github.com/vitagroupag/pds/discussions"> Github Discussions</a> or open a new topic if you can
+        not find what you're looking for.
+      </p>
+      <p>
+        For email feedback please use <a href="mailto:feedback@pds.vitagroup.ag">feedback@pds.vitagroup.ag</a>
+      </p>
+    </section>
+
   </page-content>
 </page-layout>

@@ -2,13 +2,10 @@
 
 @use "util";
 @use "colors/blue" as *;
+@use "colors/petrol" as *;
 @use "styleguide" as pds with (
   $foreground-color: --dark,
-  $background-color: #f5f5f5,
-
-  $color-primary-dark: $deep-blue,
-  $color-primary: $blue,
-  $color-primary-light: $bright-blue,
+  $background-color: #f5f5f5
 );
 
 @at-root :root {
@@ -21,11 +18,12 @@
 }
 
 @include pds.core;
-@include pds.semantics;
-@include pds.class-semantics;
-@include pds.forms;
+@include pds.html5;
 
-@include pds.custom-scrollbar;
+@include pds.color-classes;
+@include pds.typography-classes;
+
+@include pds.browser-scrollbar;
 @include cdk-overlay;
 
 $dark-theme: pds.theme-define(
@@ -45,6 +43,28 @@ $dark-theme: pds.theme-define(
 
 @at-root .dark {
   @include pds.theme($dark-theme);
+}
+
+@at-root .blue {
+  $blue-theme: pds.theme-define(
+    (
+      'primary-dark': $deep-blue,
+      'primary': $blue,
+      'primary-light': $bright-blue,
+    )
+  );
+  @include pds.theme($blue-theme);
+}
+
+@at-root .petrol {
+  $petrol-theme: pds.theme-define(
+    (
+      'primary-dark': $dark-green,
+      'primary': $petrol,
+      'primary-light': $light-turquoise,
+    )
+  );
+  @include pds.theme($petrol-theme);
 }
 
 @media (prefers-color-scheme: dark) {
