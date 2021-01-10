@@ -10,8 +10,12 @@
     @include inner-spacing(--space-4, x);
     @include inner-spacing(--space-3, y);
 
-    background: var(--pre, var(--gray));
-    font-size: var(--body-small-font-size, inherit);
+    border: 1px solid var(--pre, var(--gray-light));
+
+    code {
+      border: none;
+      padding: 0;
+    }
 
     @content;
   }

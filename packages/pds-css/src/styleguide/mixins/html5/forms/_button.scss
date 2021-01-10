@@ -10,8 +10,8 @@ $button-rounding: $button-height !default;
 $button-border: 1px solid !default;
 
 $button-min-width: 120px !default;
-$button-spacing-y: $space-1 !default;
-$button-spacing-x: $space-3 !default;
+$button-spacing-y: --space-1 !default;
+$button-spacing-x: --space-5 !default;
 
 @mixin button-base {
   user-select: none;
@@ -85,8 +85,8 @@ $button-spacing-x: $space-3 !default;
     @include button-base;
     @include button-primary;
 
-    @include outer-sibling-spacing($space-4);
-    @include outer-child-spacing($space-2, x, $trim: true);
+    @include outer-sibling-spacing(--space-4);
+    @include outer-child-spacing(--space-3, x, $trim: true, $justify: true);
     @include inner-spacing($button-spacing-x, x);
     @include inner-spacing($button-spacing-y, y);
     @include rounding($button-rounding);

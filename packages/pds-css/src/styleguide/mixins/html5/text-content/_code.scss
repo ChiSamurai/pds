@@ -1,0 +1,15 @@
+@use "../../rounding" as *;
+@use "../../spacing" as *;
+
+@mixin code {
+  code {
+    @include rounding(--rounding-sm);
+    @include inner-spacing(--space-1, x);
+
+    border: 1px solid var(--code, var(--gray-light));
+    font-size: var(--body-small-font-size, inherit);
+    display: inline-block;
+
+    @content;
+  }
+}

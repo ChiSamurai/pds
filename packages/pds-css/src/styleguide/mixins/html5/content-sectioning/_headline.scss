@@ -4,7 +4,7 @@
 @mixin headline($from: 1, $through: 6) {
   @for $n from $from through $through {
     h#{$n} {
-      @include outer-spacing(--space-#{8 - $n}, y, $trim: true);
+      @include outer-spacing(--space-5, y, $trim: true);
       @include typography-style(--h#{$n});
       @content;
     }
@@ -15,7 +15,7 @@
   @for $n from $from through $through {
     h#{$n}.display,
     .display-#{$n} {
-      @include outer-spacing(--space-#{11 - $n}, y, $trim: true);
+      @include outer-spacing(--space-6, y, $trim: true);
       @include typography-style(--display-#{$n});
       @content;
     }

@@ -110,6 +110,7 @@ $font-family: "PT Sans", sans-serif !default;
   // text-content
   @include blockquote;
   @include paragraph;
+  @include code;
   @include pre;
 
   // inline text-semantics
