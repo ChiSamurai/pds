@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
@@ -57,8 +58,9 @@ import { PageHeader } from './page-header';
       <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
     </ng-container>
   `,
+  inputs: ['footerPosition: footer'],
 })
-export class PageLayout extends PreventNativeTitleTooltip implements OnChanges {
+export class PageLayout implements OnChanges {
   @ContentChild(PageHeader, { static: true }) private _staticHeader: PageHeader;
   @ContentChild(PageHeader, { static: false }) private _dynamicHeader: PageHeader;
   @ContentChild(PageFooter, { static: true }) private _staticFooter: PageFooter;
@@ -73,15 +75,12 @@ export class PageLayout extends PreventNativeTitleTooltip implements OnChanges {
 
   @Input() encapsulation: string;
 
-  @Input('footer') footerPosition: PageFooterPosition;
+  @Input() footerPosition: PageFooterPosition;
 
   constructor(
-    protected renderer: Renderer2,
-    protected elementRef: ElementRef<HTMLElement>,
     @Inject(PAGE_FOOTER_POSITION) footerPosition: /* @dynamic */ PageFooterPosition,
     @Inject(PAGE_ENCAPSULATION) encapsulation: /* @dynamic */ string
   ) {
-    super(elementRef, renderer);
     if (encapsulation) this.encapsulation = encapsulation;
     this.footerPosition = footerPosition;
   }

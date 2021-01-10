@@ -20,7 +20,7 @@ export class ElementLoadingState extends ElementState {
 
   constructor(
     @Inject(ElementRef) elementRef: ElementRef | any,
-    @Inject(Renderer2) renderer?: Renderer2,
+    @Inject(Renderer2) renderer: Renderer2,
     @Optional() state?: LoadingState
   ) {
     super(elementRef, renderer);

@@ -6,20 +6,21 @@ import {
   EventEmitter,
   Output,
   QueryList,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { PrimitiveBehaviorState } from '@vitagroup/common';
 import { StepDef } from './step-def';
 
 @Component({
   selector: 'step-layout',
-  styles: [ 'step-layout { display: block; width: 100% }' ],
+  styles: ['step-layout { display: block; width: 100% }'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   template: `
-    <ng-container *ngIf='activeStep as step'>
-      <ng-container *ngTemplateOutlet='step?.template'></ng-container>
-    </ng-container>`
+    <ng-container *ngIf="activeStep as step">
+      <ng-container *ngTemplateOutlet="step?.template"></ng-container>
+    </ng-container>
+  `,
 })
 export class StepLayout {
   @ContentChildren(StepDef)
@@ -42,13 +43,12 @@ export class StepLayout {
     return this.indexState.snapshot === 0;
   }
   get isLastStep(): boolean {
-    return !this.steps?.length || this.indexState.snapshot === (this.steps.length - 1);
+    return !this.steps?.length || this.indexState.snapshot === this.steps.length - 1;
   }
 
   @Output() readonly stepChanges = new EventEmitter<StepDef>();
 
-  constructor(protected changeDetectorRef: ChangeDetectorRef) {
-  }
+  constructor(protected changeDetectorRef: ChangeDetectorRef) {}
 
   isActive(index: number): boolean {
     return this.indexState.snapshot === index;
@@ -78,5 +78,4 @@ export class StepLayout {
       this.activate(this.count - 1);
     }
   }
-
 }
