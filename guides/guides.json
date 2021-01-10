@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "getting-started",
+    "title": "Getting Started",
+    "description": "First steps with the ecosystem.",
+    "next": "styling"
+  },
+  {
+    "slug": "styling",
+    "title": "Styling",
+    "description": "**PDS-CSS** features and possibilities.",
+    "previous": "getting-started"
+  }
+]

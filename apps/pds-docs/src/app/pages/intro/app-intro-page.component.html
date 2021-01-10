@@ -5,25 +5,23 @@
       <h1>TLDR;</h1>
       <p>
         The main goal of the <strong>Product Design System</strong> is to collect and generalize various user interface
-        behaviors and components, used within <a href="https://vitagroup.ag">vitagroup</a> frontend applications. The
+        behaviors and components, used across <a href="https://vitagroup.ag">vitagroup</a> frontend applications. The
         core technology used to build the ecosystem is <a href="https://angular.io">Angular</a>.
       </p>
     </section>
 
-    <section fxFlex="100">
+    <section fxFlex="100" *ngIf="spotlightGuides?.length > 0">
       <h1>Guides</h1>
       <div fxLayout="row wrap" fxLayoutGap="32px grid">
-        <ng-container *ngFor="let guide of guideShortcuts">
+        <ng-container *ngFor="let guide of spotlightGuides">
           <div fxFlex="33.33">
             <pds-card>
               <pds-card-header>
-                <h5>{{ guide.headline }}</h5>
+                <h5>{{ guide.title }}</h5>
               </pds-card-header>
-              <pds-card-content>
-                <p>{{ guide.description }}</p>
-              </pds-card-content>
+              <pds-card-content [innerHTML]="guide.description | marked"></pds-card-content>
               <pds-card-footer>
-                <button [routerLinkOrHref]="guide.linkUrl">{{ guide.linkLabel }}</button>
+                <button [routerLinkOrHref]="[ './guides', guide.slug ]">Read</button>
               </pds-card-footer>
             </pds-card>
           </div>

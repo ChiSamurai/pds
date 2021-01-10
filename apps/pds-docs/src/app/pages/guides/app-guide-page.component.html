@@ -1,0 +1,19 @@
+<page-layout>
+  <page-content *ngIf="'guide' | routeData | async as guide" fxLayout="column">
+    <div class="guide-content" [innerHTML]="guide.content | marked"></div>
+    <div class="guide-refs" *ngIf="guide.previous || guide.next">
+      <div>
+        <button *ngIf="appGuides.get(guide.previous) as prevGuide" class="secondary" [routerLink]="[ '..', prevGuide.slug ]">
+          <svg-icon name="arrow-left"></svg-icon>
+          <span>{{ prevGuide.title }}</span>
+        </button>
+      </div>
+      <div>
+        <button *ngIf="appGuides.get(guide.next) as nextGuide" class="secondary" [routerLink]="[ '..', nextGuide.slug ]">
+          <span>{{ nextGuide.title }}</span>
+          <svg-icon name="arrow-right"></svg-icon>
+        </button>
+      </div>
+    </div>
+  </page-content>
+</page-layout>

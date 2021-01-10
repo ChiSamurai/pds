@@ -146,13 +146,22 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["highlight.js"],
             "outputPath": "dist/apps/pds-docs",
             "index": "apps/pds-docs/src/index.html",
             "main": "apps/pds-docs/src/main.ts",
             "polyfills": "apps/pds-docs/src/polyfills.ts",
             "tsConfig": "apps/pds-docs/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/pds-docs/src/favicon.ico", "apps/pds-docs/src/assets"],
+            "assets": [
+              "apps/pds-docs/src/favicon.ico",
+              "apps/pds-docs/src/assets",
+              {
+                "glob": "**/*.{json,md}",
+                "input": "guides",
+                "output": "assets/guides"
+              }
+            ],
             "styles": ["apps/pds-docs/src/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["packages/pds-css/src"]

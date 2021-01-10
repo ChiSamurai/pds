@@ -26,25 +26,6 @@
 @include pds.browser-scrollbar;
 @include cdk-overlay;
 
-$dark-theme: pds.theme-define(
-  (
-    'foreground': #f2f2f2,
-    'background': --gray-lightest,
-    'link': --primary-light,
-    'gray-darkest': #999999,
-    'gray-darker': #808080,
-    'gray-dark': #6b6b6b,
-    'gray': #383838,
-    'gray-light': #212121,
-    'gray-lighter': #1a1a1a,
-    'gray-lightest': #141414,
-  )
-);
-
-@at-root .dark {
-  @include pds.theme($dark-theme);
-}
-
 @at-root .blue {
   $blue-theme: pds.theme-define(
     (
@@ -67,8 +48,31 @@ $dark-theme: pds.theme-define(
   @include pds.theme($petrol-theme);
 }
 
+$dark-theme: pds.theme-define(
+  (
+    'foreground': #f2f2f2,
+    'background': --gray-lightest,
+    'link': --primary-light,
+    'gray-darkest': #d9d9d9,
+    'gray-darker': #bfbfbf,
+    'gray-dark': #6b6b6b,
+    'gray': #383838,
+    'gray-light': #212121,
+    'gray-lighter': #1a1a1a,
+    'gray-lightest': #141414,
+  )
+);
+
+@import '~highlight.js/scss/vs';
+
+@at-root .dark {
+  @include pds.theme($dark-theme);
+  @import '~highlight.js/scss/vs2015';
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     @include pds.theme($dark-theme);
+    @import '~highlight.js/scss/vs2015';
   }
 }

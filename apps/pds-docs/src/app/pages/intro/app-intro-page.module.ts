@@ -6,6 +6,7 @@ import { SvgIconModule } from '@vitagroup/cdk';
 import { PageLayoutModule } from '@vitagroup/cdk/layout';
 import { RouterLinkOrHrefModule } from '@vitagroup/common';
 import { CardModule, SelectBoxModule, SelectListModule, TagModule } from '@vitagroup/pds-components';
+import { MarkedPipeModule } from '../../pipes/marked.pipe';
 import { AppIntroPageComponent } from './app-intro-page.component';
 
 export const APP_INTRO_PAGE_ROUTES: Routes = [
@@ -32,6 +33,7 @@ export const APP_INTRO_PAGE_ROUTES: Routes = [
     SvgIconModule,
     CardModule,
     RouterLinkOrHrefModule,
+    MarkedPipeModule,
   ],
 })
 export class AppIntroPageModule {}

@@ -1,0 +1,10 @@
+@use "styleguide" as pds;
+
+pds-app-guide-page {
+  .guide-refs {
+    display: flex;
+    justify-content: space-between;
+
+    @include pds.outer-spacing(120px, top);
+  }
+}
