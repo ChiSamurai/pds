@@ -1,17 +1,21 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
-  ElementRef,
   Inject,
   Input,
   OnChanges,
-  Renderer2,
+  OnDestroy,
+  OnInit,
+  Optional,
   SimpleChanges,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { PreventNativeTitleTooltip } from '@vitagroup/cdk/a11y';
+import { Router, Scroll } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { PAGE_ENCAPSULATION } from './page-encapsulation';
 import { PAGE_FOOTER_POSITION, PageFooter, PageFooterPosition } from './page-footer';
 import { PageHeader } from './page-header';
@@ -60,7 +64,11 @@ import { PageHeader } from './page-header';
   `,
   inputs: ['footerPosition: footer'],
 })
-export class PageLayout implements OnChanges {
+export class PageLayout implements OnChanges, OnInit, OnDestroy {
+  private _routerScrollSubscription: Subscription | null;
+
+  @ViewChild(CdkScrollable) private _mainScrollable: CdkScrollable;
+
   @ContentChild(PageHeader, { static: true }) private _staticHeader: PageHeader;
   @ContentChild(PageHeader, { static: false }) private _dynamicHeader: PageHeader;
   @ContentChild(PageFooter, { static: true }) private _staticFooter: PageFooter;
@@ -79,7 +87,8 @@ export class PageLayout implements OnChanges {
 
   constructor(
     @Inject(PAGE_FOOTER_POSITION) footerPosition: /* @dynamic */ PageFooterPosition,
-    @Inject(PAGE_ENCAPSULATION) encapsulation: /* @dynamic */ string
+    @Inject(PAGE_ENCAPSULATION) encapsulation: /* @dynamic */ string,
+    @Optional() protected router?: Router
   ) {
     if (encapsulation) this.encapsulation = encapsulation;
     this.footerPosition = footerPosition;
@@ -91,5 +100,25 @@ export class PageLayout implements OnChanges {
       this.header.encapsulation = encapsulation.currentValue;
       this.footer.encapsulation = encapsulation.currentValue;
     }
+  }
+  ngOnInit() {
+    if (this.router != null) {
+      this._routerScrollSubscription = this.router.events
+        .pipe(filter((e) => e instanceof Scroll))
+        .subscribe((e: Scroll) => {
+          // todo(@janunld): consider anchor scroll support? we should probably..
+          let top = 0;
+          let left = 0;
+          if (e.position) {
+            left = e.position[0];
+            top = e.position[1];
+          }
+          this._mainScrollable.scrollTo({ left, top });
+        });
+    }
+  }
+  ngOnDestroy() {
+    if (this._routerScrollSubscription != null && !this._routerScrollSubscription.closed)
+      this._routerScrollSubscription.unsubscribe();
   }
 }
