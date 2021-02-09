@@ -5,7 +5,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { SvgIconModule } from '@vitagroup/cdk';
 import { PageLayoutModule } from '@vitagroup/cdk/layout';
 import { RouterLinkOrHrefModule } from '@vitagroup/common';
-import { CardModule, SelectBoxModule, SelectListModule, TagModule } from '@vitagroup/pds-components';
+import {
+  CardModule,
+  ComboBoxModule,
+  SelectBoxModule,
+  SelectListModule,
+  TagModule,
+  TextBoxModule,
+} from '@vitagroup/pds-components';
+import { AppGuideCardModule } from '../../components/app-guide-card/app-guide-card.component';
 import { MarkedPipeModule } from '../../pipes/marked.pipe';
 import { AppIntroPageComponent } from './app-intro-page.component';
 
@@ -34,6 +42,7 @@ export const APP_INTRO_PAGE_ROUTES: Routes = [
     CardModule,
     RouterLinkOrHrefModule,
     MarkedPipeModule,
+    AppGuideCardModule,
   ],
 })
 export class AppIntroPageModule {}

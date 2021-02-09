@@ -6,6 +6,7 @@ import { SvgIconModule } from '@vitagroup/cdk';
 import { PageLayoutModule } from '@vitagroup/cdk/layout';
 import { RouteDataPipeModule } from '@vitagroup/common';
 import { CardModule } from '@vitagroup/pds-components';
+import { AppGuideCardModule } from '../../components/app-guide-card/app-guide-card.component';
 import { MarkedPipeModule } from '../../pipes/marked.pipe';
 import { AppGuidePageComponent } from './app-guide-page.component';
 import { AppGuideResolve } from './app-guide.resolve';
@@ -40,6 +41,7 @@ export const APP_GUIDES_PAGE_ROUTES: Routes = [
     CardModule,
     RouteDataPipeModule,
     SvgIconModule,
+    AppGuideCardModule,
   ],
   providers: [AppGuideResolve],
 })

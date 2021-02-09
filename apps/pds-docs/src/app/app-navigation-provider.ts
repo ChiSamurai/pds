@@ -14,15 +14,11 @@ export const APP_NAV_ENTRY_PROVIDER: Provider = {
     },
     {
       name: $localize`Components`,
-      linkUrl: '/pds-components',
+      linkUrl: '/components',
     },
     {
       name: $localize`CSS`,
-      linkUrl: '/pds-css',
-    },
-    {
-      name: $localize`CDK`,
-      linkUrl: '/cdk',
+      linkUrl: '/css',
     },
   ] as NavigationEntry[],
 };
