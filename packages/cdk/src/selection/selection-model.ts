@@ -24,7 +24,7 @@ export class SelectionModel<T = any> extends Observable<T[]> {
 
   readonly changes: Observable<SelectionChange<T>> = this._changes.asObservable();
 
-  protected readonly trackBy: PrimitiveTrackByFn<T> = (value) => value;
+  trackBy: PrimitiveTrackByFn<T>;
 
   get isEmpty(): boolean {
     return this.size === 0;
@@ -51,7 +51,7 @@ export class SelectionModel<T = any> extends Observable<T[]> {
   }
 
   select(value: T, options?: SelectOptions): void {
-    if (!this.isSelected(value)) this.value = [value, ...this.value];
+    if (!this.isSelected(value)) this.value = [...this.value, value];
     if (this.shouldEmit(options)) this.emitChange('select', value);
   }
 
@@ -87,12 +87,14 @@ export class SelectionModel<T = any> extends Observable<T[]> {
   }
 
   protected equalValueIdentity(value1: T, value2: T): boolean {
-    return this.trackBy(value1) === this.trackBy(value2);
+    const track = this.trackBy || ((value) => value);
+    return track(value1) === track(value2);
   }
 
   private _isOptionsObject(obj: any): obj is SelectionOptions {
     // todo: keep up to date with the SelectionOptions interface!
-    return obj != null && Object.keys(obj).every((key) => ['emitEvent'].includes(key));
+    // eslint-disable-next-line no-prototype-builtins
+    return obj != null && obj.hasOwnProperty('emitEvent');
   }
 }
 

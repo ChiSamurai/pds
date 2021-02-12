@@ -1,6 +1,5 @@
-import { Directive, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { EventUnlistener } from '@vitagroup/common';
-import { SELECTION_MODEL } from '../selection/selection-control';
 import { SelectionModel } from '../selection/selection-model';
 import { SelectionValue } from '../selection/selection-value';
 

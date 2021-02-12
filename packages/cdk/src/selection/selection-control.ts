@@ -2,9 +2,7 @@ import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { Directive, EventEmitter, InjectionToken, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { SelectionChange, SelectionModel, SelectOptions } from './selection-model';
-
-export const SELECTION_MODEL = new InjectionToken<SelectionModel>('adk:SELECTION_MODEL');
+import { PrimitiveTrackByFn, SelectionChange, SelectionModel, SelectOptions } from './selection-model';
 
 @Directive({
   exportAs: 'selectionControl',
@@ -39,6 +37,8 @@ export class SelectionControl<T> extends SelectionModel<T> implements OnInit, On
   }
 
   @Output() readonly changes = new EventEmitter<SelectionChange<T>>();
+
+  @Input('selectionTrackBy') trackBy: PrimitiveTrackByFn<T> = (value) => value;
 
   constructor() {
     super([]);
