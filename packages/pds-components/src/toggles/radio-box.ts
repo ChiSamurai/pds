@@ -7,7 +7,10 @@ import { RADIO_BOX_TEMPLATE, RadioBoxBase } from '@vitagroup/cdk';
   styleUrls: ['./radio-box.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: RadioBox, multi: true }],
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: RadioBox, multi: true },
+    { provide: RadioBoxBase, useExisting: RadioBox },
+  ],
   template: RADIO_BOX_TEMPLATE,
 })
 export class RadioBox extends RadioBoxBase {}

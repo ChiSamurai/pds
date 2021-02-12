@@ -5,6 +5,7 @@
   @include pds.outer-child-spacing(pds.$input-padding-x, x, $trim: true, $justify: true);
   @include pds.input-base;
 
+  width: 100%;
   min-width: 60px;
   white-space: nowrap;
   height: var(--input-height);
