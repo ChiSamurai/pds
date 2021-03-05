@@ -15,7 +15,7 @@ $h5-typography: typography.define(20px, 28px, bold, -0.02px) !default;
 $h6-typography: typography.define(16px, 22px, bold, -0.01px) !default;
 
 $lead-typography: typography.define(14px, 24px, bold, -0.01px) !default;
-$capitalized-typography: typography.define(14px, 19px, normal, 2px, uppercase) !default;
+$uppercase-typography: typography.define(14px, 19px, normal, 2px, uppercase) !default;
 $small-typography: typography.define(12px, 15px) !default;
 $tiny-typography: typography.define(10px, 13px, bold, 0.02px) !default;
 
@@ -36,7 +36,7 @@ $typography-map: (
   "h5": $h5-typography,
   "h6": $h6-typography,
   "lead": $lead-typography,
-  "capitalized": $capitalized-typography,
+  "uppercase": $uppercase-typography,
   "small": $small-typography,
   "tiny": $tiny-typography,
   "blockquote": $blockquote-typography,

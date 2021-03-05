@@ -50,7 +50,7 @@ $color-rgb: false !default;
 /// Gets or sets a map or a list of maps containing typography definitions that will be generated
 $typography: $typography-map !default;
 /// Gets or sets a list of class names generated for typography variants (eg. .body-small, .small, ...)
-$typography-classes: ("body-small", "capitalized", "lead", "small", "tiny") !default;
+$typography-classes: ("body-small", "uppercase", "lead", "small", "tiny") !default;
 
 /// Gets or sets a map or a list of maps of additional custom properties to generate
 $custom-properties: ($spacing-map, $rounding-map) !default;
