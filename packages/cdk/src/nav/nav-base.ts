@@ -1,39 +1,39 @@
 import { Directive, Inject, InjectionToken, Input, Optional } from '@angular/core';
-import { NavigationEntries } from '../navigation/navigation-entries';
-import { NavigationEntry } from '../navigation/navigation-entry';
-import { NavigationEntryContainer } from '../navigation/navigation-entry-container';
+import { NavEntries } from './nav-entries';
+import { NavEntry } from './nav-entry';
+import { NavEntryContainer } from './nav-entry-container';
 
 /**
- * Holds a reference to the static {@link NavigationEntry}s that are displayed in a separate
+ * Holds a reference to the static {@link NavEntry}s that are displayed in a separate
  * region of the `nav-menu` instance
  */
-export const STATIC_NAVIGATION_ENTRIES = new InjectionToken<NavigationEntry[]>('STATIC_NAVIGATION_ENTRIES');
+export const STATIC_NAVIGATION_ENTRIES = new InjectionToken<NavEntry[]>('STATIC_NAVIGATION_ENTRIES');
 
 @Directive()
-export class NavBase extends NavigationEntryContainer {
-  readonly staticState = new NavigationEntries();
+export class NavBase extends NavEntryContainer {
+  readonly staticState = new NavEntries();
 
   @Input()
-  set entries(value: NavigationEntry[]) {
+  set entries(value: NavEntry[]) {
     this.state.reset(...value);
   }
-  get entries(): NavigationEntry[] {
+  get entries(): NavEntry[] {
     return this.state.snapshot;
   }
 
   @Input()
-  set staticEntries(value: NavigationEntry[]) {
+  set staticEntries(value: NavEntry[]) {
     this.staticState.reset(...value);
   }
-  get staticEntries(): NavigationEntry[] {
+  get staticEntries(): NavEntry[] {
     return this.staticState.snapshot;
   }
 
   constructor(
-    readonly state: NavigationEntries,
+    readonly state: NavEntries,
     @Optional()
     @Inject(STATIC_NAVIGATION_ENTRIES)
-    staticEntries?: NavigationEntry[]
+    staticEntries?: NavEntry[]
   ) {
     super();
 

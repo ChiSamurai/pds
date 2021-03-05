@@ -18,15 +18,14 @@ export * from './loading-state/loading-overlay';
 export * from './loading-state/loading-state';
 export * from './loading-state/element-loading-state';
 
-export * from './navigation/module';
-export * from './navigation/navigation-entries';
-export * from './navigation/navigation-entry';
-export * from './navigation/navigation-entry-container';
-export * from './navigation/navigation-entry-def';
-export * from './navigation/navigation-entry-link';
-export * from './navigation/navigation-entry-outlet';
-
+export * from './nav/module';
 export * from './nav/nav-base';
+export * from './nav/nav-entries';
+export * from './nav/nav-entry';
+export * from './nav/nav-entry-container';
+export * from './nav/nav-entry-def';
+export * from './nav/nav-entry-link';
+export * from './nav/nav-entry-outlet';
 
 export * from './select-box/select-box-base';
 export * from './select-box/select-def-base';

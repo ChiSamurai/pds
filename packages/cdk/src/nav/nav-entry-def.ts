@@ -1,14 +1,14 @@
 import { Directive, Input, Predicate, TemplateRef } from '@angular/core';
-import { NavigationEntry } from './navigation-entry';
+import { NavEntry } from './nav-entry';
 
 export interface NavigationEntryDefContext extends Record<PropertyKey, any> {
-  $implicit: NavigationEntry;
+  $implicit: NavEntry;
   static?: boolean;
 }
 
 @Directive({ selector: '[navEntryDef]' })
-export class NavigationEntryDef {
-  @Input('navEntryDefWhen') when: Predicate<NavigationEntry> | boolean;
+export class NavEntryDef {
+  @Input('navEntryDefWhen') when: Predicate<NavEntry> | boolean;
 
   constructor(readonly template: TemplateRef<NavigationEntryDefContext>) {}
 }

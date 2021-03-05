@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Injector,
   Input,
   Optional,
   Predicate,
@@ -10,10 +9,10 @@ import {
 } from '@angular/core';
 import { merge } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { NavigationEntries } from './navigation-entries';
-import { NavigationEntry } from './navigation-entry';
-import { NavigationEntryContainer } from './navigation-entry-container';
-import { NavigationEntryDefContext } from './navigation-entry-def';
+import { NavEntries } from './nav-entries';
+import { NavEntry } from './nav-entry';
+import { NavEntryContainer } from './nav-entry-container';
+import { NavigationEntryDefContext } from './nav-entry-def';
 
 @Component({
   selector: 'nav-entry-outlet',
@@ -33,16 +32,16 @@ import { NavigationEntryDefContext } from './navigation-entry-def';
     </ng-container>
   `,
 })
-export class NavigationEntryOutlet extends NavigationEntryContainer {
+export class NavEntryOutlet extends NavEntryContainer {
   /**
-   * An instance of custom {@link NavigationEntries} to use for this outlet. This will not overwrite
-   * any existing entries stored in {@link NavigationEntries}. Those will only be preferred for
+   * An instance of custom {@link NavEntries} to use for this outlet. This will not overwrite
+   * any existing entries stored in {@link NavEntries}. Those will only be preferred for
    * rendering and stored locally on the component instance. Any existing {@link filter} value will
    * be applied nevertheless
    */
-  protected readonly customState = new NavigationEntries();
+  protected readonly customState = new NavEntries();
 
-  /** Gets the stream of {@link NavigationEntry}s that's used for rendering */
+  /** Gets the stream of {@link NavEntry}s that's used for rendering */
   readonly viewEntries = merge(this.customState, this.state).pipe(
     map(() => {
       const entries = this.customState.length ? this.customState.snapshot : this.state.snapshot;
@@ -51,29 +50,26 @@ export class NavigationEntryOutlet extends NavigationEntryContainer {
   );
 
   @Input()
-  set entries(value: NavigationEntry[]) {
+  set entries(value: NavEntry[]) {
     this.customState.reset(...value);
   }
-  get entries(): NavigationEntry[] {
+  get entries(): NavEntry[] {
     return this.customState.snapshot || this.state.snapshot;
   }
 
   @Input() context?: Omit<NavigationEntryDefContext, '$implicit'>;
 
-  /** Gets or sets a filter {@link Predicate} for the rendered {@link NavigationEntry}s */
-  @Input() filter: Predicate<NavigationEntry>;
+  /** Gets or sets a filter {@link Predicate} for the rendered {@link NavEntry}s */
+  @Input() filter: Predicate<NavEntry>;
 
-  constructor(
-    protected readonly state: NavigationEntries,
-    @Optional() protected readonly parent?: NavigationEntryContainer
-  ) {
+  constructor(protected readonly state: NavEntries, @Optional() protected readonly parent?: NavEntryContainer) {
     super();
   }
 
-  resolveEntryTemplate(entry: NavigationEntry): TemplateRef<NavigationEntryDefContext> | null {
+  resolveEntryTemplate(entry: NavEntry): TemplateRef<NavigationEntryDefContext> | null {
     return this.parent?.resolveEntryTemplate(entry) || super.resolveEntryTemplate(entry);
   }
-  resolveEntryContext(entry: NavigationEntry): NavigationEntryDefContext {
+  resolveEntryContext(entry: NavEntry): NavigationEntryDefContext {
     return { ...this.context, $implicit: entry };
   }
 }

@@ -1,4 +1,4 @@
-export * from './form-error/module';
-export * from './form-error/form-error-outlet';
+export * from './form-status-outlet/module';
+export * from './form-status-outlet/form-status-outlet';
 
 export * from './utils';

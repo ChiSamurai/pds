@@ -2,19 +2,19 @@ import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { ObjectPropertySelector, resolveObjectPropertySelector } from '@vitagroup/common';
 import { SvgIconRegistry } from './svg-icon-registry';
 
-export interface SvgIconImportConfig<Icon = any> {
+export interface SvgIconImportConfig<T = any> {
   /** Defines all icons that should be imported */
-  icons: Icon[];
+  icons: T[];
   /**
    * Defines how to and what property of the {@link icons} type should be used to
    * retrieve the {@link SvgIconData}. Defaults to `"data"`
    */
-  dataSelector?: ObjectPropertySelector<Icon>;
+  dataSelector?: ObjectPropertySelector<T>;
   /**
    * Defines how to and what property of the {@link icons} type should be used to
    * retrieve the _unique_ name of the svg icon. Defaults to `"name"`
    */
-  nameSelector?: ObjectPropertySelector<Icon>;
+  nameSelector?: ObjectPropertySelector<T>;
 }
 
 export const SVG_ICON_IMPORT = new InjectionToken<SvgIconImportConfig>('SVG_ICON_IMPORT');
@@ -34,13 +34,16 @@ export class SvgIconImporter {
     if (!dataSelector) dataSelector = 'data';
     if (!nameSelector) nameSelector = 'name';
 
-    for (const icon of config.icons) {
+    for (let i = 0, l = config.icons.length; i < l; i++) {
+      const icon = config.icons[i];
+
       const data = resolveObjectPropertySelector(icon, dataSelector);
       const name = resolveObjectPropertySelector(icon, nameSelector);
-      if (name == null || name.trim() === '')
-        throw new Error(`Unable to import svg icons. Failed to select name for "${icon}"`);
 
-      this.registry.register(name, data);
+      if (!name) throw new Error(`Unable to import svg icons. Failed to select name of icons[${i}]`);
+      if (!data) throw new Error(`Unable to import svg icons. No data provided for "${name}"`);
+
+      this.registry.register(name, data, true);
     }
   }
 }

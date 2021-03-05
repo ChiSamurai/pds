@@ -32,7 +32,7 @@ export class SvgIconRegistry {
    * @param force Optional flag to overwrite any existing {@link SvgIconData}, if the `name` already exists
    */
   register(name: string, data: SvgIconData, force?: boolean): void {
-    if (!this.has(name)) {
+    if (force || !this.has(name)) {
       this.state.patch({ [name]: data });
       this.registers.next([name, data]);
     }

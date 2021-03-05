@@ -14,20 +14,20 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { WINDOW } from '@ng-web-apis/common';
 import { RouterLinkOrHref, StringInterpolator, URL_PARAM_INTERPOLATION_SCHEME } from '@vitagroup/common';
-import { NavigationEntry } from './navigation-entry';
+import { NavEntry } from './nav-entry';
 
 export const NAVIGATION_LINK_URL_PARAMS = new InjectionToken<Params>('NAVIGATION_LINK_URL_PARAMS');
 
 @Directive({
   selector: '[navEntryLink]',
-  providers: [{ provide: RouterLink, useExisting: NavigationEntryLink }],
+  providers: [{ provide: RouterLink, useExisting: NavEntryLink }],
   inputs: ['entry: navEntryLink'],
 })
-export class NavigationEntryLink extends RouterLinkOrHref {
-  private _entry: NavigationEntry;
+export class NavEntryLink extends RouterLinkOrHref {
+  private _entry: NavEntry;
 
   @Input()
-  set entry(value: NavigationEntry) {
+  set entry(value: NavEntry) {
     if (typeof value?.linkUrl === 'string') {
       this.routerLinkOrHref = this.interpolateLinkUrl(value?.linkUrl);
     } else {
@@ -39,13 +39,11 @@ export class NavigationEntryLink extends RouterLinkOrHref {
 
     this._entry = value;
   }
-  get entry(): NavigationEntry {
+  get entry(): NavEntry {
     return this._entry;
   }
 
   constructor(
-    router: Router,
-    route: ActivatedRoute,
     protected renderer: Renderer2,
     protected element: ElementRef,
     protected sanitizer: DomSanitizer,
@@ -55,9 +53,11 @@ export class NavigationEntryLink extends RouterLinkOrHref {
     @Attribute('tab-index') tabIndex: string,
     @Optional()
     @Inject(NAVIGATION_LINK_URL_PARAMS)
-    readonly linkUrlParams?: any
+    readonly linkUrlParams?: any,
+    @Optional() router?: Router,
+    @Optional() route?: ActivatedRoute
   ) {
-    super(router, route, renderer, element, sanitizer, window, tabIndex);
+    super(renderer, element, sanitizer, window, tabIndex, router, route);
   }
 
   interpolateLinkUrl(value: string): string {

@@ -1,20 +1,20 @@
 import { ContentChildren, Directive, OnDestroy, QueryList, TemplateRef } from '@angular/core';
 import { Subject } from 'rxjs';
-import { NavigationEntry } from './navigation-entry';
-import { NavigationEntryDef, NavigationEntryDefContext } from './navigation-entry-def';
+import { NavEntry } from './nav-entry';
+import { NavEntryDef, NavigationEntryDefContext } from './nav-entry-def';
 
 @Directive()
-export abstract class NavigationEntryContainer implements OnDestroy {
+export abstract class NavEntryContainer implements OnDestroy {
   protected readonly ngDestroys = new Subject<void>();
 
-  @ContentChildren(NavigationEntryDef, { descendants: true })
-  protected readonly contentEntryDefs: QueryList<NavigationEntryDef>;
+  @ContentChildren(NavEntryDef, { descendants: true })
+  protected readonly contentEntryDefs: QueryList<NavEntryDef>;
 
   get defaultEntryTemplate(): TemplateRef<NavigationEntryDefContext> | null {
     return this.contentEntryDefs?.find((entryDef) => entryDef.when == null)?.template;
   }
 
-  resolveEntryTemplate(entry: NavigationEntry): TemplateRef<NavigationEntryDefContext> | null {
+  resolveEntryTemplate(entry: NavEntry): TemplateRef<NavigationEntryDefContext> | null {
     return (
       this.contentEntryDefs?.find((entryDef) => {
         return typeof entryDef.when === 'function' ? entryDef.when(entry) : entryDef.when;

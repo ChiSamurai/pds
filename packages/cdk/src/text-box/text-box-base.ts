@@ -1,15 +1,13 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
+  ChangeDetectorRef,
   Directive,
   ElementRef,
+  EventEmitter,
   Input,
   OnDestroy,
-  OnInit,
   Output,
   Renderer2,
-  EventEmitter,
-  ChangeDetectorRef,
-  inject,
-  NgZone,
 } from '@angular/core';
 import { EventUnlistener } from '@vitagroup/common';
 import { Subject } from 'rxjs';
@@ -23,6 +21,17 @@ export abstract class TextBoxBase<T = any> extends ControlValueAccessorBase<T> i
 
   private _unlistener: EventUnlistener[] = [];
   private _value: T;
+
+  @Input('readOnly')
+  private set _readOnly(value: boolean) {
+    if (coerceBooleanProperty(value)) this.readOnly.set();
+    else this.readOnly.unset();
+  }
+  @Input('disabled')
+  private set _disabled(value: boolean) {
+    if (coerceBooleanProperty(value)) this.disabled.set();
+    else this.disabled.unset();
+  }
 
   readonly active = new ElementActiveState(this.elementRef, this.renderer);
   readonly focus = new ElementFocusState(this.elementRef, this.renderer);

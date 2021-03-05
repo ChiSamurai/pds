@@ -62,7 +62,7 @@ export abstract class SelectBoxBase<T, C extends SelectDefContext<T> = SelectDef
   }
 
   protected onSelectionChange(change: SelectionChange): void {
-    this.setValue(change.source.toArray());
+    if (this.readOnly.isUnset) this.setValue(change.source.toArray());
   }
 
   attachOverlay(): void {
