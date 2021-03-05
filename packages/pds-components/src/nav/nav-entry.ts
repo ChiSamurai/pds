@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NavigationEntryLink } from '@vitagroup/cdk';
+import { NavEntryLink } from '@vitagroup/cdk';
 
 @Component({
   selector: 'pds-nav-entry',
@@ -11,4 +11,4 @@ import { NavigationEntryLink } from '@vitagroup/cdk';
     <ng-content></ng-content>
   `,
 })
-export class NavEntry extends NavigationEntryLink {}
+export class NavEntry extends NavEntryLink {}

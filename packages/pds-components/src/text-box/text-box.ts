@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TextBoxBase } from '@vitagroup/cdk';
 
 @Component({
@@ -6,8 +7,9 @@ import { TextBoxBase } from '@vitagroup/cdk';
   styleUrls: ['text-box.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: TextBox, multi: true }],
   template: `
-    <ng-content select="[textPrefix]"></ng-content>
+    <ng-content select="[pdsBefore]"></ng-content>
     <input
       type="text"
       [value]="value || ''"
@@ -16,7 +18,7 @@ import { TextBoxBase } from '@vitagroup/cdk';
       [disabled]="disabled.isSet"
       #inputElement
     />
-    <ng-content select="[textSuffix]"></ng-content>
+    <ng-content select="[pdsAfter]"></ng-content>
   `,
 })
 export class TextBox extends TextBoxBase<string> implements OnInit {

@@ -12,8 +12,9 @@ pds-fab-button {
   @include pds.rounding($fab-button-rounding);
   @include pds.elevation(pds.$overlay-elevation);
 
-  position: fixed;
-  bottom: 0; right: 0;
   height: $fab-button-size;
   width: $fab-button-size;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SelectBoxBase } from '@vitagroup/cdk';
 import { takeUntil } from 'rxjs/operators';
 
@@ -6,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'pds-select-box',
   styleUrls: ['select-box.scss'],
   encapsulation: ViewEncapsulation.None,
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: SelectBox, multi: true }],
   /* eslint-disable max-len */
   template: `
     <ng-template #fallbackTemplate let-value let-last="last">
@@ -17,7 +19,7 @@ import { takeUntil } from 'rxjs/operators';
       </div>
     </ng-template>
 
-    <ng-content select="[selectPrefix]"></ng-content>
+    <ng-content select="[pdsBefore]"></ng-content>
     <div class="pds-select-box-value">
       <ng-container *ngIf="placeholder != null && !value?.length">
         <span class="pds-select-box-placeholder">{{ placeholder }}</span>
@@ -28,7 +30,7 @@ import { takeUntil } from 'rxjs/operators';
         ></ng-container>
       </ng-container>
     </div>
-    <ng-content select="[selectSuffix]"></ng-content>
+    <ng-content select="[pdsBeforeToggle]"></ng-content>
     <svg-icon
       class="pds-select-box-toggle"
       [name]="'pds-select-box-' + (hasAttachedOverlay ? 'detach-toggle' : 'attach-toggle')"
@@ -46,7 +48,7 @@ import { takeUntil } from 'rxjs/operators';
         />
       </ng-template>
     </svg-icon>
-    <ng-content select="[selectToggleSuffix]"></ng-content>
+    <ng-content select="[pdsAfter]"></ng-content>
   `,
   /* eslint-enable max-len */
 })

@@ -1,0 +1,21 @@
+@use "styleguide" as pds;
+
+pds-form-status {
+  @include pds.outer-spacing(--space-2, top);
+
+  display: flex;
+  align-items: center;
+
+  svg-icon {
+    @include pds.outer-spacing(--space-2, right);
+  }
+
+  &.error {
+    color: var(--bad);
+  }
+  &.pending {
+  }
+  &.valid {
+    color: var(--good);
+  }
+}

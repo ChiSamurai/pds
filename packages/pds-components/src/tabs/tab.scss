@@ -1,5 +1,6 @@
 @use "styleguide" as pds;
 @use "util";
+
 $tab-active-indicator-width: 4px !default;
 
 pds-tab {
@@ -21,8 +22,9 @@ pds-tab {
   @include util.active-state {
     border-color: var(--primary-light);
   }
-  @include util.disabled_state( $within_parent: true ) {
-    border-color: var(--disabled);
+  @include util.disabled_state($within_parent: true) {
+    pointer-events: none;
+
     color: var(--disabled);
   }
 }

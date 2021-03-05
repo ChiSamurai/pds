@@ -1,3 +1,6 @@
+export * from './alert/module';
+export * from './alert/alert';
+
 export * from './button/fab-button';
 
 export * from './card/module';
@@ -6,6 +9,9 @@ export * from './card/card';
 
 export * from './combo-box/module';
 export * from './combo-box/combo-box';
+
+export * from './form-status/module';
+export * from './form-status/form-status';
 
 export * from './nav/module';
 export * from './nav/nav';

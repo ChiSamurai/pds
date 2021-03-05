@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { NavBase, NavigationEntryContainer } from '@vitagroup/cdk';
+import { NavBase, NavEntryContainer } from '@vitagroup/cdk';
 
 @Component({
   selector: 'pds-nav',
   styleUrls: ['./nav.scss'],
-  providers: [{ provide: NavigationEntryContainer, useExisting: Nav }],
+  providers: [{ provide: NavEntryContainer, useExisting: Nav }],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   template: `

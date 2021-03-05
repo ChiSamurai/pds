@@ -9,6 +9,7 @@
   min-width: 60px;
   white-space: nowrap;
   height: var(--input-height);
+  color: var(--gray-dark);
   display: inline-flex;
   align-items: center;
   overflow: hidden;
@@ -20,17 +21,18 @@
     border: none !important;
     background: transparent !important;
     box-shadow: none !important;
+    color: var(--foreground);
     flex: 1 1 auto;
   }
 
   @include util.hover-state {
     @include pds.input-hover;
   }
-  @include util.focus-state {
-    @include pds.input-focus;
-  }
   @include util.read-only-state($with-pseudo: false) {
     @include pds.input-read-only;
+  }
+  @include util.focus-state {
+    @include pds.input-focus;
   }
   @include util.disabled-state {
     @include pds.input-disabled;

@@ -9,6 +9,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ComboBoxBase } from '@vitagroup/cdk';
 
 @Component({
@@ -16,12 +17,13 @@ import { ComboBoxBase } from '@vitagroup/cdk';
   styleUrls: ['combo-box.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: ComboBox, multi: true }],
   template: `
     <ng-template #fallbackTemplate let-value let-last="last">
       <span>{{ value }}{{ !last ? ', ' : '' }}</span>
     </ng-template>
 
-    <ng-content select="[comboPrefix]"></ng-content>
+    <ng-content select="[pdsBefore]"></ng-content>
     <div>
       <ng-container *ngFor="let it of value; let index = index; trackBy: trackBy">
         <ng-container
@@ -37,7 +39,7 @@ import { ComboBoxBase } from '@vitagroup/cdk';
         #inputElement
       />
     </div>
-    <ng-content select="[comboSuffix]"></ng-content>
+    <ng-content select="[pdsAfter]"></ng-content>
   `,
 })
 export class ComboBox<T = any> extends ComboBoxBase<T> implements OnInit {

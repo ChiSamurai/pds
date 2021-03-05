@@ -8,6 +8,7 @@ pds-combo-box {
     @include pds.outer-child-spacing(--space-1, horizontal, $trim: true, $justify: true);
 
     flex: 1 0 0;
+    color: var(--foreground);
     align-items: inherit;
     overflow: hidden;
     display: flex;
