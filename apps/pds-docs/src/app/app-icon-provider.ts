@@ -6,6 +6,7 @@ import {
   faSolidIconArrowLeft,
   faSolidIconArrowRight,
   faSolidIconGlobe,
+  faSolidIconInfo,
   faSolidIconSearch,
 } from '../icons/fa-solid-icons';
 
@@ -19,6 +20,7 @@ export const APP_ICON_IMPORT_PROVIDER: Provider = {
       faBrandIconGithub,
       faSolidIconArrowRight,
       faSolidIconArrowLeft,
+      faSolidIconInfo,
     ],
   } as SvgIconImportConfig,
 };

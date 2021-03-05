@@ -10,6 +10,7 @@ pds-app-footer {
   flex: 1 0 auto;
   justify-content: space-between;
   align-items: center;
+  user-select: none;
   display: flex;
 
   .app-legal-links {

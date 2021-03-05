@@ -1,8 +1,8 @@
 import { Provider } from '@angular/core';
-import { NAVIGATION_ENTRIES, NavigationEntry, STATIC_NAVIGATION_ENTRIES } from '@vitagroup/cdk';
+import { NAV_ENTRIES, NavEntry, STATIC_NAVIGATION_ENTRIES } from '@vitagroup/cdk';
 
 export const APP_NAV_ENTRY_PROVIDER: Provider = {
-  provide: NAVIGATION_ENTRIES,
+  provide: NAV_ENTRIES,
   useValue: [
     {
       name: $localize`Introduction`,
@@ -20,7 +20,7 @@ export const APP_NAV_ENTRY_PROVIDER: Provider = {
       name: $localize`CSS`,
       linkUrl: '/css',
     },
-  ] as NavigationEntry[],
+  ] as NavEntry[],
 };
 
 export const APP_STATIC_NAV_ENTRY_PROVIDER: Provider = {
@@ -36,5 +36,5 @@ export const APP_STATIC_NAV_ENTRY_PROVIDER: Provider = {
       linkUrl: 'https://vitagroup.ag',
       iconName: 'globe',
     },
-  ] as NavigationEntry[],
+  ] as NavEntry[],
 };

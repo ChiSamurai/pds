@@ -1,2 +1,140 @@
 <page-layout>
+  <page-content fxLayout="row wrap" fxLayoutGap="32px grid">
+
+    <section fxFlex="100">
+      <h5>Text Box</h5>
+    </section>
+
+    <section fxFlex="50">
+      <label>Default</label>
+      <pds-text-box placeholder="Type something..."></pds-text-box>
+    </section>
+    <section fxFlex="50">
+      <label>Read only</label>
+      <pds-text-box readOnly="true" value="Hello World"></pds-text-box>
+    </section>
+    <section fxFlex="50">
+      <label>Disabled</label>
+      <pds-text-box disabled="true" value="Hello World"></pds-text-box>
+    </section>
+    <fx-break></fx-break>
+    <section fxFlex="50">
+      <label>Usage with a <em>search</em> icon <em>before</em></label>
+      <pds-text-box placeholder="Type something...">
+        <svg-icon name="search" pdsBefore></svg-icon>
+      </pds-text-box>
+    </section>
+    <section fxFlex="50">
+      <label>Usage with a <em>search</em> icon <em>after</em></label>
+      <pds-text-box placeholder="Type something...">
+        <svg-icon name="search" pdsAfter></svg-icon>
+      </pds-text-box>
+    </section>
+
+    <section fxFlex="100">
+      <h5>Combo Box</h5>
+    </section>
+
+    <section fxFlex="50">
+      <label>Default value style</label>
+      <pds-combo-box placeholder="Type something and hit enter..."></pds-combo-box>
+    </section>
+    <fx-break></fx-break>
+    <section fxFlex="50">
+      <label>Tag value style</label>
+      <pds-combo-box placeholder="Type something and hit enter...">
+        <pds-tag *pdsComboDef="let value">{{ value }}</pds-tag>
+      </pds-combo-box>
+    </section>
+    <section fxFlex="50">
+      <label>Readonly tag value style</label>
+      <pds-combo-box [value]="[ 1, 2 ]" readOnly="true">
+        <pds-tag *pdsComboDef="let value">{{ value }}</pds-tag>
+      </pds-combo-box>
+    </section>
+
+    <section fxFlex="100">
+      <h5>Select Box</h5>
+    </section>
+
+    <section fxFlex="50">
+      <label>Multi selection behavior&nbsp;&nbsp;<pds-tag>default</pds-tag></label>
+      <pds-select-box placeholder="Select options...">
+        <pds-select-list>
+          <pds-select-option value="1">1</pds-select-option>
+          <pds-select-option value="2">2</pds-select-option>
+        </pds-select-list>
+      </pds-select-box>
+    </section>
+    <section fxFlex="50">
+      <label>Single selection behavior</label>
+      <pds-select-box placeholder="Select an option...">
+        <pds-select-list mode="single">
+          <pds-select-option value="1">1</pds-select-option>
+          <pds-select-option value="2">2</pds-select-option>
+        </pds-select-list>
+      </pds-select-box>
+    </section>
+    <fx-break></fx-break>
+    <section fxFlex="50">
+      <label>Tag value style with multi selection behavior</label>
+      <pds-select-box placeholder="Select options...">
+        <pds-tag *pdsSelectDef="let value">{{ value }}</pds-tag>
+        <pds-select-list>
+          <pds-select-option value="1">1</pds-select-option>
+          <pds-select-option value="2">2</pds-select-option>
+        </pds-select-list>
+      </pds-select-box>
+    </section>
+    <section fxFlex="50">
+      <label>Read only tag value style</label>
+      <pds-select-box [value]="[ 1, 2 ]" readOnly="true">
+        <pds-tag *pdsSelectDef="let value">{{ value }}</pds-tag>
+        <pds-select-list>
+          <pds-select-option value="1">1</pds-select-option>
+          <pds-select-option value="2">2</pds-select-option>
+        </pds-select-list>
+      </pds-select-box>
+    </section>
+
+    <section fxFlex="50">
+      <h5>Radio Box</h5>
+      <div pdsRadioGroup fxLayout fxLayoutGap="24px">
+        <pds-radio-box label="1"></pds-radio-box>
+        <pds-radio-box label="2" labelAlign="left"></pds-radio-box>
+      </div>
+    </section>
+
+    <section fxFlex="50">
+      <h5>Check Box</h5>
+      <div fxLayout fxLayoutGap="24px">
+        <pds-check-box label="1"></pds-check-box>
+        <pds-check-box label="2" labelAlign="left"></pds-check-box>
+      </div>
+    </section>
+
+    <section fxFlex="100">
+      <h5>Tabs</h5>
+      <pds-tabs>
+        <pds-tab class="active">Active</pds-tab>
+        <pds-tab>Other Tab</pds-tab>
+        <pds-tab disabled>Disabled Tab</pds-tab>
+      </pds-tabs>
+    </section>
+
+    <section fxFlex="100">
+      <h5>Alert</h5>
+
+      <pds-alert>Primary style</pds-alert>
+      <pds-alert class="warn">
+        <svg-icon name="info" pdsBefore></svg-icon>
+        Warning style with icon before
+      </pds-alert>
+      <pds-alert class="bad">
+        <button class="small" pdsAfter>Dismiss</button>
+        Bad style with button after
+      </pds-alert>
+    </section>
+
+  </page-content>
 </page-layout>

@@ -2,7 +2,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { LoadingStateModule, NavigationModule, SvgIconModule } from '@vitagroup/cdk';
+import { LoadingStateModule, NavModule, SvgIconModule } from '@vitagroup/cdk';
+import { FORM_ERROR_MESSAGES, FormErrorMessages } from '@vitagroup/cdk/forms';
 import {
   FlexContainer,
   FlexContainerModule,
@@ -11,7 +12,7 @@ import {
   TemplateEncapsulation,
 } from '@vitagroup/cdk/layout';
 import { RouteDataPipeModule, TemplateOutletModule } from '@vitagroup/common';
-import { MainMenuModule, RingLoader, TagModule, TextBoxModule } from '@vitagroup/pds-components';
+import { FormStatusModule, MainMenuModule, RingLoader, TagModule, TextBoxModule } from '@vitagroup/pds-components';
 import { APP_ICON_IMPORT_PROVIDER } from './app-icon-provider';
 import { APP_NAV_ENTRY_PROVIDER, APP_STATIC_NAV_ENTRY_PROVIDER } from './app-navigation-provider';
 import {
@@ -46,7 +47,7 @@ import { APP_GUIDES_INIT_PROVIDER } from './services/app-guides.service';
     PageLayoutModule,
     SvgIconModule,
     RouteDataPipeModule,
-    NavigationModule,
+    NavModule,
     TextBoxModule,
     TagModule,
   ],
@@ -57,6 +58,13 @@ import { APP_GUIDES_INIT_PROVIDER } from './services/app-guides.service';
       useValue: { name: 'fx-container', container: FlexContainer } as TemplateEncapsulation,
       multi: true,
     },
+    {
+      provide: FORM_ERROR_MESSAGES,
+      useValue: {
+        required: $localize`The field requires a value!`,
+      } as FormErrorMessages,
+    },
+
     APP_NAV_ENTRY_PROVIDER,
     APP_STATIC_NAV_ENTRY_PROVIDER,
     APP_SITEMAP_PROVIDER,

@@ -7,18 +7,10 @@ import { PageHeader } from '@vitagroup/cdk/layout';
   encapsulation: ViewEncapsulation.None,
   template: `
     <div class="page-headline body-small">
-      <!-- todo(@janunld): integrate pds-breadcrumbs as soon as implemented -->
-      <span class="capitalized">Product Design System</span>
       <ng-container *ngIf="'title' | routeData | async as title">
-        &mdash;
-        <span class="page-title">{{ title }}</span>
+        <span class="page-title uppercase">{{ title }}</span>
       </ng-container>
     </div>
-    <!--<div class="app-search">
-      <pds-text-box placeholder="Search...">
-        <svg-icon name="search" textSuffix></svg-icon>
-      </pds-text-box>
-    </div>-->
   `,
 })
 export class AppHeaderComponent {
