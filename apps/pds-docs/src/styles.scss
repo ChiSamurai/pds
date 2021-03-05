@@ -26,53 +26,24 @@
 @include pds.browser-scrollbar;
 @include cdk-overlay;
 
-@at-root .blue {
-  $blue-theme: pds.theme-define(
-    (
-      'primary-dark': $deep-blue,
-      'primary': $blue,
-      'primary-light': $bright-blue,
-    )
-  );
-  @include pds.theme($blue-theme);
-}
-
-@at-root .petrol {
-  $petrol-theme: pds.theme-define(
-    (
-      'primary-dark': $dark-green,
-      'primary': $petrol,
-      'primary-light': $light-turquoise,
-    )
-  );
-  @include pds.theme($petrol-theme);
-}
-
-$dark-theme: pds.theme-define(
-  (
-    'foreground': #f2f2f2,
-    'background': --gray-lightest,
-    'link': --primary-light,
-    'gray-darkest': #d9d9d9,
-    'gray-darker': #bfbfbf,
-    'gray-dark': #6b6b6b,
-    'gray': #383838,
-    'gray-light': #212121,
-    'gray-lighter': #1a1a1a,
-    'gray-lightest': #141414,
-  )
-);
-
 @import '~highlight.js/scss/vs';
 
 @at-root .dark {
-  @include pds.theme($dark-theme);
+  @include pds.theme(pds.$dark-theme);
   @import '~highlight.js/scss/vs2015';
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    @include pds.theme($dark-theme);
+    @include pds.theme(pds.$dark-theme);
     @import '~highlight.js/scss/vs2015';
   }
+}
+
+@at-root .blue {
+  @include pds.theme(pds.$blue-theme);
+}
+
+@at-root .petrol {
+  @include pds.theme(pds.$petrol-theme);
 }

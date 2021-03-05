@@ -8,7 +8,8 @@
 $input-padding-x: $space-3 !default;
 $input-padding-y: $space-2 !default;
 
-$input-border: 1px solid var(--gray) !default;
+$input-background-color: var(--gray-light) !default;
+$input-border: 1px solid $input-background-color !default;
 $input-placeholder: var(--gray-dark) !default;
 
 @mixin input {
@@ -66,18 +67,18 @@ $input-placeholder: var(--gray-dark) !default;
   appearance: none;
   box-sizing: border-box;
   transition: 100ms ease-out;
-  background-color: var(--gray);
+  background-color: $input-background-color;
   color: var(--foreground);
   border: $input-border;
 }
 
 @mixin input-disabled {
   border-color: var(--disabled);
-  color: var(--disabled);
+  color: var(--gray-dark);
   pointer-events: none;
 }
 @mixin input-read-only {
-  border-color: var(--disabled) !important;
+  border-color: var(--disabled);
 }
 
 @mixin input-error {
@@ -86,7 +87,7 @@ $input-placeholder: var(--gray-dark) !default;
 }
 
 @mixin input-hover {
-  border-color: var(--gray-dark);
+  border-color: var(--gray);
 }
 @mixin input-focus {
   box-shadow: 0 0 0 1px var(--primary-light);

@@ -15,7 +15,7 @@ and **petrol**. They can be imported as easy as...
 
 ## Sass
 
-Before we can start using the `scss` APIs it's recommended to include the base path
+Before we can start using the Sass API it's recommended to include the base path
 to the root of the installed `@vitagroup/pds-css/sass` lib. This is usually done using
 the `includePaths` option of your Sass build configuration.
 
@@ -70,11 +70,21 @@ Let's assume we want to change the color to the **blue** PDS signature color.
 @include pds.html5;
 ```
 
-### Creating a Theme
+### Building a Theme
 
-A common desire, especially by developers, is a dark style. Let's try to
-create a theme according to our preferences. The `@media` query even allows
-us to dynamically react to OS settings outside the browser sandbox. 
+A common desire, especially by developers, is a dark theme. Luckily the **PDS**
+comes with its one _pre-defined_ dark theme, `pds.$dark-theme`. The theme should
+basically take effect as soon as we apply the `dark` class somewhere.
+
+```scss
+@use "styleguide" as pds;
+
+@at-root .dark {
+  @include pds.theme(pds.$dark-theme);
+}
+```
+
+We can also create a custom theme with some gray overwrites, for example:
 
 ```scss
 @use "styleguide" as pds;
@@ -90,15 +100,11 @@ $dark-theme: pds.theme-define(
     "gray": #383838,
     "gray-light": #212121,
     "gray-lighter": #1a1a1a,
-    "gray-lightest": #141414,
-
-    "link": --primary-light,
+    "gray-lightest": #141414
   )
 );
 
-@media (prefers-color-scheme: dark) {
-  body {
-    @include pds.theme($dark-theme);
-  }
+@at-root .dark {
+  @include pds.theme($dark-theme);
 }
 ```

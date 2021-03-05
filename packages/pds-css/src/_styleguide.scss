@@ -9,6 +9,7 @@
 @forward "styleguide/roundings";
 @forward "styleguide/spacings";
 @forward "styleguide/inputs";
+@forward "styleguide/themes";
 @forward "styleguide/mixins";
 // </editor-fold>
 // Usages <editor-fold>
@@ -29,6 +30,7 @@
 @use "styleguide/roundings" as *;
 @use "styleguide/spacings" as *;
 @use "styleguide/inputs" as *;
+@use "styleguide/themes" as *;
 // </editor-fold>
 
 /// Disables, enables or scales the global spacing. Can be any floating point number (must be unit-less)
@@ -39,9 +41,9 @@ $rounding: $rounding !default;
 /// Gets or sets a map or a list of maps containing color properties that will be generated as so called
 /// "custom color properties". Will generate 2 custom properties for each definition when $color-rgb is set
 /// to `true` (eg. `--primary: #fff;` will generate `--primary-rbg: 255,255,255;` as well)
-$colors: ($accent-color-map, $system-color-map) !default;
+$colors: ($accent-color-map) !default;
 /// Gets or sets a list of class names generated for text accents (eg. text-primary, text-primary-dark, ...)
-$color-classes: ("primary", "primary-dark", "primary-light", "good", "warning", "bad") !default;
+$color-classes: ("primary", "good", "warn", "bad") !default;
 /// Enables or disables additional custom property generation for color properties
 $color-rgb: false !default;
 
@@ -138,7 +140,23 @@ $font-family: "PT Sans", sans-serif !default;
 
 /// Includes utility classes based on the value of `$color-classes`
 @mixin color-classes {
-  @include text-color-accents($color-classes);
+  @include color-accent-classes($color-classes, "text");
+
+  @if list.index($color-classes, "good") != null {
+    @at-root .good {
+      @include theme($good-theme);
+    }
+  }
+  @if list.index($color-classes, "warn") != null {
+    @at-root .warn {
+      @include theme($warn-theme);
+    }
+  }
+  @if list.index($color-classes, "bad") != null {
+    @at-root .bad {
+      @include theme($bad-theme);
+    }
+  }
 }
 
 /// Includes utility classes based on the value of `$typography-classes`

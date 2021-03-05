@@ -1,94 +1,51 @@
-$system-light: #ebebeb !default;
-$system-light-t1: #f5f5f5 !default;
-$system-light-t2: #ffffff !default;
-$system-light-outline: $system-light !default;
+$light: #ebebeb !default;
+$light-t1: #f5f5f5 !default;
+$light-t2: #ffffff !default;
+$light-outline: $light !default;
 
-$system-dark: #000000 !default;
-$system-dark-t1: #232323 !default;
-$system-dark-t2: #777777 !default;
-$system-dark-t3: #a3a3a3 !default;
-$system-dark-t4: #c8c8c8 !default;
-$system-dark-outline: $system-dark-t2 !default;
+$dark: #000000 !default;
+$dark-t1: #232323 !default;
+$dark-t2: #777777 !default;
+$dark-t3: #a3a3a3 !default;
+$dark-t4: #c8c8c8 !default;
+$dark-outline: $dark-t2 !default;
 
-$system-red: #e63535 !default;
-$system-red-t1: #ff3b3b !default;
-$system-red-t2: #ff5c5c !default;
-$system-red-t3: #ff8080 !default;
-$system-red-t4: #ffe6e6 !default;
-$system-red-outline: $system-red-t1 !default;
+$red-s1: #b02828 !default;
+$red: #e63535 !default;
+$red-t1: #ff3b3b !default;
+$red-t2: #ff5c5c !default;
+$red-t3: #ff8080 !default;
+$red-t4: #ffe6e6 !default;
+$red-outline: $red-t1 !default;
 
-$system-green: #159f03 !default;
-$system-green-t1: #50b742 !default;
-$system-green-t2: #8acf81 !default;
-$system-green-t3: #c4e7c0 !default;
-$system-green-t4: #e3fff1 !default;
-$system-green-outline: $system-green !default;
+$green-s1: #0e6b02 !default;
+$green: #159f03 !default;
+$green-t1: #50b742 !default;
+$green-t2: #8acf81 !default;
+$green-t3: #c4e7c0 !default;
+$green-t4: #e3fff1 !default;
+$green-outline: $green !default;
 
-$system-blue: #0647f5 !default;
-$system-blue-t1: #2b62f6 !default;
-$system-blue-t2: #6aa1f9 !default;
-$system-blue-t3: #c1dbfc !default;
-$system-blue-t4: #e5f0ff !default;
-$system-blue-outline: #1476d8 !default;
+$blue-s1: #0432b0 !default;
+$blue: #0647f5 !default;
+$blue-t1: #2b62f6 !default;
+$blue-t2: #6aa1f9 !default;
+$blue-t3: #c1dbfc !default;
+$blue-t4: #e5f0ff !default;
+$blue-outline: #1476d8 !default;
 
-$system-orange: #e67a00 !default;
-$system-orange-t1: #ff8800 !default;
-$system-orange-t2: #fdac42 !default;
-$system-orange-t3: #fccc75 !default;
-$system-orange-t4: #fff8e6 !default;
-$system-orange-outline: #de6800 !default;
+$orange-s1: #b05e00 !default;
+$orange: #e67a00 !default;
+$orange-t1: #ff8800 !default;
+$orange-t2: #fdac42 !default;
+$orange-t3: #fccc75 !default;
+$orange-t4: #fff8e6 !default;
+$orange-outline: #de6800 !default;
 
-$system-yellow: #fcba04 !default;
-$system-yellow-t1: #fdcc43 !default;
-$system-yellow-t2: #fdd668 !default;
-$system-yellow-t3: #feeab3 !default;
-$system-yellow-t4: #fef8e5 !default;
-$system-yellow-outline: #ffcc00 !default;
-
-$system-color-map: (
-  "light": $system-light,
-  "light-t1": $system-light-t1,
-  "light-t2": $system-light-t2,
-
-  "dark": $system-dark,
-  "dark-t1": $system-dark-t1,
-  "dark-t2": $system-dark-t2,
-  "dark-t3": $system-dark-t3,
-  "dark-t4": $system-dark-t4,
-  "dark-outline": $system-dark-outline,
-
-  "red": $system-red,
-  "red-t1": $system-red-t1,
-  "red-t2": $system-red-t2,
-  "red-t3": $system-red-t3,
-  "red-t4": $system-red-t4,
-  "red-outline": $system-red-outline,
-
-  "green": $system-green,
-  "green-t1": $system-green-t1,
-  "green-t2": $system-green-t2,
-  "green-t3": $system-green-t3,
-  "green-t4": $system-green-t4,
-  "green-outline": $system-green-outline,
-
-  "blue": $system-blue,
-  "blue-t1": $system-blue-t1,
-  "blue-t2": $system-blue-t2,
-  "blue-t3": $system-blue-t3,
-  "blue-t4": $system-blue-t4,
-  "blue-outline": $system-blue-outline,
-
-  "orange": $system-orange,
-  "orange-t1": $system-orange-t1,
-  "orange-t2": $system-orange-t2,
-  "orange-t3": $system-orange-t3,
-  "orange-t4": $system-orange-t4,
-  "orange-outline": $system-orange-outline,
-
-  "yellow": $system-yellow,
-  "yellow-t1": $system-yellow-t1,
-  "yellow-t2": $system-yellow-t2,
-  "yellow-t3": $system-yellow-t3,
-  "yellow-t4": $system-yellow-t4,
-  "yellow-outline": $system-yellow-outline,
-);
+$yellow-s1: #b08204 !default;
+$yellow: #fcba04 !default;
+$yellow-t1: #fdcc43 !default;
+$yellow-t2: #fdd668 !default;
+$yellow-t3: #feeab3 !default;
+$yellow-t4: #fef8e5 !default;
+$yellow-outline: #ffcc00 !default;

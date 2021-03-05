@@ -1,0 +1,58 @@
+@use "../colors" as *;
+@use "./theme";
+
+$blue-theme: theme.define(
+  (
+    "primary-dark": $deep-blue,
+    "primary": $blue,
+    "primary-light": $bright-blue,
+  )
+);
+
+$petrol-theme: theme.define(
+  (
+    "primary-dark": $dark-green,
+    "primary": $petrol,
+    "primary-light": $light-turquoise,
+  )
+);
+
+$dark-theme: theme.define(
+  (
+    "foreground": #f2f2f2,
+    "background": --gray-lightest,
+    "link": --primary-light,
+    "gray-darkest": #d9d9d9,
+    "gray-darker": #bfbfbf,
+    "gray-dark": #6b6b6b,
+    "gray": #383838,
+    "gray-light": #212121,
+    "gray-lighter": #1a1a1a,
+    "gray-lightest": #141414,
+    "disabled": --gray,
+  )
+) !default;
+
+$good-theme: theme.define(
+  (
+    "primary-dark": --good-dark,
+    "primary": --good,
+    "primary-light": --good-light,
+  )
+) !default;
+
+$warn-theme: theme.define(
+  (
+    "primary-dark": --warn-dark,
+    "primary": --warn,
+    "primary-light": --warn-light,
+  )
+) !default;
+
+$bad-theme: theme.define(
+  (
+    "primary-dark": --bad-dark,
+    "primary": --bad,
+    "primary-light": --bad-light,
+  )
+) !default;

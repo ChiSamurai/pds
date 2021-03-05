@@ -1,7 +1,7 @@
 @use "util/custom-property" as *;
 @use "util/coerce";
 
-@mixin accent($accent, $properties, $prefix: null, $parent: false, $accent-color: var($accent)) {
+@mixin accent-class($accent, $properties, $prefix: null, $parent: false, $accent-color: var($accent)) {
   $class-name: if($prefix != null, "#{$prefix}-#{$accent}", $accent);
   #{if($parent, "&.", ".")}#{$class-name} {
     @each $property in coerce.to-list($properties) {
@@ -10,24 +10,24 @@
   }
 }
 
-@mixin accents($accents, $properties, $prefix: null) {
+@mixin accent-classes($accents, $properties, $prefix: null) {
   @if type-of($accents) == list {
     @each $accent in $accents {
-      @include accent($accent, $properties, $prefix);
+      @include accent-class($accent, $properties, $prefix);
     }
   } @else if type-of($accents) == map {
     @each $accent, $accent-color in $accents {
-      @include accent($accent, $properties, $prefix, $accent-color);
+      @include accent-class($accent, $properties, $prefix, $accent-color);
     }
   } @else {
     @error "Unable to include accents. Unsupported accents input \"#{$accents}\"";
   }
 }
 
-@mixin color-accents($accents, $prefix: null) {
-  @include accents($accents, color, $prefix);
+@mixin color-accent-classes($accents, $prefix: null) {
+  @include accent-classes($accents, color, $prefix);
 }
 
-@mixin background-color-accents($accents, $prefix: null) {
-  @include accents($accents, background-color, $prefix);
+@mixin background-color-accent-classes($accents, $prefix: null) {
+  @include accent-classes($accents, background-color, $prefix);
 }

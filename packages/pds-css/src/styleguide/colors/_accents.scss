@@ -1,4 +1,5 @@
 @use "colors/berry" as *;
+@use "../theme";
 
 @use "./system" as *;
 
@@ -7,28 +8,39 @@ $primary: $berry !default;
 $primary-light: $pinkberry !default;
 $primary-contrast: white !default;
 
-$gray-darkest: var(--dark) !default;
-$gray-darker: var(--dark-t1) !default;
-$gray-dark: var(--dark-t2) !default;
-$gray: var(--dark-t4) !default;
-$gray-light: var(--light) !default;
-$gray-lighter: var(--light-t1) !default;
-$gray-lightest: var(--light-t2) !default;
+$gray-darkest: $dark !default;
+$gray-darker: $dark-t1 !default;
+$gray-dark: $dark-t2 !default;
+$gray: $dark-t4 !default;
+$gray-light: $light !default;
+$gray-lighter: $light-t1 !default;
+$gray-lightest: $light-t2 !default;
 
-$good: var(--green) !default;
-$good-outline: var(--green-outline) !default;
+$good-dark: $green-s1 !default;
+$good: $green !default;
+$good-light: $green-t1 !default;
+
+$good-outline: $green-outline !default;
 $good-contrast: white !default;
 
-$warning: var(--yellow) !default;
-$warning-outline: var(--yellow-outline) !default;
-$warning-contrast: black !default;
+$warn-dark: $yellow-s1 !default;
+$warn: $yellow !default;
+$warn-light: $yellow-t1 !default;
 
-$bad: var(--red) !default;
-$bad-outline: var(--red-outline) !default;
+$warn-outline: $yellow-outline !default;
+$warn-contrast: black !default;
+
+$bad-dark: $red-s1 !default;
+$bad: $red !default;
+$bad-light: $red-t1 !default;
+
+$bad-outline: $red-outline !default;
 $bad-contrast: white !default;
 
 $link: var(--primary) !default;
 $link-visited: var(--primary) !default;
+
+$disabled: var(--gray) !default;
 
 $accent-color-map: (
   "primary-dark": $primary-dark,
@@ -42,14 +54,21 @@ $accent-color-map: (
   "gray-light": $gray-light,
   "gray-lighter": $gray-lighter,
   "gray-lightest": $gray-lightest,
+  "good-dark": $good-dark,
   "good": $good,
+  "good-light": $good-light,
   "good-outline": $good-outline,
   "good-contrast": $good-contrast,
-  "warning": $warning,
-  "warning-outline": $warning-outline,
-  "warning-contrast": $warning-contrast,
+  "warn-dark": $warn-dark,
+  "warn": $warn,
+  "warn-light": $warn-light,
+  "warn-outline": $warn-outline,
+  "warn-contrast": $warn-contrast,
+  "bad-dark": $bad-dark,
   "bad": $bad,
+  "bad-light": $bad-light,
   "bad-outline": $bad-outline,
   "bad-contrast": $bad-contrast,
   "link": $link,
+  "disabled": $disabled,
 ) !default;
