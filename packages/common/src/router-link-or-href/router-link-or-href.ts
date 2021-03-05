@@ -1,4 +1,14 @@
-import { Attribute, Directive, ElementRef, Inject, Input, NgModule, Renderer2, SecurityContext } from '@angular/core';
+import {
+  Attribute,
+  Directive,
+  ElementRef,
+  Inject,
+  Input,
+  NgModule,
+  Optional,
+  Renderer2,
+  SecurityContext,
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { WINDOW } from '@ng-web-apis/common';
@@ -35,13 +45,13 @@ export class RouterLinkOrHref extends RouterLink {
   }
 
   constructor(
-    router: Router,
-    route: ActivatedRoute,
     protected renderer: Renderer2,
     protected element: ElementRef,
     protected sanitizer: DomSanitizer,
     @Inject(WINDOW) protected window: /* @dynamic */ Window,
-    @Attribute('tab-index') tabIndex: string
+    @Attribute('tab-index') tabIndex: string,
+    @Optional() router?: Router,
+    @Optional() route?: ActivatedRoute
   ) {
     super(router, route, tabIndex, renderer, element);
   }
