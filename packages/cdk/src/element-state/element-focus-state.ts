@@ -6,7 +6,7 @@ function targetInside(target: any, element: any): boolean {
 }
 
 export class ElementFocusState<T = any> extends ElementState<T> {
-  // ancestors will be used to ignore unsets if they appear as target of the document:mousedown unset listener
+  /** Gets the ancestors whitelist that ignore unsets if they appear as target of the document:mousedown unset event */
   readonly ancestors = new Set<any>();
 
   className = 'focus';

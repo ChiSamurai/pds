@@ -6,6 +6,9 @@ export * from './dialog/dialog-dispose';
 export * from './dialog/dialog-overlay';
 export * from './dialog/dialog-ref';
 
+export * from './dropdown/dropdown-def-base';
+export * from './dropdown/dropdown-outlet-base';
+
 export * from './element-state/element-active-state';
 export * from './element-state/element-disabled-state';
 export * from './element-state/element-focus-state';
