@@ -57,11 +57,3 @@
     @content;
   }
 }
-
-$error-state-class: "error" !default;
-
-@mixin error-state($within-parent: false) {
-  @include state(($error-state-class), $within-parent) {
-    @content;
-  }
-}

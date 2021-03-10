@@ -1,6 +1,6 @@
 @use "styleguide/spacings" as *;
 @use "styleguide/roundings" as *;
-@use "util/mixins" as *;
+@use "util";
 
 @use "../../rounding" as *;
 @use "../../spacing" as *;
@@ -20,32 +20,29 @@ $input-placeholder: var(--gray-dark) !default;
 
     caret-color: var(--primary-light);
 
-    @include hover-state {
+    @include util.hover-state {
       @include input-hover;
     }
-    @include read-only-state {
+    @include util.read-only-state {
       @include input-read-only;
     }
-    @include focus-state {
+    @include util.focus-state {
       @include input-focus;
     }
 
-    @include disabled-state {
+    @include util.disabled-state {
       @include input-disabled;
     }
 
-    @content;
-
-    // todo: @include error_state( $within_parent: true ) { }
-    .error &,
-    &.error {
+    &:invalid {
       @include input-error;
     }
-
     &::placeholder {
       color: $input-placeholder;
       user-select: none;
     }
+
+    @content;
   }
 
   select,
@@ -72,20 +69,6 @@ $input-placeholder: var(--gray-dark) !default;
   border: $input-border;
 }
 
-@mixin input-disabled {
-  border-color: var(--disabled);
-  color: var(--gray-dark);
-  pointer-events: none;
-}
-@mixin input-read-only {
-  border-color: var(--disabled);
-}
-
-@mixin input-error {
-  color: var(--bad);
-  border-color: var(--bad);
-}
-
 @mixin input-hover {
   border-color: var(--gray);
 }
@@ -93,4 +76,21 @@ $input-placeholder: var(--gray-dark) !default;
   box-shadow: 0 0 0 1px var(--primary-light);
   border-color: var(--primary-light);
   background: var(--background);
+}
+
+@mixin input-read-only {
+  border-color: var(--gray-lighter);
+  background-color: var(--gray-lighter);
+}
+@mixin input-disabled {
+  @include input-read-only;
+
+  color: var(--disabled);
+  pointer-events: none;
+}
+
+@mixin input-error {
+  color: var(--bad);
+  box-shadow: 0 0 0 1px var(--bad);
+  border-color: var(--bad);
 }
