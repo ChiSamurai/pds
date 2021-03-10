@@ -10,6 +10,11 @@ export * from './card/card';
 export * from './combo-box/module';
 export * from './combo-box/combo-box';
 
+export * from './dropdown/module';
+export * from './dropdown/dropdown';
+export * from './dropdown/dropdown-def';
+export * from './dropdown/dropdown-outlet';
+
 export * from './form-status/module';
 export * from './form-status/form-status';
 

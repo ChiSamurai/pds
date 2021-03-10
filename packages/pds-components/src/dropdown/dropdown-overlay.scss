@@ -1,0 +1,5 @@
+@use "styleguide" as pds;
+
+.pds-dropdown-overlay-container > * {
+  @include pds.elevation(pds.$overlay-elevation);
+}

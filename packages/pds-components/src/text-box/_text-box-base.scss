@@ -37,4 +37,8 @@
   @include util.disabled-state {
     @include pds.input-disabled;
   }
+
+  &.ng-invalid {
+    @include pds.input-error;
+  }
 }
