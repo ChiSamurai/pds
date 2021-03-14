@@ -60,7 +60,7 @@ $body-typography: --body !default;
 /// Gets or sets the main foreground color to use
 $foreground-color: --gray-darker !default;
 /// Gets or sets the main background color to use
-$background-color: --gray-lighter !default;
+$background-color: --gray-lightest !default;
 /// Gets or sets the _default_ font family name to use
 $font-family: "PT Sans", sans-serif !default;
 
@@ -125,17 +125,9 @@ $font-family: "PT Sans", sans-serif !default;
   // forms
   @at-root :root {
     --input-height: #{$input-height};
-    --input-spacing: #{$input-spacing};
-    --input-rounding: #{$input-rounding};
   }
-  @include button {
-    --spacing: var(--input-spacing);
-    --rounding: var(--input-rounding);
-  }
-  @include input {
-    --spacing: var(--input-spacing);
-    --rounding: var(--input-rounding);
-  }
+  @include button;
+  @include input;
 }
 
 /// Includes utility classes based on the value of `$color-classes`

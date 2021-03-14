@@ -5,8 +5,8 @@
 @use "../../rounding" as *;
 @use "../../spacing" as *;
 
-$input-padding-x: $space-3 !default;
-$input-padding-y: $space-2 !default;
+$input-padding-x: var(--space-3) !default;
+$input-padding-y: var(--space-2) !default;
 
 $input-background-color: var(--gray-light) !default;
 $input-border: 1px solid $input-background-color !default;
