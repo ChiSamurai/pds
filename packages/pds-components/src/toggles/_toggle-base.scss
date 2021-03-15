@@ -27,11 +27,10 @@ $toggle-size: 30px !default;
     @include pds.input-base($spacing: false);
 
     color: var(--primary-light);
-    width: $toggle-size;
     height: $toggle-size;
+    width: $toggle-size;
   }
 
-  // todo: @include error_state( $within_parent: true ) { }
   @include util.hover-state {
     .toggle-indicator {
       @include pds.input-hover;

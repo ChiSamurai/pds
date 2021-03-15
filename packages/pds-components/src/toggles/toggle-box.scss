@@ -1,0 +1,47 @@
+@use "styleguide" as pds;
+@use "toggle-base" as *;
+@use "util";
+
+pds-toggle-box {
+  $toggle-knob-spacing: 1px;
+  $toggle-knob-size: $toggle-size - ($toggle-knob-spacing * 2);
+
+  @include pds-toggle-base;
+
+  .toggle-indicator {
+    @include pds.rounding($toggle-size);
+
+    width: ($toggle-knob-size + $toggle-knob-spacing) * 2;
+    align-items: center;
+    display: flex;
+
+    .toggle-knob {
+      @include pds.elevation(pds.$raised-elevation);
+      @include pds.outer-spacing($toggle-knob-spacing, x);
+
+      position: relative;
+      border-radius: inherit;
+      transition: 100ms ease-out;
+      background: var(--background);
+      height: $toggle-knob-size - 2px;
+      width: $toggle-knob-size - 2px;
+    }
+  }
+
+  @include util.focus-state {
+    .toggle-indicator {
+      background: var(--gray-light);
+    }
+  }
+
+  &.checked {
+    .toggle-indicator {
+      border-color: var(--primary-light);
+      background: var(--primary-light);
+
+      .toggle-knob {
+        transform: translateX($toggle-knob-size);
+      }
+    }
+  }
+}

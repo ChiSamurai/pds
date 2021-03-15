@@ -1,16 +1,14 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, NgModule, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { RadioBoxBase } from '@vitagroup/cdk';
+import { ToggleBase } from '@vitagroup/cdk';
 
 @Component({
-  selector: 'pds-radio-box',
-  styleUrls: ['./radio-box.scss'],
+  selector: 'pds-toggle-box',
+  styleUrls: ['./toggle-box.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: RadioBox, multi: true },
-    { provide: RadioBoxBase, useExisting: RadioBox },
-  ],
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: ToggleBox, multi: true }],
   template: `
     <ng-template #labelTemplate>
       <ng-container *ngIf="label != null; else projectLabelContent">
@@ -24,13 +22,22 @@ import { RadioBoxBase } from '@vitagroup/cdk';
     <ng-container *ngIf="labelAlign == 'before'">
       <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
     </ng-container>
-    <div class="toggle-indicator"></div>
+    <div class="toggle-indicator">
+      <div class="toggle-knob"></div>
+    </div>
     <ng-container *ngIf="labelAlign == 'after'">
       <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
     </ng-container>
   `,
 })
-export class RadioBox extends RadioBoxBase {
-  @Input() label: string | null;
-  @Input() labelAlign: 'before' | 'after' = 'after';
+export class ToggleBox extends ToggleBase {
+  @Input() label?: string;
+  @Input() labelAlign?: 'before' | 'after' = 'after';
 }
+
+@NgModule({
+  declarations: [ToggleBox],
+  exports: [ToggleBox],
+  imports: [CommonModule],
+})
+export class ToggleBoxModule {}

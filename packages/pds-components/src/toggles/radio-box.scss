@@ -1,13 +1,14 @@
 @use "styleguide" as pds;
 @use 'toggle-base' as *;
 
-$radio_box_indicator_size: 12px !default;
+$indicator-size: 12px !default;
 
 pds-radio-box {
   @include pds-toggle-base;
 
   .toggle-indicator {
-    border-radius: 15px;
+    @include pds.rounding($indicator-size * 2);
+
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -26,8 +27,8 @@ pds-radio-box {
   &.checked {
     .toggle-indicator {
       &:before {
-        height: $radio_box_indicator_size;
-        width: $radio_box_indicator_size;
+        height: $indicator-size;
+        width: $indicator-size;
       }
     }
   }

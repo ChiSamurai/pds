@@ -50,8 +50,8 @@ export * from './tag/tag';
 export * from './text-box/module';
 export * from './text-box/text-box';
 
-export * from './toggles/check-box-module';
 export * from './toggles/check-box';
 export * from './toggles/radio-box-module';
 export * from './toggles/radio-box';
+export * from './toggles/toggle-box';
 export * from './toggles/radio-group';
