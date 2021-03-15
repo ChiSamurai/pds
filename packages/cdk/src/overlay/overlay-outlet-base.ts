@@ -43,8 +43,8 @@ export abstract class OverlayOutletBase<T extends OverlayDefBase> implements OnI
     protected renderer: Renderer2
   ) {}
 
-  protected configureOverlay(): OverlayConfig {
-    return new OverlayConfig();
+  protected configureOverlay(config?: OverlayConfig): OverlayConfig {
+    return new OverlayConfig({ scrollStrategy: this.overlay.scrollStrategies.close(), ...config });
   }
 
   protected listenUntilDestroyed(target: ElementRef | any, eventName: string, listener: EventListener): void {
