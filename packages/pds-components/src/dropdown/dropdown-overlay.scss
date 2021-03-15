@@ -1,5 +1,8 @@
 @use "styleguide" as pds;
 
 .pds-dropdown-overlay-container > * {
-  @include pds.elevation(pds.$overlay-elevation);
+  @include pds.elevation(pds.$raised-elevation);
+  @include pds.outer-spacing(--space-1, top);
+
+  width: 100%;
 }

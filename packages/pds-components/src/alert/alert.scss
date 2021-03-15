@@ -1,7 +1,7 @@
 @use "styleguide" as pds;
 @use "util";
 
-$alert-color: var(--primary) !default;
+$alert-color: var(--primary-light) !default;
 $alert-affix-color: var(--primary) !default;
 $alert-color-contrast: var(--foreground) !default;
 

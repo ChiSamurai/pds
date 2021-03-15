@@ -16,7 +16,7 @@ pds-select-option {
   }
 
   @include util.active-state {
-    background: var(--primary-light);
+    background: var(--primary-dark);
     color: var(--primary-contrast);
   }
 }

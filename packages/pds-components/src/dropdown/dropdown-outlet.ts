@@ -3,11 +3,11 @@ import { Directive } from '@angular/core';
 import { DropdownOutletBase } from '@vitagroup/cdk';
 
 @Directive({
-  selector: '[pdsDropdownOutlet]',
-  inputs: ['overlayDef: pdsDropdownOutlet'],
+  selector: '[pdsDropdown]',
+  inputs: ['overlayDef: pdsDropdown'],
 })
 export class DropdownOutlet extends DropdownOutletBase {
   protected configureOverlay(): OverlayConfig {
-    return new OverlayConfig({ panelClass: 'pds-dropdown-overlay-container' });
+    return super.configureOverlay({ panelClass: 'pds-dropdown-overlay-container' });
   }
 }

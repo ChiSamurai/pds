@@ -11,7 +11,7 @@ pds-tag {
   user-select: none;
   align-items: center;
   display: inline-flex;
-  background-color: var(--gray);
-  color: var(--foreground);
+  background-color: var(--primary-dark);
+  color: var(--primary-contrast);
   height: $tag-height;
 }
