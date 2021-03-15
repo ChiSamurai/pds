@@ -3,7 +3,6 @@ import {
   ComponentFactoryResolver,
   ComponentRef,
   Directive,
-  DoCheck,
   EmbeddedViewRef,
   Inject,
   Injector,

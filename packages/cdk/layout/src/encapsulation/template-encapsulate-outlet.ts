@@ -13,24 +13,21 @@ import {
 export const ENCAPSULATE_TEMPLATE = new InjectionToken<TemplateRef<any>>('ENCAPSULATE_TEMPLATE');
 
 @Directive({ selector: '[encapsulateTemplateOutlet]' })
-export class TemplateEncapsulateOutlet implements DoCheck, OnDestroy {
+export class TemplateEncapsulateOutlet implements OnDestroy {
   protected embeddedView: EmbeddedViewRef<any>;
 
   constructor(
     @Inject(ENCAPSULATE_TEMPLATE)
     protected template: TemplateRef<any>,
     protected viewContainer: ViewContainerRef
-  ) {}
+  ) {
+    this.embeddedView = this.viewContainer.createEmbeddedView(this.template);
+  }
 
   protected destroyEmbeddedView(): void {
     if (this.embeddedView != null && !this.embeddedView.destroyed) this.embeddedView.destroy();
   }
 
-  ngDoCheck() {
-    this.destroyEmbeddedView();
-    this.embeddedView = this.viewContainer.createEmbeddedView(this.template);
-    this.embeddedView.detectChanges();
-  }
   ngOnDestroy() {
     this.destroyEmbeddedView();
   }
