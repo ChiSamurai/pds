@@ -6,6 +6,7 @@ $blue-theme: theme.define(
     "primary-dark": $deep-blue,
     "primary": $blue,
     "primary-light": $bright-blue,
+    "primary-contract": #fff,
   )
 );
 
@@ -14,6 +15,7 @@ $petrol-theme: theme.define(
     "primary-dark": $dark-green,
     "primary": $petrol,
     "primary-light": $light-turquoise,
+    "primary-contrast": #fff,
   )
 );
 
@@ -38,6 +40,7 @@ $good-theme: theme.define(
     "primary-dark": --good-dark,
     "primary": --good,
     "primary-light": --good-light,
+    "primary-contrast": --good-contrast,
   )
 ) !default;
 
@@ -46,6 +49,7 @@ $warn-theme: theme.define(
     "primary-dark": --warn-dark,
     "primary": --warn,
     "primary-light": --warn-light,
+    "primary-contrast": --warn-contrast,
   )
 ) !default;
 
@@ -54,5 +58,6 @@ $bad-theme: theme.define(
     "primary-dark": --bad-dark,
     "primary": --bad,
     "primary-light": --bad-light,
+    "primary-contrast": --bad-contrast,
   )
 ) !default;
