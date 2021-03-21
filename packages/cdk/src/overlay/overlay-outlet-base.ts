@@ -7,6 +7,7 @@ import {
   EventEmitter,
   OnDestroy,
   OnInit,
+  Optional,
   Renderer2,
   ViewContainerRef,
 } from '@angular/core';
@@ -21,7 +22,7 @@ export abstract class OverlayOutletBase<T extends OverlayDefBase> implements OnI
   private _unlistener: EventUnlistener[] = [];
   private _viewRef: EmbeddedViewRef<any>;
 
-  protected readonly focusState = new ElementFocusState(this.viewContainerRef.element, this.renderer);
+  protected readonly focus: ElementFocusState;
   protected readonly ngDestroys = new Subject();
 
   protected portal: TemplatePortal;
@@ -40,8 +41,11 @@ export abstract class OverlayOutletBase<T extends OverlayDefBase> implements OnI
   constructor(
     protected overlay: Overlay,
     protected viewContainerRef: ViewContainerRef,
-    protected renderer: Renderer2
-  ) {}
+    protected renderer: Renderer2,
+    @Optional() focus?: ElementFocusState
+  ) {
+    this.focus = focus || new ElementFocusState(this.viewContainerRef.element, this.renderer);
+  }
 
   protected configureOverlay(config?: OverlayConfig): OverlayConfig {
     return new OverlayConfig({ scrollStrategy: this.overlay.scrollStrategies.close(), ...config });
@@ -68,9 +72,9 @@ export abstract class OverlayOutletBase<T extends OverlayDefBase> implements OnI
   ngOnInit() {
     const config = this.configureOverlay();
     this.overlayRef = this.overlay.create(config);
-    this.focusState.ancestors.add(this.overlayRef.overlayElement);
+    this.focus.ancestors.add(this.overlayRef.overlayElement);
 
-    this.focusState
+    this.focus
       .asObservable()
       .pipe(
         takeUntil(this.ngDestroys),
