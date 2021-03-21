@@ -1,6 +1,4 @@
-import { ContentChildren, Directive, Input, OnDestroy, OnInit, QueryList, TemplateRef } from '@angular/core';
-import { EventUnlistener } from '@vitagroup/common';
-import { Subject } from 'rxjs';
+import { ContentChildren, Directive, QueryList, TemplateRef } from '@angular/core';
 import { TextBoxBase } from '../text-box/text-box-base';
 import { ComboDefBase, ComboDefContext } from './combo-def-base';
 
@@ -19,9 +17,10 @@ export abstract class ComboBoxBase<T, C extends ComboDefContext<T> = ComboDefCon
     return this.value;
   }
   pop(): T | null {
-    const it = this.value.pop();
+    const value = this.value?.[this.value?.length - 1];
+    this.value = this.value?.slice(0, this.value?.length - 1);
     this.changeDetectorRef.detectChanges();
-    return it;
+    return value;
   }
 
   removeAt(index: number): T | null {
