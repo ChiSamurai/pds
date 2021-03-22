@@ -111,7 +111,6 @@ export abstract class InputDropdownOutletBase extends DropdownOutletBase impleme
           this.overlayDef.selectionModel?.reset(coerceArray(value));
         });
         this.overlayDef?.selectionModel.pipe(takeUntil(this.ngChanges)).subscribe((value) => {
-          this.inputAccessor?.input.patch('');
           this.valueAccessor.writeValue(value);
 
           if (this._latestKeyDownEvent?.key?.toLowerCase() === 'enter' && !this._latestKeyDownEvent.shiftKey)
