@@ -18,6 +18,11 @@ export * from './dropdown/dropdown-outlet';
 export * from './form-status/module';
 export * from './form-status/form-status';
 
+export * from './input-dropdown/module';
+export * from './input-dropdown/input-dropdown-def';
+export * from './input-dropdown/input-dropdown-outlet';
+export * from './input-dropdown/input-filter';
+
 export * from './nav/module';
 export * from './nav/nav';
 

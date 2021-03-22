@@ -1,5 +1,5 @@
 import { OverlayConfig } from '@angular/cdk/overlay';
-import { Directive } from '@angular/core';
+import { Directive, OnInit } from '@angular/core';
 import { DropdownOutletBase } from '@vitagroup/cdk';
 
 @Directive({

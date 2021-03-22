@@ -1,9 +1,10 @@
 import { Directive } from '@angular/core';
-import { DropdownDefBase } from '@vitagroup/cdk';
+import { DropdownDefBase, ElementFocusState, resolveElementFocusState } from '@vitagroup/cdk';
 
 @Directive({
   exportAs: 'pdsDropdownDef',
   selector: '[pdsDropdownDef]',
   inputs: ['preferredPosition: pdsDropdownPreferredPosition'],
+  providers: [{ provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [DropdownDef] }],
 })
 export class DropdownDef extends DropdownDefBase {}
