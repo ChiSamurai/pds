@@ -1,9 +1,5 @@
-import { ChangeDetectorRef, Inject, InjectionToken, OnDestroy, Pipe, PipeTransform } from '@angular/core';
-import { ControlInputAccessor, INPUT_ACCESSOR } from '@vitagroup/cdk';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-
-export type InputFilterFn<T> = (value: T, input?: string) => boolean;
+import { ChangeDetectorRef, Inject, InjectionToken, Pipe, PipeTransform } from '@angular/core';
+import { ControlInputAccessor, INPUT_ACCESSOR, InputFilterBase, InputFilterFn } from '@vitagroup/cdk';
 
 export const DEFAULT_INPUT_FILTER = new InjectionToken<InputFilterFn<unknown>>('DEFAULT_INPUT_FILTER', {
   providedIn: 'root',
@@ -17,31 +13,12 @@ export const DEFAULT_INPUT_FILTER = new InjectionToken<InputFilterFn<unknown>>('
 });
 
 @Pipe({ name: 'pdsInputFilter', pure: false })
-export class InputFilterPipe implements PipeTransform, OnDestroy {
-  protected readonly ngDestroys = new Subject();
-
+export class InputFilterPipe extends InputFilterBase implements PipeTransform {
   constructor(
     @Inject(INPUT_ACCESSOR) readonly inputAccessor: ControlInputAccessor,
     @Inject(DEFAULT_INPUT_FILTER) protected defaultFilter: InputFilterFn<unknown>,
     protected changeDetectorRef: ChangeDetectorRef
   ) {
-    this.inputAccessor.input
-      .asObservable()
-      .pipe(takeUntil(this.ngDestroys))
-      .subscribe(() => this.changeDetectorRef.markForCheck());
-  }
-
-  transform<T>(value: Iterable<T>, filter: InputFilterFn<T> = this.defaultFilter): T[] {
-    const input = this.inputAccessor?.input.snapshot;
-    let result = value ? Array.from(value) : [];
-
-    if (input) result = result.filter((it) => filter(it, input));
-
-    return result;
-  }
-
-  ngOnDestroy() {
-    this.ngDestroys.next();
-    this.ngDestroys.complete();
+    super(inputAccessor, defaultFilter, changeDetectorRef);
   }
 }

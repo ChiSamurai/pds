@@ -11,7 +11,7 @@ import { ElementFocusState, resolveElementFocusState, SelectionModel, SelectList
     { provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [SelectList] },
   ],
   template: `
-    <ng-content select="pds-select-option"></ng-content>
+    <ng-content></ng-content>
   `,
 })
 export class SelectList<T = any> extends SelectListBase<T> {}
