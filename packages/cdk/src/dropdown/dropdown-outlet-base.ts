@@ -1,5 +1,6 @@
-import { ConnectedPosition, OverlayConfig } from '@angular/cdk/overlay';
+import { ConnectedPosition } from '@angular/cdk/overlay';
 import { Directive, OnInit } from '@angular/core';
+import { ShortcutManager } from '@vitagroup/common';
 import { OverlayOutletBase } from '../overlay/overlay-outlet-base';
 import { DropdownDefBase, DropdownPosition, DropdownPositionX, DropdownPositionY } from './dropdown-def-base';
 

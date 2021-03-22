@@ -15,6 +15,10 @@ export * from './element-state/element-focus-state';
 export * from './element-state/element-read-only-state';
 export * from './element-state/element-state';
 
+export * from './input-dropdown/control-input-accessor';
+export * from './input-dropdown/input-dropdown-outlet-base';
+export * from './input-dropdown/input-dropdown-def-base';
+
 export * from './loading-state/module';
 export * from './loading-state/loading-indicator';
 export * from './loading-state/loading-overlay';
