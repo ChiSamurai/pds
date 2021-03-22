@@ -31,19 +31,21 @@ export abstract class ElementState<T = any> {
    */
   constructor(element: ElementRef<T> | T, protected renderer: Renderer2) {
     this.nativeElement = element instanceof ElementRef ? element.nativeElement : element;
-    if (this.configureEventListener != null) this.configureEventListener();
+    this.configure();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  protected configureEventListener(): void {}
+  protected configure(): void {}
 
-  set(): void {
+  set(value = true): void {
+    if (!value) return this.unset();
+
     if (this.hasClassName) this.renderer.addClass(this.nativeElement, this.className);
-    if (this.isUnset) this.state.patch(true);
+    this.state.patch(value);
   }
   unset(): void {
     if (this.hasClassName) this.renderer.removeClass(this.nativeElement, this.className);
-    if (this.isSet) this.state.patch(false);
+    this.state.patch(false);
   }
 
   toggle(): void {
@@ -59,12 +61,12 @@ export abstract class ElementState<T = any> {
     return this.state.asObservable();
   }
 
-  protected setOn(eventName: string, filter?: Predicate<any>): EventUnlistener {
+  protected setOn(eventName: string, filter?: Predicate<Event>): EventUnlistener {
     return this.listen(eventName, (e) => {
       if (filter == null || filter(e)) this.set();
     });
   }
-  protected unsetOn(eventName: string, filter?: Predicate<any>): EventUnlistener {
+  protected unsetOn(eventName: string, filter?: Predicate<Event>): EventUnlistener {
     return this.listen(eventName, (e) => {
       if (filter == null || filter(e)) this.unset();
     });
