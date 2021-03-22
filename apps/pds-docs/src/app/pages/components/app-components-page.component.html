@@ -20,9 +20,24 @@
     <fx-break></fx-break>
     <section fxFlex="50">
       <label>Usage with a <em>search</em> icon <em>before</em></label>
-      <pds-text-box placeholder="Type something...">
+      <pds-text-box placeholder="Type something..." [pdsInputDropdown]="searchDropdown">
         <svg-icon name="search" pdsBefore></svg-icon>
       </pds-text-box>
+
+      <pds-dropdown pdsInputDropdownDef #searchDropdown>
+        <pds-select-list>
+          <ng-container *ngIf="(options | pdsInputFilter) as filteredOptions">
+            <ng-container *ngIf="filteredOptions?.length; else noMatchTemplate">
+              <pds-select-option *ngFor="let option of filteredOptions" [value]="option">
+                {{ option }}
+              </pds-select-option>
+            </ng-container>
+          </ng-container>
+          <ng-template #noMatchTemplate>
+            <pds-select-option disabled="true">No matches</pds-select-option>
+          </ng-template>
+        </pds-select-list>
+      </pds-dropdown>
     </section>
     <section fxFlex="50">
       <label>Usage with a <em>search</em> icon <em>after</em></label>
@@ -103,17 +118,24 @@
 
     <section fxFlex="50">
       <label>Combo box with multi auto complete selection</label>
-      <pds-combo-box [pdsInputDropdown]="dropdown" placeholder="Type something an hit enter...">
+      <pds-combo-box [pdsInputDropdown]="comboBoxDropdown" placeholder="Type something an hit enter...">
         <pds-tag *pdsComboDef="let value">{{ value }}</pds-tag>
       </pds-combo-box>
 
-      <pds-dropdown pdsInputDropdownDef #dropdown>
-        <pds-select-list mode="multiple" #selectList>
-          <pds-select-option *ngFor="let option of options | pdsInputFilter" [value]="option">
-            <pds-check-box [checked]="selectList.isSelected(option)">
-              <label>{{ option }}</label>
-            </pds-check-box>
-          </pds-select-option>
+      <pds-dropdown pdsInputDropdownDef #comboBoxDropdown>
+        <pds-select-list mode="multiple" #selectList2>
+          <ng-container *ngIf="(options | pdsInputFilter) as filteredOptions">
+            <ng-container *ngIf="filteredOptions?.length; else noMatchTemplate">
+              <pds-select-option *ngFor="let option of filteredOptions" [value]="option">
+                <pds-check-box [checked]="selectList2.isSelected(option)">
+                  <label>{{ option }}</label>
+                </pds-check-box>
+              </pds-select-option>
+            </ng-container>
+          </ng-container>
+          <ng-template #noMatchTemplate>
+            <pds-select-option disabled="true">No matches</pds-select-option>
+          </ng-template>
         </pds-select-list>
       </pds-dropdown>
     </section>
