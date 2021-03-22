@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { ElementState } from '../element-state/element-state';
 import { LoadingState } from './loading-state';
 
-// tslint:disable-next-line:directive-selector
 @Directive({ selector: '[loadingState]' })
 export class ElementLoadingState extends ElementState {
   private _subs: Subscription[] = [];

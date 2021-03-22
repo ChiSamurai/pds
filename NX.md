@@ -39,7 +39,7 @@ Run `nx g @nrwl/react:lib my-lib` to generate a library.
 
 > You can also use any of the plugins above to generate libraries as well.
 
-Libraries are sharable across libraries and applications. They can be imported from `@adk/mylib`.
+Libraries are sharable across libraries and applications. They can be imported from `@vitagroup/mylib`.
 
 ## Development server
 

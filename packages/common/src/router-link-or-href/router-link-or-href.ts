@@ -22,7 +22,6 @@ export class RouterLinkOrHref extends RouterLink {
   private _isRouterLink = false;
   private _href: string;
 
-  // tslint:disable-next-line:no-inferrable-types
   @Input() target = '_blank';
 
   @Input() set routerLinkOrHref(value: any[] | string) {

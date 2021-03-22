@@ -6,7 +6,7 @@ import { ResourceOperationKey } from '../client/shared';
  * Holds the {@link Symbol} definition for resource metadata information which
  * gets attached statically to the resource type itself
  */
-export const RESOURCE_METADATA = Symbol('adk:resource_metadata');
+export const RESOURCE_METADATA = Symbol('__resource_metadata__');
 
 /**
  * Describes additional metadata information that will be attached to the

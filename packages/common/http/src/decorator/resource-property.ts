@@ -6,7 +6,7 @@ import { Type } from '@angular/core';
  * information which gets attached to static context of any parent type (aka.
  * class) it is used within
  */
-export const RESOURCE_PROPERTY_METADATA = Symbol('adk:resource_property_metadata');
+export const RESOURCE_PROPERTY_METADATA = Symbol('__resource_property_metadata__');
 
 /**
  * Describes the metadata information of a property in the static context of a
@@ -73,6 +73,7 @@ export function Property(metadata?: ResourcePropertyMetadata): PropertyDecorator
     // as the typescript reflection does yield pretty inconsistent results.
     // especially in the context of property reflection
     // todo(@JanUnld): consider removing the typescript reflection here?!
+    // eslint-disable-next-line no-prototype-builtins
     if (metadata && !metadata.hasOwnProperty('type'))
       metadata.type = Reflect.getMetadata('design:type', target, propertyKey);
     // we then use this map of property keys and their respective metadata
