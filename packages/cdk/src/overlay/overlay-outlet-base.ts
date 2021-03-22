@@ -11,7 +11,7 @@ import {
   Renderer2,
   ViewContainerRef,
 } from '@angular/core';
-import { EventUnlistener } from '@vitagroup/common';
+import { EventUnlistener, ShortcutManager } from '@vitagroup/common';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { ElementFocusState } from '../element-state/element-focus-state';
@@ -27,6 +27,8 @@ export abstract class OverlayOutletBase<T extends OverlayDefBase> implements OnI
 
   protected portal: TemplatePortal;
   protected overlayRef: OverlayRef;
+
+  readonly shortcuts = new ShortcutManager(this.renderer, this.viewContainerRef.element);
 
   deactivateOnBlur = false;
   overlayDef: T;
@@ -73,6 +75,8 @@ export abstract class OverlayOutletBase<T extends OverlayDefBase> implements OnI
     const config = this.configureOverlay();
     this.overlayRef = this.overlay.create(config);
     this.focus.ancestors.add(this.overlayRef.overlayElement);
+
+    this.shortcuts.register('document:esc', () => this.isActive && this.deactivate());
 
     this.focus
       .asObservable()

@@ -1,4 +1,5 @@
 import { ContentChildren, Directive, QueryList, TemplateRef } from '@angular/core';
+import { ShortcutManager } from '@vitagroup/common';
 import { TextBoxBase } from '../text-box/text-box-base';
 import { ComboDefBase, ComboDefContext } from './combo-def-base';
 
@@ -6,6 +7,8 @@ import { ComboDefBase, ComboDefContext } from './combo-def-base';
 export abstract class ComboBoxBase<T, C extends ComboDefContext<T> = ComboDefContext<T>> extends TextBoxBase<T[]> {
   @ContentChildren(ComboDefBase, { descendants: true })
   protected readonly defs: QueryList<ComboDefBase<T, C>>;
+
+  readonly shortcuts = new ShortcutManager(this.renderer, this.elementRef);
 
   get defaultTemplate(): TemplateRef<C> | null {
     return this.defs?.find((def) => def.when == null)?.template as TemplateRef<C>;

@@ -9,6 +9,7 @@ import {
   Inject,
   InjectionToken,
   isDevMode,
+  OnInit,
   QueryList,
   Renderer2,
   TemplateRef,
@@ -31,7 +32,7 @@ export const SELECT_BOX_OVERLAY_POSITIONS = new InjectionToken<ConnectedPosition
 @Directive()
 export abstract class SelectBoxBase<T, C extends SelectDefContext<T> = SelectDefContext<T>>
   extends ComboBoxBase<T, C>
-  implements AfterContentInit {
+  implements OnInit, AfterContentInit {
   @ContentChildren(SelectDefBase, { descendants: true }) protected readonly defs: QueryList<SelectDefBase<T, C>>;
   @ContentChild(SelectionModel) readonly selectionModel: SelectionModel<T>;
 
@@ -83,6 +84,11 @@ export abstract class SelectBoxBase<T, C extends SelectDefContext<T> = SelectDef
     else this.attachOverlay();
   }
 
+  ngOnInit() {
+    super.ngOnInit();
+
+    this.shortcuts.register('document:esc', () => this.focus.isSet && this.detachOverlay());
+  }
   ngAfterContentInit() {
     if (isDevMode() && this.selectionModel == null)
       console.warn(`${this.constructor.name} instantiated without a selection model as content child`);

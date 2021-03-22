@@ -8,6 +8,7 @@ export interface SelectionOptions {
 export type SelectOptions = SelectionOptions;
 export type DeselectOptions = SelectionOptions;
 export type ToggleOptions = SelectionOptions;
+export type ResetOptions = SelectionOptions;
 
 export interface SelectionChange<T = any> {
   source: SelectionModel<T>;
@@ -38,7 +39,7 @@ export class SelectionModel<T = any> extends Observable<T[]> {
   constructor(initialValue?: Iterable<T>, trackBy?: PrimitiveTrackByFn<T>);
   constructor(initialValueOrTrackBy?: Iterable<T> | PrimitiveTrackByFn<T>, trackBy?: PrimitiveTrackByFn<T>) {
     super((subscriber) => {
-      this._changes.pipe(map(() => this.toArray())).subscribe(subscriber);
+      this.changes.pipe(map(() => this.toArray())).subscribe(subscriber);
     });
     trackBy = typeof initialValueOrTrackBy === 'function' ? initialValueOrTrackBy : trackBy;
     const initialValue = typeof initialValueOrTrackBy === 'function' ? [] : initialValueOrTrackBy;
@@ -75,6 +76,13 @@ export class SelectionModel<T = any> extends Observable<T[]> {
     else this.select(value, options);
   }
 
+  reset(value?: T[], options?: ResetOptions): void {
+    this.deselect(options);
+    for (const innerValue of value || []) {
+      this.select(innerValue, options);
+    }
+  }
+
   toArray(): T[] {
     return Array.from(this.value);
   }
@@ -86,9 +94,9 @@ export class SelectionModel<T = any> extends Observable<T[]> {
     this._changes.next({ source: this, type, value });
   }
 
-  protected equalValueIdentity(value1: T, value2: T): boolean {
+  protected equalValueIdentity(value: T, other: T): boolean {
     const track = this.trackBy || ((value) => value);
-    return track(value1) === track(value2);
+    return track(value) === track(other);
   }
 
   private _isOptionsObject(obj: any): obj is SelectionOptions {

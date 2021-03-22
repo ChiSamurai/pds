@@ -1,21 +1,32 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
+  AfterContentInit,
   ChangeDetectorRef,
   Directive,
   ElementRef,
   EventEmitter,
   Input,
   OnDestroy,
+  OnInit,
   Output,
   Renderer2,
 } from '@angular/core';
 import { EventUnlistener } from '@vitagroup/common';
 import { Subject } from 'rxjs';
-import { ElementActiveState, ElementDisabledState, ElementFocusState, ElementReadOnlyState } from '../element-state';
+import { takeUntil } from 'rxjs/operators';
+import {
+  ElementActiveState,
+  ElementDisabledState,
+  ElementFocusAccessor,
+  ElementFocusState,
+  ElementReadOnlyState,
+} from '../element-state';
 import { ControlValueAccessorBase } from '../utils';
 
 @Directive()
-export abstract class TextBoxBase<T = any> extends ControlValueAccessorBase<T> implements OnDestroy {
+export abstract class TextBoxBase<T = any>
+  extends ControlValueAccessorBase<T>
+  implements OnInit, OnDestroy, ElementFocusAccessor {
   protected readonly inputRef: ElementRef<HTMLInputElement> | null;
   protected readonly ngDestroys = new Subject<void>();
 
@@ -71,8 +82,17 @@ export abstract class TextBoxBase<T = any> extends ControlValueAccessorBase<T> i
   writeValue(obj: any) {
     this._value = obj;
     this.valueChange.emit(this._value);
+
+    this.changeDetectorRef.markForCheck();
   }
 
+  ngOnInit() {
+    this.listenUntilDestroyed(this.elementRef, 'click', () => this.focus.set());
+    this.focus
+      .asObservable()
+      .pipe(takeUntil(this.ngDestroys))
+      .subscribe((isFocused) => isFocused && this.inputRef?.nativeElement.focus?.());
+  }
   ngOnDestroy() {
     for (const unlisten of this._unlistener) unlisten();
     this._unlistener = [];

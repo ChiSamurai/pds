@@ -1,14 +1,5 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import {
-  Directive,
-  ElementRef,
-  Inject,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  Renderer2,
-  SimpleChanges
-} from '@angular/core';
+import { Directive, ElementRef, Inject, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges } from '@angular/core';
 import { SelectionOptions } from './selection-model';
 import { SELECTION_VALUE, SelectionValue } from './selection-value';
 
@@ -25,7 +16,7 @@ export abstract class SelectionTrigger<T = any> implements OnInit, OnChanges, On
     this._isDisabled = coerceBooleanProperty(value);
   }
   get isDisabled(): boolean {
-    return this._isDisabled || this.value.isDisabled;
+    return this._isDisabled || this.value.disabled.isSet;
   }
 
   /** Gets the {@link Event} for the latest trigger event name callback on the host {@link ElementRef} */
