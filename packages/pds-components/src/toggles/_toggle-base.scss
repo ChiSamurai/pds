@@ -13,7 +13,7 @@ $toggle-size: 30px !default;
 
   label {
     cursor: pointer;
-    color: var(--foreground) !important;
+    color: currentColor !important;
     font: inherit;
 
     &:first-child {

@@ -5,6 +5,7 @@ import { SELECTION_VALUE, SelectOptionBase } from '@vitagroup/cdk';
   selector: 'pds-select-option',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['select-option.scss'],
+  host: { '[attr.tabindex]': '0' },
   providers: [
     { provide: SelectOptionBase, useExisting: SelectOption },
     { provide: SELECTION_VALUE, useExisting: SelectOption },

@@ -9,7 +9,8 @@ pds-card {
 
   display: block;
   overflow: hidden;
-  background: var(--gray-light);
+  border: 1px solid var(--gray-light);
+  background: var(--gray-lightest);
 
   pds-card-header {
     @include pds.inner-spacing($card-padding-x, x);
@@ -34,6 +35,5 @@ pds-card {
 
     display: flex;
     justify-content: flex-end;
-    background: var(--gray-lighter);
   }
 }

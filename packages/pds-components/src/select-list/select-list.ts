@@ -1,11 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { SelectionModel, SelectListBase } from '@vitagroup/cdk';
+import { ElementFocusState, resolveElementFocusState, SelectionModel, SelectListBase } from '@vitagroup/cdk';
 
 @Component({
   selector: 'pds-select-list',
   styleUrls: ['select-list.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [{ provide: SelectionModel, useExisting: SelectList }],
+  host: { '[attr.tabindex]': '0' },
+  providers: [
+    { provide: SelectionModel, useExisting: SelectList },
+    { provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [SelectList] },
+  ],
   template: `
     <ng-content select="pds-select-option"></ng-content>
   `,

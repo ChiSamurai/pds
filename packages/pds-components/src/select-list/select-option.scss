@@ -7,14 +7,14 @@ pds-select-option {
   @include pds.inner-spacing(pds.$input-padding-y, y);
 
   display: flex;
-  transition: 100ms ease-out;
+  transition: color 100ms ease-out, background-color 100ms ease-out;
   align-items: center;
   cursor: default;
 
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--gray);
+  @include util.focus-state {
+    background: var(--gray-lighter);
+    color: var(--primary-light);
   }
-
   @include util.active-state {
     background: var(--primary-dark);
     color: var(--primary-contrast);

@@ -1,4 +1,3 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,14 +9,28 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ComboBoxBase } from '@vitagroup/cdk';
+import {
+  ComboBoxBase,
+  ControlInputAccessor,
+  ElementFocusState,
+  INPUT_ACCESSOR,
+  resolveElementFocusState,
+} from '@vitagroup/cdk';
+import { PrimitiveBehaviorState, ShortcutManager } from '@vitagroup/common';
 
 @Component({
   selector: 'pds-combo-box',
   styleUrls: ['combo-box.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: ComboBox, multi: true }],
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: ComboBox, multi: true },
+    { provide: INPUT_ACCESSOR, useExisting: ComboBox },
+    { provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [ComboBox] },
+  ],
+  host: {
+    '[attr.tabindex]': '-1',
+  },
   template: `
     <ng-template #fallbackTemplate let-value let-last="last">
       <span>{{ value }}{{ !last ? ', ' : '' }}</span>
@@ -32,60 +45,45 @@ import { ComboBoxBase } from '@vitagroup/cdk';
       </ng-container>
       <input
         type="text"
+        tabindex="0"
         [placeholder]="(!value?.length && placeholder) || ''"
-        [value]="inputValue || ''"
+        [value]="(input.asObservable() | async) || ''"
         [readOnly]="readOnly.isSet"
         [disabled]="disabled.isSet"
+        (input)="input.patch($any($event.target)?.value)"
+        (blur)="focus.canUnset($event.relatedTarget) && focus.unset()"
+        (focus)="focus.set()"
         #inputElement
       />
     </div>
     <ng-content select="[pdsAfter]"></ng-content>
   `,
 })
-export class ComboBox<T = any> extends ComboBoxBase<T> implements OnInit {
-  private _latestInputValueOnBackspaceDown: string;
-  private _backspaceToPop = true;
-  private _enterToPush = true;
+export class ComboBox<T = any> extends ComboBoxBase<T> implements ControlInputAccessor, OnInit {
+  @ViewChild('inputElement', { static: true })
+  protected readonly inputRef: ElementRef<HTMLInputElement>;
 
-  @ViewChild('inputElement', { static: true }) protected readonly inputRef: ElementRef<HTMLInputElement>;
+  readonly input = new PrimitiveBehaviorState<string>();
 
-  @Input() inputValue: string;
   @Input() inputParser: (str: string) => T = (str) => str as any;
-
-  @Input()
-  set enterToPush(value: boolean) {
-    this._enterToPush = coerceBooleanProperty(value);
-  }
-  get enterToPush(): boolean {
-    return this._enterToPush;
-  }
-
-  @Input()
-  set backspaceToPop(value: boolean) {
-    this._backspaceToPop = coerceBooleanProperty(value);
-  }
-  get backspaceToPop(): boolean {
-    return this._backspaceToPop;
-  }
 
   @Input() trackBy: TrackByFunction<T> = (index, item) => item;
 
   ngOnInit() {
-    this.listenUntilDestroyed(this.elementRef, 'click', () => {
-      this.inputRef.nativeElement.focus();
-    });
-    this.listenUntilDestroyed('document', 'keyup.Enter', () => {
+    super.ngOnInit();
+
+    this.shortcuts.register('enter', () => {
       const value = this.inputRef.nativeElement.value?.trim();
-      if (this._enterToPush && this.focus.isSet && value) {
+
+      if (value) {
         this.inputRef.nativeElement.value = '';
+        this.input.patch('');
+
         this.push(this.inputParser?.(value));
       }
     });
-    this.listenUntilDestroyed('document', 'keydown.Backspace', () => {
-      if (this._backspaceToPop) this._latestInputValueOnBackspaceDown = this.inputRef.nativeElement.value?.trim();
-    });
-    this.listenUntilDestroyed('document', 'keyup.Backspace', () => {
-      if (this._backspaceToPop && this.focus.isSet && !this._latestInputValueOnBackspaceDown) this.pop();
+    this.shortcuts.register('backspace', () => {
+      if (!this.inputRef.nativeElement.value?.trim()) this.pop();
     });
   }
 }

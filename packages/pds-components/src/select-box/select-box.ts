@@ -1,13 +1,19 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { SelectBoxBase } from '@vitagroup/cdk';
+import { ElementFocusState, resolveElementFocusState, SelectBoxBase } from '@vitagroup/cdk';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'pds-select-box',
   styleUrls: ['select-box.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: SelectBox, multi: true }],
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: SelectBox, multi: true },
+    { provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [SelectBox] },
+  ],
+  host: {
+    '[attr.tabindex]': '0',
+  },
   /* eslint-disable max-len */
   template: `
     <ng-template #fallbackTemplate let-value let-last="last">
@@ -56,9 +62,9 @@ export class SelectBox<T = any> extends SelectBoxBase<T> implements OnInit {
   @ViewChild('selectOptionsTemplate', { static: true })
   protected overlayTemplate: TemplateRef<any>;
 
-  @Input() inputValue: string;
-
   ngOnInit() {
+    super.ngOnInit();
+
     this.focus.ancestors.add(this.overlayRef.overlayElement);
     this.focus
       .asObservable()
