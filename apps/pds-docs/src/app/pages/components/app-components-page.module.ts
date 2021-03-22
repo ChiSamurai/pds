@@ -11,12 +11,15 @@ import {
   CardModule,
   CheckBoxModule,
   ComboBoxModule,
+  DropdownModule,
+  InputDropdownModule,
   RadioBoxModule,
   SelectBoxModule,
   SelectListModule,
   TabsModule,
   TagModule,
   TextBoxModule,
+  ToggleBoxModule,
 } from '@vitagroup/pds-components';
 import { AppComponentsPageComponent } from './app-components-page.component';
 
@@ -49,6 +52,9 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
     TabsModule,
     CardModule,
     AlertModule,
+    DropdownModule,
+    InputDropdownModule,
+    ToggleBoxModule,
   ],
 })
 export class AppComponentsPageModule {}

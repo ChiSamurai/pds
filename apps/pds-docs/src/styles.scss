@@ -3,10 +3,7 @@
 @use "util";
 @use "colors/blue" as *;
 @use "colors/petrol" as *;
-@use "styleguide" as pds with (
-  $foreground-color: --dark,
-  $background-color: #f5f5f5
-);
+@use "styleguide" as pds;
 
 @at-root :root {
   @include util.custom-properties(
@@ -31,13 +28,6 @@
 @at-root .dark {
   @include pds.theme(pds.$dark-theme);
   @import '~highlight.js/scss/vs2015';
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    @include pds.theme(pds.$dark-theme);
-    @import '~highlight.js/scss/vs2015';
-  }
 }
 
 @at-root .blue {

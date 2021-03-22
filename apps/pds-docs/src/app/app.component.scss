@@ -42,7 +42,7 @@ pds-app {
     @include pds.theme($main-menu-theme);
 
     flex: 0 0 auto;
-    background: linear-gradient(45deg, var(--primary-light) 0%, var(--primary) 100%);
+    background: linear-gradient(45deg, var(--primary) 0%, var(--primary-light) 100%);
     width: var(--app-menu-width);
 
     pds-nav-entry {

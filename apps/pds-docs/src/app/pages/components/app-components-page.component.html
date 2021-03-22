@@ -48,7 +48,7 @@
     </section>
     <section fxFlex="50">
       <label>Readonly tag value style</label>
-      <pds-combo-box [value]="[ 1, 2 ]" readOnly="true">
+      <pds-combo-box [value]="[ 'foo', 'bar' ]" readOnly="true">
         <pds-tag *pdsComboDef="let value">{{ value }}</pds-tag>
       </pds-combo-box>
     </section>
@@ -61,8 +61,8 @@
       <label>Multi selection behavior&nbsp;&nbsp;<pds-tag>default</pds-tag></label>
       <pds-select-box placeholder="Select options...">
         <pds-select-list>
-          <pds-select-option value="1">1</pds-select-option>
-          <pds-select-option value="2">2</pds-select-option>
+          <pds-select-option value="foo">foo</pds-select-option>
+          <pds-select-option value="bar">bar</pds-select-option>
         </pds-select-list>
       </pds-select-box>
     </section>
@@ -70,8 +70,8 @@
       <label>Single selection behavior</label>
       <pds-select-box placeholder="Select an option...">
         <pds-select-list mode="single">
-          <pds-select-option value="1">1</pds-select-option>
-          <pds-select-option value="2">2</pds-select-option>
+          <pds-select-option value="foo">foo</pds-select-option>
+          <pds-select-option value="bar">bar</pds-select-option>
         </pds-select-list>
       </pds-select-box>
     </section>
@@ -81,35 +81,66 @@
       <pds-select-box placeholder="Select options...">
         <pds-tag *pdsSelectDef="let value">{{ value }}</pds-tag>
         <pds-select-list>
-          <pds-select-option value="1">1</pds-select-option>
-          <pds-select-option value="2">2</pds-select-option>
+          <pds-select-option value="foo">foo</pds-select-option>
+          <pds-select-option value="bar">bar</pds-select-option>
         </pds-select-list>
       </pds-select-box>
     </section>
     <section fxFlex="50">
       <label>Read only tag value style</label>
-      <pds-select-box [value]="[ 1, 2 ]" readOnly="true">
+      <pds-select-box [value]="[ 'foo', 'bar' ]" readOnly="true">
         <pds-tag *pdsSelectDef="let value">{{ value }}</pds-tag>
         <pds-select-list>
-          <pds-select-option value="1">1</pds-select-option>
-          <pds-select-option value="2">2</pds-select-option>
+          <pds-select-option value="foo">foo</pds-select-option>
+          <pds-select-option value="bar">bar</pds-select-option>
         </pds-select-list>
       </pds-select-box>
     </section>
 
-    <section fxFlex="50">
-      <h5>Radio Box</h5>
-      <div pdsRadioGroup fxLayout fxLayoutGap="24px">
-        <pds-radio-box label="1"></pds-radio-box>
-        <pds-radio-box label="2" labelAlign="left"></pds-radio-box>
-      </div>
+    <section fxFlex="100">
+      <h5>Autocomplete Behavior</h5>
     </section>
 
     <section fxFlex="50">
+      <label>Combo box with multi auto complete selection</label>
+      <pds-combo-box [pdsInputDropdown]="dropdown" placeholder="Type something an hit enter...">
+        <pds-tag *pdsComboDef="let value">{{ value }}</pds-tag>
+      </pds-combo-box>
+
+      <pds-dropdown pdsInputDropdownDef #dropdown>
+        <pds-select-list mode="multiple" #selectList>
+          <pds-select-option *ngFor="let option of options | pdsInputFilter" [value]="option">
+            <pds-check-box [checked]="selectList.isSelected(option)">
+              <label>{{ option }}</label>
+            </pds-check-box>
+          </pds-select-option>
+        </pds-select-list>
+      </pds-dropdown>
+    </section>
+
+    <fx-break></fx-break>
+
+    <section fxFlex="33.33">
+      <h5>Radio Box</h5>
+      <div pdsRadioGroup fxLayout fxLayoutGap="24px">
+        <pds-radio-box label="foo"></pds-radio-box>
+        <pds-radio-box label="bar" labelAlign="before"></pds-radio-box>
+      </div>
+    </section>
+
+    <section fxFlex="33.33">
       <h5>Check Box</h5>
       <div fxLayout fxLayoutGap="24px">
-        <pds-check-box label="1"></pds-check-box>
-        <pds-check-box label="2" labelAlign="left"></pds-check-box>
+        <pds-check-box label="foo"></pds-check-box>
+        <pds-check-box label="bar" labelAlign="before"></pds-check-box>
+      </div>
+    </section>
+
+    <section fxFlex="33.33">
+      <h5>Toggle Box</h5>
+      <div fxLayout fxLayoutGap="24px">
+        <pds-toggle-box label="foo"></pds-toggle-box>
+        <pds-toggle-box label="bar" labelAlign="before"></pds-toggle-box>
       </div>
     </section>
 
@@ -125,14 +156,18 @@
     <section fxFlex="100">
       <h5>Alert</h5>
 
-      <pds-alert>Primary style</pds-alert>
+      <pds-alert>
+        <svg-icon name="info" pdsBefore></svg-icon>
+        <p>Primary style</p>
+      </pds-alert>
       <pds-alert class="warn">
         <svg-icon name="info" pdsBefore></svg-icon>
-        Warning style with icon before
+        <p>Warning style</p>
       </pds-alert>
       <pds-alert class="bad">
+        <svg-icon name="info" pdsBefore></svg-icon>
+        <p>Bad style with button after</p>
         <button class="small" pdsAfter>Dismiss</button>
-        Bad style with button after
       </pds-alert>
     </section>
 
