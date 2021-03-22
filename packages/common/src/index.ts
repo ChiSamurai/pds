@@ -16,6 +16,8 @@ export * from './reflection/resolve-object-property-selector';
 
 export * from './router-link-or-href/router-link-or-href';
 
+export * from './shortcut-manager/shortcut-manager';
+
 export * from './sitemap/sitemap';
 export * from './sitemap/sitemap-intl';
 
