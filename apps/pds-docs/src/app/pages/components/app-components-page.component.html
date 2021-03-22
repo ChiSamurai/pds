@@ -60,7 +60,7 @@
     <section fxFlex="50">
       <label>Multi selection behavior&nbsp;&nbsp;<pds-tag>default</pds-tag></label>
       <pds-select-box placeholder="Select options...">
-        <pds-select-list>
+        <pds-select-list mode="multiple">
           <pds-select-option value="foo">foo</pds-select-option>
           <pds-select-option value="bar">bar</pds-select-option>
         </pds-select-list>
@@ -80,7 +80,7 @@
       <label>Tag value style with multi selection behavior</label>
       <pds-select-box placeholder="Select options...">
         <pds-tag *pdsSelectDef="let value">{{ value }}</pds-tag>
-        <pds-select-list>
+        <pds-select-list mode="multiple">
           <pds-select-option value="foo">foo</pds-select-option>
           <pds-select-option value="bar">bar</pds-select-option>
         </pds-select-list>
@@ -90,7 +90,7 @@
       <label>Read only tag value style</label>
       <pds-select-box [value]="[ 'foo', 'bar' ]" readOnly="true">
         <pds-tag *pdsSelectDef="let value">{{ value }}</pds-tag>
-        <pds-select-list>
+        <pds-select-list mode="multiple">
           <pds-select-option value="foo">foo</pds-select-option>
           <pds-select-option value="bar">bar</pds-select-option>
         </pds-select-list>
