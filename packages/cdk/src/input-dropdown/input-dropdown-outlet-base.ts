@@ -80,6 +80,9 @@ export abstract class InputDropdownOutletBase extends DropdownOutletBase impleme
     this.listenUntilDestroyed('document', 'keydown', (e: KeyboardEvent) => {
       this._latestKeyDownEvent = e;
     });
+    this.listenUntilDestroyed('document', 'keyup', () => {
+      this._latestKeyDownEvent = null;
+    });
 
     this.focus
       .asObservable()
