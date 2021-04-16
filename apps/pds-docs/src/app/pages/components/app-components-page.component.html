@@ -7,7 +7,11 @@
 
     <section fxFlex="50">
       <label>Default</label>
-      <pds-text-box placeholder="Type something..."></pds-text-box>
+      <pds-text-box [formControl]="formControl" placeholder="Type something..."></pds-text-box>
+      <form-status-outlet [control]="formControl">
+        <span *formStatusPendingDef>Validating...</span>
+        <span *formStatusValidDef>Everything seems fine :shrug:</span>
+      </form-status-outlet>
     </section>
     <section fxFlex="50">
       <label>Read only</label>
@@ -191,6 +195,15 @@
         <p>Bad style with button after</p>
         <button class="small" pdsAfter>Dismiss</button>
       </pds-alert>
+    </section>
+
+    <section fxFlex="100">
+      <h5>Dialogs</h5>
+
+      <div>
+        <button (click)="openModal()">Default</button>
+        <button>Fullscreen</button>
+      </div>
     </section>
 
   </page-content>

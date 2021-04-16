@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { SvgIconModule } from '@vitagroup/cdk';
+import { DialogOverlayModule, SvgIconModule } from '@vitagroup/cdk';
 import { FormStatusOutletModule } from '@vitagroup/cdk/forms';
 import { FlexContainerModule, PageLayoutModule } from '@vitagroup/cdk/layout';
 import {
@@ -21,6 +21,7 @@ import {
   TextBoxModule,
   ToggleBoxModule,
 } from '@vitagroup/pds-components';
+import { AppDialogComponentModule } from '../../components/app-dialog/app-dialog.component';
 import { AppComponentsPageComponent } from './app-components-page.component';
 
 export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
@@ -36,6 +37,8 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
 @NgModule({
   declarations: [AppComponentsPageComponent],
   imports: [
+    DialogOverlayModule,
+    AppDialogComponentModule,
     RouterModule.forChild(APP_COMPONENTS_PAGE_ROUTES),
     PageLayoutModule,
     FlexLayoutModule,
@@ -55,6 +58,8 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
     DropdownModule,
     InputDropdownModule,
     ToggleBoxModule,
+    FormStatusOutletModule,
+    ReactiveFormsModule,
   ],
 })
 export class AppComponentsPageModule {}

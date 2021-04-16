@@ -4,7 +4,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { LoadingStateModule, NavModule, SvgIconModule } from '@vitagroup/cdk';
-import { FORM_ERROR_MESSAGES, FormErrorMessages } from '@vitagroup/cdk/forms';
+import {
+  FORM_ERROR_COMPONENT,
+  FORM_ERROR_MESSAGES,
+  FORM_PENDING_COMPONENT,
+  FormErrorMessages,
+} from '@vitagroup/cdk/forms';
 import {
   FlexContainer,
   FlexContainerModule,
@@ -13,7 +18,15 @@ import {
   TemplateEncapsulation,
 } from '@vitagroup/cdk/layout';
 import { RouteDataPipeModule, TemplateOutletModule } from '@vitagroup/common';
-import { MainMenuModule, RingLoader, TagModule, TextBoxModule, ToggleBoxModule } from '@vitagroup/pds-components';
+import {
+  FormStatus,
+  FormStatusModule,
+  MainMenuModule,
+  RingLoader,
+  TagModule,
+  TextBoxModule,
+  ToggleBoxModule,
+} from '@vitagroup/pds-components';
 import { APP_ICON_IMPORT_PROVIDER } from './app-icon-provider';
 import { APP_NAV_ENTRY_PROVIDER, APP_STATIC_NAV_ENTRY_PROVIDER } from './app-navigation-provider';
 import {
@@ -53,6 +66,7 @@ import { APP_GUIDES_INIT_PROVIDER } from './services/app-guides.service';
     TagModule,
     ToggleBoxModule,
     ReactiveFormsModule,
+    FormStatusModule.forRoot(),
   ],
   providers: [
     {
