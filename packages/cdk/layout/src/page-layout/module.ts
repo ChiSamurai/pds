@@ -8,12 +8,7 @@ import { PageFooter } from './page-footer';
 import { PageHeader } from './page-header';
 import { PageLayout } from './page-layout';
 
-const declarations = [
-  PageLayout,
-  PageHeader,
-  PageFooter,
-  PageContent
-];
+const declarations = [PageLayout, PageHeader, PageFooter, PageContent];
 
 @NgModule({
   declarations,

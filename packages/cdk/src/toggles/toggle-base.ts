@@ -12,7 +12,7 @@ import {
   Renderer2,
   SimpleChanges,
 } from '@angular/core';
-import { EventUnlistener } from '@vitagroup/common';
+import { EventUnlistener, ShortcutManager } from '@vitagroup/common';
 import { ElementActiveState, ElementDisabledState, ElementFocusState, ElementReadOnlyState } from '../element-state';
 import { ControlValueAccessorBase } from '../utils';
 
@@ -28,6 +28,8 @@ export abstract class ToggleBase<T = any> extends ControlValueAccessorBase<T> im
   private _checked = false;
 
   protected unlistenClick: EventUnlistener | null;
+
+  readonly shortcuts = new ShortcutManager(this.renderer, this.elementRef);
 
   readonly active = new ElementActiveState(this.elementRef, this.renderer);
   readonly focused = new ElementFocusState(this.elementRef, this.renderer);
@@ -97,6 +99,9 @@ export abstract class ToggleBase<T = any> extends ControlValueAccessorBase<T> im
   }
 
   ngOnInit() {
+    this.shortcuts.register('enter', () => this.toggle());
+    this.shortcuts.register('space', () => this.toggle());
+
     this.unlistenClick = this.renderer.listen(this.elementRef.nativeElement, 'click', () => this.toggle());
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -104,5 +109,6 @@ export abstract class ToggleBase<T = any> extends ControlValueAccessorBase<T> im
   }
   ngOnDestroy() {
     this.unlistenClick?.();
+    this.shortcuts.clear();
   }
 }

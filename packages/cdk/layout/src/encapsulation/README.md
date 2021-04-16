@@ -1,16 +1,9 @@
 ```typescript
 @Component({
   selector: 'paragraph',
-  template: `<ng-container *encapsulateTemplateOutlet></ng-container>`
+  template: `<ng-content></ng-content>`
 })
 export class ParagraphComponent {
-}
-
-@Component({
-  selector: 'text',
-  template: `<ng-container *encapsulateTemplateOutlet></ng-container>`
-})
-export class TextComponent {
 }
 
 export const PARAGRAPH_ENCAPSULATION_PROVIDER: Provider = {
@@ -18,22 +11,12 @@ export const PARAGRAPH_ENCAPSULATION_PROVIDER: Provider = {
   useValue: { name: 'p', container: ParagraphComponent },
   multi: true
 };
-export const TEXT_ENCAPSULATION_PROVIDER: Provider = {
-  provide: TEMPLATE_ENCAPSULATIONS,
-  useValue: { name: 'txt', container: TextComponent },
-  multi: true
-};
 ```
 ```html
 <ng-container *encapsulate="'p'">Hello World!</ng-container>
 ```
 
-_Output for `isParagraph = true`_
+_Output_
 ```html
 <paragraph>Hello World!</paragraph>
-```
-
-_Output for `isParagraph = false`_
-```html
-<text>Hello World!</text>
 ```

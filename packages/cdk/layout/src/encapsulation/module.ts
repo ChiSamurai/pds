@@ -1,15 +1,10 @@
 import { NgModule } from '@angular/core';
 import { TemplateEncapsulate } from './template-encapsulate';
-import { TemplateEncapsulateOutlet } from './template-encapsulate-outlet';
 
-const declarations = [
-  TemplateEncapsulate,
-  TemplateEncapsulateOutlet
-];
+const declarations = [TemplateEncapsulate];
 
 @NgModule({
   declarations,
-  exports: declarations
+  exports: declarations,
 })
-export class TemplateEncapsulationModule {
-}
+export class TemplateEncapsulationModule {}

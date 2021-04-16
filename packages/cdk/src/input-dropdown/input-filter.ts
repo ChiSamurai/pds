@@ -1,17 +1,28 @@
-import { ChangeDetectorRef, Directive, Inject, OnDestroy, PipeTransform } from '@angular/core';
-import { ControlInputAccessor, INPUT_ACCESSOR } from '@vitagroup/cdk';
+import { ChangeDetectorRef, Directive, Inject, InjectionToken, OnDestroy, PipeTransform } from '@angular/core';
+import { ControlInputAccessor, INPUT_ACCESSOR } from './control-input-accessor';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 export type InputFilterFn<T> = (value: T, input?: string) => boolean;
+
+export const DEFAULT_INPUT_FILTER = new InjectionToken<InputFilterFn<unknown>>('DEFAULT_INPUT_FILTER', {
+  providedIn: 'root',
+  factory: /* @dynamic */ () => (value, input) => {
+    const matchesInput = (value2) => `${value2}`.toLowerCase().includes(input.toLowerCase());
+
+    if (typeof value === 'function') return false;
+    else if (typeof value !== 'object') return matchesInput(value);
+    else Object.values(value)?.some((innerValue) => matchesInput(innerValue));
+  },
+});
 
 @Directive()
 export abstract class InputFilterBase implements PipeTransform, OnDestroy {
   protected readonly ngDestroys = new Subject();
 
   constructor(
-    @Inject(INPUT_ACCESSOR) readonly inputAccessor: ControlInputAccessor,
-    protected defaultFilter: InputFilterFn<unknown>,
+    @Inject(INPUT_ACCESSOR) readonly inputAccessor: /* @dynamic */ ControlInputAccessor,
+    @Inject(DEFAULT_INPUT_FILTER) protected defaultFilter: /* @dynamic */ InputFilterFn<unknown>,
     protected changeDetectorRef: ChangeDetectorRef
   ) {
     this.inputAccessor.input

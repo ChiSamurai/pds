@@ -1,7 +1,6 @@
 export * from './encapsulation/module';
 export * from './encapsulation/template-encapsulation';
-export * from './encapsulation/template-encapsulate-outlet';
-export { TemplateEncapsulate } from './encapsulation/template-encapsulate';
+export * from './encapsulation/template-encapsulate';
 
 export * from './flex-container/module';
 export * from './flex-container/flex-container';

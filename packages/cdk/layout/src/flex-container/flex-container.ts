@@ -26,7 +26,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   template: `
-    <ng-container *encapsulateTemplateOutlet></ng-container>
     <ng-content></ng-content>
   `,
 })

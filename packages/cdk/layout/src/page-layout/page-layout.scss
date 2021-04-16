@@ -14,6 +14,7 @@ page-layout {
     page-content,
     .page-content {
       flex: 1 0 0;
+      display: block;
     }
     page-footer {
       flex: 0 1 auto;

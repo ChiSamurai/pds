@@ -2,6 +2,7 @@ import { OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, Injector, Type } from '@angular/core';
 import { Observable, Subject, Subscriber, TeardownLogic } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { ComponentProps } from '../utils/component-props';
 import { DialogOverlayConfig } from './dialog-overlay';
 
@@ -10,7 +11,7 @@ export class DialogRef<R = any, T = any> extends Observable<R> {
 
   protected readonly subject = new Subject<R>();
   protected readonly injector = Injector.create({
-    parent: this.config.injector,
+    parent: this.config?.injector,
     providers: [{ provide: DialogRef, useValue: this }],
   });
 
@@ -24,6 +25,15 @@ export class DialogRef<R = any, T = any> extends Observable<R> {
     readonly config: DialogOverlayConfig
   ) {
     super((subscriber) => this.subject.subscribe(subscriber));
+
+    if (config && config.disposeOnBackdropClick) {
+      overlayRef
+        .backdropClick()
+        .pipe(take(1))
+        .subscribe(() => this.dispose());
+    }
+
+    this.reattach();
   }
 
   dispose(result?: R): void {
