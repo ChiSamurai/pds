@@ -7,8 +7,8 @@ pds-tab {
   @include pds.inner-spacing(pds.$space-3, y);
 
   user-select: none;
+  position: relative;
   transition: 100ms ease-in;
-  border-bottom: $tab-active-indicator-width solid transparent;
   font-weight: 500;
   cursor: pointer;
 
@@ -17,14 +17,31 @@ pds-tab {
   }
 
   @include util.hover-state {
-    border-color: var(--primary);
+    &:after {
+      background-color: var(--primary);
+    }
   }
   @include util.active-state {
-    border-color: var(--primary-light);
+    &:after {
+      background-color: var(--primary-light);
+    }
   }
   @include util.disabled_state($within_parent: true) {
     pointer-events: none;
 
     color: var(--disabled);
+  }
+
+  &:after {
+    @include pds.rounding($tab-active-indicator-width);
+
+    content: ' ';
+    display: block;
+    position: absolute;
+    height: $tab-active-indicator-width;
+    transition: inherit;
+    bottom: 0;
+    right: 0;
+    left: 0;
   }
 }

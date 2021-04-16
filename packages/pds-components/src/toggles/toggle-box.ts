@@ -8,6 +8,7 @@ import { ToggleBase } from '@vitagroup/cdk';
   styleUrls: ['./toggle-box.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '[attr.tabindex]': '0' },
   providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: ToggleBox, multi: true }],
   template: `
     <ng-template #labelTemplate>

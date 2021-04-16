@@ -7,6 +7,7 @@ import { RadioBoxBase } from '@vitagroup/cdk';
   styleUrls: ['./radio-box.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '[attr.tabindex]': '0' },
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: RadioBox, multi: true },
     { provide: RadioBoxBase, useExisting: RadioBox },

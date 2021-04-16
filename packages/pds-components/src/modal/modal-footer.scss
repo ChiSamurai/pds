@@ -1,9 +1,11 @@
-pds-modal-footer {
-  display: flex;
-  width: 100%;
+@use "styleguide" as pds;
 
-  &, fx-container {
-    justify-content: center;
-    align-self: center;
-  }
+pds-modal-footer {
+  @include pds.inner-spacing(pds.$space-6, x);
+  @include pds.inner-spacing(pds.$space-5, y);
+
+  display: flex;
+  align-items: center;
+  background-color: var(--gray-lighter);
+  width: 100%;
 }

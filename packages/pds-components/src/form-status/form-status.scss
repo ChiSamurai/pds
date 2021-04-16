@@ -6,7 +6,8 @@ pds-form-status {
   display: flex;
   align-items: center;
 
-  svg-icon {
+  svg-icon,
+  pds-ring-loader {
     @include pds.outer-spacing(--space-2, right);
   }
 

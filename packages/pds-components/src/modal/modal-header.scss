@@ -1,14 +1,10 @@
+@use "styleguide" as pds;
+
 pds-modal-header {
+  @include pds.inner-spacing(pds.$space-6, x);
+  @include pds.inner-spacing(pds.$space-5, y);
+
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
-  &, fx-container {
-    position: relative;
-  }
-
-  svg-icon#close {
-    transform: translateY(-50%);
-    right: 0; top: 50%;
-  }
 }

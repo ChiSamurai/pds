@@ -38,7 +38,7 @@
     @include pds.input-disabled;
   }
 
-  &.ng-invalid {
+  &.ng-invalid.ng-touched {
     @include pds.input-error;
   }
 }

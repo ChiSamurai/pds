@@ -8,6 +8,7 @@ import { CheckBoxBase } from '@vitagroup/cdk';
   styleUrls: ['./check-box.scss'],
   encapsulation: ViewEncapsulation.None,
   providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: CheckBox, multi: true }],
+  host: { '[attr.tabindex]': '0' },
   /* eslint-disable max-len */
   template: `
     <ng-template #labelTemplate>
