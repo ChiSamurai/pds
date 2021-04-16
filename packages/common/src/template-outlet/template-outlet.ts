@@ -86,6 +86,10 @@ export class TemplateOutlet<T = any> implements DoCheck, OnChanges, OnDestroy {
       }
     }
   }
+
+  protected setViewRef(viewRef: EmbeddedViewRef<any>): void {
+    if (viewRef instanceof EmbeddedViewRef) this._viewRef = viewRef;
+  }
 }
 
 @NgModule({

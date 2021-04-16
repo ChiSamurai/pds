@@ -5,14 +5,17 @@ import { getStringFormat } from '../../utils';
 export type ByteNumberUnit = 'B' | 'kB' | 'MB' | 'GB' | 'TB' | 'PT';
 
 export function getByteNumberUnitBreakpoints(): Record<ByteNumberUnit, number> {
-  const pow = (v, p) => Array(p).fill(v).reduce((r, n) => r * n, 1);
+  const pow = (v, p) =>
+    Array(p)
+      .fill(v)
+      .reduce((r, n) => r * n, 1);
   return {
     PT: pow(1024, 5),
     TB: pow(1024, 4),
     GB: pow(1024, 3),
     MB: pow(1024, 2),
     kB: 1024,
-    B: 1
+    B: 1,
   };
 }
 
@@ -23,12 +26,14 @@ export function getByteNumberUnitNames(): Record<ByteNumberUnit, string> {
     GB: 'Gigabyte',
     MB: 'Megabyte',
     kB: 'Kilobyte',
-    B: 'Byte'
+    B: 'Byte',
   };
 }
 export function getByteNumberUnitPluralNames(): Record<ByteNumberUnit, string> {
-  return Object.entries(getByteNumberUnitNames())
-    .reduce((names, [ key, singularName ]) => ({ ...names, [ key ]: `${singularName}s` }), {} as any);
+  return Object.entries(getByteNumberUnitNames()).reduce(
+    (names, [key, singularName]) => ({ ...names, [key]: `${singularName}s` }),
+    {} as any
+  );
 }
 
 /**
@@ -62,38 +67,34 @@ export function formatByteNumber(value: number, locale: string, format: string, 
   const breakpoints = getByteNumberUnitBreakpoints();
   const pluralNames = getByteNumberUnitPluralNames();
   const singularNames = getByteNumberUnitNames();
-  const [ digitInfo, unitFormat ] = format.split(/\s+/);
+  const [digitInfo, unitFormat] = format.split(/\s+/);
 
   if (unit != null) {
-    const singularName = singularNames[ unit ];
-    const pluralName = pluralNames[ unit ];
-    const bp = breakpoints[ unit ];
+    const singularName = singularNames[unit];
+    const pluralName = pluralNames[unit];
+    const bp = breakpoints[unit];
     const n = value / bp;
 
     const nStr = formatNumber(n, locale, digitInfo);
     return getStringFormat(null, `${nStr} ${unitFormat}`, {
-      UU: () => n === 1 ? singularName : pluralName,
-      uu: () => unit
+      UU: () => (n === 1 ? singularName : pluralName),
+      uu: () => unit,
     });
   } else {
-    for (const [ unitName, unitBp ] of Object.entries(breakpoints)) {
-      if (value >= unitBp)
-        return formatByteNumber(value, locale, format, unitName as ByteNumberUnit);
+    for (const [unitName, unitBp] of Object.entries(breakpoints)) {
+      if (value >= unitBp) return formatByteNumber(value, locale, format, unitName as ByteNumberUnit);
     }
   }
 }
 
 export const BYTE_NUMBER_FORMAT = new InjectionToken<string>('BYTE_NUMBER_FORMAT', {
-  providedIn: 'root', factory: /* @dynamic */ () => '1.0-2 uu'
+  providedIn: 'root',
+  factory: /* @dynamic */ () => '1.0-2 uu',
 });
 
 @Pipe({ name: 'byteNumber' })
 export class ByteNumberPipe implements PipeTransform {
-  constructor(
-    @Inject(LOCALE_ID) readonly locale: string,
-    @Inject(BYTE_NUMBER_FORMAT) readonly format?: string
-  ) {
-  }
+  constructor(@Inject(LOCALE_ID) readonly locale: string, @Inject(BYTE_NUMBER_FORMAT) readonly format?: string) {}
 
   transform(bytes: number, format: string = this.format, unit?: ByteNumberUnit): string {
     return formatByteNumber(bytes, this.locale, format, unit);
@@ -101,8 +102,7 @@ export class ByteNumberPipe implements PipeTransform {
 }
 
 @NgModule({
-  declarations: [ ByteNumberPipe ],
-  exports: [ ByteNumberPipe ]
+  declarations: [ByteNumberPipe],
+  exports: [ByteNumberPipe],
 })
-export class ByteNumberPipeModule {
-}
+export class ByteNumberPipeModule {}
