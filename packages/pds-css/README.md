@@ -12,4 +12,6 @@ npm i @vitagroup/pds-css
 
 ## Usage
 
-Please continue reading at the [Styling guide](../../guides/styling.md) for more usage and guidance information.
+Please continue reading at the [Styling guide][1] for more usage and guidance information.
+
+  [1]: https://github.com/vitagroupag/pds/blob/develop/guides/styling.md
