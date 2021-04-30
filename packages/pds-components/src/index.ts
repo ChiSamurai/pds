@@ -9,6 +9,7 @@ export * from './card/card';
 
 export * from './combo-box/module';
 export * from './combo-box/combo-box';
+export * from './combo-box/combo-def';
 
 export * from './dropdown/module';
 export * from './dropdown/dropdown';
@@ -23,19 +24,22 @@ export * from './input-dropdown/input-dropdown-def';
 export * from './input-dropdown/input-dropdown-outlet';
 export * from './input-dropdown/input-filter';
 
-export * from './nav/module';
-export * from './nav/nav';
-
 export * from './modal/module';
 export * from './modal/modal-encapsulation';
+export * from './modal/modal-content';
 export * from './modal/modal-header';
 export * from './modal/modal-footer';
 export * from './modal/modal';
+
+export * from './nav/module';
+export * from './nav/nav-entry';
+export * from './nav/nav';
 
 export * from './ring-loader/ring-loader';
 export * from './ring-loader/module';
 
 export * from './select-box/select-box';
+export * from './select-box/select-def';
 export * from './select-box/module';
 
 export * from './select-list/module';
