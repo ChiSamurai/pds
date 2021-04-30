@@ -2,7 +2,7 @@
 
 page-footer {
   @include pds.outer-spacing(--space-8, top);
-  height: 64px;
+  min-height: 64px;
 }
 
 pds-app-footer {
