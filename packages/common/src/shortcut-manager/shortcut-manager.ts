@@ -27,7 +27,7 @@ export class ShortcutManager<T = any> {
       keys = keys.replace('+', '.');
     }
     const unlistener = this.renderer.listen(target, `keydown.${keys}`, listener);
-    this.unlistener.push([keys, unlistener]);
+    this.unlistener.push([keystroke, unlistener]);
     return unlistener;
   }
   unregister(keystroke: string): void {

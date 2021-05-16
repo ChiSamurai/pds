@@ -14,12 +14,9 @@ export function getStringFormat<T>(
   for (const [token, valueSelector] of Object.entries(formatDescriptor)) {
     const regExp = new RegExp(token, 'g');
     if (regExp.test(format)) {
-      const value =
-        (obj != null && valueSelector(obj)) ||
-        (fallbackObj != null && valueSelector(fallbackObj)) ||
-        '';
+      const value = (obj != null && valueSelector(obj)) || (fallbackObj != null && valueSelector(fallbackObj)) || '';
       str = str.replace(regExp, value);
     }
   }
-  return str;
+  return str.replace(/\s+/, ' ').trim();
 }
