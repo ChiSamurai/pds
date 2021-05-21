@@ -1,7 +1,7 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/packages/pds-components",
-  "whitelistedNonPeerDependencies": [
+  "allowedNonPeerDependencies": [
     "@vitagroup/pds-css",
     "@vitagroup/common",
     "@vitagroup/cdk"

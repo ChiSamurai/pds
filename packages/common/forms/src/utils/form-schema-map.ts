@@ -1,4 +1,4 @@
-import { AbstractControl } from "@angular/forms";
+import { AbstractControl } from '@angular/forms';
 
 export type FormSchemaMap<S, V> = {
   [P in keyof S]?: V;

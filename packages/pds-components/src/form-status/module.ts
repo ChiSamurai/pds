@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { SvgIconModule } from '@vitagroup/cdk';
-import { FORM_ERROR_COMPONENT, FORM_PENDING_COMPONENT, FORM_VALID_COMPONENT } from '@vitagroup/cdk/forms';
+import { FORM_ERROR_COMPONENT, FORM_PENDING_COMPONENT, FORM_VALID_COMPONENT } from '@vitagroup/common/forms';
 import { RingLoaderModule } from '../ring-loader/module';
 import { FormStatus } from './form-status';
 

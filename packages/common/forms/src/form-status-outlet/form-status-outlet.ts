@@ -50,9 +50,9 @@ export const FORM_ERROR_MESSAGES = new InjectionToken<FormErrorMessages>('FORM_E
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   template: `
-    <ng-container *ngIf="control != null && (!waitForTouch || control.touched)">
+    <ng-container *ngIf="!!control && (!waitForTouch || control.touched)">
       <ng-container *ngIf="control.status === 'PENDING'; else invalidOrValidTemplate">
-        <ng-container *ngIf="pendingComponent != null">
+        <ng-container *ngIf="!!pendingComponent">
           <ng-container *ngComponentOutlet="pendingComponent; injector: pendingInjector"></ng-container>
         </ng-container>
         <ng-template #pendingTemplate>
@@ -61,13 +61,13 @@ export const FORM_ERROR_MESSAGES = new InjectionToken<FormErrorMessages>('FORM_E
       </ng-container>
       <ng-template #invalidOrValidTemplate>
         <ng-container *ngIf="control.status === 'INVALID'; else validTemplate">
-          <ng-container *ngIf="errorComponent != null; else messageTemplate">
+          <ng-container *ngIf="!!errorComponent; else messageTemplate">
             <ng-container *ngComponentOutlet="errorComponent; injector: errorInjector"></ng-container>
           </ng-container>
           <ng-template #messageTemplate>{{ selectedErrorMessage }}</ng-template>
         </ng-container>
         <ng-template #validTemplate>
-          <ng-container *ngIf="validComponent != null; else validDefTemplate">
+          <ng-container *ngIf="!!validComponent; else validDefTemplate">
             <ng-container *ngComponentOutlet="validComponent; injector: validInjector"></ng-container>
           </ng-container>
           <ng-template #validDefTemplate>

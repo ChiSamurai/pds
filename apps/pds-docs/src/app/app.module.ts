@@ -5,12 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { LoadingStateModule, NavModule, SvgIconModule } from '@vitagroup/cdk';
 import {
-  FORM_ERROR_COMPONENT,
-  FORM_ERROR_MESSAGES,
-  FORM_PENDING_COMPONENT,
-  FormErrorMessages,
-} from '@vitagroup/cdk/forms';
-import {
   FlexContainer,
   FlexContainerModule,
   PageLayoutModule,
@@ -18,8 +12,8 @@ import {
   TemplateEncapsulation,
 } from '@vitagroup/cdk/layout';
 import { RouteDataPipeModule, TemplateOutletModule } from '@vitagroup/common';
+import { FORM_ERROR_MESSAGES, FormErrorMessages } from '@vitagroup/common/forms';
 import {
-  FormStatus,
   FormStatusModule,
   MainMenuModule,
   RingLoader,
