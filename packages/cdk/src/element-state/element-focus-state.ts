@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Directive, ElementRef, Injectable, Input, Renderer2 } from '@angular/core';
 import { ElementState } from './element-state';
 
 // todo(@janunld): consider a platform independent token for this check?!
@@ -39,4 +40,16 @@ export interface ElementFocusAccessor<T = any> {
 
 export function resolveElementFocusState(accessor: ElementFocusAccessor): ElementFocusState {
   return accessor.focus;
+}
+
+@Directive({
+  selector: '[tabindex]',
+  providers: [
+    { provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [ElementFocusAccessorDirective] },
+  ],
+})
+export class ElementFocusAccessorDirective implements ElementFocusAccessor {
+  readonly focus = new ElementFocusState(this.elementRef, this.renderer);
+
+  constructor(protected elementRef: ElementRef, protected renderer: Renderer2) {}
 }
