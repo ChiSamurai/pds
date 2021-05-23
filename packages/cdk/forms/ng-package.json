@@ -1,6 +1,6 @@
 {
   "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/packages/common/forms",
+  "dest": "../../dist/packages/cdk/forms",
   "lib": {
     "entryFile": "src/index.ts"
   }

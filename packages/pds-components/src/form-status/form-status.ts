@@ -1,5 +1,5 @@
 import { Component, HostBinding, Inject, Optional, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { FORM_ERROR_MESSAGE, FORM_PENDING_TEMPLATE, FORM_VALID_TEMPLATE } from '@vitagroup/common/forms';
+import { FORM_ERROR_MESSAGE, FORM_PENDING_TEMPLATE, FORM_VALID_TEMPLATE } from '@vitagroup/cdk/forms';
 
 @Component({
   selector: 'pds-form-status',

@@ -18,9 +18,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { AbstractControl, NgControl, ValidationErrors } from '@angular/forms';
+import { extractValidationErrors } from '@vitagroup/common/forms';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, mapTo, takeUntil, tap } from 'rxjs/operators';
-import { extractValidationErrors } from '../utils';
 import { FormStatusPendingDef } from './form-status-pending-def';
 import { FormStatusValidDef } from './form-status-valid-def';
 
