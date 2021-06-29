@@ -1,3 +1,5 @@
+# Encapsulation
+
 ```typescript
 @Component({
   selector: 'paragraph',

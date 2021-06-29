@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { merge } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { NavEntries } from './nav-entries';
+import { NavEntryState } from './nav-entry-state';
 import { NavEntry } from './nav-entry';
 import { NavEntryContainer } from './nav-entry-container';
 import { NavigationEntryDefContext } from './nav-entry-def';
@@ -34,12 +34,12 @@ import { NavigationEntryDefContext } from './nav-entry-def';
 })
 export class NavEntryOutlet extends NavEntryContainer {
   /**
-   * An instance of custom {@link NavEntries} to use for this outlet. This will not overwrite
-   * any existing entries stored in {@link NavEntries}. Those will only be preferred for
+   * An instance of custom {@link NavEntryState} to use for this outlet. This will not overwrite
+   * any existing entries stored in {@link NavEntryState}. Those will only be preferred for
    * rendering and stored locally on the component instance. Any existing {@link filter} value will
    * be applied nevertheless
    */
-  protected readonly customState = new NavEntries();
+  protected readonly customState = new NavEntryState();
 
   /** Gets the stream of {@link NavEntry}s that's used for rendering */
   readonly viewEntries = merge(this.customState, this.state).pipe(
@@ -62,7 +62,7 @@ export class NavEntryOutlet extends NavEntryContainer {
   /** Gets or sets a filter {@link Predicate} for the rendered {@link NavEntry}s */
   @Input() filter: Predicate<NavEntry>;
 
-  constructor(protected readonly state: NavEntries, @Optional() protected readonly parent?: NavEntryContainer) {
+  constructor(protected readonly state: NavEntryState, @Optional() protected readonly parent?: NavEntryContainer) {
     super();
   }
 

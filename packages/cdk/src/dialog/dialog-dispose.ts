@@ -1,10 +1,12 @@
 import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { EventUnlistener } from '@vitagroup/common';
+import { EventUnlistener, ShortcutManager } from '@vitagroup/common';
 import { DialogRef } from './dialog-ref';
 
 @Directive({ selector: '[dialogDispose]' })
 export class DialogDispose<R = any> implements OnInit, OnDestroy {
   protected unlistenClicks: EventUnlistener;
+
+  readonly shortcuts = new ShortcutManager(this.renderer, this.elementRef);
 
   @Input('dialogDispose') result: R;
 
@@ -16,8 +18,11 @@ export class DialogDispose<R = any> implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.unlistenClicks = this.renderer.listen(this.elementRef.nativeElement, 'click', () => this.onClick());
+
+    this.shortcuts.register('enter', () => this.onClick());
   }
   ngOnDestroy() {
     this.unlistenClicks();
+    this.shortcuts.clear();
   }
 }

@@ -23,9 +23,9 @@ export class SvgIconRegistry {
   }
 
   /**
-   * Lazily registers a new icon definition in the registry. This will **not** overwrite any
-   * existing definition, if the provided `name` value already exists, by default. You can disable
-   * that behavior by setting the `force` parameter to `true`.
+   * Registers a new icon definition in the registry. This will **not** overwrite any existing
+   * definition, if the provided `name` value already exists, by default. You can disable that
+   * behavior by setting the `force` parameter to `true`.
    *
    * @param name  The name to identify the {@link SvgIconData} with
    * @param data  The desired {@link SvgIconData} to be registered

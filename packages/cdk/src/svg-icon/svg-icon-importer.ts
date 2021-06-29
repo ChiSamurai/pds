@@ -5,6 +5,8 @@ import { SvgIconRegistry } from './svg-icon-registry';
 export interface SvgIconImportConfig<T = any> {
   /** Defines all icons that should be imported */
   icons: T[];
+  /** Defines an optional map of aliases to register during the import process */
+  // todo: aliases?: Record<string, string>;
   /**
    * Defines how to and what property of the {@link icons} type should be used to
    * retrieve the {@link SvgIconData}. Defaults to `"data"`

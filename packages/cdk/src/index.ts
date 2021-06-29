@@ -28,7 +28,7 @@ export * from './loading-state/element-loading-state';
 
 export * from './nav/module';
 export * from './nav/nav-base';
-export * from './nav/nav-entries';
+export * from './nav/nav-entry-state';
 export * from './nav/nav-entry';
 export * from './nav/nav-entry-container';
 export * from './nav/nav-entry-def';

@@ -11,4 +11,8 @@ export class NavEntryDef {
   @Input('navEntryDefWhen') when: Predicate<NavEntry> | boolean;
 
   constructor(readonly template: TemplateRef<NavigationEntryDefContext>) {}
+
+  static ngTemplateContextGuard(dir: NavEntryDef, ctx: unknown): ctx is NavigationEntryDefContext {
+    return true;
+  }
 }

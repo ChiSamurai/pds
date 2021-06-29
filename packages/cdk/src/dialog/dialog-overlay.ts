@@ -1,6 +1,5 @@
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { Injectable, Injector, Type } from '@angular/core';
-import { take } from 'rxjs/operators';
 import { ComponentProps } from '../utils';
 import { DialogRef } from './dialog-ref';
 

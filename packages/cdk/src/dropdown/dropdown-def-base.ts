@@ -10,7 +10,6 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { ElementFocusAccessor, ElementFocusState } from '../element-state/element-focus-state';
 import { ControlInputAccessor, INPUT_ACCESSOR } from '../input-dropdown/control-input-accessor';
 import { OverlayDefBase } from '../overlay/overlay-def-base';

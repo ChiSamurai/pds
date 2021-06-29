@@ -1,5 +1,4 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, ElementRef, Injectable, Input, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Injectable, Renderer2 } from '@angular/core';
 import { ElementState } from './element-state';
 
 // todo(@janunld): consider a platform independent token for this check?!
@@ -29,7 +28,7 @@ export class ElementFocusState<T = any> extends ElementState<T> {
   }
 
   set(value = true) {
-    if (this.isUnset && value) (this.nativeElement as any).focus?.();
+    if (this.isUnset && value && 'focus' in this.nativeElement) (this.nativeElement as any).focus?.();
     super.set(value);
   }
 }

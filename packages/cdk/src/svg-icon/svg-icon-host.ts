@@ -30,6 +30,8 @@ export class SvgIconHost {
   }
 
   addSymbol(id: string, data: SvgIconData): void {
+    this.removeSymbol(id);
+
     if (data != null && data.trim() !== '') {
       let svgData = data.replace(SVG_ELEMENT_START_TAG, '$1symbol$3');
       svgData = svgData.replace(SVG_ELEMENT_END_TAG, '$1symbol$3');

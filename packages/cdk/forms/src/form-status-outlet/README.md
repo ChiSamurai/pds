@@ -1,3 +1,12 @@
+# FormStatusOutlet
+
+## Form Error Messages
+
+```typescript
+const MY_FORM_ERRORS: FormErrorMessages = {
+  required: $localize`Required: Please enter a value`,
+};
+```
 
 ```html
 <form [formGroup]="formGroup">

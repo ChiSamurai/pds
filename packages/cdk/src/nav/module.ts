@@ -12,4 +12,4 @@ const declarations = [NavEntryDef, NavEntryOutlet, NavEntryLink];
   exports: declarations,
   imports: [CommonModule, StringInterpolateModule],
 })
-export class NavModule {}
+export class NavBaseModule {}

@@ -16,14 +16,22 @@ export const SVG_ICON_SIZE_ALIASES = new InjectionToken<SvgIconSizeAliases>('SVG
   ],
   encapsulation: ViewEncapsulation.None,
   template: `
-    <svg [attr.height]="sizeAsNumber" [attr.width]="sizeAsNumber" [attr.viewBox]="registered ? null : viewBox">
-      <ng-container *ngIf="registered; else ngContentTemplate">
-        <use [attr.xlink:href]="href"></use>
-      </ng-container>
-    </svg>
     <ng-template #ngContentTemplate>
       <ng-content></ng-content>
     </ng-template>
+    <ng-template #ngContentTitle>
+      <ng-content select="title"></ng-content>
+    </ng-template>
+
+    <svg [attr.height]="sizeAsNumber" [attr.width]="sizeAsNumber" [attr.viewBox]="registered ? null : viewBox">
+      <ng-container *ngIf="!!title; else ngContentTitle">
+        <title>{{ title }}</title>
+      </ng-container>
+
+      <ng-container *ngIf="registered; else ngContentTemplate">
+        <use [attr.href]="href"></use>
+      </ng-container>
+    </svg>
   `,
 })
 export class SvgIcon {
@@ -32,6 +40,8 @@ export class SvgIcon {
 
   @Input() name: string;
   @Input() size: string | number = 18;
+
+  @Input() title: string;
 
   /**
    * Gets or sets the fallback view box used when no reference symbol can be found
