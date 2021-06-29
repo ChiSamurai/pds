@@ -26,16 +26,16 @@
     }
   },
   "projects": {
-    "pds-css": {
+    "cdk": {
       "tags": []
     },
     "common": {
       "tags": []
     },
-    "cdk": {
+    "pds-components": {
       "tags": []
     },
-    "pds-components": {
+    "pds-css": {
       "tags": []
     },
     "pds-docs": {
