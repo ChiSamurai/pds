@@ -51,7 +51,7 @@ export function getByteNumberUnitPluralNames(): Record<ByteNumberUnit, string> {
  * implementation!
  *
  * | Token  | Description                     | Example   |
- * |:------ |:------------------------------- |:--------- |
+ * | ------ | ------------------------------- | --------- |
  * | `UU`   | Full length unit name           | Kilobytes |
  * | `uu`   | Unit name abbreviation          | kB        |
  *

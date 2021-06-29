@@ -21,9 +21,9 @@ export class EventListenerOptionsPlugin extends EventManagerPlugin {
     const listenerFn = (event) => ngZone.runGuarded(() => listener(event));
     ngZone.runOutsideAngular(() =>
       element.addEventListener(name, listenerFn, {
-        capture: listenerOptions.includes('capture') || listenerOptions.includes('c'),
-        passive: listenerOptions.includes('passive') || listenerOptions.includes('p'),
-        once: listenerOptions.includes('once') || listenerOptions.includes('o'),
+        capture: listenerOptions.includes('capture'),
+        passive: listenerOptions.includes('passive'),
+        once: listenerOptions.includes('once'),
       })
     );
     return () => element.removeEventListener(name, listenerFn);

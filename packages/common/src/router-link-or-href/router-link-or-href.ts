@@ -5,6 +5,8 @@ import {
   Inject,
   Input,
   NgModule,
+  OnDestroy,
+  OnInit,
   Optional,
   Renderer2,
   SecurityContext,
@@ -12,15 +14,18 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { WINDOW } from '@ng-web-apis/common';
+import { ShortcutManager } from '../shortcut-manager/shortcut-manager';
 import { isAbsoluteURL } from '../utils/is-absolute-url';
 
 @Directive({
   selector: '[routerLinkOrHref]',
   providers: [{ provide: RouterLink, useExisting: RouterLinkOrHref }],
 })
-export class RouterLinkOrHref extends RouterLink {
+export class RouterLinkOrHref extends RouterLink implements OnInit, OnDestroy {
   private _isRouterLink = false;
   private _href: string;
+
+  readonly shortcuts = new ShortcutManager(this.renderer, this.element);
 
   @Input() target = '_blank';
 
@@ -72,6 +77,13 @@ export class RouterLinkOrHref extends RouterLink {
     } else {
       return false;
     }
+  }
+
+  ngOnInit() {
+    this.shortcuts.register('enter', () => this.onClick());
+  }
+  ngOnDestroy() {
+    this.shortcuts.clear();
   }
 }
 

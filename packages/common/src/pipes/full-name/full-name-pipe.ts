@@ -17,22 +17,22 @@ export interface FullNameFormatOptions {
  * using the following tokens. If no format is present the pipe will default to "full". Additionally
  * any field can be backed up with a fallback value
  *
- *  | Token  | Description                                                   | Example      |
- *  |:------:| ------------------------------------------------------------- | ------------ |
- *  |  `FF`  | The fully quantified first name of the person                 | Jane, John   |
- *  |  `ff`  | Shortened first letter format of the first name of the person | J.           |
- *  |  `LL`  | The fully quantified last name of the person                  | Doe          |
- *  |  `ll`  | Shortened first letter format of the last name of the person  | D.           |
- *  |  `TT`  | The title of the person                                       | Dr.          |
+ * | Token  | Description                                                   | Example      |
+ * | ------ | ------------------------------------------------------------- | ------------ |
+ * |  `FF`  | The fully quantified first name of the person                 | Jane, John   |
+ * |  `ff`  | Shortened first letter format of the first name of the person | J.           |
+ * |  `LL`  | The fully quantified last name of the person                  | Doe          |
+ * |  `ll`  | Shortened first letter format of the last name of the person  | D.           |
+ * |  `TT`  | The title of the person                                       | Dr.          |
  *
- *  There's also a predefined selection of format aliases to choose from:
+ * There's also a predefined selection of format aliases to choose from:
  *
- *  | Alias       | Format     | Example       |
- *  | ----------- | ---------- | ------------- |
- *  | `full`      | `TT FF LL` | Dr. Jane Doe  |
- *  | `short`     | `ff LL`    | J. Doe        |
- *  | `shortLast` | `FF ll`    | Jane D.       |
- *  | `reversed`  | `LL, FF`   | Doe, Jane     |
+ * | Alias       | Format     | Example       |
+ * | ----------- | ---------- | ------------- |
+ * | `full`      | `TT FF LL` | Dr. Jane Doe  |
+ * | `short`     | `ff LL`    | J. Doe        |
+ * | `shortLast` | `FF ll`    | Jane D.       |
+ * | `reversed`  | `LL, FF`   | Doe, Jane     |
  *
  * @param obj     The object value to select the name information from
  * @param format  The desired format to use for the output string value. Defaults to "full"

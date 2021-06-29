@@ -1,5 +1,9 @@
-import { InjectionToken, NgModule, Pipe, PipeTransform } from '@angular/core';
-import { getStringFormat, ObjectPropertySelector, resolveObjectPropertySelector } from '@vitagroup/common';
+import { Inject, InjectionToken, NgModule, Pipe, PipeTransform } from '@angular/core';
+import { getStringFormat } from '../../utils/get-string-format';
+import {
+  ObjectPropertySelector,
+  resolveObjectPropertySelector,
+} from '../../reflection/resolve-object-property-selector';
 
 export interface AddressFormatOptions {
   streetSelector?: ObjectPropertySelector<any>;
@@ -15,21 +19,21 @@ export interface AddressFormatOptions {
  * using the following tokens. If no format is present the pipe will default to "full". Additionally
  * any field can be backed up with a fallback value
  *
- *  | Token  | Description                        |
- *  |:------:| ---------------------------------- |
- *  | `sss`  | The street name of the address     |
- *  | `NN`   | The street number of the address   |
- *  | `aaa`  | The address addition (if given)    |
- *  | `ZZ`   | The address zip code               |
- *  | `ccc`  | The city of the address            |
+ * | Token  | Description                        |
+ * | ------ | ---------------------------------- |
+ * | `sss`  | The street name of the address     |
+ * | `NN`   | The street number of the address   |
+ * | `aaa`  | The address addition (if given)    |
+ * | `ZZ`   | The address zip code               |
+ * | `ccc`  | The city of the address            |
  *
- *  There's also a predefined selection of format aliases to choose from:
+ * There's also a predefined selection of format aliases to choose from:
  *
- *  | Alias       | Format               |
- *  | ----------- | -------------------- |
- *  | `full`      | `sss nn aaa, zz ccc` |
- *  | `street`    | `sss nn`             |
- *  | `city`      | `zz ccc`             |
+ * | Alias       | Format               |
+ * | ----------- | -------------------- |
+ * | `full`      | `sss nn aaa, zz ccc` |
+ * | `street`    | `sss nn`             |
+ * | `city`      | `zz ccc`             |
  *
  * @param obj     The object value to select the name information from
  * @param format  The desired format to use for the output string value. Defaults to "full"
@@ -73,12 +77,14 @@ export function formatAddress(obj: any, format: string = 'full', options?: Addre
 
 export const ADDRESS_FORMAT = new InjectionToken<string>('ADDRESS_FORMAT', {
   providedIn: 'root',
-  factory: /* @dynamic */ () => 'sss nn',
+  factory: /* @dynamic */ () => 'full',
 });
 
 @Pipe({ name: 'address' })
 export class AddressPipe implements PipeTransform {
-  transform(obj: any, format: string, options: AddressFormatOptions): string {
+  constructor(@Inject(ADDRESS_FORMAT) readonly defaultFormat: string) {}
+
+  transform(obj: any, format = this.defaultFormat, options?: AddressFormatOptions): string {
     return formatAddress(obj, format, options);
   }
 }

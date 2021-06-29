@@ -1,3 +1,5 @@
+# Template Outlet
+
 ```html
 <ng-template #foo>
   <div>bar</div>
