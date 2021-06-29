@@ -2,32 +2,32 @@ import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { SvgIconModule } from '@vitagroup/cdk';
 import { FORM_ERROR_COMPONENT, FORM_PENDING_COMPONENT, FORM_VALID_COMPONENT } from '@vitagroup/cdk/forms';
-import { RingLoaderModule } from '../ring-loader/module';
-import { FormStatus } from './form-status';
+import { PdsRingLoaderModule } from '../ring-loader/module';
+import { PdsFormStatus } from './form-status';
 
-const declarations = [FormStatus];
+const declarations = [PdsFormStatus];
 
 @NgModule({
   declarations,
   exports: declarations,
-  imports: [SvgIconModule, CommonModule, RingLoaderModule],
+  imports: [SvgIconModule, CommonModule, PdsRingLoaderModule],
 })
-export class FormStatusModule {
-  static forRoot(): ModuleWithProviders<FormStatusModule> {
+export class PdsFormStatusModule {
+  static forRoot(): ModuleWithProviders<PdsFormStatusModule> {
     return {
-      ngModule: FormStatusModule,
+      ngModule: PdsFormStatusModule,
       providers: [
         {
           provide: FORM_ERROR_COMPONENT,
-          useValue: FormStatus,
+          useValue: PdsFormStatus,
         },
         {
           provide: FORM_PENDING_COMPONENT,
-          useValue: FormStatus,
+          useValue: PdsFormStatus,
         },
         {
           provide: FORM_VALID_COMPONENT,
-          useValue: FormStatus,
+          useValue: PdsFormStatus,
         },
       ],
     };

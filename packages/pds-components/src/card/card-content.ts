@@ -7,7 +7,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
     <ng-content></ng-content>
   `,
 })
-export class CardHeader {}
+export class PdsCardHeader {}
 
 @Component({
   selector: 'pds-card-content',
@@ -16,7 +16,7 @@ export class CardHeader {}
     <ng-content></ng-content>
   `,
 })
-export class CardContent {}
+export class PdsCardContent {}
 
 @Component({
   selector: 'pds-card-footer',
@@ -25,4 +25,4 @@ export class CardContent {}
     <ng-content></ng-content>
   `,
 })
-export class CardFooter {}
+export class PdsCardFooter {}

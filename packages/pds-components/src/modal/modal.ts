@@ -4,20 +4,21 @@ import {
   ChangeDetectorRef,
   Component,
   ContentChild,
+  ElementRef,
   EventEmitter,
   HostBinding,
   Inject,
   Input,
   Optional,
   Output,
-  TemplateRef,
-  ViewChild,
+  Renderer2,
   ViewEncapsulation,
 } from '@angular/core';
 import { DialogRef } from '@vitagroup/cdk';
-import { MODAL_ENCAPSULATION } from './modal-encapsulation';
-import { ModalFooter } from './modal-footer';
-import { ModalHeader } from './modal-header';
+import { ShortcutManager } from '@vitagroup/common';
+import { PDS_MODAL_ENCAPSULATION } from './modal-encapsulation';
+import { PdsModalFooter } from './modal-footer';
+import { PdsModalHeader } from './modal-header';
 
 @Component({
   selector: 'pds-modal',
@@ -29,7 +30,7 @@ import { ModalHeader } from './modal-header';
       <ng-content></ng-content>
     </ng-template>
 
-    <ng-container *ngIf="header != null">
+    <ng-container *ngIf="!!header">
       <ng-content select="pds-modal-header"></ng-content>
     </ng-container>
     <main cdkScrollable>
@@ -37,27 +38,29 @@ import { ModalHeader } from './modal-header';
         <ng-container *ngTemplateOutlet="ngContentTemplate"></ng-container>
       </ng-container>
     </main>
-    <ng-container *ngIf="footer != null">
+    <ng-container *ngIf="!!footer">
       <ng-content select="pds-modal-footer"></ng-content>
     </ng-container>
   `,
   /* eslint-enable max-len */
 })
-export class Modal implements AfterContentInit {
-  @ContentChild(ModalHeader, { static: true }) private _staticHeader: ModalHeader;
-  @ContentChild(ModalHeader, { static: false }) private _dynamicHeader: ModalHeader;
-  @ContentChild(ModalFooter, { static: true }) private _staticFooter: ModalHeader;
-  @ContentChild(ModalFooter, { static: false }) private _dynamicFooter: ModalHeader;
+export class PdsModal implements AfterContentInit {
+  @ContentChild(PdsModalHeader, { static: true }) private _staticHeader: PdsModalHeader;
+  @ContentChild(PdsModalHeader, { static: false }) private _dynamicHeader: PdsModalHeader;
+  @ContentChild(PdsModalFooter, { static: true }) private _staticFooter: PdsModalFooter;
+  @ContentChild(PdsModalFooter, { static: false }) private _dynamicFooter: PdsModalFooter;
 
   private _fullscreen = false;
   private _closeable = false;
 
-  /** Gets the {@link ModalHeader} component instance, preferring any dynamically added references */
-  get header(): ModalHeader | null {
+  readonly shortcuts = new ShortcutManager(this.renderer, this.elementRef);
+
+  /** Gets the {@link PdsModalHeader} component instance, preferring any dynamically added references */
+  get header(): PdsModalHeader | null {
     return this._dynamicHeader || this._staticHeader;
   }
-  /** Gets the {@link ModalFooter} component instance, preferring any dynamically added references */
-  get footer(): ModalFooter | null {
+  /** Gets the {@link PdsModalFooter} component instance, preferring any dynamically added references */
+  get footer(): PdsModalFooter | null {
     return this._dynamicFooter || this._staticFooter;
   }
 
@@ -83,9 +86,11 @@ export class Modal implements AfterContentInit {
   @Output() readonly closes = new EventEmitter<any>();
 
   constructor(
+    protected renderer: Renderer2,
+    protected elementRef: ElementRef,
     protected changeDetectorRef: ChangeDetectorRef,
     @Optional() protected readonly dialogRef?: DialogRef,
-    @Optional() @Inject(MODAL_ENCAPSULATION) encapsulation?: string
+    @Optional() @Inject(PDS_MODAL_ENCAPSULATION) encapsulation?: string
   ) {
     if (encapsulation != null) this.encapsulation = encapsulation;
   }

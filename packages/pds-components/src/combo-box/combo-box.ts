@@ -24,9 +24,9 @@ import { PrimitiveBehaviorState, ShortcutManager } from '@vitagroup/common';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: ComboBox, multi: true },
-    { provide: INPUT_ACCESSOR, useExisting: ComboBox },
-    { provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [ComboBox] },
+    { provide: NG_VALUE_ACCESSOR, useExisting: PdsComboBox, multi: true },
+    { provide: INPUT_ACCESSOR, useExisting: PdsComboBox },
+    { provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [PdsComboBox] },
   ],
   host: {
     '[attr.tabindex]': '-1',
@@ -59,7 +59,7 @@ import { PrimitiveBehaviorState, ShortcutManager } from '@vitagroup/common';
     <ng-content select="[pdsAfter]"></ng-content>
   `,
 })
-export class ComboBox<T = any> extends ComboBoxBase<T> implements ControlInputAccessor, OnInit {
+export class PdsComboBox<T = any> extends ComboBoxBase<T> implements ControlInputAccessor, OnInit {
   @ViewChild('inputElement', { static: true })
   protected readonly inputRef: ElementRef<HTMLInputElement>;
 

@@ -11,7 +11,7 @@ import { ElementActiveState, ElementDisabledState, ElementFocusState, SVG_ICON_S
     <ng-content></ng-content>
   `,
 })
-export class FabButton {
+export class PdsFabButton {
   readonly focus = new ElementFocusState(this.elementRef, this.renderer);
   readonly active = new ElementActiveState(this.elementRef, this.renderer);
   readonly disabled = new ElementDisabledState(this.elementRef, this.renderer);
@@ -20,8 +20,8 @@ export class FabButton {
 }
 
 @NgModule({
-  declarations: [FabButton],
-  exports: [FabButton],
+  declarations: [PdsFabButton],
+  exports: [PdsFabButton],
   imports: [],
 })
-export class FabButtonModule {}
+export class PdsFabButtonModule {}

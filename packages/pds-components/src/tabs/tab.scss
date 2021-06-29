@@ -21,6 +21,11 @@ pds-tab {
       background-color: var(--primary);
     }
   }
+  @include util.focus-visible-state {
+    &:after {
+      background-color: var(--primary);
+    }
+  }
   @include util.active-state {
     &:after {
       background-color: var(--primary-light);

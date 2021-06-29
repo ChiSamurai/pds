@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RingLoader } from './ring-loader';
+import { PdsRingLoader } from './ring-loader';
 
-const declarations = [ RingLoader ];
+const declarations = [PdsRingLoader];
 
 @NgModule({
   declarations,
-  exports: declarations
+  exports: declarations,
 })
-export class RingLoaderModule {
-}
+export class PdsRingLoaderModule {}

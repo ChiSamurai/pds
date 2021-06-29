@@ -14,44 +14,43 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { Router, Scroll } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { PAGE_ENCAPSULATION } from './page-encapsulation';
-import { PAGE_FOOTER_POSITION, PageFooter, PageFooterPosition } from './page-footer';
-import { PageHeader } from './page-header';
+import { Subject, Subscription } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
+import { PDS_PAGE_ENCAPSULATION } from './page-encapsulation';
+import { PDS_PAGE_FOOTER_POSITION, PdsPageFooter, PageFooterPosition } from './page-footer';
+import { PdsPageHeader } from './page-header';
 
 @Component({
-  selector: 'page-layout',
+  selector: 'pds-page-layout',
   styleUrls: ['./page-layout.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-template #footerTemplate>
-      <ng-container *ngIf="footer != null; else defaultFooterTemplate">
-        <ng-content select="page-footer"></ng-content>
+      <ng-container *ngIf="!!footer; else defaultFooterTemplate">
+        <ng-content select="pds-page-footer"></ng-content>
       </ng-container>
       <ng-template #defaultFooterTemplate>
-        <page-footer></page-footer>
+        <pds-page-footer></pds-page-footer>
       </ng-template>
     </ng-template>
     <ng-template #headerTemplate>
-      <ng-container *ngIf="header != null; else defaultHeaderTemplate">
-        <ng-content select="page-header"></ng-content>
+      <ng-container *ngIf="!!header; else defaultHeaderTemplate">
+        <ng-content select="pds-page-header"></ng-content>
       </ng-container>
       <ng-template #defaultHeaderTemplate>
-        <page-header></page-header>
+        <pds-page-header></pds-page-header>
       </ng-template>
     </ng-template>
     <ng-template #ngContentTemplate>
-      <ng-content select="page-content, [pageContent]"></ng-content>
-      <ng-content></ng-content>
+      <ng-content select="pds-page-content"></ng-content>
     </ng-template>
 
-    <ng-container *ngIf="header != null; else headerTemplate">
+    <ng-container *ngIf="!!header; else headerTemplate">
       <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
     </ng-container>
     <main cdkScrollable>
-      <ng-container *encapsulate="encapsulation; ngClass: 'page-content'">
+      <ng-container *encapsulate="encapsulation; ngClass: 'pds-page-content'">
         <ng-container *ngTemplateOutlet="ngContentTemplate"></ng-container>
       </ng-container>
       <ng-container *ngIf="footerPosition === 'fluid'">
@@ -64,34 +63,33 @@ import { PageHeader } from './page-header';
   `,
   inputs: ['footerPosition: footer'],
 })
-export class PageLayout implements OnChanges, OnInit, OnDestroy {
-  private _routerScrollSubscription: Subscription | null;
-
+export class PdsPageLayout implements OnChanges, OnInit, OnDestroy {
   @ViewChild(CdkScrollable) private _mainScrollable: CdkScrollable;
 
-  @ContentChild(PageHeader, { static: true }) private _staticHeader: PageHeader;
-  @ContentChild(PageHeader, { static: false }) private _dynamicHeader: PageHeader;
-  @ContentChild(PageFooter, { static: true }) private _staticFooter: PageFooter;
-  @ContentChild(PageFooter, { static: false }) private _dynamicFooter: PageFooter;
+  protected readonly ngDestroys = new Subject();
 
-  get header(): PageHeader {
+  @ContentChild(PdsPageHeader, { static: true }) private _staticHeader: PdsPageHeader;
+  @ContentChild(PdsPageHeader, { static: false }) private _dynamicHeader: PdsPageHeader;
+  @ContentChild(PdsPageFooter, { static: true }) private _staticFooter: PdsPageFooter;
+  @ContentChild(PdsPageFooter, { static: false }) private _dynamicFooter: PdsPageFooter;
+
+  get header(): PdsPageHeader | null {
     return this._dynamicHeader || this._staticHeader;
   }
-  get footer(): PageFooter {
+  get footer(): PdsPageFooter | null {
     return this._dynamicFooter || this._staticFooter;
   }
 
   @Input() encapsulation: string;
-
   @Input() footerPosition: PageFooterPosition;
 
   constructor(
-    @Inject(PAGE_FOOTER_POSITION) footerPosition: /* @dynamic */ PageFooterPosition,
-    @Inject(PAGE_ENCAPSULATION) encapsulation: /* @dynamic */ string,
+    @Inject(PDS_PAGE_FOOTER_POSITION) footerPosition: /* @dynamic */ PageFooterPosition,
+    @Inject(PDS_PAGE_ENCAPSULATION) encapsulation: /* @dynamic */ string,
     @Optional() protected router?: Router
   ) {
     if (encapsulation) this.encapsulation = encapsulation;
-    this.footerPosition = footerPosition;
+    if (this.footerPosition == null) this.footerPosition = footerPosition;
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -103,8 +101,11 @@ export class PageLayout implements OnChanges, OnInit, OnDestroy {
   }
   ngOnInit() {
     if (this.router != null) {
-      this._routerScrollSubscription = this.router.events
-        .pipe(filter((e) => e instanceof Scroll))
+      this.router.events
+        .pipe(
+          takeUntil(this.ngDestroys),
+          filter((e) => e instanceof Scroll)
+        )
         .subscribe((e: Scroll) => {
           // todo(@janunld): consider anchor scroll support? we should probably..
           let top = 0;
@@ -118,7 +119,7 @@ export class PageLayout implements OnChanges, OnInit, OnDestroy {
     }
   }
   ngOnDestroy() {
-    if (this._routerScrollSubscription != null && !this._routerScrollSubscription.closed)
-      this._routerScrollSubscription.unsubscribe();
+    this.ngDestroys.next();
+    this.ngDestroys.complete();
   }
 }

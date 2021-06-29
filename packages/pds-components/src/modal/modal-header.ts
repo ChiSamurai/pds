@@ -5,14 +5,11 @@ import {
   Inject,
   Input,
   OnDestroy,
-  OnInit,
   Optional,
-  TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { MODAL_ENCAPSULATION } from './modal-encapsulation';
+import { Subject } from 'rxjs';
+import { PDS_MODAL_ENCAPSULATION } from './modal-encapsulation';
 
 @Component({
   selector: 'pds-modal-header',
@@ -25,14 +22,14 @@ import { MODAL_ENCAPSULATION } from './modal-encapsulation';
     </ng-container>
   `,
 })
-export class ModalHeader implements OnDestroy {
+export class PdsModalHeader implements OnDestroy {
   protected readonly ngDestroys = new Subject<void>();
 
   @Input() encapsulation: string;
 
   constructor(
     protected changeDetectorRef: ChangeDetectorRef,
-    @Optional() @Inject(MODAL_ENCAPSULATION) encapsulation: string
+    @Optional() @Inject(PDS_MODAL_ENCAPSULATION) encapsulation: string
   ) {
     if (encapsulation != null) this.encapsulation = encapsulation;
   }

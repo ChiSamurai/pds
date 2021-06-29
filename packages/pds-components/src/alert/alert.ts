@@ -12,4 +12,4 @@ import { Component, ViewEncapsulation } from '@angular/core';
     <ng-content select="[pdsAfter]"></ng-content>
   `,
 })
-export class Alert {}
+export class PdsAlert {}

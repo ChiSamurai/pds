@@ -9,10 +9,10 @@ import { ToggleBase } from '@vitagroup/cdk';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '[attr.tabindex]': '0' },
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: ToggleBox, multi: true }],
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: PdsToggleBox, multi: true }],
   template: `
     <ng-template #labelTemplate>
-      <ng-container *ngIf="label != null; else projectLabelContent">
+      <ng-container *ngIf="!!label; else projectLabelContent">
         <label>{{ label }}</label>
       </ng-container>
       <ng-template #projectLabelContent>
@@ -20,25 +20,25 @@ import { ToggleBase } from '@vitagroup/cdk';
       </ng-template>
     </ng-template>
 
-    <ng-container *ngIf="labelAlign == 'before'">
+    <ng-container *ngIf="labelAlign === 'before'">
       <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
     </ng-container>
     <div class="toggle-indicator">
       <div class="toggle-knob"></div>
     </div>
-    <ng-container *ngIf="labelAlign == 'after'">
+    <ng-container *ngIf="labelAlign === 'after'">
       <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
     </ng-container>
   `,
 })
-export class ToggleBox extends ToggleBase {
+export class PdsToggleBox extends ToggleBase {
   @Input() label?: string;
   @Input() labelAlign?: 'before' | 'after' = 'after';
 }
 
 @NgModule({
-  declarations: [ToggleBox],
-  exports: [ToggleBox],
+  declarations: [PdsToggleBox],
+  exports: [PdsToggleBox],
   imports: [CommonModule],
 })
-export class ToggleBoxModule {}
+export class PdsToggleBoxModule {}

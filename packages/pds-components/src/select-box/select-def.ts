@@ -3,6 +3,6 @@ import { SelectDefBase } from '@vitagroup/cdk';
 
 @Directive({
   selector: '[pdsSelectDef]',
-  providers: [{ provide: SelectDefBase, useExisting: SelectDef }],
+  providers: [{ provide: SelectDefBase, useExisting: PdsSelectDef }],
 })
-export class SelectDef<T = any> extends SelectDefBase<T> {}
+export class PdsSelectDef<T = any> extends SelectDefBase<T> {}

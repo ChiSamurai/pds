@@ -6,13 +6,13 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
   template: `
     <div class="counter-value">{{ value }}</div>
-    <ng-container *ngIf="max != null">
+    <ng-container *ngIf="!!max">
       <div class="counter-divider">&frasl;</div>
       <div class="counter-max-value">{{ max }}</div>
     </ng-container>
   `,
 })
-export class StepCounter {
+export class PdsStepCounter {
   @Input() value = 1;
   @Input() max: number | null;
 }

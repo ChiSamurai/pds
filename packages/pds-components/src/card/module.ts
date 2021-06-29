@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { Card } from './card';
-import { CardContent, CardFooter, CardHeader } from './card-content';
+import { PdsCard } from './card';
+import { PdsCardContent, PdsCardFooter, PdsCardHeader } from './card-content';
 
-const declarations = [CardHeader, CardContent, CardFooter, Card];
+const declarations = [PdsCardHeader, PdsCardContent, PdsCardFooter, PdsCard];
 
 @NgModule({
   declarations,

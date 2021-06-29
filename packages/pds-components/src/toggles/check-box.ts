@@ -7,12 +7,12 @@ import { CheckBoxBase } from '@vitagroup/cdk';
   selector: 'pds-check-box',
   styleUrls: ['./check-box.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: CheckBox, multi: true }],
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: PdsCheckBox, multi: true }],
   host: { '[attr.tabindex]': '0' },
   /* eslint-disable max-len */
   template: `
     <ng-template #labelTemplate>
-      <ng-container *ngIf="label != null; else projectLabelContent">
+      <ng-container *ngIf="!!label; else projectLabelContent">
         <label>{{ label }}</label>
       </ng-container>
       <ng-template #projectLabelContent>
@@ -20,7 +20,7 @@ import { CheckBoxBase } from '@vitagroup/cdk';
       </ng-template>
     </ng-template>
 
-    <ng-container *ngIf="labelAlign == 'before'">
+    <ng-container *ngIf="labelAlign === 'before'">
       <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
     </ng-container>
     <div class="toggle-indicator">
@@ -44,20 +44,20 @@ import { CheckBoxBase } from '@vitagroup/cdk';
         />
       </svg>
     </div>
-    <ng-container *ngIf="labelAlign == 'after'">
+    <ng-container *ngIf="labelAlign === 'after'">
       <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
     </ng-container>
   `,
   /* eslint-enable max-len */
 })
-export class CheckBox extends CheckBoxBase {
+export class PdsCheckBox extends CheckBoxBase {
   @Input() label: string | null;
   @Input() labelAlign: 'before' | 'after' = 'after';
 }
 
 @NgModule({
-  declarations: [CheckBox],
-  exports: [CheckBox],
+  declarations: [PdsCheckBox],
+  exports: [PdsCheckBox],
   imports: [CommonModule],
 })
-export class CheckBoxModule {}
+export class PdsCheckBoxModule {}

@@ -32,7 +32,7 @@ export * from './modal/modal-footer';
 export * from './modal/modal';
 
 export * from './nav/module';
-export * from './nav/nav-entry';
+export * from './nav/nav-entry-link';
 export * from './nav/nav';
 
 export * from './ring-loader/ring-loader';

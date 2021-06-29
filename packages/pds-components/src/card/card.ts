@@ -1,17 +1,17 @@
 import { Component, ContentChild, Input, ViewEncapsulation } from '@angular/core';
-import { CardContent, CardFooter, CardHeader } from './card-content';
+import { PdsCardContent, PdsCardFooter, PdsCardHeader } from './card-content';
 
 @Component({
   selector: 'pds-card',
   styleUrls: ['./card.scss'],
   encapsulation: ViewEncapsulation.None,
   template: `
-    <ng-container *ngIf="header != null; else viewHeader">
+    <ng-container *ngIf="!!header; else viewHeader">
       <ng-content select="pds-card-header"></ng-content>
     </ng-container>
     <ng-template #viewHeader>
-      <pds-card-header *ngIf="label != null">
-        <label *ngIf="label != null">{{ label }}</label>
+      <pds-card-header *ngIf="!!label">
+        <label>{{ label }}</label>
       </pds-card-header>
     </ng-template>
     <ng-content select="pds-card-content"></ng-content>
@@ -19,31 +19,31 @@ import { CardContent, CardFooter, CardHeader } from './card-content';
     <ng-content select="pds-card-footer"></ng-content>
   `,
 })
-export class Card {
-  @ContentChild(CardHeader, { static: false })
-  private _dynamicHeader: CardHeader | null;
-  @ContentChild(CardHeader, { static: true })
-  private _staticHeader: CardHeader | null;
+export class PdsCard {
+  @ContentChild(PdsCardHeader, { static: false })
+  private _dynamicHeader: PdsCardHeader | null;
+  @ContentChild(PdsCardHeader, { static: true })
+  private _staticHeader: PdsCardHeader | null;
 
-  @ContentChild(CardContent, { static: false })
-  private _dynamicContent: CardContent | null;
-  @ContentChild(CardContent, { static: true })
-  private _staticContent: CardContent | null;
+  @ContentChild(PdsCardContent, { static: false })
+  private _dynamicContent: PdsCardContent | null;
+  @ContentChild(PdsCardContent, { static: true })
+  private _staticContent: PdsCardContent | null;
 
-  @ContentChild(CardFooter, { static: false })
-  private _dynamicFooter: CardFooter | null;
-  @ContentChild(CardFooter, { static: true })
-  private _staticFooter: CardFooter | null;
+  @ContentChild(PdsCardFooter, { static: false })
+  private _dynamicFooter: PdsCardFooter | null;
+  @ContentChild(PdsCardFooter, { static: true })
+  private _staticFooter: PdsCardFooter | null;
 
   @Input() label: string;
 
-  get header(): CardHeader | null {
+  get header(): PdsCardHeader | null {
     return this._dynamicHeader || this._staticHeader;
   }
-  get content(): CardContent | null {
+  get content(): PdsCardContent | null {
     return this._dynamicContent || this._staticContent;
   }
-  get footer(): CardFooter | null {
+  get footer(): PdsCardFooter | null {
     return this._dynamicFooter || this._staticFooter;
   }
 }

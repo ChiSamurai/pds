@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
-import { Tag } from './tag';
+import { PdsTag } from './tag';
 
-const declarations = [ Tag ];
+const declarations = [PdsTag];
 
 @NgModule({
   declarations,
-  exports: declarations
+  exports: declarations,
 })
-export class TagModule {
-}
+export class PdsTagModule {}

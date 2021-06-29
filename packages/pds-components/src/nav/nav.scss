@@ -1,24 +1,21 @@
 @use "styleguide" as pds;
 @use "util";
 
-$static-entry-divider: 1px solid;
+$property-prefix: 'pds-nav' !default;
+$properties: (
+  'foreground': --foreground,
+  'background': --gray-lighter,
+  'primary': --primary,
+  'secondary': --secondary,
+) !default;
 
 pds-nav {
-  @include util.custom-color-properties(
-    (
-      'pds-nav': (
-        'foreground': --foreground,
-        'background': --gray-lighter,
-        'primary': --primary,
-        'secondary': --gray-light,
-      ),
-    )
-  );
+  @include util.custom-color-properties($properties, $prefix: $property-prefix);
 
   display: flex;
   flex-direction: column;
-  background: var(--pds-nav-background);
-  color: var(--pds-nav-foreground);
+  background: util.var(--background, $prefix: $property-prefix);
+  color: util.var(--foreground, $prefix: $property-prefix);
   height: 100%;
 
   > nav-entry-outlet {
@@ -28,12 +25,6 @@ pds-nav {
 
     &:first-of-type {
       flex: 1 0 auto;
-    }
-
-    &:last-of-type {
-      pds-nav-entry {
-        border-top: $static-entry-divider var(--pds-nav-secondary);
-      }
     }
   }
 }

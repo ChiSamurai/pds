@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
-import { Dropdown } from './dropdown';
-import { DropdownDef } from './dropdown-def';
-import { DropdownOutlet } from './dropdown-outlet';
+import { PdsDropdown } from './dropdown';
+import { PdsDropdownDef } from './dropdown-def';
+import { PdsDropdownOutlet } from './dropdown-outlet';
 
-const declarations = [Dropdown, DropdownDef, DropdownOutlet];
+const declarations = [PdsDropdown, PdsDropdownDef, PdsDropdownOutlet];
 
 @NgModule({
   declarations,
   exports: declarations,
   imports: [],
 })
-export class DropdownModule {}
+export class PdsDropdownModule {}

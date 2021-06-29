@@ -6,7 +6,7 @@ import { InputDropdownOutletBase } from '@vitagroup/cdk';
   selector: '[pdsInputDropdown]',
   inputs: ['overlayDef: pdsInputDropdown'],
 })
-export class InputDropdownOutlet extends InputDropdownOutletBase {
+export class PdsInputDropdownOutlet extends InputDropdownOutletBase {
   protected configureOverlay(): OverlayConfig {
     return super.configureOverlay({ panelClass: 'pds-dropdown-overlay-container' });
   }

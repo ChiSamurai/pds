@@ -7,11 +7,11 @@ import { SELECTION_VALUE, SelectOptionBase } from '@vitagroup/cdk';
   styleUrls: ['select-option.scss'],
   host: { '[attr.tabindex]': '0' },
   providers: [
-    { provide: SelectOptionBase, useExisting: SelectOption },
-    { provide: SELECTION_VALUE, useExisting: SelectOption },
+    { provide: SelectOptionBase, useExisting: PdsSelectOption },
+    { provide: SELECTION_VALUE, useExisting: PdsSelectOption },
   ],
   template: `
     <ng-content></ng-content>
   `,
 })
-export class SelectOption<T = any> extends SelectOptionBase<T> {}
+export class PdsSelectOption<T = any> extends SelectOptionBase<T> {}

@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RadioBox } from './radio-box';
-import { RadioGroup } from './radio-group';
+import { PdsRadioBox } from './radio-box';
+import { PdsRadioGroup } from './radio-group';
 
-const declarations = [RadioGroup, RadioBox];
+const declarations = [PdsRadioGroup, PdsRadioBox];
 
 @NgModule({
   declarations,
   exports: declarations,
   imports: [CommonModule],
 })
-export class RadioBoxModule {}
+export class PdsRadioBoxModule {}

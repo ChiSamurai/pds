@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { SelectList } from './select-list';
-import { SelectOption } from './select-option';
+import { PdsSelectList } from './select-list';
+import { PdsSelectOption } from './select-option';
 
-const declarations = [SelectList, SelectOption];
+const declarations = [PdsSelectList, PdsSelectOption];
 
 @NgModule({
   declarations,
   exports: declarations,
 })
-export class SelectListModule {}
+export class PdsSelectListModule {}

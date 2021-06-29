@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NavModule } from '@vitagroup/cdk';
+import { NavBaseModule } from '@vitagroup/cdk';
 import { TemplateOutletModule } from '@vitagroup/common';
-import { Nav } from './nav';
-import { NavEntry } from './nav-entry';
+import { PdsNav } from './nav';
+import { PdsNavEntryLink } from './nav-entry-link';
 
-const declarations = [Nav, NavEntry];
+const declarations = [PdsNav, PdsNavEntryLink];
 
 @NgModule({
   declarations,
-  exports: declarations,
-  imports: [NavModule, CommonModule, RouterModule, TemplateOutletModule],
+  exports: [NavBaseModule, ...declarations],
+  imports: [NavBaseModule, CommonModule, RouterModule, TemplateOutletModule],
 })
-export class MainMenuModule {}
+export class PdsNavModule {}

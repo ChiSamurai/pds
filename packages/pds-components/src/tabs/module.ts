@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Tab } from './tab';
-import { Tabs } from './tabs';
+import { PdsTab } from './tab';
+import { PdsTabs } from './tabs';
 
-const declarations = [
-  Tabs,
-  Tab
-];
+const declarations = [PdsTabs, PdsTab];
 
 @NgModule({
   declarations,
-  exports: declarations
+  exports: declarations,
 })
-export class TabsModule {
-}
+export class PdsTabsModule {}

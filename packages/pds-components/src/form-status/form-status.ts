@@ -38,7 +38,7 @@ import { FORM_ERROR_MESSAGE, FORM_PENDING_TEMPLATE, FORM_VALID_TEMPLATE } from '
   `,
   /* eslint-enable max-len */
 })
-export class FormStatus {
+export class PdsFormStatus {
   @HostBinding('class.error') get isError(): boolean {
     return this.errorMessage != null;
   }

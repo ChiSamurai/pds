@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { TextBox } from './text-box';
+import { PdsTextBox } from './text-box';
 
-const declarations = [TextBox];
+const declarations = [PdsTextBox];
 
 @NgModule({
   declarations,
   exports: declarations,
 })
-export class TextBoxModule {}
+export class PdsTextBoxModule {}

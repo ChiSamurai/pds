@@ -7,11 +7,11 @@ import { ElementFocusState, resolveElementFocusState, SelectionModel, SelectList
   encapsulation: ViewEncapsulation.None,
   host: { '[attr.tabindex]': '0' },
   providers: [
-    { provide: SelectionModel, useExisting: SelectList },
-    { provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [SelectList] },
+    { provide: SelectionModel, useExisting: PdsSelectList },
+    { provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [PdsSelectList] },
   ],
   template: `
     <ng-content></ng-content>
   `,
 })
-export class SelectList<T = any> extends SelectListBase<T> {}
+export class PdsSelectList<T = any> extends SelectListBase<T> {}

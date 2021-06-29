@@ -15,9 +15,9 @@ import { PrimitiveBehaviorState } from '@vitagroup/common';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: TextBox, multi: true },
-    { provide: INPUT_ACCESSOR, useExisting: TextBox },
-    { provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [TextBox] },
+    { provide: NG_VALUE_ACCESSOR, useExisting: PdsTextBox, multi: true },
+    { provide: INPUT_ACCESSOR, useExisting: PdsTextBox },
+    { provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [PdsTextBox] },
   ],
   host: {
     '[attr.tabindex]': '-1',
@@ -38,7 +38,7 @@ import { PrimitiveBehaviorState } from '@vitagroup/common';
     <ng-content select="[pdsAfter]"></ng-content>
   `,
 })
-export class TextBox extends TextBoxBase<string> implements ControlInputAccessor, OnInit {
+export class PdsTextBox extends TextBoxBase<string> implements ControlInputAccessor, OnInit {
   @ViewChild('inputElement', { static: true }) protected readonly inputRef: ElementRef<HTMLInputElement>;
 
   readonly input = new PrimitiveBehaviorState<string>();

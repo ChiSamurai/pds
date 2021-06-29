@@ -1,3 +1,3 @@
 import { InjectionToken } from '@angular/core';
 
-export const MODAL_ENCAPSULATION = new InjectionToken<string>('MODAL_ENCAPSULATION');
+export const PDS_MODAL_ENCAPSULATION = new InjectionToken<string>('PDS_MODAL_ENCAPSULATION');

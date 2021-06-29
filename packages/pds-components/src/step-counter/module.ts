@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { StepCounter } from './step-counter';
+import { PdsStepCounter } from './step-counter';
 
-const declarations = [ StepCounter ];
+const declarations = [PdsStepCounter];
 
 @NgModule({
   declarations,
   exports: declarations,
-  imports: [ CommonModule ]
+  imports: [CommonModule],
 })
-export class StepCounterModule {
-}
+export class PdsStepCounterModule {}

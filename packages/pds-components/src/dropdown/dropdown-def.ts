@@ -5,6 +5,6 @@ import { DropdownDefBase, ElementFocusState, resolveElementFocusState } from '@v
   exportAs: 'pdsDropdownDef',
   selector: '[pdsDropdownDef]',
   inputs: ['preferredPosition: pdsDropdownPreferredPosition'],
-  providers: [{ provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [DropdownDef] }],
+  providers: [{ provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [PdsDropdownDef] }],
 })
-export class DropdownDef extends DropdownDefBase {}
+export class PdsDropdownDef extends DropdownDefBase {}

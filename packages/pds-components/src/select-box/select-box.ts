@@ -8,8 +8,8 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['select-box.scss'],
   encapsulation: ViewEncapsulation.None,
   providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: SelectBox, multi: true },
-    { provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [SelectBox] },
+    { provide: NG_VALUE_ACCESSOR, useExisting: PdsSelectBox, multi: true },
+    { provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [PdsSelectBox] },
   ],
   host: {
     '[attr.tabindex]': '0',
@@ -27,7 +27,7 @@ import { takeUntil } from 'rxjs/operators';
 
     <ng-content select="[pdsBefore]"></ng-content>
     <div class="pds-select-box-value">
-      <ng-container *ngIf="placeholder != null && !value?.length">
+      <ng-container *ngIf="!!placeholder && !value?.length">
         <span class="pds-select-box-placeholder">{{ placeholder }}</span>
       </ng-container>
       <ng-container *ngFor="let it of value; let index = index">
@@ -58,7 +58,7 @@ import { takeUntil } from 'rxjs/operators';
   `,
   /* eslint-enable max-len */
 })
-export class SelectBox<T = any> extends SelectBoxBase<T> implements OnInit {
+export class PdsSelectBox<T = any> extends SelectBoxBase<T> implements OnInit {
   @ViewChild('selectOptionsTemplate', { static: true })
   protected overlayTemplate: TemplateRef<any>;
 

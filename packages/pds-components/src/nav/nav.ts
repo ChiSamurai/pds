@@ -1,10 +1,24 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { NavBase, NavEntryContainer } from '@vitagroup/cdk';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  InjectionToken,
+  Input,
+  Optional,
+  ViewEncapsulation,
+} from '@angular/core';
+import { NavBase, NavEntry, NavEntryContainer, NavEntryState } from '@vitagroup/cdk';
+
+/**
+ * Holds a reference to the secondary {@link NavEntry}s that are displayed in the bottom
+ * region of a `pds-nav` element
+ */
+export const PDS_SECONDARY_NAV_ENTRIES = new InjectionToken<NavEntry[]>('PDS_SECONDARY_NAV_ENTRIES');
 
 @Component({
   selector: 'pds-nav',
   styleUrls: ['./nav.scss'],
-  providers: [{ provide: NavEntryContainer, useExisting: Nav }],
+  providers: [{ provide: NavEntryContainer, useExisting: PdsNav }],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   template: `
@@ -22,8 +36,8 @@ import { NavBase, NavEntryContainer } from '@vitagroup/cdk';
       </nav-entry-outlet>
     </ng-container>
 
-    <ng-container *ngIf="staticState.asObservable() | async as staticEntries">
-      <nav-entry-outlet class="static" [entries]="staticEntries" [context]="{ static: true }">
+    <ng-container *ngIf="secondaryState.asObservable() | async as staticEntries">
+      <nav-entry-outlet class="secondary" [entries]="staticEntries" [context]="{ static: true }">
         <ng-container *navEntryDef="let entry">
           <ng-container
             *templateOutlet="fallbackEntryTemplate; context: { $implicit: entry }; ngClass: 'static'"
@@ -33,4 +47,25 @@ import { NavBase, NavEntryContainer } from '@vitagroup/cdk';
     </ng-container>
   `,
 })
-export class Nav extends NavBase {}
+export class PdsNav extends NavBase {
+  readonly secondaryState = new NavEntryState();
+
+  @Input()
+  set secondaryEntries(value: NavEntry[]) {
+    this.secondaryState.reset(...value);
+  }
+  get secondaryEntries(): NavEntry[] {
+    return this.secondaryState.snapshot;
+  }
+
+  constructor(
+    readonly state: NavEntryState,
+    @Optional()
+    @Inject(PDS_SECONDARY_NAV_ENTRIES)
+    initialSecondaryEntries?: NavEntry[]
+  ) {
+    super(state);
+
+    if (initialSecondaryEntries?.length > 0) this.secondaryState.reset(...initialSecondaryEntries);
+  }
+}

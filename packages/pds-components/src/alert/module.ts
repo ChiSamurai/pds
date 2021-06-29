@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { Alert } from './alert';
+import { PdsAlert } from './alert';
 
 @NgModule({
-  declarations: [Alert],
-  exports: [Alert],
+  declarations: [PdsAlert],
+  exports: [PdsAlert],
 })
 export class AlertModule {}

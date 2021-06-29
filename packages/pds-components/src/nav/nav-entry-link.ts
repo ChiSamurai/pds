@@ -6,9 +6,9 @@ import { NavEntryLink } from '@vitagroup/cdk';
   selector: 'pds-nav-entry',
   styleUrls: ['nav-entry.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [{ provide: RouterLink, useExisting: NavEntry }],
+  providers: [{ provide: RouterLink, useExisting: PdsNavEntryLink }],
   template: `
     <ng-content></ng-content>
   `,
 })
-export class NavEntry extends NavEntryLink {}
+export class PdsNavEntryLink extends NavEntryLink {}
