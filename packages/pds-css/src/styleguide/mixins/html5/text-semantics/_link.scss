@@ -1,4 +1,11 @@
+@use '../../spacing' as *;
 @use "util";
+
+$link-property-prefix: "link" !default;
+$link-properties: (
+  "border-color": transparent,
+  "border-width": 2px,
+) !default;
 
 @mixin link {
   a {
@@ -7,14 +14,16 @@
 }
 
 @mixin link-base {
+  @include util.custom-properties($link-properties, $link-property-prefix);
+
   font-weight: bold;
   text-decoration: none;
-  color: var(--link);
+  transition: 100ms ease-out;
+  border-bottom: util.var(--border-width, $prefix: $link-property-prefix) solid
+    util.var(--border-color, $prefix: $link-property-prefix);
+  color: util.var(--link);
   cursor: pointer;
 
-  &:link {
-    @include link-default;
-  }
   &:visited {
     @include link-visited;
   }
@@ -30,19 +39,19 @@
   }
 }
 
-@mixin link-default {
-  color: var(--link-hover, var(--link));
-}
 @mixin link-visited {
-  color: var(--link-visited, var(--link));
+  color: util.var(--link-visited, --link);
 }
 
 @mixin link-hover {
-  color: var(--link-hover, var(--link));
+  color: util.var(--link-hover, --link);
+  border-bottom-color: util.var(--link-hover, --link);
 }
 @mixin link-focus {
-  color: var(--link-focus, var(--link));
+  color: util.var(--link-focus, --link-hover);
+  border-bottom-color: util.var(--link-focus, --link-hover);
 }
 @mixin link-active {
-  color: var(--link-active, var(--link));
+  color: util.var(--link-active, --link-hover);
+  border-bottom-color: util.var(--link-active, --link-hover);
 }

@@ -96,10 +96,10 @@ $font-family: "PT Sans", sans-serif !default;
 
     * {
       box-sizing: border-box;
+    }
 
-      &:focus {
-        outline: none;
-      }
+    :focus {
+      outline: none;
     }
   }
 }

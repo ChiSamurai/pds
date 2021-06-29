@@ -25,20 +25,20 @@ $good-contrast: white !default;
 
 $warn-dark: $yellow-s1 !default;
 $warn: $yellow !default;
-$warn-light: $yellow-t1 !default;
+$warn-light: $yellow-t2 !default;
 
 $warn-outline: $yellow-outline !default;
 $warn-contrast: black !default;
 
 $bad-dark: $red-s1 !default;
 $bad: $red !default;
-$bad-light: $red-t1 !default;
+$bad-light: $red-t2 !default;
 
 $bad-outline: $red-outline !default;
 $bad-contrast: white !default;
 
 $link: var(--primary) !default;
-$link-visited: var(--primary) !default;
+$link-hover: var(--primary-light) !default;
 
 $disabled: var(--gray) !default;
 
@@ -70,5 +70,6 @@ $accent-color-map: (
   "bad-outline": $bad-outline,
   "bad-contrast": $bad-contrast,
   "link": $link,
+  "link-hover": $link-hover,
   "disabled": $disabled,
 ) !default;

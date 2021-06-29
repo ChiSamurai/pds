@@ -115,7 +115,7 @@
 @function var($var, $fallback: null, $prefix: null, $suffix: null) {
   $var: normalize-var($var, $prefix, $suffix);
   @if $fallback != null {
-    @return unquote("var(#{$var}, #{$fallback})");
+    @return unquote("var(#{$var}, #{var-or-default($fallback)})");
   } @else {
     @return unquote("var(#{$var})");
   }

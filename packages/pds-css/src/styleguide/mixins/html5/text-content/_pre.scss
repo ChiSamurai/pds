@@ -11,6 +11,7 @@
     @include inner-spacing(--space-3, y);
 
     border: 1px solid var(--pre, var(--gray-light));
+    overflow: auto;
 
     code {
       border: none;

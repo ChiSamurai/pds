@@ -35,6 +35,11 @@
     @content;
   }
 }
+@mixin focus-visible-state($within-parent: false) {
+  @include state((":focus-visible"), $within-parent) {
+    @content;
+  }
+}
 
 @mixin active-state($within-parent: false) {
   @include state((".active", ":active"), $within-parent) {

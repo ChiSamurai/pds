@@ -1,15 +1,13 @@
-@use "styleguide/spacings" as *;
-@use "util/mixins" as *;
-
 @use "../../typography" as *;
 @use "../../rounding" as *;
 @use "../../spacing" as *;
+@use "util";
 
 $button-height: var(--input-height) !default;
 $button-rounding: $button-height !default;
-$button-border: 1px solid !default;
+$button-border: 2px solid !default;
 
-$button-min-width: 120px !default;
+$button-min-width: auto !default;
 $button-spacing-y: --space-1 !default;
 $button-spacing-x: --space-5 !default;
 
@@ -34,19 +32,19 @@ $button-spacing-x: --space-5 !default;
   background-color: var(--primary);
   color: var(--primary-contrast);
 
-  @include hover-state {
+  @include util.hover-state {
     background-color: var(--primary-light);
     border-color: var(--primary-light);
   }
-  @include focus-state {
+  @include util.focus-state {
     background-color: var(--primary);
     border-color: var(--primary-light);
   }
-  @include active-state {
+  @include util.active-state {
     background-color: var(--primary-dark);
     border-color: var(--primary-dark);
   }
-  @include disabled-state {
+  @include util.disabled-state {
     background-color: var(--disabled);
     border-color: var(--disabled);
     color: var(--dark-t2);
@@ -57,18 +55,18 @@ $button-spacing-x: --space-5 !default;
   background-color: transparent;
   color: var(--gray-darker);
 
-  @include hover-state {
+  @include util.hover-state {
     background-color: rgba(#000, 0.1);
   }
-  @include focus-state {
+  @include util.focus-state {
     border-color: var(--primary-light);
   }
-  @include active-state {
+  @include util.active-state {
     background-color: var(--gray-darker);
     border-color: var(--gray-darker);
     color: var(--gray-lighter);
   }
-  @include disabled-state {
+  @include util.disabled-state {
     background-color: rgba(var(--gray-darkest-rgb), 0.05);
     border-color: var(--disabled);
     color: var(--disabled);

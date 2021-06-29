@@ -1,5 +1,7 @@
 @use "../colors" as *;
+@use "./colors/accents" as *;
 @use "./theme";
+@use "util";
 
 $blue-theme: theme.define(
   (
@@ -24,6 +26,8 @@ $dark-theme: theme.define(
     "foreground": #f2f2f2,
     "background": --gray-lightest,
     "link": --primary-light,
+    "link-active": util.color-tint($primary-light, 25%),
+    "link-focus": util.color-tint($primary-light, 25%),
     "gray-darkest": #d9d9d9,
     "gray-darker": #bfbfbf,
     "gray-dark": #6b6b6b,
