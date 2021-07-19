@@ -1,6 +1,5 @@
 import { InjectionToken, Predicate } from '@angular/core';
 import { Route, Routes } from '@angular/router';
-import { resolveObjectPropertyPath } from '../reflection/resolve-object-property-path';
 import { ObjectPropertySelector, resolveObjectPropertySelector } from '../reflection/resolve-object-property-selector';
 import { ArrayBehaviorState } from '../rx';
 import { normalizeUrl } from '../utils/normalize-url';
@@ -42,6 +41,11 @@ export interface SiteRef {
 
 function createSiteRefs(descriptor: SitemapDescriptor): SiteRef[] {
   const siteRefs: SiteRef[] = [];
+  const resolveBaseUrl = (path) => {
+    const { baseUrl } = descriptor as NestedSitemapDescriptor;
+    return baseUrl != null ? normalizeUrl('/', baseUrl, path) : normalizeUrl('/', path);
+  };
+
   if (descriptor.routes != null) {
     const { titleSelector, keySelector, filter } = descriptor;
 
@@ -50,18 +54,14 @@ function createSiteRefs(descriptor: SitemapDescriptor): SiteRef[] {
       const routeDescriptor = descriptor.lazyChildren?.[routeKey];
       const routeTitle = resolveObjectPropertySelector(route, titleSelector, route.data?.title);
 
-      const hasEmptyRoutePath = !route.path;
-      const hasWildcardPath = route.path?.includes('*');
+      const isEmptyRoute = !route.path && !route.children?.length;
+      const isWildcardRoute = route.path?.includes('*');
       const isFiltered = filter?.(route);
+      const isParameterized = route.path?.includes(':');
 
-      if (!hasEmptyRoutePath && !hasWildcardPath && !isFiltered) {
-        const isParameterized = route.path?.includes(':');
+      if (!isEmptyRoute && !isWildcardRoute && !isFiltered) {
         const routeParamOptions = descriptor.routeParamOptions?.[routeKey];
         const routes = (route.children || []).concat(routeDescriptor?.routes || []);
-        const resolveBaseUrl = (path) => {
-          const { baseUrl } = descriptor as NestedSitemapDescriptor;
-          return baseUrl != null ? normalizeUrl('/', baseUrl, path) : normalizeUrl('/', path);
-        };
 
         if (isParameterized && routeParamOptions != null) {
           for (const paramValue of routeParamOptions) {
@@ -84,7 +84,8 @@ function createSiteRefs(descriptor: SitemapDescriptor): SiteRef[] {
             routes,
           } as NestedSitemapDescriptor);
 
-          siteRefs.push({ children, title, linkUrl: baseUrl, key: routeKey });
+          if (routeKey) siteRefs.push({ children, title, linkUrl: baseUrl, key: routeKey });
+          else siteRefs.push(...children);
         }
       }
     }
