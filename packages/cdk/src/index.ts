@@ -53,11 +53,6 @@ export * from './selection/triggers/selection-toggle';
 export * from './sort/module';
 export * from './sort/sort-group';
 export * from './sort/sort-toggle';
-export * from './sort/sort-order';
-export * from './sort/sort-model';
-export * from './sort/sort';
-export * from './sort/property-sort';
-export * from './sort/sort-param-parser';
 
 export * from './svg-icon/module';
 export * from './svg-icon/svg-icon';

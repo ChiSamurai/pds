@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { ArrayBehaviorState } from '@vitagroup/common';
+import { ArrayBehaviorState } from '../rx';
 import { SortOrder } from './sort-order';
 
 export interface SortState {
@@ -73,8 +73,7 @@ export class SortModel {
       const i = this.activeStates.snapshot.findIndex((state) => state.key === key);
       removed = this.activeStates.removeAt(i);
     }
-    if (options == null || options.emitChange)
-      for (const r of removed) this.emitChange('unset', r.key, r.order);
+    if (options == null || options.emitChange) for (const r of removed) this.emitChange('unset', r.key, r.order);
   }
 
   getOrder(key: string): SortOrder | null {

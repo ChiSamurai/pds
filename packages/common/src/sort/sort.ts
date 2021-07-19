@@ -1,7 +1,6 @@
 import { SortOrder } from './sort-order';
 
 export type ComparatorFn<T> = (a: T, b: T) => number;
-export type SortComparatorFn<T> = (a: T, b: T, order: SortOrder) => number;
 
 /* @dynamic */
 export class Sort<T = any> {
@@ -17,12 +16,13 @@ export class Sort<T = any> {
     return new Sort(() => 0, null);
   }
 
-  setComparator(fn: ComparatorFn<T>, defaultOrder: SortOrder): void {
+  protected setComparator(fn: ComparatorFn<T>, defaultOrder: SortOrder): void {
     if (fn != null) {
       this._comparator = fn;
       this._defaultOrder = defaultOrder;
     }
   }
+
   getComparator(): ComparatorFn<T> {
     return this._comparator;
   }
@@ -36,9 +36,5 @@ export class Sort<T = any> {
     const isDefaultOrder = this._defaultOrder === order;
     if (isDefaultOrder) return sortedData;
     else return sortedData.reverse();
-  }
-
-  protected getSortComparator(): SortComparatorFn<T> {
-    return (a: T, b: T, order: SortOrder) => this._comparator(a, b) * (this._defaultOrder !== order ? -1 : 1);
   }
 }

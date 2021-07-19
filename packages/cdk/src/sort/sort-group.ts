@@ -1,10 +1,8 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Directive, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { SortModel, SortModelChange, SortOrder, SortParamParser, SortState } from '@vitagroup/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { SortModel, SortModelChange, SortState } from './sort-model';
-import { SortOrder } from './sort-order';
-import { SortParamParser } from './sort-param-parser';
 
 @Directive({
   exportAs: 'sortGroup',
@@ -34,7 +32,6 @@ export class SortGroup implements OnInit, OnDestroy {
   set emitInitChange(value: boolean) {
     this._emitInitEvent = coerceBooleanProperty(value);
   }
-
   get emitInitChange(): boolean {
     return this._emitInitEvent;
   }
@@ -43,7 +40,6 @@ export class SortGroup implements OnInit, OnDestroy {
   set allowsMultiple(value: boolean) {
     this.model.allowsMultiple = coerceBooleanProperty(value);
   }
-
   get allowsMultiple(): boolean {
     return this.model.allowsMultiple;
   }
@@ -66,7 +62,6 @@ export class SortGroup implements OnInit, OnDestroy {
       }
     }
   }
-
   ngOnDestroy(): void {
     this.ngDestroys.next();
     this.ngDestroys.complete();

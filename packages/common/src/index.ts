@@ -21,6 +21,12 @@ export * from './shortcut-manager/shortcut-manager';
 export * from './sitemap/sitemap';
 export * from './sitemap/sitemap-intl';
 
+export * from './sort/sort';
+export * from './sort/sort-model';
+export * from './sort/sort-order';
+export * from './sort/sort-param-parser';
+export * from './sort/property-sort';
+
 export * from './string/string-interpolate';
 export * from './string/string-interpolation-schemes';
 export * from './string/string-interpolator';
