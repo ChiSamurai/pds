@@ -1,3 +1,4 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -33,6 +34,8 @@ import { NavEntryDefContext } from './nav-entry-def';
   `,
 })
 export class NavEntryOutlet extends NavEntryContainer {
+  private _inferEntries = true; // whether the outlet should use any existing parent state entries or not
+
   /**
    * An instance of custom {@link NavEntryState} to use for this outlet. This will not overwrite
    * any existing entries stored in {@link NavEntryState}. Those will only be preferred for
@@ -44,7 +47,7 @@ export class NavEntryOutlet extends NavEntryContainer {
   /** Gets the stream of {@link NavEntry}s that's used for rendering */
   readonly viewEntries = merge(this.customState, this.state).pipe(
     map(() => {
-      const entries = this.customState.snapshot != null ? this.customState.snapshot : this.state.snapshot;
+      const entries = this.customState.length || !this._inferEntries ? this.customState.snapshot : this.state.snapshot;
       return typeof this.filter === 'function' ? entries.filter(this.filter) : entries;
     })
   );
@@ -57,12 +60,23 @@ export class NavEntryOutlet extends NavEntryContainer {
     return this.customState.snapshot || this.state.snapshot;
   }
 
+  @Input()
+  set inferEntries(value: boolean) {
+    this._inferEntries = coerceBooleanProperty(value);
+  }
+  get inferEntries(): boolean {
+    return this._inferEntries;
+  }
+
   @Input() context?: Omit<NavEntryDefContext, '$implicit'>;
 
   /** Gets or sets a filter {@link Predicate} for the rendered {@link NavEntry}s */
   @Input() filter: Predicate<NavEntry>;
 
-  constructor(protected readonly state: NavEntryState, @Optional() protected readonly parent?: NavEntryContainer) {
+  constructor(
+    @Optional() protected readonly state?: NavEntryState,
+    @Optional() protected readonly parent?: NavEntryContainer
+  ) {
     super();
   }
 

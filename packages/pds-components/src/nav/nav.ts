@@ -37,7 +37,12 @@ export const PDS_SECONDARY_NAV_ENTRIES = new InjectionToken<NavEntry[]>('PDS_SEC
     </ng-container>
 
     <ng-container *ngIf="secondaryState.asObservable() | async as secondaryEntries">
-      <nav-entry-outlet class="secondary" [entries]="secondaryEntries" [context]="{ secondary: true }">
+      <nav-entry-outlet
+        class="secondary"
+        [entries]="secondaryEntries"
+        [context]="{ secondary: true }"
+        inferEntries="false"
+      >
         <ng-container *navEntryDef="let entry">
           <ng-container
             *templateOutlet="fallbackEntryTemplate; context: { $implicit: entry }; ngClass: 'static'"
