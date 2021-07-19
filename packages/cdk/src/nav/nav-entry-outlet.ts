@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 import { NavEntryState } from './nav-entry-state';
 import { NavEntry } from './nav-entry';
 import { NavEntryContainer } from './nav-entry-container';
-import { NavigationEntryDefContext } from './nav-entry-def';
+import { NavEntryDefContext } from './nav-entry-def';
 
 @Component({
   selector: 'nav-entry-outlet',
@@ -44,7 +44,7 @@ export class NavEntryOutlet extends NavEntryContainer {
   /** Gets the stream of {@link NavEntry}s that's used for rendering */
   readonly viewEntries = merge(this.customState, this.state).pipe(
     map(() => {
-      const entries = this.customState.length ? this.customState.snapshot : this.state.snapshot;
+      const entries = this.customState.snapshot != null ? this.customState.snapshot : this.state.snapshot;
       return typeof this.filter === 'function' ? entries.filter(this.filter) : entries;
     })
   );
@@ -57,7 +57,7 @@ export class NavEntryOutlet extends NavEntryContainer {
     return this.customState.snapshot || this.state.snapshot;
   }
 
-  @Input() context?: Omit<NavigationEntryDefContext, '$implicit'>;
+  @Input() context?: Omit<NavEntryDefContext, '$implicit'>;
 
   /** Gets or sets a filter {@link Predicate} for the rendered {@link NavEntry}s */
   @Input() filter: Predicate<NavEntry>;
@@ -66,10 +66,10 @@ export class NavEntryOutlet extends NavEntryContainer {
     super();
   }
 
-  resolveEntryTemplate(entry: NavEntry): TemplateRef<NavigationEntryDefContext> | null {
+  resolveEntryTemplate(entry: NavEntry): TemplateRef<NavEntryDefContext> | null {
     return this.parent?.resolveEntryTemplate(entry) || super.resolveEntryTemplate(entry);
   }
-  resolveEntryContext(entry: NavEntry): NavigationEntryDefContext {
+  resolveEntryContext(entry: NavEntry): NavEntryDefContext {
     return { ...this.context, $implicit: entry };
   }
 }

@@ -1,7 +1,7 @@
 import { ContentChildren, Directive, OnDestroy, QueryList, TemplateRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { NavEntry } from './nav-entry';
-import { NavEntryDef, NavigationEntryDefContext } from './nav-entry-def';
+import { NavEntryDef, NavEntryDefContext } from './nav-entry-def';
 
 @Directive()
 export abstract class NavEntryContainer implements OnDestroy {
@@ -10,11 +10,11 @@ export abstract class NavEntryContainer implements OnDestroy {
   @ContentChildren(NavEntryDef, { descendants: true })
   protected readonly contentEntryDefs: QueryList<NavEntryDef>;
 
-  get defaultEntryTemplate(): TemplateRef<NavigationEntryDefContext> | null {
+  get defaultEntryTemplate(): TemplateRef<NavEntryDefContext> | null {
     return this.contentEntryDefs?.find((entryDef) => entryDef.when == null)?.template;
   }
 
-  resolveEntryTemplate(entry: NavEntry): TemplateRef<NavigationEntryDefContext> | null {
+  resolveEntryTemplate(entry: NavEntry): TemplateRef<NavEntryDefContext> | null {
     return (
       this.contentEntryDefs?.find((entryDef) => {
         return typeof entryDef.when === 'function' ? entryDef.when(entry) : entryDef.when;
