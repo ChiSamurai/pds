@@ -3,13 +3,11 @@
 @use "../../spacing" as *;
 @use "util";
 
-$button-height: var(--input-height) !default;
+$button-height: var(--input-height, auto) !default;
 $button-rounding: $button-height !default;
 $button-border: 2px solid !default;
-
-$button-min-width: auto !default;
-$button-spacing-y: --space-1 !default;
-$button-spacing-x: --space-5 !default;
+$button-spacing-y: --space-2 !default;
+$button-spacing-x: --space-6 !default;
 
 @mixin button-base {
   user-select: none;
@@ -74,32 +72,30 @@ $button-spacing-x: --space-5 !default;
 }
 
 @mixin button {
-  @at-root :root {
-    --button-min-width: #{$button-min-width};
-  }
-
   button,
   .button {
     @include button-base;
     @include button-primary;
 
     @include outer-sibling-spacing(--space-4);
-    @include outer-child-spacing(--space-3, x, $trim: true, $justify: true);
+    @include outer-child-spacing($button-spacing-y, x, $trim: true, $justify: true);
     @include inner-spacing($button-spacing-x, x);
     @include inner-spacing($button-spacing-y, y);
     @include rounding($button-rounding);
-
-    &:not(.small) {
-      min-width: var(--button-min-width);
-    }
 
     @content;
 
     &.secondary {
       @include button-secondary;
     }
+    &.even {
+      @include inner-spacing($button-spacing-y, x);
+    }
+    &.block {
+      width: 100%;
+    }
     &.small {
-      height: var(--input-height-small, 24px);
+      height: var(--input-height-small, 26px);
     }
   }
 }
