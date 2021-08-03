@@ -1,6 +1,6 @@
 @use "styleguide" as pds;
 
-page-footer {
+pds-page-footer {
   @include pds.outer-spacing(--space-8, top);
   min-height: 64px;
 }

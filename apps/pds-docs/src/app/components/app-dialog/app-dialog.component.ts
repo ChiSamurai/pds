@@ -1,13 +1,13 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { DialogOverlayModule } from '@vitagroup/cdk';
-import { AlertModule, ModalModule } from '@vitagroup/pds-components';
+import { AlertModule, PdsModalModule } from '@vitagroup/pds-components';
 
 @Component({
   selector: 'pds-app-dialog',
   styles: ['pds-app-dialog { display: block }'],
   encapsulation: ViewEncapsulation.None,
   template: `
-    <pds-modal encapsulation="fx-container" fullscreen="true">
+    <pds-modal fullscreen="false">
       <pds-modal-header>
         <h4>Cookie Notice</h4>
       </pds-modal-header>
@@ -28,6 +28,6 @@ export class AppDialogComponent {}
 @NgModule({
   declarations: [AppDialogComponent],
   exports: [AppDialogComponent],
-  imports: [ModalModule, DialogOverlayModule, AlertModule],
+  imports: [PdsModalModule, DialogOverlayModule, AlertModule],
 })
 export class AppDialogComponentModule {}

@@ -5,22 +5,24 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { DialogOverlayModule, SvgIconModule } from '@vitagroup/cdk';
 import { FormStatusOutletModule } from '@vitagroup/cdk/forms';
-import { FlexContainerModule, PageLayoutModule } from '@vitagroup/cdk/layout';
+import { FlexContainerModule } from '@vitagroup/cdk/layout';
 import {
   AlertModule,
   CardModule,
-  CheckBoxModule,
-  ComboBoxModule,
-  DropdownModule,
-  InputDropdownModule,
-  RadioBoxModule,
-  SelectBoxModule,
-  SelectListModule,
-  TabsModule,
-  TagModule,
-  TextBoxModule,
-  ToggleBoxModule,
+  PdsCheckBoxModule,
+  PdsComboBoxModule,
+  PdsDropdownModule,
+  PdsInputDropdownModule,
+  PdsRadioBoxModule,
+  PdsRingLoaderModule,
+  PdsSelectBoxModule,
+  PdsSelectListModule,
+  PdsTabsModule,
+  PdsTagModule,
+  PdsTextBoxModule,
+  PdsToggleBoxModule
 } from '@vitagroup/pds-components';
+import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 import { AppDialogComponentModule } from '../../components/app-dialog/app-dialog.component';
 import { AppComponentsPageComponent } from './app-components-page.component';
 
@@ -29,37 +31,39 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
     path: '',
     component: AppComponentsPageComponent,
     data: {
-      title: $localize`Components`,
-    },
-  },
+      title: $localize`Components`
+    }
+  }
 ];
 
 @NgModule({
-  declarations: [AppComponentsPageComponent],
+  declarations: [ AppComponentsPageComponent ],
   imports: [
     DialogOverlayModule,
     AppDialogComponentModule,
     RouterModule.forChild(APP_COMPONENTS_PAGE_ROUTES),
-    PageLayoutModule,
     FlexLayoutModule,
-    TextBoxModule,
-    ComboBoxModule,
-    SelectBoxModule,
-    SelectListModule,
+    PdsTextBoxModule,
+    PdsComboBoxModule,
+    PdsSelectBoxModule,
+    PdsSelectListModule,
     CommonModule,
-    TagModule,
+    PdsTagModule,
     FlexContainerModule,
     SvgIconModule,
-    RadioBoxModule,
-    CheckBoxModule,
-    TabsModule,
+    PdsRadioBoxModule,
+    PdsCheckBoxModule,
+    PdsTabsModule,
     CardModule,
     AlertModule,
-    DropdownModule,
-    InputDropdownModule,
-    ToggleBoxModule,
+    PdsDropdownModule,
+    PdsInputDropdownModule,
+    PdsToggleBoxModule,
     FormStatusOutletModule,
     ReactiveFormsModule,
-  ],
+    PdsRingLoaderModule,
+    PdsPageLayoutModule
+  ]
 })
-export class AppComponentsPageModule {}
+export class AppComponentsPageModule {
+}

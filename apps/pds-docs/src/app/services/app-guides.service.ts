@@ -11,6 +11,12 @@ export const APP_GUIDES_BASE_URL = new InjectionToken('The base url of the app g
 
 @Injectable({ providedIn: 'root' })
 export class AppGuidesService extends ArrayBehaviorState<AppGuide> {
+  chapters(): string[] {
+    return this.snapshot
+      ?.map((guide) => guide.chapter)
+      ?.filter((chapter, index, array) => array.indexOf(chapter) === index);
+  }
+
   constructor(@Inject(APP_GUIDES_BASE_URL) readonly baseUrl: string, protected http: HttpClient) {
     super();
   }
@@ -18,6 +24,10 @@ export class AppGuidesService extends ArrayBehaviorState<AppGuide> {
   get(slug: string): AppGuide | null {
     return this.snapshot?.find((guide) => guide.slug === slug);
   }
+  getChapter(chapter: string): AppGuide[] | null {
+    return this.snapshot?.filter((guide) => guide.chapter === chapter);
+  }
+
   has(slug: string): boolean {
     return this.get(slug) != null;
   }

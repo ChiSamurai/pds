@@ -10,7 +10,8 @@ import { AppDialogComponent } from '../../components/app-dialog/app-dialog.compo
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponentsPageComponent {
-  readonly fooValidator: AsyncValidatorFn = (control) => new Promise((resolve) => setTimeout(() => resolve(), 2000));
+  readonly fooValidator: AsyncValidatorFn = (control) =>
+    new Promise((resolve) => setTimeout(() => resolve(null), 2000));
 
   /* eslint-disable @typescript-eslint/member-ordering */
   readonly formControl = new FormControl(null, [Validators.required], [this.fooValidator]);

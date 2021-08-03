@@ -10,6 +10,8 @@ export interface AppGuide {
 
   /** Gets or sets an optional title value for the guide */
   title?: string;
+  /** Gets or sets the unique chapter name this guide belongs to */
+  chapter?: string;
   /** Gets or sets an optional description for the guide */
   description?: string;
   /** Gets or sets the next slug this guide wants to refer to */

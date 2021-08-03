@@ -2,13 +2,53 @@
   {
     "slug": "getting-started",
     "title": "Getting Started",
+    "chapter": "Getting Started",
     "description": "First steps with the ecosystem.",
     "next": "styling"
   },
   {
     "slug": "styling",
     "title": "Styling",
+    "chapter": "Getting Started",
     "description": "**PDS-CSS** features and possibilities.",
     "previous": "getting-started"
+  },
+
+  {
+    "slug": "nav",
+    "src": "packages/pds-components/src/nav/README",
+    "title": "Nav",
+    "chapter": "Components",
+    "description": "Navigation component concepts."
+  },
+
+  {
+    "slug": "encapsulate",
+    "src": "packages/cdk/layout/src/encapsulation/README",
+    "title": "Encapsulation",
+    "chapter": "CDK",
+    "description": "Abstract layout encapsulation."
+  },
+  {
+    "slug": "form-status-outlet",
+    "src": "packages/cdk/forms/src/form-status-outlet/README",
+    "title": "FormStatusOutlet",
+    "chapter": "CDK",
+    "description": "Abstract form status outlet behavior."
+  },
+
+  {
+    "slug": "router-link-or-href",
+    "src": "packages/common/src/router-link-or-href/README",
+    "title": "RouterLink or Href",
+    "chapter": "Common",
+    "description": "Dynamically based on the input value."
+  },
+  {
+    "slug": "template-outlet",
+    "src": "packages/common/src/template-outlet/README",
+    "title": "TemplateOutlet",
+    "chapter": "Common",
+    "description": "Extended template outlet directive."
   }
 ]

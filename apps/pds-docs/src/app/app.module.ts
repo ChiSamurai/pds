@@ -3,26 +3,26 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { LoadingStateModule, NavModule, SvgIconModule } from '@vitagroup/cdk';
+import { LoadingStateModule, SvgIconModule } from '@vitagroup/cdk';
+import { FORM_ERROR_MESSAGES, FormErrorMessages } from '@vitagroup/cdk/forms';
 import {
   FlexContainer,
   FlexContainerModule,
-  PageLayoutModule,
   TEMPLATE_ENCAPSULATIONS,
   TemplateEncapsulation,
 } from '@vitagroup/cdk/layout';
 import { RouteDataPipeModule, TemplateOutletModule } from '@vitagroup/common';
-import { FORM_ERROR_MESSAGES, FormErrorMessages } from '@vitagroup/common/forms';
 import {
-  FormStatusModule,
-  MainMenuModule,
-  RingLoader,
-  TagModule,
-  TextBoxModule,
-  ToggleBoxModule,
+  PdsNavModule,
+  PdsFormStatusModule,
+  PdsRingLoader,
+  PdsTextBoxModule,
+  PdsToggleBoxModule,
+  PdsTagModule,
 } from '@vitagroup/pds-components';
+import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 import { APP_ICON_IMPORT_PROVIDER } from './app-icon-provider';
-import { APP_NAV_ENTRY_PROVIDER, APP_STATIC_NAV_ENTRY_PROVIDER } from './app-navigation-provider';
+import { APP_NAV_ENTRY_PROVIDER, APP_SECONDARY_NAV_ENTRY_PROVIDER } from './app-navigation-provider';
 import {
   APP_PAGE_ENCAPSULATION_PROVIDER,
   APP_PAGE_FOOTER_POSITION_PROVIDER,
@@ -43,24 +43,23 @@ import { APP_GUIDES_INIT_PROVIDER } from './services/app-guides.service';
     BrowserModule,
     RouterModule.forRoot(APP_ROUTES),
     LoadingStateModule.forRoot({
-      indicator: RingLoader,
+      indicator: PdsRingLoader,
       overlayStrategy: 'onRouterEvent',
     }),
     FlexContainerModule.forRoot({
-      default: { maxWidth: 1024, padding: 32 },
+      default: { maxWidth: 1270, padding: 32 },
     }),
     HttpClientModule,
-    MainMenuModule,
+    ReactiveFormsModule,
     TemplateOutletModule,
-    PageLayoutModule,
     SvgIconModule,
     RouteDataPipeModule,
-    NavModule,
-    TextBoxModule,
-    TagModule,
-    ToggleBoxModule,
-    ReactiveFormsModule,
-    FormStatusModule.forRoot(),
+    PdsPageLayoutModule,
+    PdsNavModule,
+    PdsTextBoxModule,
+    PdsTagModule,
+    PdsToggleBoxModule,
+    PdsFormStatusModule.forRoot(),
   ],
   providers: [
     {
@@ -77,7 +76,7 @@ import { APP_GUIDES_INIT_PROVIDER } from './services/app-guides.service';
     },
 
     APP_NAV_ENTRY_PROVIDER,
-    APP_STATIC_NAV_ENTRY_PROVIDER,
+    APP_SECONDARY_NAV_ENTRY_PROVIDER,
     APP_SITEMAP_PROVIDER,
     APP_PAGE_HEADER_PROVIDER,
     APP_PAGE_FOOTER_PROVIDER,

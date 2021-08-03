@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { RouterModule, Routes } from '@angular/router';
 import { SvgIconModule } from '@vitagroup/cdk';
-import { PageLayoutModule } from '@vitagroup/cdk/layout';
 import { RouteDataPipeModule } from '@vitagroup/common';
 import { CardModule } from '@vitagroup/pds-components';
+import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 import { AppGuideCardModule } from '../../components/app-guide-card/app-guide-card.component';
 import { MarkedPipeModule } from '../../pipes/marked.pipe';
 import { AppGuidePageComponent } from './app-guide-page.component';
@@ -34,7 +34,6 @@ export const APP_GUIDES_PAGE_ROUTES: Routes = [
   exports: [AppGuidesPageComponent, AppGuidesPageComponent],
   imports: [
     RouterModule.forChild(APP_GUIDES_PAGE_ROUTES),
-    PageLayoutModule,
     MarkedPipeModule,
     FlexModule,
     CommonModule,
@@ -42,6 +41,7 @@ export const APP_GUIDES_PAGE_ROUTES: Routes = [
     RouteDataPipeModule,
     SvgIconModule,
     AppGuideCardModule,
+    PdsPageLayoutModule
   ],
   providers: [AppGuideResolve],
 })

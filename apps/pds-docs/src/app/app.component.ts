@@ -1,4 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { WINDOW } from '@ng-web-apis/common';
 
 @Component({
   selector: 'pds-app',
@@ -17,8 +19,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
       <ng-template #navEntryWithIcon let-entry>
         <pds-nav-entry
           [entry]="entry"
-          routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: entry.linkUrl === '/' }"
+          routerLinkActive="active"
         >
           <svg-icon *ngIf="entry.iconName" [name]="entry.iconName"></svg-icon>
           <span>{{ entry.name }}</span>
@@ -36,4 +38,20 @@ import { Component, ViewEncapsulation } from '@angular/core';
     <router-outlet></router-outlet>
   `,
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  set darkMode(value: boolean) {
+    if (value) this.document.body.classList.add('dark');
+    else this.document.body.classList.remove('dark');
+  }
+  get darkMode(): boolean {
+    return this.document.body.classList.contains('dark');
+  }
+
+  constructor(@Inject(DOCUMENT) readonly document: Document, @Inject(WINDOW) protected window: Window) {}
+
+  ngOnInit() {
+    const colorSchemeMediaQuery = this.window.matchMedia('(prefers-color-scheme: dark)');
+    colorSchemeMediaQuery.addEventListener('change', ({ matches }) => (this.darkMode = matches));
+    this.darkMode = colorSchemeMediaQuery.matches;
+  }
+}

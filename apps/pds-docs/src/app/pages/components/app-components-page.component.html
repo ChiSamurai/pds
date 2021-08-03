@@ -1,5 +1,5 @@
-<page-layout>
-  <page-content fxLayout="row wrap" fxLayoutGap="32px grid">
+<pds-page-layout footer="fixed">
+  <pds-page-content fxLayout="row wrap" fxLayoutGap="32px grid">
 
     <section fxFlex="100">
       <h5>Text Box</h5>
@@ -10,7 +10,7 @@
       <pds-text-box [formControl]="formControl" placeholder="Type something..."></pds-text-box>
       <form-status-outlet [control]="formControl">
         <span *formStatusPendingDef>Validating...</span>
-        <span *formStatusValidDef>Everything seems fine :shrug:</span>
+        <span *formStatusValidDef>Everything seems fine</span>
       </form-status-outlet>
     </section>
     <section fxFlex="50">
@@ -175,7 +175,7 @@
       <pds-tabs>
         <pds-tab class="active">Active</pds-tab>
         <pds-tab>Other Tab</pds-tab>
-        <pds-tab disabled>Disabled Tab</pds-tab>
+        <pds-tab disabled="true">Disabled Tab</pds-tab>
       </pds-tabs>
     </section>
 
@@ -186,14 +186,17 @@
         <svg-icon name="info" pdsBefore></svg-icon>
         <p>Primary style</p>
       </pds-alert>
+      <pds-alert class="good">
+        <svg-icon name="info" pdsBefore></svg-icon>
+        <p>Good style</p>
+      </pds-alert>
       <pds-alert class="warn">
         <svg-icon name="info" pdsBefore></svg-icon>
         <p>Warning style</p>
       </pds-alert>
       <pds-alert class="bad">
         <svg-icon name="info" pdsBefore></svg-icon>
-        <p>Bad style with button after</p>
-        <button class="small" pdsAfter>Dismiss</button>
+        <p>Bad style</p>
       </pds-alert>
     </section>
 
@@ -201,10 +204,9 @@
       <h5>Dialogs</h5>
 
       <div>
-        <button (click)="openModal()">Default</button>
-        <button>Fullscreen</button>
+        <button (click)="openModal()">Open Modal</button>
       </div>
     </section>
 
-  </page-content>
-</page-layout>
+  </pds-page-content>
+</pds-page-layout>

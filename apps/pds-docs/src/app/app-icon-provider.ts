@@ -8,6 +8,7 @@ import {
   faSolidIconGlobe,
   faSolidIconInfo,
   faSolidIconSearch,
+  faSolidIconTimes,
 } from '../icons/fa-solid-icons';
 
 export const APP_ICON_IMPORT_PROVIDER: Provider = {
@@ -16,11 +17,12 @@ export const APP_ICON_IMPORT_PROVIDER: Provider = {
     icons: [
       appIconVitagroupSignet,
       faSolidIconSearch,
-      faSolidIconGlobe,
-      faBrandIconGithub,
+      faSolidIconTimes,
       faSolidIconArrowRight,
       faSolidIconArrowLeft,
       faSolidIconInfo,
+      faSolidIconGlobe,
+      faBrandIconGithub,
     ],
   } as SvgIconImportConfig,
 };

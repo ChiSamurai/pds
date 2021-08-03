@@ -1,5 +1,6 @@
 import { Provider } from '@angular/core';
-import { NAV_ENTRIES, NavEntry, STATIC_NAVIGATION_ENTRIES } from '@vitagroup/cdk';
+import { NAV_ENTRIES, NavEntry } from '@vitagroup/cdk';
+import { PDS_SECONDARY_NAV_ENTRIES } from '@vitagroup/pds-components';
 
 export const APP_NAV_ENTRY_PROVIDER: Provider = {
   provide: NAV_ENTRIES,
@@ -23,8 +24,8 @@ export const APP_NAV_ENTRY_PROVIDER: Provider = {
   ] as NavEntry[],
 };
 
-export const APP_STATIC_NAV_ENTRY_PROVIDER: Provider = {
-  provide: STATIC_NAVIGATION_ENTRIES,
+export const APP_SECONDARY_NAV_ENTRY_PROVIDER: Provider = {
+  provide: PDS_SECONDARY_NAV_ENTRIES,
   useValue: [
     {
       name: 'Github',

@@ -1,9 +1,12 @@
-@use "~@angular/cdk/overlay" as *;
+@use "~@angular/cdk/overlay" as ng;
 
 @use "util";
 @use "colors/blue" as *;
 @use "colors/petrol" as *;
 @use "styleguide" as pds;
+
+@include util.font-face('/assets/fonts/pt-sans', 'pt-sans-bold', 'PT Sans', 700, ttf);
+@include util.font-face('/assets/fonts/pt-sans', 'pt-sans-regular', 'PT Sans', 400, ttf);
 
 @at-root :root {
   @include util.custom-properties(
@@ -21,7 +24,7 @@
 @include pds.typography-classes;
 
 @include pds.browser-scrollbar;
-@include cdk-overlay;
+@include ng.overlay;
 
 @import '~highlight.js/scss/vs';
 

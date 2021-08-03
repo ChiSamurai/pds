@@ -1,4 +1,5 @@
 @use "styleguide" as pds;
+@use "util";
 
 $nav-spacing-x: pds.$space-6 !default;
 $nav-spacing-y: pds.$space-8 !default;
@@ -51,7 +52,7 @@ pds-app {
         margin-right: var(--space-4) !important;
       }
     }
-    nav-entry-outlet:not(.static) {
+    nav-entry-outlet:not(.secondary) {
       pds-nav-entry {
         @include pds.rounding(--rounding-sm);
         @include pds.outer-spacing(--space-2, y, $justify: true);

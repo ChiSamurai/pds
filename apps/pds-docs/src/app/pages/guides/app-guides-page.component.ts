@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { AppGuidesService } from '../../services/app-guides.service';
 
 @Component({
@@ -7,5 +8,7 @@ import { AppGuidesService } from '../../services/app-guides.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class AppGuidesPageComponent {
+  chapters = this.appGuides.asObservable().pipe(map(() => this.appGuides.chapters()));
+
   constructor(readonly appGuides: AppGuidesService) {}
 }
