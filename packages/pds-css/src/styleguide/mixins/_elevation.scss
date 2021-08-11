@@ -1,8 +1,12 @@
+@use "util";
+
 @use "../elevation";
 
-@mixin elevation($elevation) {
-  $box-shadow: elevation.get-box-shadow($elevation);
+@mixin elevation($elevation, $box-shadows...) {
+  @each $box-shadow in util.coerce-to-list(elevation.get-box-shadow($elevation)) {
+    $box-shadows: append($box-shadows, $box-shadow, comma);
+  }
 
   z-index: elevation.get-z-index($elevation);
-  box-shadow: inspect($box-shadow);
+  box-shadow: inspect($box-shadows);
 }

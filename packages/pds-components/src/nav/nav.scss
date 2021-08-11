@@ -1,24 +1,17 @@
 @use "styleguide" as pds;
 @use "util";
 
-$property-prefix: 'pds-nav' !default;
-$properties: (
-  'foreground': --foreground,
-  'background': --gray-lighter,
-  'primary': --primary,
-  'secondary': --secondary,
-) !default;
-
 pds-nav {
-  @include util.custom-color-properties($properties, $prefix: $property-prefix);
+  @include pds.elevation(pds.$level-3, (0 0 0 1px var(--background)));
 
   display: flex;
   flex-direction: column;
-  background: util.var(--background, $prefix: $property-prefix);
-  color: util.var(--foreground, $prefix: $property-prefix);
+  background: var(--sheet);
   height: 100%;
 
   > nav-entry-outlet {
+    @include pds.outer-spacing(--space-xs, bottom);
+
     user-select: none;
     flex-direction: column;
     display: flex;

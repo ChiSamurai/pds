@@ -31,12 +31,12 @@
 }
 
 @mixin focus-state($within-parent: false) {
-  @include state((".focus", ":focus"), $within-parent) {
+  @include state((".focus", ":focus-visible"), $within-parent) {
     @content;
   }
 }
 @mixin focus-visible-state($within-parent: false) {
-  @include state((":focus-visible"), $within-parent) {
+  @include focus-state($within-parent) {
     @content;
   }
 }

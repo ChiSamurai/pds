@@ -2,21 +2,31 @@
 @use "util";
 
 pds-select-option {
+  @include pds.rounding(--rounding-md);
+  @include pds.inner-spacing(--space-sm, x);
+  @include pds.inner-spacing(--space-xs, y);
   @include pds.outer-child-spacing(pds.$input-padding-x, x, $trim: true, $justify: true);
-  @include pds.inner-spacing(pds.$input-padding-x, x);
-  @include pds.inner-spacing(pds.$input-padding-y, y);
 
   display: flex;
   transition: color 100ms ease-out, background-color 100ms ease-out;
+  border: 2px solid transparent;
   align-items: center;
   cursor: default;
 
-  @include util.focus-state {
-    background: var(--gray-lighter);
-    color: var(--primary-light);
+  @include util.hover-state {
+    color: var(--primary-lighter);
   }
   @include util.active-state {
-    background: var(--primary-dark);
-    color: var(--primary-contrast);
+    color: var(--primary-darker);
+  }
+
+  @include util.focus-state {
+    border-color: var(--focus);
+    color: var(--focus);
+  }
+
+  @include util.disabled-state {
+    color: var(--disabled);
+    pointer-events: none;
   }
 }

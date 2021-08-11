@@ -8,6 +8,9 @@ export interface SvgIconSizeAliases {
 export const SVG_ICON_SIZE = new InjectionToken<string | number>('SVG_ICON_SIZE');
 export const SVG_ICON_SIZE_ALIASES = new InjectionToken<SvgIconSizeAliases>('SVG_ICON_SIZE_ALIASES');
 
+/** @internal */
+const SVG_FALLBACK_SIZE = '1em';
+
 @Component({
   selector: 'svg-icon',
   styles: [
@@ -23,7 +26,11 @@ export const SVG_ICON_SIZE_ALIASES = new InjectionToken<SvgIconSizeAliases>('SVG
       <ng-content select="title"></ng-content>
     </ng-template>
 
-    <svg [attr.height]="sizeAsNumber" [attr.width]="sizeAsNumber" [attr.viewBox]="registered ? null : viewBox">
+    <svg
+      [attr.height]="sizeAsNumber || '${SVG_FALLBACK_SIZE}'"
+      [attr.width]="sizeAsNumber || '${SVG_FALLBACK_SIZE}'"
+      [attr.viewBox]="registered ? null : viewBox"
+    >
       <ng-container *ngIf="!!title; else ngContentTitle">
         <title>{{ title }}</title>
       </ng-container>
@@ -39,7 +46,8 @@ export class SvgIcon {
   @Input() id: string;
 
   @Input() name: string;
-  @Input() size: string | number = 18;
+  @Input() fallback: string;
+  @Input() size: string | number;
 
   @Input() title: string;
 
@@ -50,17 +58,17 @@ export class SvgIcon {
   @Input() viewBox: string;
 
   get href(): string {
-    return this.name && `#${this.name}`;
+    return (this.name || this.fallback) && `#${this.name || this.fallback}`;
   }
   get data(): SvgIconData {
-    return this.registry.resolve(this.name);
+    return this.registry.resolve(this.name) || (this.fallback && this.registry.resolve(this.fallback));
   }
   get sizeAsNumber(): number {
     const size = this.sizeAliases != null && typeof this.size === 'string' ? this.sizeAliases[this.size] : this.size;
     return typeof size === 'string' ? parseFloat(size) : size;
   }
   get registered(): boolean {
-    return this.name && this.data != null;
+    return (this.name || this.fallback) && this.data != null;
   }
 
   constructor(

@@ -17,9 +17,9 @@ import { MarkedPipeModule } from '../../pipes/marked.pipe';
 
     <pds-card>
       <pds-card-header>
-        <h5>{{ guide.title || guide.slug }}</h5>
+        <h3>{{ guide.title || guide.slug }}</h3>
       </pds-card-header>
-      <pds-card-content [innerHTML]="guide.description | md"></pds-card-content>
+      <pds-card-content *ngIf="description" [innerHTML]="guide.description | md"></pds-card-content>
       <pds-card-footer *ngIf="!hasContentFooter; else ngContentFooter">
         <button [routerLink]="['/', 'guides', guide.slug]">
           <span>Read</span>
@@ -37,8 +37,8 @@ export class AppGuideCardComponent {
     return this.footer != null;
   }
 
-  @Input()
-  guide: AppGuide;
+  @Input() guide: AppGuide;
+  @Input() description = true;
 }
 
 @NgModule({

@@ -5,7 +5,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['app-footer.component.scss'],
   template: `
-    <div class="app-legal-links">
+    <div class="app-legal-links text-primary no-decoration">
       <a routerLink="/imprint">Imprint</a>
       <a routerLink="/privacy">Privacy</a>
     </div>

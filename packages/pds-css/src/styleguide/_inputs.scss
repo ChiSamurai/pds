@@ -1,4 +1,5 @@
-$input-height: 40px !default;
+$input-height: 44px !default;
+$input-border: 1px solid var(--input-border-color, var(--background-darker));
 
 $input-spacing: 1 !default;
 $input-rounding: 1 !default;

@@ -18,6 +18,7 @@
 
 @use "util/mixins" as *;
 @use "util/custom-property" as *;
+@use "util/list" as *;
 
 @use "styleguide/theme";
 @use "styleguide/elevation";
@@ -41,16 +42,16 @@ $rounding: $rounding !default;
 /// Gets or sets a map or a list of maps containing color properties that will be generated as so called
 /// "custom color properties". Will generate 2 custom properties for each definition when $color-rgb is set
 /// to `true` (eg. `--primary: #fff;` will generate `--primary-rbg: 255,255,255;` as well)
-$colors: ($accent-color-map) !default;
+$colors: ($accent-color-map, $semantic-color-map) !default;
 /// Gets or sets a list of class names generated for text accents (eg. text-primary, text-primary-dark, ...)
-$color-classes: ("primary", "good", "warn", "bad") !default;
+$color-classes: ("primary", "info", "success", "warning", "error") !default;
 /// Enables or disables additional custom property generation for color properties
 $color-rgb: false !default;
 
 /// Gets or sets a map or a list of maps containing typography definitions that will be generated
 $typography: $typography-map !default;
 /// Gets or sets a list of class names generated for typography variants (eg. .body-small, .small, ...)
-$typography-classes: ("body-small", "uppercase", "lead", "small", "tiny") !default;
+$typography-classes: ("body-small", "caption") !default;
 
 /// Gets or sets a map or a list of maps of additional custom properties to generate
 $custom-properties: ($spacing-map, $rounding-map) !default;
@@ -58,22 +59,19 @@ $custom-properties: ($spacing-map, $rounding-map) !default;
 /// Gets or sets the typography property name to use for the body
 $body-typography: --body !default;
 /// Gets or sets the main foreground color to use
-$foreground-color: --gray-darker !default;
+$foreground-color: var(--gray-primary) !default;
 /// Gets or sets the main background color to use
-$background-color: --gray-lightest !default;
+$background-color: var(--page) !default;
 /// Gets or sets the _default_ font family name to use
 $font-family: "PT Sans", sans-serif !default;
 
 /// Includes any foundational style rules as well as a custom property setup
-@mixin core {
+@mixin core() {
   $default-theme: theme.define($colors, $typography, $custom-properties);
 
   @at-root {
     :root {
-      @include theme($default-theme, $color-rgb) {
-        @include custom-color-property(--foreground, $foreground-color, $rgb: $color-rgb);
-        @include custom-color-property(--background, $background-color, $rgb: $color-rgb);
-      }
+      @include theme($default-theme, $color-rgb);
     }
 
     body {
@@ -89,8 +87,8 @@ $font-family: "PT Sans", sans-serif !default;
       @if $body-typography != null {
         @include typography-style($body-typography);
       }
-      background-color: var(--background);
-      color: var(--foreground);
+      background-color: $background-color;
+      color: $foreground-color;
       margin: 0;
     }
 
@@ -119,7 +117,6 @@ $font-family: "PT Sans", sans-serif !default;
   @include link;
 
   // content-sectioning
-  @include headline-display;
   @include label;
 
   // forms
@@ -132,21 +129,30 @@ $font-family: "PT Sans", sans-serif !default;
 
 /// Includes utility classes based on the value of `$color-classes`
 @mixin color-classes {
+  .sheet {
+    background-color: var(--sheet);
+  }
+
   @include color-accent-classes($color-classes, "text");
 
-  @if list.index($color-classes, "good") != null {
-    @at-root .good {
-      @include theme($good-theme);
+  @if some($color-classes, "info") {
+    @at-root .info {
+      @include theme($info-theme);
     }
   }
-  @if list.index($color-classes, "warn") != null {
-    @at-root .warn {
-      @include theme($warn-theme);
+  @if some($color-classes, "success") {
+    @at-root .success {
+      @include theme($success-theme);
     }
   }
-  @if list.index($color-classes, "bad") != null {
-    @at-root .bad {
-      @include theme($bad-theme);
+  @if some($color-classes, "warning") {
+    @at-root .warning {
+      @include theme($warning-theme);
+    }
+  }
+  @if some($color-classes, "error") {
+    @at-root .error {
+      @include theme($error-theme);
     }
   }
 }

@@ -2,20 +2,19 @@
 @use "util";
 
 pds-alert {
-  @include pds.outer-child-spacing(--space-4, x, $trim: true, $justify: true);
-  @include pds.inner-spacing(--space-5, x);
-  @include pds.inner-spacing(--space-4, y);
+  @include pds.outer-child-spacing(--space-sm, x, $trim: true, $justify: true);
+  @include pds.inner-spacing(--space-sm, x);
+  @include pds.inner-spacing(--space-sm, y);
   @include pds.rounding(--rounding-md);
 
   z-index: 0;
   display: flex;
   align-items: center;
-  color: var(--primary-dark);
+  color: var(--primary-contrast);
   background-color: var(--primary);
   position: relative;
 
   > div {
-    color: var(--primary-contrast);
     flex: 1 0 0;
   }
 }

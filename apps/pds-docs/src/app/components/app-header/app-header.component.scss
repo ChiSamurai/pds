@@ -11,10 +11,9 @@ pds-app-header {
 
   .page-headline {
     user-select: none;
-    color: var(--gray-dark);
 
     .page-title {
-      color: var(--gray-darkest);
+      @include pds.outer-spacing(--space-4, right);
     }
   }
 

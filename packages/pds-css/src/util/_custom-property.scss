@@ -150,3 +150,10 @@
   $value: str.replace($value, " ");
   @return str-index($value, "var") == 1;
 }
+
+/// Checks whether the $value is one of inherit, initial or unset
+@function is-reserved($value) {
+  $value: str.replace($value, " ");
+  @return str-index($value, "inherit") == 1 or str-index($value, "initial") == 1 or str-index($value, "unset") == 1 or
+    str-index($value, "currentColor");
+}

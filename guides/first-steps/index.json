@@ -1,0 +1,18 @@
+[
+  {
+    "slug": "getting-started",
+    "src": "first-steps/getting-started",
+    "title": "Getting Started",
+    "chapter": "Getting Started",
+    "description": "First steps with the ecosystem",
+    "next": "styling"
+  },
+  {
+    "slug": "styling",
+    "src": "first-steps/styling",
+    "title": "Styling",
+    "chapter": "Getting Started",
+    "description": "**PDS-CSS** setup possibilities",
+    "previous": "getting-started"
+  }
+]

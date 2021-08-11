@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER, Inject, Injectable, InjectionToken, Provider } from '@angular/core';
 import { ArrayBehaviorState, normalizeUrl } from '@vitagroup/common';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { AppGuide, AppGuideWithContent } from '../interfaces/app-guide.interface';
 
 export const APP_GUIDES_BASE_URL = new InjectionToken('The base url of the app guides asset directory', {
@@ -11,7 +11,7 @@ export const APP_GUIDES_BASE_URL = new InjectionToken('The base url of the app g
 
 @Injectable({ providedIn: 'root' })
 export class AppGuidesService extends ArrayBehaviorState<AppGuide> {
-  chapters(): string[] {
+  get chapters(): string[] {
     return this.snapshot
       ?.map((guide) => guide.chapter)
       ?.filter((chapter, index, array) => array.indexOf(chapter) === index);
@@ -39,20 +39,38 @@ export class AppGuidesService extends ArrayBehaviorState<AppGuide> {
       .pipe(map((content) => ({ ...guide, content })))
       .toPromise();
   }
+
+  pushOrUpdate(guide: AppGuide): AppGuide[] {
+    if (this.has(guide.slug)) {
+      const index = this.snapshot.findIndex(({ slug }) => slug === guide.slug);
+      return this.patch([guide], index);
+    } else {
+      return this.push(guide);
+    }
+  }
+
+  import(path: string): Promise<AppGuide[]> {
+    if (!path.endsWith('.json')) path = normalizeUrl(path, 'index.json');
+    return this.http
+      .get<AppGuide[]>(normalizeUrl(this.baseUrl, path), { responseType: 'json' })
+      .pipe(tap((guides) => guides.forEach(this.pushOrUpdate.bind(this))))
+      .toPromise();
+  }
 }
 
-export function initAppGuides(baseUrl: string, http: HttpClient, appGuides: AppGuidesService): () => void {
+export function initAppGuides(appGuides: AppGuidesService): () => void {
   return async () => {
-    const guides = await http
-      .get<AppGuide[]>(normalizeUrl(baseUrl, 'guides.json'), { responseType: 'json' })
-      .toPromise();
-    appGuides.push(...guides);
+    await appGuides.import('first-steps');
+
+    await appGuides.import('common.json');
+    await appGuides.import('cdk.json');
+    await appGuides.import('components.json');
   };
 }
 
 export const APP_GUIDES_INIT_PROVIDER: Provider = {
   provide: APP_INITIALIZER,
   useFactory: initAppGuides,
-  deps: [APP_GUIDES_BASE_URL, HttpClient, AppGuidesService],
+  deps: [AppGuidesService],
   multi: true,
 };

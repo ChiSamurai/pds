@@ -1,25 +1,29 @@
-$space-9: 64px !default;
-$space-8: 56px !default;
-$space-7: 40px !default;
-$space-6: 32px !default;
-$space-5: 24px !default;
-
-$space-4: 16px !default;
-$space-3: 12px !default;
-$space-2: 8px !default;
-$space-1: 4px !default;
+$space-xxl: 48px !default;
+$space-xl: 40px !default;
+$space-lg: 32px !default;
+$space-md: 24px !default;
+$space-sm: 16px !default;
+$space-xs: 8px !default;
+$space-xxs: 4px !default;
 
 /// Global spacing factor applied to all `@include spacing(...)` usages
 $spacing: 1 !default;
 
 $spacing-map: (
-  "space-9": $space-9,
-  "space-8": $space-8,
-  "space-7": $space-7,
-  "space-6": $space-6,
-  "space-5": $space-5,
-  "space-4": $space-4,
-  "space-3": $space-3,
-  "space-2": $space-2,
-  "space-1": $space-1,
+  "space-xxl": $space-xxl,
+  "space-xl": $space-xl,
+  "space-lg": $space-lg,
+  "space-md": $space-md,
+  "space-sm": $space-sm,
+  "space-xs": $space-xs,
+  "space-xxs": $space-xxs,
+  "space-9": --space-xxl,
+  "space-8": --space-xxl,
+  "space-7": --space-xxl,
+  "space-6": --space-xl,
+  "space-5": --space-lg,
+  "space-4": --space-xxs,
+  "space-3": --space-sm,
+  "space-2": --space-xs,
+  "space-1": --space-xxs,
 ) !default;

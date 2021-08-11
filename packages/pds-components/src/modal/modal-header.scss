@@ -1,8 +1,8 @@
 @use "styleguide" as pds;
 
 pds-modal-header {
-  @include pds.inner-spacing(pds.$space-6, x);
-  @include pds.inner-spacing(pds.$space-5, y);
+  @include pds.inner-spacing(--space-lg, x);
+  @include pds.inner-spacing(--space-md, y);
 
   display: flex;
   justify-content: flex-start;

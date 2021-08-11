@@ -27,8 +27,8 @@ pds-modal {
   }
 
   main {
-    @include pds.inner-spacing(pds.$space-6, x);
-    @include pds.inner-spacing(pds.$space-2, y);
+    @include pds.inner-spacing(--space-lg, x);
+    @include pds.inner-spacing(--space-md, y);
 
     flex: 1 0 0;
     overflow-x: hidden;

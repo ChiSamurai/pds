@@ -4,9 +4,9 @@
 @mixin code {
   code {
     @include rounding(--rounding-sm);
-    @include inner-spacing(--space-1, x);
+    @include inner-spacing(--space-xxs, x);
 
-    border: 1px solid var(--code, var(--gray-light));
+    background-color: var(--code, var(--background));
     display: inline-block;
     font-size: 0.9em;
 

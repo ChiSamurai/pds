@@ -13,12 +13,12 @@ import {
 } from '@vitagroup/cdk/layout';
 import { RouteDataPipeModule, TemplateOutletModule } from '@vitagroup/common';
 import {
-  PdsNavModule,
   PdsFormStatusModule,
+  PdsNavModule,
   PdsRingLoader,
+  PdsTagModule,
   PdsTextBoxModule,
   PdsToggleBoxModule,
-  PdsTagModule,
 } from '@vitagroup/pds-components';
 import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 import { APP_ICON_IMPORT_PROVIDER } from './app-icon-provider';

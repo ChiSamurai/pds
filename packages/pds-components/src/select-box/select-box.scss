@@ -13,11 +13,11 @@ pds-select-box {
 
     flex: 1 0 0;
     align-items: inherit;
-    color: var(--foreground);
+    color: currentColor;
     display: flex;
   }
   .pds-select-box-placeholder {
-    color: var(--placeholder, pds.$input-placeholder);
+    color: var(--input-border-color, var(--background-darker));
     pointer-events: none;
     user-select: none;
   }
@@ -28,15 +28,15 @@ pds-select-box {
 }
 
 .pds-select-box-overlay-container {
-  @include pds.elevation(pds.$raised-elevation);
+  @include pds.elevation(pds.$level-2);
 
   min-width: 120px;
   width: 100%;
 
   .top & {
-    @include pds.outer-spacing(--space-1, bottom);
+    @include pds.outer-spacing(--space-xxs, bottom);
   }
   .bottom & {
-    @include pds.outer-spacing(--space-1, top);
+    @include pds.outer-spacing(--space-xxs, top);
   }
 }

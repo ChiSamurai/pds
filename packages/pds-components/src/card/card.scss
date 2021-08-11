@@ -1,16 +1,68 @@
 @use "styleguide" as pds;
+@use "util";
 
 $card-padding-x: var(--space-5) !default;
 $card-padding-y: var(--space-5) !default;
+$card-transition: 100ms ease-out !default;
 
 pds-card {
-  @include pds.elevation(pds.$raised-elevation);
   @include pds.rounding(pds.$rounding-lg);
+
+  @if $card-transition {
+    transition: $card-transition;
+  }
 
   display: block;
   overflow: hidden;
-  border: 1px solid var(--gray-light);
-  background: var(--gray-lightest);
+  border: 1px solid var(--background);
+  background: var(--sheet);
+  position: relative;
+
+  &:after {
+    @include pds.rounding(--rounding-xxs);
+    @include pds.outer-spacing($card-padding-x, x);
+
+    content: ' ';
+    display: block;
+    transition: inherit;
+    pointer-events: none;
+    position: absolute;
+    height: 3px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+
+  @include util.hover-state {
+    color: var(--primary-lighter);
+
+    &:after {
+      background-color: var(--primary-lighter);
+    }
+  }
+  @include util.focus-state {
+    color: var(--focus);
+
+    &:after {
+      background-color: var(--focus);
+    }
+  }
+  @include util.active-state {
+    color: var(--primary-darker);
+
+    &:after {
+      background-color: var(--primary-darker);
+    }
+  }
+
+  @include util.disabled-state {
+    color: var(--disabled);
+    pointer-events: none;
+
+    &:after {
+      background-color: var(--disabled);
+    }
+  }
 
   pds-card-header {
     @include pds.inner-spacing($card-padding-x, x);

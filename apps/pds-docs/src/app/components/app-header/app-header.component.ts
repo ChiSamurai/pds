@@ -7,27 +7,26 @@ import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'pds-app-header',
-  styleUrls: [ 'app-header.component.scss' ],
+  styleUrls: ['app-header.component.scss'],
   encapsulation: ViewEncapsulation.None,
   template: `
-    <div class="page-headline body-small">
+    <div class="page-headline">
       <ng-container *ngIf="'title' | routeData | async as title">
-        <span class="page-title uppercase">{{ title }}</span>
+        <span class="page-title">{{ title }}</span>
       </ng-container>
       <ng-content></ng-content>
     </div>
     <div>
       <pds-toggle-box label="Dark Mode" [formControl]="darkModeControl"></pds-toggle-box>
     </div>
-  `
+  `,
 })
 export class AppHeaderComponent implements OnInit, OnDestroy {
   protected readonly ngDestroys = new Subject();
 
   readonly darkModeControl = new FormControl(this.app.darkMode);
 
-  constructor(readonly parent: PdsPageHeader, protected app: AppComponent) {
-  }
+  constructor(readonly parent: PdsPageHeader, protected app: AppComponent) {}
 
   ngOnInit() {
     this.darkModeControl.valueChanges

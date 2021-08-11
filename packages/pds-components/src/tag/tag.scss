@@ -1,17 +1,33 @@
 @use "styleguide" as pds;
 @use "util";
 
-$tag-height: 24px !default;
-
 pds-tag {
   @include pds.typography(--body-small);
-  @include pds.inner-spacing(pds.$space-3, x);
-  @include pds.rounding($tag-height * 0.5);
+  @include pds.inner-spacing(--space-sm, x);
+  @include pds.outer-sibling-spacing(--space-xs);
+  @include pds.rounding(--rounding-xxl);
 
   user-select: none;
   align-items: center;
   display: inline-flex;
-  background-color: var(--primary-dark);
-  color: var(--primary-contrast);
-  height: $tag-height;
+  background-color: var(--background);
+  height: var(--tag-height, 32px);
+  color: currentColor;
+
+  @include util.hover-state {
+    background-color: var(--background-lighter);
+  }
+  @include util.active-state {
+    background-color: var(--background-darker);
+  }
+
+  @include util.focus-state {
+    background-color: var(--focus);
+    color: var(--focus-contrast);
+  }
+
+  @include util.disabled-state {
+    color: var(--disabled);
+    pointer-events: none;
+  }
 }

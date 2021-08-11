@@ -4,7 +4,7 @@ import { FlexModule } from '@angular/flex-layout';
 import { RouterModule, Routes } from '@angular/router';
 import { SvgIconModule } from '@vitagroup/cdk';
 import { RouteDataPipeModule } from '@vitagroup/common';
-import { CardModule } from '@vitagroup/pds-components';
+import { CardModule, PdsTagModule } from '@vitagroup/pds-components';
 import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 import { AppGuideCardModule } from '../../components/app-guide-card/app-guide-card.component';
 import { MarkedPipeModule } from '../../pipes/marked.pipe';
@@ -41,7 +41,8 @@ export const APP_GUIDES_PAGE_ROUTES: Routes = [
     RouteDataPipeModule,
     SvgIconModule,
     AppGuideCardModule,
-    PdsPageLayoutModule
+    PdsPageLayoutModule,
+    PdsTagModule,
   ],
   providers: [AppGuideResolve],
 })

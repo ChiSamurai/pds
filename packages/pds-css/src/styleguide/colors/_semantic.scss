@@ -1,0 +1,57 @@
+@use "../../colors" as *;
+
+$info-lighter: #62b0ee !default;
+$info: #2296f3 !default;
+$info-darker: #1975d0 !default;
+$info-contrast: $black !default;
+
+$success-lighter: #81c784 !default;
+$success: #4caf50 !default;
+$success-darker: #378d3c !default;
+$success-contrast: $black !default;
+
+$warning-lighter: #ffb74d !default;
+$warning: #ff9800 !default;
+$warning-darker: #ed8701 !default;
+$warning-contrast: $black !default;
+
+$error-lighter: #e57373 !default;
+$error: #f44436 !default;
+$error-darker: #d02e2f !default;
+$error-contrast: $black !default;
+
+$semantic-color-map: (
+  "info-darker": $info-darker,
+  "info": $info,
+  "info-lighter": $info-lighter,
+  "info-contrast": $info-contrast,
+  "success-darker": $success-darker,
+  "success": $success,
+  "success-lighter": $success-lighter,
+  "success-contrast": $success-contrast,
+  "warning-darker": $warning-darker,
+  "warning": $warning,
+  "warning-lighter": $warning-lighter,
+  "warning-contrast": $warning-contrast,
+  "error-darker": $error-darker,
+  "error": $error,
+  "error-lighter": $error-lighter,
+  "error-contrast": $error-contrast,
+  // backwards compatibility, consider removal <editor-fold>
+  "good-dark": --success-darker,
+  "good": --success,
+  "good-light": --success-lighter,
+  "good-outline": --success,
+  "good-contrast": --success-contrast,
+  "warn-dark": --warning-darker,
+  "warn": --warning,
+  "warn-light": --warning-lighter,
+  "warn-outline": --warning,
+  "warn-contrast": --warning-contrast,
+  "bad-dark": --error-darker,
+  "bad": --error,
+  "bad-light": --error-lighter,
+  "bad-outline": --error,
+  "bad-contrast": --error-contrast,
+  // </editor-fold>
+) !default;

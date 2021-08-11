@@ -5,16 +5,17 @@
 
 @mixin pre {
   pre {
-    @include rounding(--rounding-sm);
-    @include outer-spacing(--space-4, y, $trim: true);
-    @include inner-spacing(--space-4, x);
-    @include inner-spacing(--space-3, y);
+    @include rounding(--rounding-md);
+    @include outer-spacing(--space-md, y, $trim: true);
+    @include inner-spacing(--space-md, x);
+    @include inner-spacing(--space-sm, y);
 
-    border: 1px solid var(--pre, var(--gray-light));
+    border: 1px solid var(--code, var(--background));
     overflow: auto;
 
     code {
-      border: none;
+      background-color: transparent !important;
+      border: none !important;
       padding: 0;
     }
 

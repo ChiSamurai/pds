@@ -9,7 +9,6 @@
   min-width: 60px;
   white-space: nowrap;
   height: var(--input-height);
-  color: var(--gray-dark);
   display: inline-flex;
   align-items: center;
   overflow: hidden;
@@ -21,7 +20,7 @@
     border: none !important;
     background: transparent !important;
     box-shadow: none !important;
-    color: var(--foreground);
+    color: inherit;
     flex: 1 1 auto;
   }
 
@@ -34,11 +33,15 @@
   @include util.focus-state {
     @include pds.input-focus;
   }
+  @include util.active-state {
+    @include pds.input-active;
+  }
+
   @include util.disabled-state {
     @include pds.input-disabled;
   }
 
   &.ng-invalid.ng-touched {
-    @include pds.input-error;
+    // todo
   }
 }

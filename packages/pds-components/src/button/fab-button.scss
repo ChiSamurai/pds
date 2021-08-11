@@ -1,7 +1,7 @@
 @use "styleguide" as pds;
 
 $fab-button-size: 60px !default;
-$fab-button-spacing: pds.$space-9 !default;
+$fab-button-spacing: var(--space-xxl) !default;
 $fab-button-rounding: $fab-button-size * 0.5 !default;
 
 pds-fab-button {

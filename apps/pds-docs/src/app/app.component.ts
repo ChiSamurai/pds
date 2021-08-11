@@ -22,8 +22,9 @@ import { WINDOW } from '@ng-web-apis/common';
           [routerLinkActiveOptions]="{ exact: entry.linkUrl === '/' }"
           routerLinkActive="active"
         >
-          <svg-icon *ngIf="entry.iconName" [name]="entry.iconName"></svg-icon>
+          <svg-icon [name]="entry.iconName" *ngIf="entry.iconName" pdsBefore></svg-icon>
           <span>{{ entry.name }}</span>
+          <svg-icon fallback="expand" pdsAfter></svg-icon>
         </pds-nav-entry>
       </ng-template>
       <ng-container *navEntryDef="let entry">

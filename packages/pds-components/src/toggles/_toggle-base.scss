@@ -1,7 +1,7 @@
 @use "styleguide" as pds;
 @use "util";
 
-$toggle-size: 30px !default;
+$toggle-size: 20px !default;
 
 @mixin pds-toggle-base {
   user-select: none;
@@ -17,16 +17,18 @@ $toggle-size: 30px !default;
     font: inherit;
 
     &:first-child {
-      @include pds.outer-spacing(pds.$space-3, right);
+      @include pds.outer-spacing(--space-sm, right);
     }
     &:last-child {
-      @include pds.outer-spacing(pds.$space-3, left);
+      @include pds.outer-spacing(--space-sm, left);
     }
   }
   .toggle-indicator {
     @include pds.input-base($spacing: false);
 
-    color: var(--primary-light);
+    border-width: 2px;
+    background-color: var(--page);
+    color: var(--primary);
     height: $toggle-size;
     width: $toggle-size;
   }
@@ -34,22 +36,36 @@ $toggle-size: 30px !default;
   @include util.hover-state {
     .toggle-indicator {
       @include pds.input-hover;
+
+      color: var(--primary-lighter);
     }
   }
   @include util.focus-state {
+    color: var(--focus);
+
     .toggle-indicator {
       @include pds.input-focus;
+
+      color: var(--focus);
+      border-width: 1px;
+    }
+  }
+  @include util.active-state {
+    .toggle-indicator {
+      @include pds.input-active;
+
+      color: var(--primary-darker);
+      border-width: 2px;
     }
   }
 
   &.intermediate {
     .toggle-indicator {
-      color: var(--foreground);
+      color: currentColor;
     }
   }
   &.checked {
     .toggle-indicator {
-      color: var(--primary-light);
     }
   }
 

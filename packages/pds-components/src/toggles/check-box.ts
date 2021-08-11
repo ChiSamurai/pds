@@ -33,15 +33,30 @@ import { CheckBoxBase } from '@vitagroup/cdk';
           y1="8"
           x2="12"
           y2="8"
-          stroke-width="2.5"
-          stroke-linecap="round"
+          [attr.stroke-width]="strokeWidth"
+          [attr.stroke-linecap]="strokeLineCap"
           stroke="currentColor"
         />
-        <path
-          *ngIf="checked"
-          class="checked-indicator"
-          d="M6.4,12.3L6.4,12.3c-0.3,0-0.5-0.1-0.7-0.3L2.3,8.6c-0.4-0.4-0.4-1,0-1.4c0.4-0.4,1-0.4,1.4,0l2.7,2.7L12.3,4c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4L7.1,12C6.9,12.2,6.7,12.3,6.4,12.3z"
-        />
+        <g *ngIf="checked" class="checked-indicator">
+          <line
+            x1="1"
+            y1="8"
+            x2="7"
+            y2="13"
+            [attr.stroke-width]="strokeWidth"
+            [attr.stroke-linecap]="strokeLineCap"
+            stroke="currentColor"
+          />
+          <line
+            x1="7"
+            y1="13"
+            x2="15"
+            y2="3"
+            [attr.stroke-width]="strokeWidth"
+            [attr.stroke-linecap]="strokeLineCap"
+            stroke="currentColor"
+          />
+        </g>
       </svg>
     </div>
     <ng-container *ngIf="labelAlign === 'after'">
@@ -53,6 +68,9 @@ import { CheckBoxBase } from '@vitagroup/cdk';
 export class PdsCheckBox extends CheckBoxBase {
   @Input() label: string | null;
   @Input() labelAlign: 'before' | 'after' = 'after';
+
+  @Input() strokeLineCap: 'butt' | 'round' | 'square' = 'square';
+  @Input() strokeWidth = 3;
 }
 
 @NgModule({

@@ -1,26 +1,13 @@
 @use "styleguide" as pds;
 @use "util";
 
-$nav-spacing-x: pds.$space-6 !default;
-$nav-spacing-y: pds.$space-8 !default;
-
-$main-menu-theme: pds.theme-define(
-  (
-    'pds-nav': (
-      'foreground': --primary-contrast,
-      'primary': --light,
-      'secondary': --primary-light,
-    ),
-  )
-);
-
 pds-app {
   display: flex;
   align-items: stretch;
   height: 100vh;
 
   .pds-app-branding {
-    @include pds.inner-spacing($nav-spacing-x, x);
+    @include pds.inner-spacing(--space-lg, x);
     @include pds.typography-style(--h6);
 
     display: flex;
@@ -29,7 +16,9 @@ pds-app {
     height: var(--app-header-height);
 
     svg-icon {
-      margin-right: $nav-spacing-x;
+      @include pds.outer-spacing(--space-lg, right);
+
+      color: var(--primary);
       flex: 0 0;
     }
     .pds-app-brand {
@@ -38,31 +27,7 @@ pds-app {
   }
 
   pds-nav {
-    @include pds.elevation(pds.$nav-elevation);
-    @include pds.theme($main-menu-theme);
-
-    flex: 0 0 auto;
-    background: linear-gradient(45deg, var(--primary) 0%, var(--primary-light) 100%);
     width: var(--app-menu-width);
-
-    pds-nav-entry {
-      border-left: none !important;
-
-      svg-icon {
-        margin-right: var(--space-4) !important;
-      }
-    }
-    nav-entry-outlet:not(.secondary) {
-      pds-nav-entry {
-        @include pds.rounding(--rounding-sm);
-        @include pds.outer-spacing(--space-2, y, $justify: true);
-        @include pds.outer-spacing(--space-2, x);
-      }
-    }
-
-    .nav-entry-children pds-nav-entry {
-      @include pds.inner-spacing(--space-7, left);
-    }
   }
   router-outlet + * {
     display: block;

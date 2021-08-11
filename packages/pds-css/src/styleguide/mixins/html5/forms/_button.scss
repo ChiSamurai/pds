@@ -4,19 +4,24 @@
 @use "util";
 
 $button-height: var(--input-height, auto) !default;
-$button-rounding: $button-height !default;
-$button-border: 2px solid !default;
-$button-spacing-y: --space-2 !default;
-$button-spacing-x: --space-6 !default;
+$button-rounding: var(--rounding-md) !default;
+$button-spacing-y: --space-sm !default;
+$button-spacing-x: --space-sm !default;
+$button-transition: 100ms ease-out !default;
 
 @mixin button-base {
+  @if $button-transition {
+    transition: background-color $button-transition, border-color $button-transition, box-shadow $button-transition;
+  }
+
   user-select: none;
   align-items: center;
   display: inline-flex;
   justify-content: center;
   height: $button-height;
-  border: $button-border;
+  border: 1px solid transparent;
   text-overflow: ellipsis;
+  box-sizing: border-box;
   white-space: nowrap;
   cursor: pointer;
 
@@ -31,43 +36,43 @@ $button-spacing-x: --space-6 !default;
   color: var(--primary-contrast);
 
   @include util.hover-state {
-    background-color: var(--primary-light);
-    border-color: var(--primary-light);
+    background-color: var(--primary-lighter);
+    border-color: var(--primary-lighter);
   }
   @include util.focus-state {
-    background-color: var(--primary);
-    border-color: var(--primary-light);
+    background-color: var(--focus);
+    border-color: var(--focus);
+    color: var(--focus-contrast);
   }
   @include util.active-state {
-    background-color: var(--primary-dark);
-    border-color: var(--primary-dark);
+    background-color: var(--primary-darker);
+    border-color: var(--primary-darker);
   }
   @include util.disabled-state {
     background-color: var(--disabled);
     border-color: var(--disabled);
-    color: var(--dark-t2);
+    color: var(--disabled-contrast);
   }
 }
 @mixin button-secondary {
-  border-color: var(--gray-darker);
+  border-color: var(--background);
   background-color: transparent;
-  color: var(--gray-darker);
+  color: var(--primary);
 
   @include util.hover-state {
-    background-color: rgba(#000, 0.1);
-  }
-  @include util.focus-state {
-    border-color: var(--primary-light);
+    color: var(--primary-lighter);
   }
   @include util.active-state {
-    background-color: var(--gray-darker);
-    border-color: var(--gray-darker);
-    color: var(--gray-lighter);
+    color: var(--primary-darker);
+  }
+  @include util.focus-state {
+    box-shadow: 0 0 0 1px var(--focus);
+    border-color: var(--focus);
+    color: var(--focus);
   }
   @include util.disabled-state {
-    background-color: rgba(var(--gray-darkest-rgb), 0.05);
     border-color: var(--disabled);
-    color: var(--disabled);
+    color: var(--disabled-contrast);
   }
 }
 
@@ -77,7 +82,7 @@ $button-spacing-x: --space-6 !default;
     @include button-base;
     @include button-primary;
 
-    @include outer-sibling-spacing(--space-4);
+    @include outer-sibling-spacing(--space-md);
     @include outer-child-spacing($button-spacing-y, x, $trim: true, $justify: true);
     @include inner-spacing($button-spacing-x, x);
     @include inner-spacing($button-spacing-y, y);

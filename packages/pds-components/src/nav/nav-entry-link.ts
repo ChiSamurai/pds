@@ -8,7 +8,11 @@ import { NavEntryLink } from '@vitagroup/cdk';
   encapsulation: ViewEncapsulation.None,
   providers: [{ provide: RouterLink, useExisting: PdsNavEntryLink }],
   template: `
-    <ng-content></ng-content>
+    <ng-content select="[pdsBefore]"></ng-content>
+    <div>
+      <ng-content></ng-content>
+    </div>
+    <ng-content select="[pdsAfter]"></ng-content>
   `,
 })
 export class PdsNavEntryLink extends NavEntryLink {}

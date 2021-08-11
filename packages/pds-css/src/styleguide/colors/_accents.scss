@@ -1,75 +1,61 @@
-@use "colors/berry" as *;
 @use "../theme";
 
+@use "../../colors" as *;
 @use "./system" as *;
 
-$primary-dark: $blackberry !default;
+$primary-darker: $berry-darker !default;
 $primary: $berry !default;
-$primary-light: $pinkberry !default;
+$primary-lighter: $berry-lighter !default;
 $primary-contrast: white !default;
 
-$gray-darkest: $dark !default;
-$gray-darker: $dark-t1 !default;
-$gray-dark: $dark-t2 !default;
-$gray: $dark-t4 !default;
-$gray-light: $light !default;
-$gray-lighter: $light-t1 !default;
-$gray-lightest: $light-t2 !default;
+$focus: $smokey-blue !default;
+$focus-contrast: white !default;
 
-$good-dark: $green-s1 !default;
-$good: $green !default;
-$good-light: $green-t1 !default;
+$gray-primary: $gray-900 !default;
+$gray-secondary: $gray-700 !default;
 
-$good-outline: $green-outline !default;
-$good-contrast: white !default;
+$disabled: $gray-500 !default;
+$disabled-contrast: $gray-700 !default;
 
-$warn-dark: $yellow-s1 !default;
-$warn: $yellow !default;
-$warn-light: $yellow-t2 !default;
+$background-darker: $gray-400 !default;
+$background: $gray-300 !default;
+$background-lighter: $gray-100 !default;
 
-$warn-outline: $yellow-outline !default;
-$warn-contrast: black !default;
-
-$bad-dark: $red-s1 !default;
-$bad: $red !default;
-$bad-light: $red-t2 !default;
-
-$bad-outline: $red-outline !default;
-$bad-contrast: white !default;
+$page: var(--background-lighter) !default;
+$sheet: $white !default;
 
 $link: var(--primary) !default;
-$link-hover: var(--primary-light) !default;
-
-$disabled: var(--gray) !default;
+$link-hover: var(--primary-lighter) !default;
+$link-active: var(--primary-darker) !default;
 
 $accent-color-map: (
-  "primary-dark": $primary-dark,
+  "primary-darker": $primary-darker,
   "primary": $primary,
-  "primary-light": $primary-light,
+  "primary-lighter": $primary-lighter,
   "primary-contrast": $primary-contrast,
-  "gray-darkest": $gray-darkest,
-  "gray-darker": $gray-darker,
-  "gray-dark": $gray-dark,
-  "gray": $gray,
-  "gray-light": $gray-light,
-  "gray-lighter": $gray-lighter,
-  "gray-lightest": $gray-lightest,
-  "good-dark": $good-dark,
-  "good": $good,
-  "good-light": $good-light,
-  "good-outline": $good-outline,
-  "good-contrast": $good-contrast,
-  "warn-dark": $warn-dark,
-  "warn": $warn,
-  "warn-light": $warn-light,
-  "warn-outline": $warn-outline,
-  "warn-contrast": $warn-contrast,
-  "bad-dark": $bad-dark,
-  "bad": $bad,
-  "bad-light": $bad-light,
-  "bad-outline": $bad-outline,
-  "bad-contrast": $bad-contrast,
+  "focus": $focus,
+  "focus-contrast": $focus-contrast,
+  "gray": $gray-primary,
+  "gray-primary": --gray,
+  "gray-secondary": $gray-secondary,
+  "disabled": $disabled,
+  "disabled-contrast": $disabled-contrast,
+  "background-darker": $background-darker,
+  "background": $background,
+  "background-lighter": $background-lighter,
+  "page": $page,
+  "sheet": $sheet,
   "link": $link,
   "link-hover": $link-hover,
-  "disabled": $disabled,
+  "link-active": $link-active,
+  // backwards compatibility, consider removal <editor-fold>
+  "primary-dark": --primary-darker,
+  "primary-light": --primary-lighter,
+  "gray-darkest": $gray-900,
+  "gray-darker": $gray-700,
+  "gray-dark": $gray-500,
+  "gray-light": $gray-400,
+  "gray-lighter": $gray-300,
+  "gray-lightest": $gray-100,
+  // </editor-fold>
 ) !default;

@@ -2,17 +2,12 @@
 @use "util";
 
 pds-select-list {
-  @include pds.rounding(--rounding-sm);
+  @include pds.rounding(--rounding-md);
+  @include pds.inner-spacing(--space-sm);
+  @include pds.outer-child-spacing(--space-xs, y, $trim: true, $justify: true);
 
   display: block;
   overflow: hidden;
-  border: 1px solid var(--gray-light);
-  background: var(--gray-lightest);
+  background: var(--sheet);
   width: 100%;
-
-  pds-select-option {
-    &:not(:last-child) {
-      border-bottom: 1px solid var(--gray-light);
-    }
-  }
 }

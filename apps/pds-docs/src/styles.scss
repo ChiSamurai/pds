@@ -1,8 +1,6 @@
 @use "~@angular/cdk/overlay" as ng;
 
 @use "util";
-@use "colors/blue" as *;
-@use "colors/petrol" as *;
 @use "styleguide" as pds;
 
 @include util.font-face('/assets/fonts/pt-sans', 'pt-sans-bold', 'PT Sans', 700, ttf);
@@ -31,12 +29,4 @@
 @at-root .dark {
   @include pds.theme(pds.$dark-theme);
   @import '~highlight.js/scss/vs2015';
-}
-
-@at-root .blue {
-  @include pds.theme(pds.$blue-theme);
-}
-
-@at-root .petrol {
-  @include pds.theme(pds.$petrol-theme);
 }

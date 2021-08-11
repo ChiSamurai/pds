@@ -29,7 +29,8 @@
     @each $property, $color in $custom-property-map {
       @if type-of($color) == map or type-of($color) == list {
         @include custom-color-properties($color, prefix($prefix, $property), $suffix, $rgb);
-      } @else if not is-var-key($color) and not is-var($color) and type-of($color) != color {
+      } @else if not is-var-key($color) and not is-var($color) and type-of($color) != color and not is-reserved($color)
+      {
         @error "Unable to include custom color properties. Non color value provided for property \"#{$property}\"";
       } @else if $color != null {
         @include custom-color-property($property, $color, $prefix, $suffix, $rgb);

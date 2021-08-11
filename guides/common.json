@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "router-link-or-href",
+    "src": "packages/common/src/router-link-or-href/README",
+    "title": "RouterLink or Href",
+    "chapter": "Common",
+    "description": "Dynamically based on the input value"
+  },
+  {
+    "slug": "template-outlet",
+    "src": "packages/common/src/template-outlet/README",
+    "title": "TemplateOutlet",
+    "chapter": "Common",
+    "description": "Extended template outlet directive"
+  }
+]

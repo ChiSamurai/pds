@@ -34,12 +34,13 @@ $_default-trim: false !default;
 
 @mixin outer-sibling-spacing(
   $space,
+  $anchors: left,
   $trim: $_default-trim,
   $justify: $_default-justify,
   $pseudo-mode: $_default-pseudo-mode
 ) {
   & + & {
-    @include outer-spacing($space, left, $trim, $justify, $pseudo-mode);
+    @include outer-spacing($space, $anchors, $trim, $justify, $pseudo-mode);
   }
 }
 

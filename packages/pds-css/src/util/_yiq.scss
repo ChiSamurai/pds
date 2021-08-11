@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $default-threshold: 128 !default;
 $default-light-contrast: #fff !default;
 $default-dark-contrast: #000 !default;
@@ -6,7 +8,7 @@ $default-dark-contrast: #000 !default;
   $r: red($color);
   $g: green($color);
   $b: blue($color);
-  $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+  $yiq: math.div($r * 299 + $g * 587 + $b * 114, 1000);
   @return $yiq >= $threshold;
 }
 

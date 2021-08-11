@@ -1,42 +1,44 @@
 @use "styleguide" as pds;
 @use "util";
 
-$property-prefix: 'pds-nav-entry' !default;
-$properties: (
-  'active-foreground': --pds-nav-foreground,
-  'active-background': --pds-nav-secondary,
-  'active-border-width': 4px,
-  'active-border-color': --pds-nav-primary,
-) !default;
-
-%active-state {
-  background: util.var(--active-background, $prefix: $property-prefix);
-  border-left: util.var(--active-border-width, $prefix: $property-prefix) solid
-    util.var(--active-border-color, $prefix: $property-prefix);
-  font-weight: bold;
-}
-
 pds-nav-entry {
-  @include util.custom-properties($properties, $property-prefix);
-
-  @include pds.outer-child-spacing(pds.$space-2, x, $trim: true, $justify: true);
-  @include pds.inner-spacing(pds.$space-5, x);
+  @include pds.rounding(--rounding-md);
+  @include pds.outer-sibling-spacing(--space-xs, y, $trim: true, $justify: true);
+  @include pds.outer-child-spacing(--space-sm, x, $trim: true, $justify: true);
+  @include pds.outer-spacing(--space-sm, x);
+  @include pds.inner-spacing(--space-sm, x);
+  @include pds.inner-spacing(--space-xs, y);
 
   display: flex;
   cursor: pointer;
-  min-height: 48px;
+  color: currentColor;
   align-items: center;
   font-weight: normal;
   transition: 60ms ease-out;
-  color: util.var(--foreground, $prefix: $property-prefix);
-  // to not cause disruption when applying outer borders for active states we initially set the border values here
-  border-right: util.var(--active-border-width, $prefix: $property-prefix) solid transparent;
-  border-left: util.var(--active-border-width, $prefix: $property-prefix) solid transparent;
+  min-height: var(--input-height, 44px);
+  border: 2px solid transparent;
 
-  @include util.active-state {
-    @extend %active-state;
+  @include util.hover-state {
+    color: var(--primary-lighter);
   }
-  @include util.focus-visible-state {
-    @extend %active-state;
+  &:active {
+    color: var(--primary);
+  }
+  &.active {
+    background-color: var(--background);
+    border-color: var(--background);
+  }
+  @include util.focus-state {
+    border-color: var(--focus);
+    color: var(--focus);
+  }
+
+  @include util.disabled-state {
+    color: var(--disabled);
+    pointer-events: none;
+  }
+
+  > div {
+    flex: 1 0 0;
   }
 }

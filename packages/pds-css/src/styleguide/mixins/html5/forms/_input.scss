@@ -2,15 +2,15 @@
 @use "styleguide/roundings" as *;
 @use "util";
 
+@use "../../../inputs" as *;
 @use "../../rounding" as *;
 @use "../../spacing" as *;
 
-$input-padding-x: var(--space-3) !default;
-$input-padding-y: var(--space-2) !default;
+$input-padding-x: var(--space-sm) !default;
+$input-padding-y: var(--space-xs) !default;
 
-$input-background-color: var(--gray-light) !default;
-$input-border: 1px solid $input-background-color !default;
-$input-placeholder: var(--gray-dark) !default;
+$input-background-color: var(--sheet) !default;
+$input-placeholder: var(--gray-secondary) !default;
 
 @mixin input {
   select,
@@ -29,14 +29,14 @@ $input-placeholder: var(--gray-dark) !default;
     @include util.focus-state {
       @include input-focus;
     }
+    @include util.active-state {
+      @include input-active;
+    }
 
     @include util.disabled-state {
       @include input-disabled;
     }
 
-    &:invalid {
-      @include input-error;
-    }
     &::placeholder {
       color: $input-placeholder;
       user-select: none;
@@ -55,7 +55,8 @@ $input-placeholder: var(--gray-dark) !default;
 }
 
 @mixin input-base($spacing: true) {
-  @include rounding($rounding-sm);
+  @include rounding(--rounding-md);
+
   @if $spacing {
     @include inner-spacing($input-padding-x, x);
     @include inner-spacing($input-padding-y, y);
@@ -65,32 +66,28 @@ $input-placeholder: var(--gray-dark) !default;
   box-sizing: border-box;
   transition: 100ms ease-out;
   background-color: $input-background-color;
-  color: var(--foreground);
   border: $input-border;
+  color: inherit;
 }
 
 @mixin input-hover {
-  border-color: var(--gray);
+  border-color: var(--primary-lighter);
+}
+@mixin input-active {
+  border-color: var(--primary);
+  box-shadow: none;
 }
 @mixin input-focus {
-  box-shadow: 0 0 0 1px var(--primary-light);
-  border-color: var(--primary-light);
-  background: var(--background);
+  box-shadow: 0 0 0 1px var(--focus);
+  border-color: var(--focus);
 }
 
 @mixin input-read-only {
-  border-color: var(--gray-lighter);
-  background-color: var(--gray-lighter);
+  border-color: var(--background);
+  color: var(--disabled);
 }
 @mixin input-disabled {
   @include input-read-only;
 
-  color: var(--disabled);
   pointer-events: none;
-}
-
-@mixin input-error {
-  color: var(--bad);
-  box-shadow: 0 0 0 1px var(--bad);
-  border-color: var(--bad);
 }

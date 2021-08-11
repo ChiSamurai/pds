@@ -1,44 +1,25 @@
 @use "./typography";
 
-$body-typography: typography.define(16px, 23px, normal, -0.01px) !default;
-$body-small-typography: typography.define(14px, 20px, normal, -0.01px) !default;
+$body-typography: typography.define(17px, 26px) !default;
+$body-small-typography: typography.define(15px, 22.5px) !default;
 
-$display-1-typography: typography.define(64px, 84px, bold, -0.02px) !default;
-$display-2-typography: typography.define(56px, 72px, normal, -0.02px) !default;
-$display-3-typography: typography.define(32px, 42px, normal, -0.01px) !default;
+$caption-typography: typography.define(13px, 20px);
 
-$h1-typography: typography.define(40px, 54px, bold, -0.02px) !default;
-$h2-typography: typography.define(32px, 44px, bold, -0.02px) !default;
-$h3-typography: typography.define(28px, 38px, bold, -0.02px) !default;
-$h4-typography: typography.define(24px, 32px, bold, -0.02px) !default;
-$h5-typography: typography.define(20px, 28px, bold, -0.02px) !default;
-$h6-typography: typography.define(16px, 22px, bold, -0.01px) !default;
-
-$lead-typography: typography.define(14px, 24px, bold, -0.01px) !default;
-$uppercase-typography: typography.define(14px, 19px, normal, 2px, uppercase) !default;
-$small-typography: typography.define(12px, 15px) !default;
-$tiny-typography: typography.define(10px, 13px, bold, 0.02px) !default;
-
-$blockquote-typography: typography.define(20px, 28px, bold, -0.02px) !default;
-
-$button-typography: typography.define(--body-font-size, --body-line-height, 500, 0.69px) !default;
+$h1-typography: typography.define(34px, 42.5px) !default;
+$h2-typography: typography.define(26px, 32.5px) !default;
+$h3-typography: typography.define(20px, 25px, bold) !default;
+$h4-typography: typography.define(17px, 21.25px, bold) !default;
+$h5-typography: typography.define(15px, 18.75px, bold) !default;
+$h6-typography: $h5-typography !default;
 
 $typography-map: (
   "body": $body-typography,
   "body-small": $body-small-typography,
-  "display-1": $display-1-typography,
-  "display-2": $display-2-typography,
-  "display-3": $display-3-typography,
+  "caption": $caption-typography,
   "h1": $h1-typography,
   "h2": $h2-typography,
   "h3": $h3-typography,
   "h4": $h4-typography,
   "h5": $h5-typography,
   "h6": $h6-typography,
-  "lead": $lead-typography,
-  "uppercase": $uppercase-typography,
-  "small": $small-typography,
-  "tiny": $tiny-typography,
-  "blockquote": $blockquote-typography,
-  "button": $button-typography,
 ) !default;

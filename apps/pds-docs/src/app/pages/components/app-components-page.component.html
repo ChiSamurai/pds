@@ -182,21 +182,21 @@
     <section fxFlex="100">
       <h5>Alert</h5>
 
-      <pds-alert>
+      <pds-alert class="info">
         <svg-icon name="info" pdsBefore></svg-icon>
-        <p>Primary style</p>
+        <p>Info style</p>
       </pds-alert>
-      <pds-alert class="good">
+      <pds-alert class="success">
         <svg-icon name="info" pdsBefore></svg-icon>
-        <p>Good style</p>
+        <p>Success style</p>
       </pds-alert>
-      <pds-alert class="warn">
+      <pds-alert class="warning">
         <svg-icon name="info" pdsBefore></svg-icon>
         <p>Warning style</p>
       </pds-alert>
-      <pds-alert class="bad">
+      <pds-alert class="error">
         <svg-icon name="info" pdsBefore></svg-icon>
-        <p>Bad style</p>
+        <p>Error style</p>
       </pds-alert>
     </section>
 
@@ -205,6 +205,7 @@
 
       <div>
         <button (click)="openModal()">Open Modal</button>
+        <button class="secondary">Don't open anything</button>
       </div>
     </section>
 

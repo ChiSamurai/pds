@@ -1,67 +1,82 @@
 @use "../colors" as *;
-@use "./colors/accents" as *;
+@use "./colors" as *;
+
 @use "./theme";
 @use "util";
 
-$blue-theme: theme.define(
-  (
-    "primary-dark": $deep-blue,
-    "primary": $blue,
-    "primary-light": $bright-blue,
-    "primary-contract": #fff,
-  )
-);
-
-$petrol-theme: theme.define(
-  (
-    "primary-dark": $dark-green,
-    "primary": $petrol,
-    "primary-light": $light-turquoise,
-    "primary-contrast": #fff,
-  )
-);
-
 $dark-theme: theme.define(
   (
-    "foreground": #f2f2f2,
-    "background": --gray-lightest,
-    "link": --primary-light,
-    "link-active": util.color-tint($primary-light, 25%),
-    "link-focus": util.color-tint($primary-light, 25%),
-    "gray-darkest": #d9d9d9,
-    "gray-darker": #bfbfbf,
-    "gray-dark": #6b6b6b,
-    "gray": #383838,
-    "gray-light": #212121,
-    "gray-lighter": #1a1a1a,
-    "gray-lightest": #141414,
-    "disabled": --gray,
+    "primary-darker": $watermelon-darker,
+    "primary": $watermelon,
+    "primary-lighter": $watermelon-lighter,
+    "primary-contrast": $black,
+    "focus": $smokey-blue-lighter,
+    "gray-primary": $gray-200,
+    "gray-secondary": $gray-400,
+    "disabled": $gray-600,
+    "background-lighter": $gray-700,
+    "background": $gray-800,
+    "background-darker": $gray-900,
+    "page": $black,
+    "sheet": --background-darker,
+    "input-border-color": --background-lighter,
+    "code": --background-darker,
+    // resets:
+    "link": --primary,
+    "link-hover": --primary-lighter,
+    "link-active": --primary-darker,
   )
 ) !default;
 
-$good-theme: theme.define(
+$info-theme: theme.define(
   (
-    "primary-dark": --good-dark,
-    "primary": --good,
-    "primary-light": --good-light,
-    "primary-contrast": --good-contrast,
+    "primary-darker": --info-darker,
+    "primary": --info,
+    "primary-lighter": --info-lighter,
+    "primary-contrast": --info-contrast,
+    // resets:
+    "link": --primary-darker,
+    "link-hover": --primary-lighter,
+    "link-active": --primary-darker,
   )
 ) !default;
 
-$warn-theme: theme.define(
+$success-theme: theme.define(
   (
-    "primary-dark": --warn-dark,
-    "primary": --warn,
-    "primary-light": --warn-light,
-    "primary-contrast": --warn-contrast,
+    "primary-darker": --success-darker,
+    "primary": --success,
+    "primary-lighter": --success-lighter,
+    "primary-contrast": --success-contrast,
+    // resets:
+    "link": --primary-darker,
+    "link-hover": --primary-lighter,
+    "link-active": --primary-darker,
   )
 ) !default;
 
-$bad-theme: theme.define(
+$warning-theme: theme.define(
   (
-    "primary-dark": --bad-dark,
-    "primary": --bad,
-    "primary-light": --bad-light,
-    "primary-contrast": --bad-contrast,
+    "primary-darker": --warning-darker,
+    "primary": --warning,
+    "primary-lighter": --warning-lighter,
+    "primary-contrast": --warning-contrast,
+    // resets:
+    "link": --primary-darker,
+    "link-hover": --primary-lighter,
+    "link-active": --primary-darker,
+  )
+) !default;
+
+$error-theme: theme.define(
+  (
+    "primary-darker": --error-darker,
+    "primary": --error,
+    "primary-lighter": --error-lighter,
+    "primary-contrast": --error-contrast,
+    // resets:
+    "link": --primary-darker,
+    "link-hover": --primary-lighter,
+    "link-focus": --focus,
+    "link-active": --primary-darker,
   )
 ) !default;

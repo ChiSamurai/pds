@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "encapsulate",
+    "src": "packages/cdk/layout/src/encapsulation/README",
+    "title": "Encapsulation",
+    "chapter": "CDK",
+    "description": "Abstract layout encapsulation"
+  },
+  {
+    "slug": "form-status-outlet",
+    "src": "packages/cdk/forms/src/form-status-outlet/README",
+    "title": "FormStatusOutlet",
+    "chapter": "CDK",
+    "description": "Abstract form status outlet behavior"
+  }
+]

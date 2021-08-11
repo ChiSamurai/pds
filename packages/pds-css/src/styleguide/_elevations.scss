@@ -1,5 +1,12 @@
 @use "./elevation";
 
+$level-0: elevation.define(0) !default;
+$level-1: elevation.define(1, (0 1px 2px 0 rgba(#000, 0.16), 0 2px 8px 0 rgba(#000, 0.08))) !default;
+$level-2: elevation.define(2, (0 2px 4px 0 rgba(#000, 0.16), 0 4px 8px 0 rgba(#000, 0.08))) !default;
+$level-3: elevation.define(3, (0 4px 6px 0 rgba(#000, 0.16), 0 8px 16px 0 rgba(#000, 0.08))) !default;
+$level-4: elevation.define(4, (0 4px 8px 0 rgba(#000, 0.16), 0 18px 32px 0 rgba(#000, 0.08))) !default;
+
+// backwards compatibility, consider removal <editor-fold>
 $base-elevation: elevation.define(0);
 
 $nav-elevation: elevation.define(500, 6px 0 10px -6px rgba(0, 0, 0, 0.2));
@@ -9,12 +16,4 @@ $footer-elevation: elevation.define(600, 0 -6px 10px -6px rgba(0, 0, 0, 0.2));
 $overlay-elevation: elevation.define(1000, (0 2px 8px 0 rgba(0, 0, 0, 0.08), 0 20px 32px 0 rgb(0, 0, 0, 0.15)));
 
 $raised-elevation: elevation.define(200, (0 0 1px 0 rgba(0, 0, 0, 0.04), 0 3px 10px -3px rgba(0, 0, 0, 0.2)));
-
-$elevation-map: (
-  "base": $base-elevation,
-  "navigation": $nav-elevation,
-  "header": $header-elevation,
-  "footer": $footer-elevation,
-  "overlay": $overlay-elevation,
-  "raised": $raised-elevation,
-) !default;
+// </editor-fold>

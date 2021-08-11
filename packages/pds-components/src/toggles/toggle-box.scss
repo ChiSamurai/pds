@@ -12,6 +12,7 @@ pds-toggle-box {
     @include pds.rounding($toggle-size);
 
     width: ($toggle-knob-size + $toggle-knob-spacing) * 2;
+    background-color: var(--input-border-color, var(--background-darker));
     align-items: center;
     display: flex;
 
@@ -21,26 +22,52 @@ pds-toggle-box {
 
       position: relative;
       border-radius: inherit;
+      background-color: var(--page);
       transition: 100ms ease-out;
-      background: var(--background);
       height: $toggle-knob-size - 2px;
       width: $toggle-knob-size - 2px;
     }
   }
 
-  @include util.focus-state {
-    .toggle-indicator {
-      background: var(--gray-light);
-    }
-  }
-
   &.checked {
     .toggle-indicator {
-      border-color: var(--primary-light);
-      background: var(--primary-light);
+      background-color: var(--primary);
+      border-color: var(--primary);
 
       .toggle-knob {
         transform: translateX($toggle-knob-size);
+      }
+    }
+  }
+
+  @include util.hover-state {
+    .toggle-indicator {
+      @include pds.input-hover;
+
+      background-color: var(--primary-lighter);
+    }
+  }
+  @include util.focus-state {
+    .toggle-indicator {
+      @include pds.input-focus;
+
+      background-color: var(--focus);
+    }
+  }
+  @include util.active-state {
+    .toggle-indicator {
+      @include pds.input-active;
+
+      background-color: var(--primary);
+
+      .toggle-knob {
+        transform: translateX($toggle-knob-size * 0.33);
+      }
+    }
+
+    &.checked {
+      .toggle-indicator .toggle-knob {
+        transform: translateX($toggle-knob-size * 0.66);
       }
     }
   }

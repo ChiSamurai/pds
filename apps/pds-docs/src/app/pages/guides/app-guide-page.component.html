@@ -3,24 +3,20 @@
     <div class="guide-content" [innerHTML]="guide.content | md"></div>
     <div class="guide-refs" *ngIf="guide.previous || guide.next">
       <div fxFlex>
-        <pds-app-guide-card *ngIf="appGuides.get(guide.previous) as prevGuide" [guide]="prevGuide">
-          <pds-card-footer fxLayoutAlign="start">
-            <button class="secondary" [routerLink]="[ '..', prevGuide.slug ]">
-              <svg-icon name="arrow-left"></svg-icon>
-              <span>Previous</span>
-            </button>
-          </pds-card-footer>
-        </pds-app-guide-card>
+        <ng-container *ngIf="appGuides.get(guide.previous) as prevGuide">
+          <button class="secondary" [routerLink]="[ '..', prevGuide.slug ]">
+            <svg-icon name="arrow-left"></svg-icon>
+            <span>Previous</span>
+          </button>
+        </ng-container>
       </div>
-      <div fxFlex>
-        <pds-app-guide-card *ngIf="appGuides.get(guide.next) as nextGuide" [guide]="nextGuide">
-          <pds-card-footer>
-            <button [routerLink]="[ '..', nextGuide.slug ]">
-              <span>Next</span>
-              <svg-icon name="arrow-right"></svg-icon>
-            </button>
-          </pds-card-footer>
-        </pds-app-guide-card>
+      <div fxFlex fxLayoutAlign="end">
+        <ng-container *ngIf="appGuides.get(guide.next) as nextGuide">
+          <button [routerLink]="[ '..', nextGuide.slug ]">
+            <span>Next</span>
+            <svg-icon name="arrow-right"></svg-icon>
+          </button>
+        </ng-container>
       </div>
     </div>
   </pds-page-content>

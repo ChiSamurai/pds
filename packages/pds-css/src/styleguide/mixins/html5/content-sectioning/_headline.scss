@@ -4,19 +4,8 @@
 @mixin headline($from: 1, $through: 6) {
   @for $n from $from through $through {
     h#{$n} {
-      @include outer-spacing(--space-5, y, $trim: true);
+      @include outer-spacing(if($n > 1, --space-md, --space-xl), y, $trim: true);
       @include typography-style(--h#{$n});
-      @content;
-    }
-  }
-}
-
-@mixin headline-display($from: 1, $through: 3) {
-  @for $n from $from through $through {
-    h#{$n}.display,
-    .display-#{$n} {
-      @include outer-spacing(--space-6, y, $trim: true);
-      @include typography-style(--display-#{$n});
       @content;
     }
   }

@@ -1,19 +1,15 @@
-import { Component, ContentChild, Input, ViewEncapsulation } from '@angular/core';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Component, ContentChild, ElementRef, Input, Renderer2, ViewEncapsulation } from '@angular/core';
+import { ElementDisabledState, ElementFocusState } from '@vitagroup/cdk';
 import { PdsCardContent, PdsCardFooter, PdsCardHeader } from './card-content';
 
 @Component({
   selector: 'pds-card',
   styleUrls: ['./card.scss'],
+  host: { '[attr.tabindex]': '0' },
   encapsulation: ViewEncapsulation.None,
   template: `
-    <ng-container *ngIf="!!header; else viewHeader">
-      <ng-content select="pds-card-header"></ng-content>
-    </ng-container>
-    <ng-template #viewHeader>
-      <pds-card-header *ngIf="!!label">
-        <label>{{ label }}</label>
-      </pds-card-header>
-    </ng-template>
+    <ng-content select="pds-card-header"></ng-content>
     <ng-content select="pds-card-content"></ng-content>
     <ng-content></ng-content>
     <ng-content select="pds-card-footer"></ng-content>
@@ -35,7 +31,11 @@ export class PdsCard {
   @ContentChild(PdsCardFooter, { static: true })
   private _staticFooter: PdsCardFooter | null;
 
-  @Input() label: string;
+  @Input('disabled') private set _disabled(value: boolean) {
+    this.disabled.set(coerceBooleanProperty(value));
+  }
+
+  readonly disabled = new ElementDisabledState(this.elementRef, this.renderer);
 
   get header(): PdsCardHeader | null {
     return this._dynamicHeader || this._staticHeader;
@@ -46,4 +46,6 @@ export class PdsCard {
   get footer(): PdsCardFooter | null {
     return this._dynamicFooter || this._staticFooter;
   }
+
+  constructor(protected elementRef: ElementRef, protected renderer: Renderer2) {}
 }

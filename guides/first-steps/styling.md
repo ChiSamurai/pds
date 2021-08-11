@@ -35,8 +35,8 @@ and simplify the usage of the extensive underlying module foundation consisting 
 mixin, function and variable definitions.
 
 ```scss
-@use "styleguide";
-@use "util";
+@use "packages/pds-css/src/styleguide";
+@use "packages/pds-css/src/util";
 ```
 
 ### Building a Styleguide
@@ -62,7 +62,7 @@ Let's assume we want to change the color to the **blue** PDS signature color.
 @use "colors/blue" as *;
 @use "styleguide" as pds with (
   $color-primary-dark: $deep-blue,
-  $color-primary: $blue,
+  $color-primary: $smokey-blue,
   $color-primary-light: $bright-blue
 );
 

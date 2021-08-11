@@ -4,7 +4,7 @@
 
 @mixin paragraph {
   p {
-    @include outer-spacing(--space-4, y, $trim: true);
+    @include outer-spacing(--space-md, y, $trim: true);
     @content;
   }
 }

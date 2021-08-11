@@ -4,17 +4,14 @@
 $tab-active-indicator-width: 4px !default;
 
 pds-tab {
-  @include pds.inner-spacing(pds.$space-3, y);
+  @include pds.inner-spacing(--space-xs, y);
+  @include pds.outer-sibling-spacing(--space-sm);
 
   user-select: none;
   position: relative;
   transition: 100ms ease-in;
   font-weight: 500;
   cursor: pointer;
-
-  &:not(:first-child) {
-    margin-left: pds.$space_8;
-  }
 
   @include util.hover-state {
     &:after {
