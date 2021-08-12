@@ -1,13 +1,16 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { AsyncValidatorFn, FormControl, Validators } from '@angular/forms';
-import { DialogOverlay } from '@vitagroup/cdk';
-import { AppDialogComponent } from '../../components/app-dialog/app-dialog.component';
+import {
+  Component,
+  ViewEncapsulation
+} from '@angular/core';
+import {AsyncValidatorFn, FormControl, Validators} from '@angular/forms';
+import {DialogOverlay} from '@vitagroup/cdk';
+import {AppDialogComponent} from '../../components/app-dialog/app-dialog.component';
 
 @Component({
   selector: 'pds-app-components-page',
   styleUrls: ['./app-components-page.components.scss'],
   templateUrl: './app-components-page.component.html',
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponentsPageComponent {
   readonly fooValidator: AsyncValidatorFn = (control) =>
@@ -31,10 +34,14 @@ export class AppComponentsPageComponent {
     'Leora Luse',
     'Vivian Violette',
     'Doreen Dupuy',
-    'Audie Almeida',
+    'Audie Almeida'
   ];
 
-  constructor(protected dialog: DialogOverlay) {}
+  constructor(
+    protected dialog: DialogOverlay
+  ) {
+  }
+
 
   openModal(): void {
     this.dialog.create(AppDialogComponent).subscribe();

@@ -1,5 +1,8 @@
 <pds-page-layout footer="fixed">
   <pds-page-content fxLayout="row wrap" fxLayoutGap="32px grid">
+    <section fxFlex="100">
+      <pds-app-button-documentation></pds-app-button-documentation>
+    </section>
 
     <section fxFlex="100">
       <h5>Text Box</h5>
@@ -77,7 +80,8 @@
     </section>
 
     <section fxFlex="50">
-      <label>Multi selection behavior&nbsp;&nbsp;<pds-tag>default</pds-tag></label>
+      <label>Multi selection behavior&nbsp;&nbsp;<pds-tag>default</pds-tag>
+      </label>
       <pds-select-box placeholder="Select options...">
         <pds-select-list mode="multiple">
           <pds-select-option value="foo">foo</pds-select-option>

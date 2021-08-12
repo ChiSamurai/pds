@@ -1,0 +1,51 @@
+<pds-app-base-documentation-component
+  heading="Buttons"
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview },
+  ]"
+></pds-app-base-documentation-component>
+<ng-template #overview>
+  <section>
+    These are the PDS buttons
+  </section>
+  <ng-container
+    *ngFor="let buttonRank of ['primary', 'secondary', 'tertiary', 'quaternary']"
+    [ngTemplateOutlet]="buttonRankTemplate"
+    [ngTemplateOutletContext]="{buttonRank: buttonRank}"></ng-container>
+</ng-template>
+
+<ng-template #buttonRankTemplate let-buttonRank="buttonRank">
+  <pds-card>
+    <pds-card-header><h3>{{buttonRank}}</h3></pds-card-header>
+    <pds-card-content>
+      <div fxLayout="column"
+           *ngFor="let buttonState of ['enabled', 'disabled', 'active', 'hover', 'focus']">
+        <ng-container [ngTemplateOutlet]="buttonStateTemplate"
+                      [ngTemplateOutletContext]="{buttonClasses: [(buttonRank), buttonState]}"></ng-container>
+      </div>
+    </pds-card-content>
+  </pds-card>
+</ng-template>
+
+<ng-template #buttonStateTemplate let-buttonClasses="buttonClasses">
+  <div fxLayout="row">
+    <div fxFlex>
+      <h4>{{buttonClasses[1]}}</h4>
+    </div>
+    <div fxFlex>
+      <button [ngClass]="buttonClasses">Label</button>
+    </div>
+    <div fxFlex>
+      <button [ngClass]="buttonClasses">Icon only (TBD)</button>
+    </div>
+    <div fxFlex>
+      <button [ngClass]="buttonClasses">Icon & Label (TBD)</button>
+    </div>
+    <div fxFlex>
+      <button [ngClass]="buttonClasses">Label & Icon (TBD)</button>
+    </div>
+    <div fxFlex>
+      <button [ngClass]="buttonClasses">Icon Top &  Label (TBD)</button>
+    </div>
+  </div>
+</ng-template>

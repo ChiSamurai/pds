@@ -25,6 +25,9 @@ import {
 import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 import { AppDialogComponentModule } from '../../components/app-dialog/app-dialog.component';
 import { AppComponentsPageComponent } from './app-components-page.component';
+import { AvatarDocumentationComponent } from './documentation/avatar/avatar-documentation.component';
+import { BaseDocumentationComponent } from './base-documentation/base-documentation.component';
+import {ButtonDocumentationComponent} from './documentation/button/button-documentation.component';
 
 export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
   {
@@ -37,7 +40,12 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
 ];
 
 @NgModule({
-  declarations: [ AppComponentsPageComponent ],
+  declarations: [
+    AppComponentsPageComponent,
+    AvatarDocumentationComponent,
+    BaseDocumentationComponent,
+    ButtonDocumentationComponent
+  ],
   imports: [
     DialogOverlayModule,
     AppDialogComponentModule,
