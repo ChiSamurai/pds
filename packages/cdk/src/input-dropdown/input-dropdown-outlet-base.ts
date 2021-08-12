@@ -47,6 +47,10 @@ export abstract class InputDropdownOutletBase extends DropdownOutletBase impleme
     super(overlay, viewContainerRef, renderer, focus);
   }
 
+  protected onEscShortcut() {
+    if (this.isActive) this.deactivate({ setControlFocus: true });
+  }
+
   activate() {
     const { width } = this.window.getComputedStyle(this.viewContainerRef.element.nativeElement);
     this.overlayRef.updateSize({ minWidth: width });
@@ -112,6 +116,7 @@ export abstract class InputDropdownOutletBase extends DropdownOutletBase impleme
         });
         this.overlayDef?.selectionModel.pipe(takeUntil(this.ngChanges)).subscribe((value) => {
           this.valueAccessor.writeValue(value);
+          this.inputAccessor?.input.patch('');
 
           if (this._latestKeyDownEvent?.key?.toLowerCase() === 'enter' && !this._latestKeyDownEvent.shiftKey)
             this.deactivate({ setControlFocus: true });

@@ -11,9 +11,9 @@ import {
   QueryList,
   Renderer2,
 } from '@angular/core';
-import { EventUnlistener, ShortcutManager } from '@vitagroup/common';
+import { ShortcutManager } from '@vitagroup/common';
 import { Subject } from 'rxjs';
-import { distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import {
   ElementFocusAccessor,
   ElementFocusState,
@@ -94,7 +94,9 @@ export class SelectionControl<T> extends SelectionModel<T> implements OnInit, On
       e.preventDefault();
       this.toggleFocusValue();
     });
-    this.shortcuts.register('document:space', (e) => {
+    // IMPORTANT: do not remove the (shift) modifier from the space shortcut below! doing this will result
+    // in unintended preventions for other component and directive interactions
+    this.shortcuts.register('document:shift+space', (e) => {
       e.preventDefault();
       this.toggleFocusValue();
     });

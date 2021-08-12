@@ -58,6 +58,10 @@ export abstract class OverlayOutletBase<T extends OverlayDefBase> implements OnI
     this._unlistener.push(this.renderer.listen(target, eventName, listener));
   }
 
+  protected onEscShortcut(): void {
+    if (this.isActive) this.deactivate();
+  }
+
   activate(): void {
     if (this.isActive) this.deactivate();
     if (this.overlayDef != null) {
@@ -76,7 +80,7 @@ export abstract class OverlayOutletBase<T extends OverlayDefBase> implements OnI
     this.overlayRef = this.overlay.create(config);
     this.focus.ancestors.add(this.overlayRef.overlayElement);
 
-    this.shortcuts.register('document:esc', () => this.isActive && this.deactivate());
+    this.shortcuts.register('document:esc', () => this.onEscShortcut());
 
     this.focus
       .asObservable()
