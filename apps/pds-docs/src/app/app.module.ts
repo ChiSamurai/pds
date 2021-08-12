@@ -13,6 +13,7 @@ import {
 } from '@vitagroup/cdk/layout';
 import { RouteDataPipeModule, TemplateOutletModule } from '@vitagroup/common';
 import {
+  PdsDividerModule,
   PdsFormStatusModule,
   PdsNavModule,
   PdsRingLoader,
@@ -60,6 +61,7 @@ import { APP_GUIDES_INIT_PROVIDER } from './services/app-guides.service';
     PdsTagModule,
     PdsToggleBoxModule,
     PdsFormStatusModule.forRoot(),
+    PdsDividerModule,
   ],
   providers: [
     {

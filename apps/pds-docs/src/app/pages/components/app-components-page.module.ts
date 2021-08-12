@@ -6,9 +6,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { DialogOverlayModule, SvgIconModule } from '@vitagroup/cdk';
 import { FormStatusOutletModule } from '@vitagroup/cdk/forms';
 import { FlexContainerModule } from '@vitagroup/cdk/layout';
+import { ClipPipeModule } from '@vitagroup/common';
 import {
   AlertModule,
   CardModule,
+  PdsBadgeModule,
   PdsCheckBoxModule,
   PdsComboBoxModule,
   PdsDropdownModule,
@@ -20,7 +22,7 @@ import {
   PdsTabsModule,
   PdsTagModule,
   PdsTextBoxModule,
-  PdsToggleBoxModule
+  PdsToggleBoxModule,
 } from '@vitagroup/pds-components';
 import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 import { AppDialogComponentModule } from '../../components/app-dialog/app-dialog.component';
@@ -31,13 +33,13 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
     path: '',
     component: AppComponentsPageComponent,
     data: {
-      title: $localize`Components`
-    }
-  }
+      title: $localize`Components`,
+    },
+  },
 ];
 
 @NgModule({
-  declarations: [ AppComponentsPageComponent ],
+  declarations: [AppComponentsPageComponent],
   imports: [
     DialogOverlayModule,
     AppDialogComponentModule,
@@ -62,8 +64,9 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
     FormStatusOutletModule,
     ReactiveFormsModule,
     PdsRingLoaderModule,
-    PdsPageLayoutModule
-  ]
+    PdsPageLayoutModule,
+    PdsBadgeModule,
+    ClipPipeModule,
+  ],
 })
-export class AppComponentsPageModule {
-}
+export class AppComponentsPageModule {}

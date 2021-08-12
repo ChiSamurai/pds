@@ -173,8 +173,14 @@
     <section fxFlex="100">
       <h5>Tabs</h5>
       <pds-tabs>
-        <pds-tab class="active">Active</pds-tab>
-        <pds-tab>Other Tab</pds-tab>
+        <pds-tab class="active">
+          <span>Tab 1</span>
+          <pds-badge>8</pds-badge>
+        </pds-tab>
+        <pds-tab>
+          <span>Tab 2</span>
+          <pds-badge>{{ 1337 | clip: 42 }}</pds-badge>
+        </pds-tab>
         <pds-tab disabled="true">Disabled Tab</pds-tab>
       </pds-tabs>
     </section>

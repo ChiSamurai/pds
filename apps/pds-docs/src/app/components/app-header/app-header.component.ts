@@ -10,15 +10,16 @@ import { AppComponent } from '../../app.component';
   styleUrls: ['app-header.component.scss'],
   encapsulation: ViewEncapsulation.None,
   template: `
-    <div class="page-headline">
+    <div class="page-head">
       <ng-container *ngIf="'title' | routeData | async as title">
-        <span class="page-title">{{ title }}</span>
+        <div class="page-title">{{ title }}</div>
       </ng-container>
-      <ng-content></ng-content>
-    </div>
-    <div>
+      <div>
+        <ng-content></ng-content>
+      </div>
       <pds-toggle-box label="Dark Mode" [formControl]="darkModeControl"></pds-toggle-box>
     </div>
+    <pds-divider></pds-divider>
   `,
 })
 export class AppHeaderComponent implements OnInit, OnDestroy {
