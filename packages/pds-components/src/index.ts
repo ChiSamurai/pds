@@ -1,6 +1,8 @@
 export * from './alert/module';
 export * from './alert/alert';
 
+export * from './badge/badge';
+
 export * from './button/fab-button';
 
 export * from './card/module';
@@ -10,6 +12,8 @@ export * from './card/card';
 export * from './combo-box/module';
 export * from './combo-box/combo-box';
 export * from './combo-box/combo-def';
+
+export * from './divider/divider';
 
 export * from './dropdown/module';
 export * from './dropdown/dropdown';

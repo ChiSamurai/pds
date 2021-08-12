@@ -17,7 +17,6 @@ pds-toggle-box {
     display: flex;
 
     .toggle-knob {
-      @include pds.elevation(pds.$raised-elevation);
       @include pds.outer-spacing($toggle-knob-spacing, x);
 
       position: relative;
@@ -35,7 +34,7 @@ pds-toggle-box {
       border-color: var(--primary);
 
       .toggle-knob {
-        transform: translateX($toggle-knob-size);
+        transform: translateX($toggle-knob-size - $toggle-knob-spacing);
       }
     }
   }
@@ -52,6 +51,7 @@ pds-toggle-box {
       @include pds.input-focus;
 
       background-color: var(--focus);
+      box-shadow: none;
     }
   }
   @include util.active-state {

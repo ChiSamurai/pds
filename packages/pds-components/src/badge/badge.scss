@@ -1,0 +1,18 @@
+@use "styleguide" as pds;
+@use "util";
+
+pds-badge {
+  @include pds.typography-style(--body-small);
+  @include pds.rounding(var(--badge-height, 16px));
+  @include pds.inner-spacing(--space-xxs, x);
+
+  display: inline-flex;
+  height: var(--badge-height, 20px);
+  min-width: var(--badge-height, 20px);
+  background-color: var(--badge, var(--error-lighter));
+  color: var(--badge-contrast, var(--error-contrast));
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  user-select: none;
+}
