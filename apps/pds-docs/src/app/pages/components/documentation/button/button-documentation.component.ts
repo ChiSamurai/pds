@@ -10,6 +10,7 @@ import {
 @Component({
   selector: 'pds-app-button-documentation',
   templateUrl: './button-documentation.component.html',
+  styleUrls: ['./button-documentation.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

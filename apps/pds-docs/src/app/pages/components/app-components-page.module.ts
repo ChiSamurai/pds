@@ -12,6 +12,7 @@ import {
   PdsCheckBoxModule,
   PdsComboBoxModule,
   PdsDropdownModule,
+  PdsFabButtonModule,
   PdsInputDropdownModule,
   PdsRadioBoxModule,
   PdsRingLoaderModule,
@@ -28,6 +29,7 @@ import { AppComponentsPageComponent } from './app-components-page.component';
 import { AvatarDocumentationComponent } from './documentation/avatar/avatar-documentation.component';
 import { BaseDocumentationComponent } from './base-documentation/base-documentation.component';
 import {ButtonDocumentationComponent} from './documentation/button/button-documentation.component';
+import {AlertDocumentationComponent} from './documentation/alert/alert-documentation.component';
 
 export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
   {
@@ -42,6 +44,7 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
 @NgModule({
   declarations: [
     AppComponentsPageComponent,
+    AlertDocumentationComponent,
     AvatarDocumentationComponent,
     BaseDocumentationComponent,
     ButtonDocumentationComponent
@@ -70,7 +73,8 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
     FormStatusOutletModule,
     ReactiveFormsModule,
     PdsRingLoaderModule,
-    PdsPageLayoutModule
+    PdsPageLayoutModule,
+    PdsFabButtonModule
   ]
 })
 export class AppComponentsPageModule {
