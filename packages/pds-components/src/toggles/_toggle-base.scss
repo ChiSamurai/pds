@@ -2,6 +2,7 @@
 @use "util";
 
 $toggle-size: 20px !default;
+$toggle-border-width: 2px !default;
 
 @mixin pds-toggle-base {
   user-select: none;
@@ -26,7 +27,7 @@ $toggle-size: 20px !default;
   .toggle-indicator {
     @include pds.input-base($spacing: false);
 
-    border-width: 2px;
+    border-width: $toggle-border-width;
     background-color: transparent;
     color: var(--primary);
     height: $toggle-size;

@@ -3,7 +3,7 @@
 @use "util";
 
 pds-toggle-box {
-  $toggle-knob-spacing: 1px;
+  $toggle-knob-spacing: $toggle-border-width / 2;
   $toggle-knob-size: $toggle-size - ($toggle-knob-spacing * 2);
 
   @include pds-toggle-base;
@@ -17,8 +17,6 @@ pds-toggle-box {
     display: flex;
 
     .toggle-knob {
-      @include pds.outer-spacing($toggle-knob-spacing, x);
-
       position: relative;
       border-radius: inherit;
       background-color: var(--page);
@@ -34,7 +32,7 @@ pds-toggle-box {
       border-color: var(--primary);
 
       .toggle-knob {
-        transform: translateX($toggle-knob-size - $toggle-knob-spacing);
+        transform: translateX($toggle-knob-size);
       }
     }
   }
