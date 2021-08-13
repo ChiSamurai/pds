@@ -1,0 +1,41 @@
+<pds-app-base-documentation-component
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview },
+  ]"
+  heading="Cards"
+  id="card"
+></pds-app-base-documentation-component>
+<ng-template #overview>
+  <pds-card>
+    <pds-card-content>
+      <section>
+        The entire card can be clicked or tapped. In addition, buttons can be placed on the card, which perform a
+        different
+        action.
+      </section>
+      <div fxLayout="row" fxLayoutGap="32px 32px">
+        <div *ngFor="let cardState of ['enabled', 'disabled', 'active', 'hover', 'focus']"
+             fxFlex>
+          <ng-container [ngTemplateOutletContext]="{cardClasses: [cardState]}"
+                        [ngTemplateOutlet]="cardTemplate"></ng-container>
+        </div>
+      </div>
+
+    </pds-card-content>
+  </pds-card>
+</ng-template>
+
+<ng-template #cardTemplate let-cardClasses="cardClasses">
+  <pds-card [ngClass]="cardClasses">
+    <pds-card-header>
+      {{cardClasses[0] | uppercase}} card
+    </pds-card-header>
+    <pds-card-content>
+      Bacon ipsum dolor amet burgdoggen sunt laboris sed, beef ribs cupim consectetur meatball chislic enim
+      tempor. Ex ham hock mollit salami. Mollit andouille ut swine sed kevin, ea excepteur ad ball tip leberkas
+      sausage pork belly short loin. Lorem in sint in pork jowl corned beef ut jerky tongue enim ham meatball duis
+      pork belly. Chuck sint in tenderloin mollit incididunt fugiat in ut culpa eu ex sausage esse pork loin.
+    </pds-card-content>
+    <pds-card-footer>The card footer</pds-card-footer>
+  </pds-card>
+</ng-template>

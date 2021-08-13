@@ -1,0 +1,36 @@
+<pds-app-base-documentation-component
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview },
+  ]"
+  heading="Toggles"
+  id="toggles"
+></pds-app-base-documentation-component>
+<ng-template #overview>
+  <pds-card>
+    <pds-card-content>
+      <h3>Checkboxes</h3>
+      <section>
+        <div *ngFor="let labelAlignment of ['', 'before', 'after']"
+             fxLayout="row"
+             fxLayoutGap="32px">
+          <div fxFlex>
+            <h4>Label alignment: {{labelAlignment ? labelAlignment : 'default'}}</h4>
+          </div>
+          <div *ngFor="let state of ['enabled', 'disabled', 'active', 'hover', 'focus', 'error']"
+               fxFlex>
+            <ng-container [ngTemplateOutletContext]="{classes: [state, labelAlignment]}"
+                          [ngTemplateOutlet]="checkboxTemplate"></ng-container>
+          </div>
+        </div>
+      </section>
+    </pds-card-content>
+  </pds-card>
+</ng-template>
+
+<ng-template #checkboxTemplate let-classes="classes">
+  <pds-check-box
+    [labelAlign]="classes[1]"
+    [ngClass]="classes"
+    label="Label">
+  </pds-check-box>
+</ng-template>
