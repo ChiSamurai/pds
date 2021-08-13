@@ -100,7 +100,7 @@ export abstract class ToggleBase<T = any> extends ControlValueAccessorBase<T> im
 
   ngOnInit() {
     this.shortcuts.register('enter', () => this.toggle());
-    this.shortcuts.register('space', () => this.toggle());
+    this.shortcuts.register('shift+space', () => this.toggle());
 
     this.unlistenClick = this.renderer.listen(this.elementRef.nativeElement, 'click', () => this.toggle());
   }
