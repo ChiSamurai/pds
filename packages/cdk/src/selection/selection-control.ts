@@ -68,11 +68,7 @@ export class SelectionControl<T> extends SelectionModel<T> implements OnInit, On
     return this.selectionValues?.find((value) => value.focus.isSet);
   }
   get focusValueIndex(): number | null {
-    let index: number;
-    this.selectionValues?.forEach((value, valueIndex) => {
-      if (index == null && value.focus.isSet) index = valueIndex;
-    });
-    return index;
+    return this.selectionValues?.toArray().findIndex((value) => value.focus.isSet);
   }
 
   @Output() readonly changes = new EventEmitter<SelectionChange<T>>();
@@ -138,12 +134,20 @@ export class SelectionControl<T> extends SelectionModel<T> implements OnInit, On
   }
 
   focusNextValue(): void {
-    const nextValue = this.selectionValues?.toArray()?.[this.focusValueIndex + 1];
+    const nextIndex = this.focusValueIndex + 1;
+    const nextValue = nextIndex && this.selectionValues?.toArray()?.[nextIndex];
+
+    this.focusValue?.focus.unset();
+
     if (nextValue) nextValue.focus.set();
     else this.selectionValues?.first?.focus.set();
   }
   focusPreviousValue(): void {
-    const previousValue = this.selectionValues?.toArray()?.[this.focusValueIndex - 1];
+    const previousIndex = this.focusValueIndex - 1;
+    const previousValue = this.selectionValues?.toArray()?.[previousIndex];
+
+    this.focusValue?.focus.unset();
+
     if (previousValue) previousValue.focus.set();
     else this.selectionValues?.last?.focus.set();
   }

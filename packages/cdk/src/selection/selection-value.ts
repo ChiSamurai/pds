@@ -1,5 +1,6 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, ElementRef, InjectionToken, Input, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, InjectionToken, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { EventUnlistener, ShortcutManager } from '@vitagroup/common';
 import { ElementDisabledState } from '../element-state/element-disabled-state';
 import {
   ElementFocusAccessor,
@@ -18,7 +19,9 @@ export const SELECTION_VALUE = new InjectionToken<SelectionValue>('SELECTION_VAL
     { provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [SelectionValue] },
   ],
 })
-export class SelectionValue<T = any> implements ElementFocusAccessor {
+export class SelectionValue<T = any> implements OnInit, OnDestroy, ElementFocusAccessor {
+  private _unlistenClicks: EventUnlistener;
+
   @Input('disabled') private set _disabled(value: boolean) {
     if (coerceBooleanProperty(value)) this.disabled.set();
     else this.disabled.unset();
@@ -49,5 +52,12 @@ export class SelectionValue<T = any> implements ElementFocusAccessor {
 
   toggle(options?: ToggleOptions): void {
     if (this.value != null) this.selectionModel.toggle(this.value, options || this.options);
+  }
+
+  ngOnInit() {
+    this._unlistenClicks = this.renderer.listen(this.elementRef.nativeElement, 'click', () => this.toggle());
+  }
+  ngOnDestroy() {
+    this._unlistenClicks?.();
   }
 }
