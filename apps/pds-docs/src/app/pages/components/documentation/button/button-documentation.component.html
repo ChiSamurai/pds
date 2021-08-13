@@ -1,9 +1,10 @@
 <pds-app-base-documentation-component
-  heading="Buttons"
   [documentationTabs]="[
     { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview },
     { id: DEFAULT_DOCUMENTATION_TABS.EXAMPLES, content: examples }
   ]"
+  heading="Buttons"
+  id="buttons"
 ></pds-app-base-documentation-component>
 <ng-template #overview>
   <section>
@@ -11,32 +12,24 @@
   </section>
   <ng-container
     *ngFor="let buttonRank of ['primary', 'secondary', 'tertiary', 'quaternary']"
-    [ngTemplateOutlet]="buttonRankTemplate"
-    [ngTemplateOutletContext]="{buttonRank: buttonRank}"></ng-container>
+    [ngTemplateOutletContext]="{buttonRank: buttonRank}"
+    [ngTemplateOutlet]="buttonRankTemplate"></ng-container>
 
   <ng-container [ngTemplateOutlet]="fabTemplate"></ng-container>
 </ng-template>
-
 <ng-template #examples>
-  <pds-card>
-    <pds-card-content>
-      <pre>
-        <code class="language-typescript">
-          <button class="primary"></button>
-        </code>
-      </pre>
-    </pds-card-content>
-  </pds-card>
+  <pre [innerText]="'<button class=&quot;primary&quot;>Label</button>'">
+  </pre>
 </ng-template>
 
 <ng-template #buttonRankTemplate let-buttonRank="buttonRank">
   <pds-card>
     <pds-card-header><h3>{{buttonRank}}</h3></pds-card-header>
     <pds-card-content>
-      <div fxLayout="column"
-           *ngFor="let buttonState of ['enabled', 'disabled', 'active', 'hover', 'focus']">
-        <ng-container [ngTemplateOutlet]="buttonStateTemplate"
-                      [ngTemplateOutletContext]="{buttonClasses: [(buttonRank), buttonState]}"></ng-container>
+      <div *ngFor="let buttonState of ['enabled', 'disabled', 'active', 'hover', 'focus']"
+           fxLayout="column">
+        <ng-container [ngTemplateOutletContext]="{buttonClasses: [(buttonRank), buttonState]}"
+                      [ngTemplateOutlet]="buttonStateTemplate"></ng-container>
       </div>
     </pds-card-content>
   </pds-card>
@@ -47,7 +40,7 @@
     <div fxFlex>
       <h4>{{buttonClasses[1]}}</h4>
     </div>
-    <div fxFlex>
+    <div #button fxFlex>
       <button [ngClass]="buttonClasses">Label</button>
     </div>
     <div fxFlex>
@@ -69,12 +62,12 @@
   <pds-card>
     <pds-card-header><h3>Floating Action Buttons(FABs)</h3></pds-card-header>
     <pds-card-content>
-      <div fxLayout="row"
-           class="fab-doc">
-        <div fxFlex
+      <div class="fab-doc"
+           fxLayout="row">
+        <div *ngFor="let buttonState of ['enabled', 'disabled', 'active', 'hover', 'focus']"
+             fxFlex
              fxLayout="column"
-             fxLayoutAlign="center center"
-             *ngFor="let buttonState of ['enabled', 'disabled', 'active', 'hover', 'focus']">
+             fxLayoutAlign="center center">
           <pds-fab-button [ngClass]="buttonState">
             <svg-icon name="info"></svg-icon>
           </pds-fab-button>

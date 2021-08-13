@@ -1,14 +1,7 @@
-import {
-  AfterViewInit,
-  Component,
-  ContentChildren,
-  QueryList,
-  ViewEncapsulation
-} from '@angular/core';
-import {AsyncValidatorFn, FormControl, Validators} from '@angular/forms';
-import {DialogOverlay} from '@vitagroup/cdk';
-import {AppDialogComponent} from '../../components/app-dialog/app-dialog.component';
-import {BaseDocumentationComponent} from './base-documentation/base-documentation.component';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { AsyncValidatorFn, FormControl, Validators } from '@angular/forms';
+import { DialogOverlay } from '@vitagroup/cdk';
+import { AppDialogComponent } from '../../components/app-dialog/app-dialog.component';
 
 @Component({
   selector: 'pds-app-components-page',
@@ -16,14 +9,7 @@ import {BaseDocumentationComponent} from './base-documentation/base-documentatio
   templateUrl: './app-components-page.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class AppComponentsPageComponent implements AfterViewInit {
-  @ContentChildren(BaseDocumentationComponent) docComponents: QueryList<BaseDocumentationComponent>;
-
-  readonly fooValidator: AsyncValidatorFn = (control) =>
-    new Promise((resolve) => setTimeout(() => resolve(null), 2000));
-
-  /* eslint-disable @typescript-eslint/member-ordering */
-  readonly formControl = new FormControl(null, [Validators.required], [this.fooValidator]);
+export class AppComponentsPageComponent {
 
   readonly options = [
     'Ta Tyree',
@@ -48,10 +34,11 @@ export class AppComponentsPageComponent implements AfterViewInit {
   ) {
   }
 
-  ngAfterViewInit() {
-    console.log(this.docComponents);
-  }
+  readonly fooValidator: AsyncValidatorFn = (control) =>
+    new Promise((resolve) => setTimeout(() => resolve(null), 2000));
 
+  /* eslint-disable @typescript-eslint/member-ordering */
+  readonly formControl = new FormControl(null, [Validators.required], [this.fooValidator]);
 
   openModal(): void {
     this.dialog.create(AppDialogComponent).subscribe();

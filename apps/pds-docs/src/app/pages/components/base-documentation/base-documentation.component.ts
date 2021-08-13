@@ -1,5 +1,6 @@
-import { AfterContentInit, Component, Input, TemplateRef } from '@angular/core';
+import { AfterContentInit, Component, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 export enum DEFAULT_DOCUMENTATION_TABS {
   OVERVIEW = 'overview',
@@ -17,7 +18,7 @@ export interface IDocumentationTab {
   template: `
     <pds-card>
       <pds-card-header>
-        <h3>{{heading}}</h3>
+        <h3 (click)="openComponentDoc()" [ngStyle]="{cursor: 'pointer'}">{{heading}}</h3>
       </pds-card-header>
       <pds-card-content>
         <div fxLayout="column" [id]="heading | lowercase">
@@ -38,17 +39,23 @@ export interface IDocumentationTab {
       </pds-card-content>
     </pds-card>`
 })
-export class BaseDocumentationComponent implements AfterContentInit {
+export class BaseDocumentationComponent implements OnInit, OnDestroy, AfterContentInit {
   @Input() heading: string;
+  @Input() id: string;
   @Input() documentationTabs: IDocumentationTab[];
 
   @Input() activeTab: string;
+
+  private fragmentSubscription: Subscription;
 
   constructor(
     protected route: ActivatedRoute,
     protected router: Router
   ) {
-    route.fragment.subscribe(frag => {
+  }
+
+  ngOnInit() {
+    this.fragmentSubscription = this.route.fragment.subscribe(frag => {
       this.activeTab = frag ? frag : null;
     });
   }
@@ -59,11 +66,21 @@ export class BaseDocumentationComponent implements AfterContentInit {
     }
   }
 
+  ngOnDestroy() {
+    !!this.fragmentSubscription && this.fragmentSubscription.unsubscribe();
+  }
+
   async onTabClick(tab: IDocumentationTab) {
     if (this.route.snapshot.url.length > 0) {
       await this.router.navigate(['./'], {fragment: tab.id, relativeTo: this.route});
     } else {
       this.activeTab = tab.id;
+    }
+  }
+
+  async openComponentDoc() {
+    if (this.route.snapshot.url.length === 0) {
+      await this.router.navigate([this.id], {relativeTo: this.route});
     }
   }
 }

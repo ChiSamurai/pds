@@ -38,7 +38,7 @@ interface IDocComponentRouteDef {
 
 const docComponents: IDocComponentRouteDef[] = [
   {
-    name: 'banners',
+    name: 'alerts',
     comp: AlertDocumentationComponent
   },
   {
