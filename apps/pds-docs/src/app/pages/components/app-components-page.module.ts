@@ -30,6 +30,8 @@ import { AvatarDocumentationComponent } from './documentation/avatar/avatar-docu
 import { BaseDocumentationComponent } from './base-documentation/base-documentation.component';
 import { ButtonDocumentationComponent } from './documentation/button/button-documentation.component';
 import { AlertDocumentationComponent } from './documentation/alert/alert-documentation.component';
+import { CardDocumentationComponent } from './documentation/card/card-documentation.component';
+import { TogglesDocumentationComponent } from './documentation/toggles/toggles-documentation.component';
 
 interface IDocComponentRouteDef {
   name: string;
@@ -44,6 +46,14 @@ const docComponents: IDocComponentRouteDef[] = [
   {
     name: 'buttons',
     comp: ButtonDocumentationComponent
+  },
+  {
+    name: 'card',
+    comp: CardDocumentationComponent
+  },
+  {
+    name: 'toggles',
+    comp: TogglesDocumentationComponent
   }
 ];
 
@@ -79,7 +89,9 @@ function generateRoutes(): Routes {
     AlertDocumentationComponent,
     AvatarDocumentationComponent,
     BaseDocumentationComponent,
-    ButtonDocumentationComponent
+    ButtonDocumentationComponent,
+    CardDocumentationComponent,
+    TogglesDocumentationComponent
   ],
   imports: [
     DialogOverlayModule,

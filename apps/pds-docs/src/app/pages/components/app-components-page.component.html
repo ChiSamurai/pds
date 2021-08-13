@@ -3,6 +3,8 @@
     <section fxFlex="100">
       <pds-app-button-documentation></pds-app-button-documentation>
       <pds-app-alert-documentation></pds-app-alert-documentation>
+      <pds-app-card-documentation></pds-app-card-documentation>
+      <pds-app-toggles-documentation></pds-app-toggles-documentation>
     </section>
 
     <section fxFlex="100">
@@ -28,11 +30,11 @@
     <fx-break></fx-break>
     <section fxFlex="50">
       <label>Usage with a <em>search</em> icon <em>before</em></label>
-      <pds-text-box placeholder="Type something..." [pdsInputDropdown]="searchDropdown">
+      <pds-text-box [pdsInputDropdown]="searchDropdown" placeholder="Type something...">
         <svg-icon name="search" pdsBefore></svg-icon>
       </pds-text-box>
 
-      <pds-dropdown pdsInputDropdownDef #searchDropdown>
+      <pds-dropdown #searchDropdown pdsInputDropdownDef>
         <pds-select-list>
           <ng-container *ngIf="(options | pdsInputFilter) as filteredOptions">
             <ng-container *ngIf="filteredOptions?.length; else noMatchTemplate">
@@ -131,8 +133,8 @@
         <pds-tag *pdsComboDef="let value">{{ value }}</pds-tag>
       </pds-combo-box>
 
-      <pds-dropdown pdsInputDropdownDef #comboBoxDropdown>
-        <pds-select-list mode="multiple" #selectList2>
+      <pds-dropdown #comboBoxDropdown pdsInputDropdownDef>
+        <pds-select-list #selectList2 mode="multiple">
           <ng-container *ngIf="(options | pdsInputFilter) as filteredOptions">
             <ng-container *ngIf="filteredOptions?.length; else noMatchTemplate">
               <pds-select-option *ngFor="let option of filteredOptions" [value]="option">
@@ -153,7 +155,7 @@
 
     <section fxFlex="33.33">
       <h5>Radio Box</h5>
-      <div pdsRadioGroup fxLayout fxLayoutGap="24px">
+      <div fxLayout fxLayoutGap="24px" pdsRadioGroup>
         <pds-radio-box label="foo"></pds-radio-box>
         <pds-radio-box label="bar" labelAlign="before"></pds-radio-box>
       </div>
