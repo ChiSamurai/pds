@@ -1,5 +1,5 @@
 import { AfterContentInit, Component, Input, TemplateRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export enum DEFAULT_DOCUMENTATION_TABS {
   OVERVIEW = 'overview',
@@ -20,13 +20,11 @@ export interface IDocumentationTab {
         <h3>{{heading}}</h3>
       </pds-card-header>
       <pds-card-content>
-        {{activeTab}}
         <div fxLayout="column" [id]="heading | lowercase">
           <pds-tabs>
             <pds-tab *ngFor="let tab of documentationTabs"
                      [ngClass]="{'active': activeTab === tab.id}"
-                     [routerLink]=""
-                     [fragment]="tab.id">
+                     (click)="onTabClick(tab)">
               {{tab.id | uppercase}}
             </pds-tab>
           </pds-tabs>
@@ -47,7 +45,8 @@ export class BaseDocumentationComponent implements AfterContentInit {
   @Input() activeTab: string;
 
   constructor(
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
+    protected router: Router
   ) {
     route.fragment.subscribe(frag => {
       this.activeTab = frag ? frag : null;
@@ -57,6 +56,14 @@ export class BaseDocumentationComponent implements AfterContentInit {
   ngAfterContentInit() {
     if (!this.activeTab) {
       this.activeTab = this.documentationTabs.length > 0 && this.documentationTabs[0].id;
+    }
+  }
+
+  async onTabClick(tab: IDocumentationTab) {
+    if (this.route.snapshot.url.length > 0) {
+      await this.router.navigate(['./'], {fragment: tab.id, relativeTo: this.route});
+    } else {
+      this.activeTab = tab.id;
     }
   }
 }
