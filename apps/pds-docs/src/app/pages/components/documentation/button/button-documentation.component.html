@@ -2,6 +2,7 @@
   heading="Buttons"
   [documentationTabs]="[
     { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview },
+    { id: DEFAULT_DOCUMENTATION_TABS.EXAMPLES, content: examples }
   ]"
 ></pds-app-base-documentation-component>
 <ng-template #overview>
@@ -14,6 +15,18 @@
     [ngTemplateOutletContext]="{buttonRank: buttonRank}"></ng-container>
 
   <ng-container [ngTemplateOutlet]="fabTemplate"></ng-container>
+</ng-template>
+
+<ng-template #examples>
+  <pds-card>
+    <pds-card-content>
+      <pre>
+        <code class="language-typescript">
+          <button class="primary"></button>
+        </code>
+      </pre>
+    </pds-card-content>
+  </pds-card>
 </ng-template>
 
 <ng-template #buttonRankTemplate let-buttonRank="buttonRank">

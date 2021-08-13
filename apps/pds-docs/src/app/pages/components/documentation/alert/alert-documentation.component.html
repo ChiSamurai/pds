@@ -1,0 +1,39 @@
+<pds-app-base-documentation-component
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview },
+    { id: DEFAULT_DOCUMENTATION_TABS.EXAMPLES, content: examples },
+  ]"
+  heading="Alert / Banner"
+></pds-app-base-documentation-component>
+<ng-template #overview>
+  <section>
+    A banner is permanently displayed on a page to emphasize an information. In addition, a banner can be used as a
+    reaction to an action of the user, for example, in the form of an error message.
+  </section>
+  <pds-card>
+    <pds-card-header><h3>Banners</h3></pds-card-header>
+    <pds-card-content>
+      <pds-alert *ngFor="let bannerClass of ['info', 'success', 'warning', 'error']" [ngClass]="bannerClass">
+        <svg-icon name="info" pdsBefore></svg-icon>
+        <p>{{bannerClass}}</p>
+      </pds-alert>
+    </pds-card-content>
+  </pds-card>
+</ng-template>
+
+<ng-template #examples>
+  <pds-card>
+    <pds-card-header><h3>Examples</h3></pds-card-header>
+    <pds-card-content>
+      <pds-alert *ngFor="let bannerClass of ['info', 'success', 'warning', 'error']" [ngClass]="bannerClass">
+        <svg-icon name="info" pdsBefore></svg-icon>
+        <p>Bacon ipsum dolor amet burgdoggen sunt laboris sed, beef ribs cupim consectetur meatball chislic enim
+          tempor. Ex ham hock mollit salami. Mollit andouille ut swine sed kevin, ea excepteur ad ball tip leberkas
+          sausage pork belly short loin. Lorem in sint in pork jowl corned beef ut jerky tongue enim ham meatball duis
+          pork belly. Chuck sint in tenderloin mollit incididunt fugiat in ut culpa eu ex sausage esse pork loin.</p>
+      </pds-alert>
+
+    </pds-card-content>
+  </pds-card>
+</ng-template>
+
