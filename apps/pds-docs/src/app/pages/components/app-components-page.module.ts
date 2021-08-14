@@ -20,7 +20,7 @@ import {
   PdsSelectBoxModule,
   PdsSelectListModule,
   PdsTabsModule,
-  PdsTagModule,
+  PdsChipModule,
   PdsTextBoxModule,
   PdsToggleBoxModule,
 } from '@vitagroup/pds-components';
@@ -50,7 +50,7 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
     PdsSelectBoxModule,
     PdsSelectListModule,
     CommonModule,
-    PdsTagModule,
+    PdsChipModule,
     FlexContainerModule,
     SvgIconModule,
     PdsRadioBoxModule,

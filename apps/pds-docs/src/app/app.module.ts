@@ -17,7 +17,7 @@ import {
   PdsFormStatusModule,
   PdsNavModule,
   PdsRingLoader,
-  PdsTagModule,
+  PdsChipModule,
   PdsTextBoxModule,
   PdsToggleBoxModule,
 } from '@vitagroup/pds-components';
@@ -58,7 +58,7 @@ import { APP_GUIDES_INIT_PROVIDER } from './services/app-guides.service';
     PdsPageLayoutModule,
     PdsNavModule,
     PdsTextBoxModule,
-    PdsTagModule,
+    PdsChipModule,
     PdsToggleBoxModule,
     PdsFormStatusModule.forRoot(),
     PdsDividerModule,
