@@ -48,7 +48,7 @@ export abstract class InputDropdownOutletBase extends DropdownOutletBase impleme
   }
 
   protected onEscShortcut() {
-    if (this.isActive) this.deactivate({ setControlFocus: true });
+    if (this.isActive) this.deactivate({ setControlFocus: true, clearInputAccessor: true });
   }
 
   activate() {
@@ -59,10 +59,11 @@ export abstract class InputDropdownOutletBase extends DropdownOutletBase impleme
 
     super.activate();
   }
-  deactivate(options?: { setControlFocus?: boolean }) {
+  deactivate(options?: { setControlFocus?: boolean; clearInputAccessor?: boolean }) {
     super.deactivate();
 
     if (options?.setControlFocus) this.focus.set();
+    if (options?.clearInputAccessor) this.inputAccessor.input.patch(null);
   }
 
   ngOnInit() {
@@ -75,10 +76,6 @@ export abstract class InputDropdownOutletBase extends DropdownOutletBase impleme
     this.shortcuts.register('arrowup', (e) => {
       e.preventDefault();
       this.activate();
-    });
-
-    this.shortcuts.register('document:backspace', () => {
-      this.focus.isSet && this.deactivate({ setControlFocus: true });
     });
 
     this.listenUntilDestroyed('document', 'keydown', (e: KeyboardEvent) => {
@@ -116,10 +113,9 @@ export abstract class InputDropdownOutletBase extends DropdownOutletBase impleme
         });
         this.overlayDef?.selectionModel.pipe(takeUntil(this.ngChanges)).subscribe((value) => {
           this.valueAccessor.writeValue(value);
-          this.inputAccessor?.input.patch('');
 
           if (this._latestKeyDownEvent?.key?.toLowerCase() === 'enter' && !this._latestKeyDownEvent.shiftKey)
-            this.deactivate({ setControlFocus: true });
+            this.deactivate({ setControlFocus: true, clearInputAccessor: true });
         });
       });
     }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ElementFocusState, resolveElementFocusState, SelectBoxBase } from '@vitagroup/cdk';
 import { takeUntil } from 'rxjs/operators';
@@ -41,7 +41,6 @@ import { takeUntil } from 'rxjs/operators';
       class="pds-select-box-toggle"
       [name]="'pds-select-box-' + (hasAttachedOverlay ? 'detach-toggle' : 'attach-toggle')"
       viewBox="0 0 18 18"
-      (click)="toggleOverlay()"
     >
       <ng-container *ngIf="hasAttachedOverlay; else attachToggleTemplate">
         <svg:path

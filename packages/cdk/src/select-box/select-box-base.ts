@@ -88,6 +88,8 @@ export abstract class SelectBoxBase<T, C extends SelectDefContext<T> = SelectDef
     super.ngOnInit();
 
     this.shortcuts.register('document:esc', () => this.focus.isSet && this.detachOverlay());
+
+    this.listenUntilDestroyed(this.elementRef, 'click', () => this.toggleOverlay());
   }
   ngAfterContentInit() {
     if (isDevMode() && this.selectionModel == null)
