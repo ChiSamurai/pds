@@ -5,5 +5,26 @@
     "title": "Nav",
     "chapter": "Components",
     "description": "Navigation component concepts"
+  },
+  {
+    "slug": "button",
+    "src": "packages/pds-components/src/button/README",
+    "title": "Buttons",
+    "chapter": "Components",
+    "description": "Button examples"
+  },
+  {
+    "slug": "alert",
+    "src": "packages/pds-components/src/alert/README",
+    "title": "Alerts / Banners",
+    "chapter": "Components",
+    "description": "Alerts examples"
+  },
+  {
+    "slug": "toggles",
+    "src": "packages/pds-components/src/toggles/README",
+    "title": "Toggles (Chechboxes, RadioButtons, ToggleBoxes)",
+    "chapter": "Components",
+    "description": "Toggle Examples"
   }
 ]

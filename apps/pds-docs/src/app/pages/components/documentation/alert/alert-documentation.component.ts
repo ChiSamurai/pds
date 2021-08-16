@@ -1,11 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation
-} from '@angular/core';
-import {
-  DEFAULT_DOCUMENTATION_TABS
-} from '../../base-documentation/base-documentation.component';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { DEFAULT_DOCUMENTATION_TABS } from '../../base-documentation/base-documentation.component';
 
 @Component({
   selector: 'pds-app-alert-documentation',

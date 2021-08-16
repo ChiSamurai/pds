@@ -1,10 +1,9 @@
 <pds-app-base-documentation-component
   [documentationTabs]="[
-    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview },
-    { id: DEFAULT_DOCUMENTATION_TABS.EXAMPLES, content: examples },
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview }
   ]"
   heading="Alert / Banner"
-  id="alerts"
+  id="alert"
 ></pds-app-base-documentation-component>
 <ng-template #overview>
   <section>
@@ -14,15 +13,19 @@
   <pds-card>
     <pds-card-header><h3>Banners</h3></pds-card-header>
     <pds-card-content>
-      <pds-alert *ngFor="let bannerClass of ['info', 'success', 'warning', 'error']" [ngClass]="bannerClass">
-        <svg-icon name="info" pdsBefore></svg-icon>
-        <p>{{bannerClass}}</p>
-      </pds-alert>
+      <ng-container *ngFor="let bannerClass of ['info', 'success', 'warning', 'error']">
+        <pds-alert [ngClass]="bannerClass">
+          <svg-icon name="info" pdsBefore></svg-icon>
+          <p>{{bannerClass}}</p>
+        </pds-alert>
+        <pds-alert [ngClass]="bannerClass">
+          <svg-icon name="info" pdsAfter></svg-icon>
+          <p>{{bannerClass}}</p>
+        </pds-alert>
+      </ng-container>
     </pds-card-content>
   </pds-card>
-</ng-template>
 
-<ng-template #examples>
   <pds-card>
     <pds-card-header><h3>Examples</h3></pds-card-header>
     <pds-card-content>
@@ -36,5 +39,5 @@
 
     </pds-card-content>
   </pds-card>
-</ng-template>
 
+</ng-template>

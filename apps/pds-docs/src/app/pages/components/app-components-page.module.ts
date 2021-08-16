@@ -32,6 +32,8 @@ import { ButtonDocumentationComponent } from './documentation/button/button-docu
 import { AlertDocumentationComponent } from './documentation/alert/alert-documentation.component';
 import { CardDocumentationComponent } from './documentation/card/card-documentation.component';
 import { TogglesDocumentationComponent } from './documentation/toggles/toggles-documentation.component';
+import { AppGuideCardModule } from '../../components/app-guide-card/app-guide-card.component';
+import { FormElementsDocumentationComponent } from './documentation/form-elements-documentation/form-elements-documentation.component';
 
 interface IDocComponentRouteDef {
   name: string;
@@ -40,16 +42,20 @@ interface IDocComponentRouteDef {
 
 const docComponents: IDocComponentRouteDef[] = [
   {
-    name: 'alerts',
+    name: 'alert',
     comp: AlertDocumentationComponent
   },
   {
-    name: 'buttons',
+    name: 'button',
     comp: ButtonDocumentationComponent
   },
   {
     name: 'card',
     comp: CardDocumentationComponent
+  },
+  {
+    name: 'form-elements',
+    comp: FormElementsDocumentationComponent
   },
   {
     name: 'toggles',
@@ -92,7 +98,8 @@ function generateRoutes(): Routes {
     BaseDocumentationComponent,
     ButtonDocumentationComponent,
     CardDocumentationComponent,
-    TogglesDocumentationComponent
+    TogglesDocumentationComponent,
+    FormElementsDocumentationComponent
   ],
   imports: [
     DialogOverlayModule,
@@ -119,7 +126,8 @@ function generateRoutes(): Routes {
     ReactiveFormsModule,
     PdsRingLoaderModule,
     PdsPageLayoutModule,
-    PdsFabButtonModule
+    PdsFabButtonModule,
+    AppGuideCardModule
   ]
 })
 export class AppComponentsPageModule {
