@@ -75,7 +75,8 @@ function generateRoutes(): Routes {
       pathMatch: 'full',
       component: docCompDef.comp,
       data: {
-        title: $localize`${docCompDef.name}`
+        title: $localize`${docCompDef.name}`,
+        inline: false
       }
     } as Route);
   });
