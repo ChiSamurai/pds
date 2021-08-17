@@ -6,23 +6,25 @@
   id="card"
 ></pds-app-base-documentation-component>
 <ng-template #overview>
-  <pds-card>
-    <pds-card-content>
-      <section>
-        The entire card can be clicked or tapped. In addition, buttons can be placed on the card, which perform a
-        different
-        action.
-      </section>
-      <div fxLayout="row" fxLayoutGap="32px 32px">
-        <div *ngFor="let cardState of ['enabled', 'disabled', 'active', 'hover', 'focus']"
-             fxFlex>
-          <ng-container [ngTemplateOutletContext]="{cardClasses: [cardState]}"
-                        [ngTemplateOutlet]="cardTemplate"></ng-container>
-        </div>
-      </div>
+  <pds-app-base-documentation-card
+    [contentTemplateRef]="cards"
+    title="Cards"
+  ></pds-app-base-documentation-card>
+</ng-template>
 
-    </pds-card-content>
-  </pds-card>
+<ng-template #cards>
+  <section>
+    The entire card can be clicked or tapped. In addition, buttons can be placed on the card, which perform a
+    different
+    action.
+  </section>
+  <div fxLayout="row wrap" fxLayoutGap="32px grid">
+    <div *ngFor="let cardState of ['enabled', 'disabled', 'active', 'hover', 'focus']"
+         fxFlex="0 0 50">
+      <ng-container [ngTemplateOutletContext]="{cardClasses: [cardState]}"
+                    [ngTemplateOutlet]="cardTemplate"></ng-container>
+    </div>
+  </div>
 </ng-template>
 
 <ng-template #cardTemplate let-cardClasses="cardClasses">

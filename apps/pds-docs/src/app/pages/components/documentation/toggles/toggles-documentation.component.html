@@ -5,73 +5,97 @@
   heading="Toggles"
   id="toggles"
 ></pds-app-base-documentation-component>
+
 <ng-template #overview>
-  <pds-card>
-    <pds-card-content>
-      <h3>CheckBox</h3>
-    </pds-card-content>
-    <ng-container [ngTemplateOutletContext]="{template: checkboxTemplate}"
-                  [ngTemplateOutlet]="toggleTypeTemplate"></ng-container>
-  </pds-card>
 
-  <pds-card>
-    <pds-card-content>
-      <h3>RadioBox</h3>
-    </pds-card-content>
-    <ng-container [ngTemplateOutletContext]="{template: radioTemplate}"
-                  [ngTemplateOutlet]="toggleTypeTemplate"></ng-container>
-  </pds-card>
+  <div #top>
+    <h3>Toggles</h3>
+  </div>
 
-  <pds-card>
-    <pds-card-content>
-      <h3>ToggleBox</h3>
-    </pds-card-content>
-    <ng-container [ngTemplateOutletContext]="{template: toggleBoxTemplate}"
-                  [ngTemplateOutlet]="toggleTypeTemplate"></ng-container>
-  </pds-card>
+  <div fxLayout="column" fxLayoutGap="32px">
 
-  <ng-template #toggleTypeTemplate let-template="template">
-    <section>
-      <div fxLayout="column" fxLayoutGap="16px">
-        <div>Label alignment:</div>
-        <div *ngFor="let labelAlignment of ['', 'before', 'after']"
-             fxLayout="row"
-             fxLayoutGap="32px">
-          <div fxFlex>
-            <h4>{{labelAlignment ? labelAlignment : 'default'}}</h4>
-          </div>
-          <div *ngFor="let state of ['enabled', 'disabled', 'active', 'hover', 'focus', 'error']"
-               fxFlex>
-            <ng-container [ngTemplateOutletContext]="{classes: [state, labelAlignment]}"
-                          [ngTemplateOutlet]="template"></ng-container>
-          </div>
+    <div fxLayout="row" fxLayoutGap="16px">
+      <div *ngFor="let card of documentationCards">
+        <button (click)="card.anchorRef.nativeElement.scrollIntoView()" fxFlex>{{card.title}}</button>
+      </div>
+    </div>
+
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="checkboxes"
+      [topElement]="top"
+      title="Checkbox">
+    </pds-app-base-documentation-card>
+
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="radios"
+      [topElement]="top"
+      title="Radio">
+    </pds-app-base-documentation-card>
+
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="toggleBoxes"
+      [topElement]="top"
+      title="Togglebox">
+    </pds-app-base-documentation-card>
+  </div>
+</ng-template>
+
+
+<ng-template #checkboxes>
+  <ng-container [ngTemplateOutletContext]="{template: checkboxTemplate}"
+                [ngTemplateOutlet]="toggleTypeTemplate"></ng-container>
+</ng-template>
+
+<ng-template #radios>
+  <ng-container [ngTemplateOutletContext]="{template: radioTemplate}"
+                [ngTemplateOutlet]="toggleTypeTemplate"></ng-container>
+</ng-template>
+
+<ng-template #toggleBoxes>
+  <ng-container [ngTemplateOutletContext]="{template: toggleBoxTemplate}"
+                [ngTemplateOutlet]="toggleTypeTemplate"></ng-container>
+</ng-template>
+
+<ng-template #toggleTypeTemplate let-template="template">
+  <section>
+    <div fxLayout="column" fxLayoutGap="16px">
+      <div>Label alignment:</div>
+      <div *ngFor="let labelAlignment of ['', 'before', 'after']"
+           fxLayout="row"
+           fxLayoutGap="32px">
+        <div fxFlex>
+          <h4>{{labelAlignment ? labelAlignment : 'default'}}</h4>
+        </div>
+        <div *ngFor="let state of ['enabled', 'disabled', 'active', 'hover', 'focus', 'error']"
+             fxFlex>
+          <ng-container [ngTemplateOutletContext]="{classes: [state, labelAlignment]}"
+                        [ngTemplateOutlet]="template"></ng-container>
         </div>
       </div>
-    </section>
-  </ng-template>
+    </div>
+  </section>
+</ng-template>
 
-  <ng-template #checkboxTemplate let-classes="classes">
-    <pds-check-box
-      [labelAlign]="classes[1]"
-      [ngClass]="classes[0]"
-      label="Label">
-    </pds-check-box>
-  </ng-template>
+<ng-template #checkboxTemplate let-classes="classes">
+  <pds-check-box
+    [labelAlign]="classes[1]"
+    [ngClass]="classes[0]"
+    label="Label">
+  </pds-check-box>
+</ng-template>
 
-  <ng-template #radioTemplate let-classes="classes">
-    <pds-radio-box
-      [labelAlign]="classes[1]"
-      [ngClass]="classes[0]"
-      label="Label">
-    </pds-radio-box>
-  </ng-template>
+<ng-template #radioTemplate let-classes="classes">
+  <pds-radio-box
+    [labelAlign]="classes[1]"
+    [ngClass]="classes[0]"
+    label="Label">
+  </pds-radio-box>
+</ng-template>
 
-  <ng-template #toggleBoxTemplate let-classes="classes">
-    <pds-toggle-box
-      [labelAlign]="classes[1]"
-      [ngClass]="classes[0]"
-      label="Label">
-    </pds-toggle-box>
-  </ng-template>
-
+<ng-template #toggleBoxTemplate let-classes="classes">
+  <pds-toggle-box
+    [labelAlign]="classes[1]"
+    [ngClass]="classes[0]"
+    label="Label">
+  </pds-toggle-box>
 </ng-template>

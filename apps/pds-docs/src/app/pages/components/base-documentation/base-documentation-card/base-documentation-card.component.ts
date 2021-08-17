@@ -6,10 +6,9 @@ import { Component, ElementRef, Input, TemplateRef, ViewChild } from '@angular/c
   styleUrls: ['./base-documentation-card.component.scss']
 })
 export class BaseDocumentationCardComponent {
-  @ViewChild('headingElement') anchorRef: ElementRef;
+  @ViewChild('titleAnchor') anchorRef: ElementRef;
 
-  @Input() topElement: HTMLElement;
-  @Input() content: TemplateRef<any>;
+  @Input() topElement?: HTMLElement;
+  @Input() contentTemplateRef: TemplateRef<any>;
   @Input() title: string;
-  @Input() id: string;
 }

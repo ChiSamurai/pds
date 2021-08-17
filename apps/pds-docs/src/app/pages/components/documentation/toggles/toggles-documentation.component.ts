@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { DEFAULT_DOCUMENTATION_TABS } from '../../base-documentation/base-documentation.component';
+import { BaseDocumentationCardComponent } from '../../base-documentation/base-documentation-card/base-documentation-card.component';
 
 @Component({
   selector: 'pds-app-toggles-documentation',
@@ -8,5 +9,6 @@ import { DEFAULT_DOCUMENTATION_TABS } from '../../base-documentation/base-docume
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TogglesDocumentationComponent {
+  @ViewChildren(BaseDocumentationCardComponent) documentationCards: QueryList<BaseDocumentationCardComponent>;
   readonly DEFAULT_DOCUMENTATION_TABS = DEFAULT_DOCUMENTATION_TABS;
 }

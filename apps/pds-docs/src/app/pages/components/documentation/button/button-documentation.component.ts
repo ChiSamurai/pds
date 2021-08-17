@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { DEFAULT_DOCUMENTATION_TABS, HTML_ELEMENT_STATES } from '../../base-documentation/base-documentation.component';
+import { BaseDocumentationCardComponent } from '../../base-documentation/base-documentation-card/base-documentation-card.component';
 
 @Component({
   selector: 'pds-app-button-documentation',
@@ -9,7 +10,9 @@ import { DEFAULT_DOCUMENTATION_TABS, HTML_ELEMENT_STATES } from '../../base-docu
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonDocumentationComponent {
+  @ViewChildren(BaseDocumentationCardComponent) documentationCards: QueryList<BaseDocumentationCardComponent>;
   readonly DEFAULT_DOCUMENTATION_TABS = DEFAULT_DOCUMENTATION_TABS;
+
   buttonRanks = ['primary', 'secondary', 'tertiary', 'quaternary'];
   htmlElementStates = Object.values(HTML_ELEMENT_STATES);
 }

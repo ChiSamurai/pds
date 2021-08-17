@@ -6,38 +6,40 @@
   id="alert"
 ></pds-app-base-documentation-component>
 <ng-template #overview>
-  <section>
-    A banner is permanently displayed on a page to emphasize an information. In addition, a banner can be used as a
-    reaction to an action of the user, for example, in the form of an error message.
-  </section>
-  <pds-card>
-    <pds-card-header><h3>Banners</h3></pds-card-header>
-    <pds-card-content>
-      <ng-container *ngFor="let bannerClass of ['info', 'success', 'warning', 'error']">
-        <pds-alert [ngClass]="bannerClass">
-          <svg-icon name="info" pdsBefore></svg-icon>
-          <p>{{bannerClass}}</p>
-        </pds-alert>
-        <pds-alert [ngClass]="bannerClass">
-          <svg-icon name="info" pdsAfter></svg-icon>
-          <p>{{bannerClass}}</p>
-        </pds-alert>
-      </ng-container>
-    </pds-card-content>
-  </pds-card>
+  <div fxLayout="column" fxLayoutGap="32px">
+    <section>
+      A banner is permanently displayed on a page to emphasize an information. In addition, a banner can be used as a
+      reaction to an action of the user, for example, in the form of an error message.
+    </section>
 
-  <pds-card>
-    <pds-card-header><h3>Examples</h3></pds-card-header>
-    <pds-card-content>
-      <pds-alert *ngFor="let bannerClass of ['info', 'success', 'warning', 'error']" [ngClass]="bannerClass">
+    <pds-app-base-documentation-card [contentTemplateRef]="banners"
+                                     title="Banners">
+    </pds-app-base-documentation-card>
+    
+    <pds-app-base-documentation-card [contentTemplateRef]="longTexts"
+                                     title="Banners with long texts">
+    </pds-app-base-documentation-card>
+  </div>
+  <ng-template #banners>
+    <ng-container *ngFor="let bannerClass of ['info', 'success', 'warning', 'error']">
+      <pds-alert [ngClass]="bannerClass">
         <svg-icon name="info" pdsBefore></svg-icon>
-        <p>Bacon ipsum dolor amet burgdoggen sunt laboris sed, beef ribs cupim consectetur meatball chislic enim
-          tempor. Ex ham hock mollit salami. Mollit andouille ut swine sed kevin, ea excepteur ad ball tip leberkas
-          sausage pork belly short loin. Lorem in sint in pork jowl corned beef ut jerky tongue enim ham meatball duis
-          pork belly. Chuck sint in tenderloin mollit incididunt fugiat in ut culpa eu ex sausage esse pork loin.</p>
+        <p>{{bannerClass}}</p>
       </pds-alert>
+      <pds-alert [ngClass]="bannerClass">
+        <svg-icon name="info" pdsAfter></svg-icon>
+        <p>{{bannerClass}}</p>
+      </pds-alert>
+    </ng-container>
+  </ng-template>
 
-    </pds-card-content>
-  </pds-card>
-
+  <ng-template #longTexts>
+    <pds-alert *ngFor="let bannerClass of ['info', 'success', 'warning', 'error']" [ngClass]="bannerClass">
+      <svg-icon name="info" pdsBefore></svg-icon>
+      <p>Bacon ipsum dolor amet burgdoggen sunt laboris sed, beef ribs cupim consectetur meatball chislic enim
+        tempor. Ex ham hock mollit salami. Mollit andouille ut swine sed kevin, ea excepteur ad ball tip leberkas
+        sausage pork belly short loin. Lorem in sint in pork jowl corned beef ut jerky tongue enim ham meatball duis
+        pork belly. Chuck sint in tenderloin mollit incididunt fugiat in ut culpa eu ex sausage esse pork loin.</p>
+    </pds-alert>
+  </ng-template>
 </ng-template>
