@@ -42,7 +42,7 @@
 
 <ng-template #buttonRankTemplate let-buttonRank="buttonRank">
   <pds-card>
-    <pds-card-header><h3>{{buttonRank}}</h3></pds-card-header>
+    <pds-card-header><h3>{{buttonRank | titlecase}}</h3></pds-card-header>
     <pds-card-content>
       <div fxLayout="column" fxLayoutGap="32px">
         <ng-container *ngFor="let buttonState of htmlElementStates"
@@ -56,7 +56,7 @@
 <ng-template #buttonStateTemplate let-buttonClasses="buttonClasses">
   <div fxFlex fxLayout="row" fxLayoutGap="32px">
     <div fxFlex>
-      <h4>{{buttonClasses[1]}}</h4>
+      <h4>{{buttonClasses[1] | titlecase}}</h4>
     </div>
     <div fxFlex>
       <button [ngClass]="buttonClasses">Label</button>

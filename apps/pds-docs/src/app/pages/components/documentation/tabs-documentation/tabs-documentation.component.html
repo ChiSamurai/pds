@@ -1,0 +1,37 @@
+<pds-app-base-documentation-component
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview }
+  ]"
+  heading="Tabs"
+  id="tabs"
+></pds-app-base-documentation-component>
+<ng-template #overview>
+  <div fxLayout="column" fxLayoutGap="32px">
+    <div *ngFor="let tabState of TABS_STATES" fxFlex fxLayout="row" fxLayoutGap="32px">
+      <h4 fxFlex="0 0 10">{{tabState | titlecase}}</h4>
+      <div fxFlex="0 1">
+        <pds-tabs>
+          <pds-tab [ngClass]="tabState">
+            Label
+          </pds-tab>
+          <pds-tab [ngClass]="tabState">
+            Label + Icon
+            <svg-icon name="info"></svg-icon>
+          </pds-tab>
+          <pds-tab [ngClass]="tabState">
+            Label + Badge (TBD)
+          </pds-tab>
+          <pds-tab [ngClass]="tabState">
+            <svg-icon name="info"></svg-icon>
+            Icon + Label
+          </pds-tab>
+          <pds-tab [ngClass]="tabState">
+            <svg-icon name="info"></svg-icon>
+            Icon + Label + Badge (TBD)
+          </pds-tab>
+        </pds-tabs>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
