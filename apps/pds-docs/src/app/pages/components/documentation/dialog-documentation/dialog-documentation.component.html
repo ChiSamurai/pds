@@ -1,0 +1,15 @@
+<pds-app-base-documentation-component
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview }
+  ]"
+  heading="Dialogs"
+  id="dialogs"
+></pds-app-base-documentation-component>
+<ng-template #overview>
+  <section>
+    The dialogs makes use of the Angular CDK Dialog service (see: <a href="https://material.angular.io/cdk/overlay">https://material.angular.io/cdk/overlay</a>).
+    You may use the <a href="https://material.angular.io/cdk/overlay/overview#configuring-an-overlay">OverlayRef
+    Configuration</a> as you want.
+  </section>
+  <button (click)="openDialog()">Open Dialog</button>
+</ng-template>

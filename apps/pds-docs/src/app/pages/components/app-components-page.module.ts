@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Route, RouterModule, Routes } from '@angular/router';
 import { DialogOverlayModule, SvgIconModule } from '@vitagroup/cdk';
 import { FormStatusOutletModule } from '@vitagroup/cdk/forms';
@@ -36,6 +36,7 @@ import { AppGuideCardModule } from '../../components/app-guide-card/app-guide-ca
 import { FormElementsDocumentationComponent } from './documentation/form-elements-documentation/form-elements-documentation.component';
 import { BaseDocumentationCardComponent } from './base-documentation/base-documentation-card/base-documentation-card.component';
 import { TabsDocumentationComponent } from './documentation/tabs-documentation/tabs-documentation.component';
+import { DialogDocumentationComponent } from './documentation/dialog-documentation/dialog-documentation.component';
 
 interface IDocComponentRouteDef {
   name: string;
@@ -54,6 +55,10 @@ const docComponents: IDocComponentRouteDef[] = [
   {
     name: 'card',
     comp: CardDocumentationComponent
+  },
+  {
+    name: 'dialog',
+    comp: DialogDocumentationComponent
   },
   {
     name: 'form-elements',
@@ -107,7 +112,8 @@ function generateRoutes(): Routes {
     TogglesDocumentationComponent,
     FormElementsDocumentationComponent,
     BaseDocumentationCardComponent,
-    TabsDocumentationComponent
+    TabsDocumentationComponent,
+    DialogDocumentationComponent
   ],
   imports: [
     DialogOverlayModule,
@@ -135,7 +141,8 @@ function generateRoutes(): Routes {
     PdsRingLoaderModule,
     PdsPageLayoutModule,
     PdsFabButtonModule,
-    AppGuideCardModule
+    AppGuideCardModule,
+    FormsModule
   ]
 })
 export class AppComponentsPageModule {

@@ -7,6 +7,21 @@
 ></pds-app-base-documentation-component>
 <ng-template #overview>
   <div fxLayout="column" fxLayoutGap="32px">
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="tabs"
+      title="Tabs">
+    </pds-app-base-documentation-card>
+
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="workingExample"
+      title="Working Example">
+    </pds-app-base-documentation-card>
+  </div>
+</ng-template>
+
+
+<ng-template #tabs>
+  <div fxLayout="column" fxLayoutGap="32px">
     <div *ngFor="let tabState of TABS_STATES" fxFlex fxLayout="row" fxLayoutGap="32px">
       <h4 fxFlex="0 0 10">{{tabState | titlecase}}</h4>
       <div fxFlex="0 1">
@@ -31,7 +46,19 @@
           </pds-tab>
         </pds-tabs>
       </div>
-
     </div>
   </div>
 </ng-template>
+
+<ng-template #workingExample>
+  <div>
+    <pds-tabs>
+      <pds-tab (click)="activeExampleTab = tabId"
+               *ngFor="let tabId of [0, 1, 2, 3, 4, 5]"
+               [ngClass]="{'active': tabId === activeExampleTab}">
+        Tab {{tabId}}
+      </pds-tab>
+    </pds-tabs>
+  </div>
+</ng-template>
+

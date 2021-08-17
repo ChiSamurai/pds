@@ -12,4 +12,6 @@ export class TabsDocumentationComponent {
     ...Object.values(HTML_ELEMENT_STATES)
   ];
 
+  activeExampleTab = 0;
+
 }
