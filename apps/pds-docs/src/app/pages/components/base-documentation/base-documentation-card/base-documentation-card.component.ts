@@ -1,10 +1,9 @@
-import { Component, ElementRef, Input, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, Input, TemplateRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'pds-app-base-documentation-card',
   templateUrl: './base-documentation-card.component.html',
-  styleUrls: ['./base-documentation-card.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./base-documentation-card.component.scss']
 })
 export class BaseDocumentationCardComponent {
   @ViewChild('headingElement') anchorRef: ElementRef;

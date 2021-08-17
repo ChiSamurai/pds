@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import {
   DEFAULT_DOCUMENTATION_TABS,
   HTML_ELEMENT_SEMANTICS,
@@ -10,8 +10,7 @@ import { BaseDocumentationCardComponent } from '../../base-documentation/base-do
   selector: 'pds-app-form-elements-documentation',
   templateUrl: './form-elements-documentation.component.html',
   styleUrls: ['./form-elements-documentation.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  encapsulation: ViewEncapsulation.None
 })
 export class FormElementsDocumentationComponent {
   @ViewChildren(BaseDocumentationCardComponent) documentationCards: QueryList<BaseDocumentationCardComponent>;
