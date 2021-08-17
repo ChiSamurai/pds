@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Route, RouterModule, Routes } from '@angular/router';
-import { DialogOverlayModule, SvgIconModule } from '@vitagroup/cdk';
+import { DialogOverlayModule, SelectionModule, SvgIconModule } from '@vitagroup/cdk';
 import { FormStatusOutletModule } from '@vitagroup/cdk/forms';
 import { FlexContainerModule } from '@vitagroup/cdk/layout';
 import {
@@ -37,6 +37,8 @@ import { FormElementsDocumentationComponent } from './documentation/form-element
 import { BaseDocumentationCardComponent } from './base-documentation/base-documentation-card/base-documentation-card.component';
 import { TabsDocumentationComponent } from './documentation/tabs-documentation/tabs-documentation.component';
 import { DialogDocumentationComponent } from './documentation/dialog-documentation/dialog-documentation.component';
+import { TagsDocumentationComponent } from './documentation/tags-documentation/tags-documentation.component';
+import { RingLoaderDocumentationComponent } from './documentation/ring-loader-documentation/ring-loader-documentation.component';
 
 interface IDocComponentRouteDef {
   name: string;
@@ -65,8 +67,16 @@ const docComponents: IDocComponentRouteDef[] = [
     comp: FormElementsDocumentationComponent
   },
   {
+    name: 'ring-loader',
+    comp: RingLoaderDocumentationComponent
+  },
+  {
     name: 'tabs',
     comp: TabsDocumentationComponent
+  },
+  {
+    name: 'tags',
+    comp: TagsDocumentationComponent
   },
   {
     name: 'toggles',
@@ -113,7 +123,9 @@ function generateRoutes(): Routes {
     FormElementsDocumentationComponent,
     BaseDocumentationCardComponent,
     TabsDocumentationComponent,
-    DialogDocumentationComponent
+    DialogDocumentationComponent,
+    TagsDocumentationComponent,
+    RingLoaderDocumentationComponent
   ],
   imports: [
     DialogOverlayModule,
@@ -142,7 +154,8 @@ function generateRoutes(): Routes {
     PdsPageLayoutModule,
     PdsFabButtonModule,
     AppGuideCardModule,
-    FormsModule
+    FormsModule,
+    SelectionModule
   ]
 })
 export class AppComponentsPageModule {

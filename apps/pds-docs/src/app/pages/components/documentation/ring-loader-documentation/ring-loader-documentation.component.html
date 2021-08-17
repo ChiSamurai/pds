@@ -1,0 +1,55 @@
+<pds-app-base-documentation-component
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview }
+  ]"
+  heading="Ring Loader"
+  id="ring-loader"
+></pds-app-base-documentation-component>
+
+<div [hidden]="true">
+  <pds-ring-loader #standard></pds-ring-loader>
+</div>
+
+<ng-template #overview>
+  <div fxLayout="column" fxLayoutGap="32px">
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="ringLoader"
+      title="Ring Loader - width {{standard.width}} (default)">
+    </pds-app-base-documentation-card>
+
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="ringLoader8"
+      title="Ring Loader - width 8">
+    </pds-app-base-documentation-card>
+
+  </div>
+</ng-template>
+
+<ng-template #ringLoader>
+  <div fxLayout="column" fxLayoutGap="32px">
+    <div *ngFor="let state of HTML_ELEMENT_STATES" fxFlex fxLayout="row" fxLayoutGap="32px">
+      <h4 fxFlex="0 0 10">{{state | titlecase}}</h4>
+      <div *ngFor="let size of [standard.size, 16, 32, 80]" fxFlex="0 1">
+        <div>size: {{size}} {{ size === standard.size ? '(default)' : ''}}</div>
+        <div>
+          <pds-ring-loader [ngClass]="state" [size]="size ? size : standard.size"></pds-ring-loader>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #ringLoader8>
+  <div fxLayout="column" fxLayoutGap="32px">
+    <div *ngFor="let state of HTML_ELEMENT_STATES" fxFlex fxLayout="row" fxLayoutGap="32px">
+      <h4 fxFlex="0 0 10">{{state | titlecase}}</h4>
+      <div *ngFor="let size of [standard.size, 16, 32, 80]" fxFlex="0 1">
+        <div>size: {{size}} {{ size === standard.size ? '(default)' : ''}}</div>
+        <div>
+          <pds-ring-loader [ngClass]="state" [size]="size ? size : standard.size" [width]="8"></pds-ring-loader>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

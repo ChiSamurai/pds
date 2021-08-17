@@ -1,0 +1,27 @@
+<pds-app-base-documentation-component
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview }
+  ]"
+  heading="Tags"
+  id="tags"
+></pds-app-base-documentation-component>
+<ng-template #overview>
+  <div fxLayout="column" fxLayoutGap="32px">
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="tags"
+      title="Tags">
+    </pds-app-base-documentation-card>
+
+  </div>
+</ng-template>
+
+<ng-template #tags>
+  <div fxLayout="column" fxLayoutGap="32px">
+    <div *ngFor="let tabState of TAGS_STATES" fxFlex fxLayout="row" fxLayoutGap="32px">
+      <h4 fxFlex="0 0 10">{{tabState | titlecase}}</h4>
+      <div fxFlex="0 1">
+        <pds-tag [ngClass]="tabState">Label</pds-tag>
+      </div>
+    </div>
+  </div>
+</ng-template>
