@@ -41,47 +41,7 @@ export interface IDocumentationTab {
 
 @Component({
   selector: 'pds-app-base-documentation-component',
-  template: `
-    <pds-page-layout footer="fixed" *ngIf="!inline; else docTemplate">
-      <pds-page-content fxLayout="row wrap" fxLayoutGap="32px grid">
-        <section fxFlex="100">
-          <ng-container [ngTemplateOutlet]="docTemplate"></ng-container>
-        </section>
-      </pds-page-content>
-    </pds-page-layout>
-
-    <ng-template #docTemplate>
-      <pds-card>
-        <pds-card-header *ngIf="inline">
-          <h3 (click)="openComponentDoc()" [ngStyle]="{cursor: 'pointer'}">{{heading}}</h3>
-        </pds-card-header>
-        <pds-card-content>
-          <div fxLayout="column" [id]="heading | lowercase">
-            <pds-tabs>
-              <pds-tab *ngFor="let tab of documentationTabs"
-                       [ngClass]="{'active': activeTab === tab.id}"
-                       (click)="onTabClick(tab)">
-                {{tab.id | uppercase}}
-              </pds-tab>
-            </pds-tabs>
-            <div class="container">
-              <div *ngFor="let tab of documentationTabs"
-                   [hidden]="activeTab !== tab.id">
-                <ng-container [ngTemplateOutlet]="tab.content"></ng-container>
-              </div>
-            </div>
-          </div>
-        </pds-card-content>
-      </pds-card>
-    </ng-template>
-
-    <ng-template #guideTemplate>
-      <div fxLayout="column">
-        <pds-app-guide-card *ngIf="guide$ | async as guide" [guide]="guide">
-        </pds-app-guide-card>
-      </div>
-    </ng-template>
-  `
+  templateUrl: './base-documentation.component.html'
 })
 export class BaseDocumentationComponent implements OnInit, OnDestroy, AfterContentInit, AfterViewInit {
   @ViewChild('guideTemplate') guideTemplateRef: TemplateRef<never>;

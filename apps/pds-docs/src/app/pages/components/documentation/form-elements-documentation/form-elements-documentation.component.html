@@ -6,143 +6,191 @@
   id="form-elements"
 ></pds-app-base-documentation-component>
 <ng-template #overview>
-  <pds-card>
-    <pds-card-header><h3>Simple HTML Inputs</h3></pds-card-header>
-    <pds-card-content>
-      <div fxLayout="column"
-           fxLayoutGap="16px">
-        <div *ngFor="let elementState of htmlElementStates"
-             fxFlex
-             fxLayout="row">
-          <div fxFlex="0 0 15">
-            <h4>{{elementState}}</h4>
-          </div>
-          <div fxFlex="0 1">
-            <input [ngClass]="elementState">
-          </div>
+  <div #top fxLayout="row" fxLayoutGap="32px">
+    <div *ngFor="let card of documentationCards">
+      <button (click)="card.anchorRef.nativeElement.scrollIntoView()" fxFlex>{{card.title}}</button>
+    </div>
+  </div>
+
+
+  <div fxLayout="column" fxLayoutGap="32px">
+    <pds-app-base-documentation-card
+      [content]="simplehtmlinputs"
+      [title]="'Simple HTML Inputs'"
+      [topElement]="top">
+    </pds-app-base-documentation-card>
+
+    <pds-app-base-documentation-card
+      [content]="textboxwolabel"
+      [title]="'Textbox (w/o label)'"
+      [topElement]="top">
+    </pds-app-base-documentation-card>
+
+    <pds-app-base-documentation-card
+      [content]="textboxwlabel"
+      [title]="'Textbox (with label)'"
+      [topElement]="top">
+    </pds-app-base-documentation-card>
+
+    <pds-app-base-documentation-card
+      [content]="textboxwithselectdropdown"
+      [title]="'Textbox with select dropdown'"
+      [topElement]="top">
+    </pds-app-base-documentation-card>
+
+    <pds-app-base-documentation-card
+      [content]="combobox"
+      [title]="'Combobox'"
+      [topElement]="top">
+    </pds-app-base-documentation-card>
+  </div>
+
+  <ng-template #simplehtmlinputs>
+    <div fxLayout="column"
+         fxLayoutGap="16px">
+      <div *ngFor="let elementState of htmlElementStates"
+           fxFlex
+           fxLayout="row">
+        <div fxFlex="0 0 15">
+          <h4>{{elementState}}</h4>
+        </div>
+        <div fxFlex="0 1">
+          <input [ngClass]="elementState">
         </div>
       </div>
-    </pds-card-content>
-  </pds-card>
+    </div>
+  </ng-template>
 
-  <pds-card>
-    <pds-card-header><h3>Text Box (without label)</h3></pds-card-header>
-    <pds-card-content>
-      <div fxLayout="column" fxLayoutGap="16px">
-        <div fxFlex
-             fxLayout="row"
-             fxLayoutGap="32px">
-          <div fxFlex="0 0 15"></div>
-          <div fxFlex>
-            <h4>icon before</h4>
-          </div>
-          <div fxFlex>
-            <h4>icon after</h4>
-          </div>
-          <div fxFlex>
-            <h4>icon before & after</h4>
-          </div>
+  <ng-template #textboxwolabel>
+    <div fxLayout="column" fxLayoutGap="16px">
+      <div fxFlex
+           fxLayout="row"
+           fxLayoutGap="32px">
+        <div fxFlex="0 0 15"></div>
+        <div fxFlex>
+          <h4>icon before</h4>
         </div>
-        <div *ngFor="let elementState of htmlElementStates"
-             fxFlex
-             fxLayout="row"
-             fxLayoutGap="32px">
-          <div fxFlex="1 0">
-            <h4>{{elementState}}</h4>
-          </div>
-          <div fxFlex="0 1">
-            <pds-text-box [ngClass]="elementState" placeholder="Placeholder...">
-              <svg-icon name="search" pdsAfter></svg-icon>
-            </pds-text-box>
-          </div>
-          <div fxFlex="0 1">
-            <pds-text-box [ngClass]="elementState" placeholder="Placeholder...">
-              <svg-icon name="search" pdsBefore></svg-icon>
-            </pds-text-box>
-          </div>
-          <div fxFlex="0 1">
-            <pds-text-box [ngClass]="elementState" placeholder="Placeholder...">
-              <svg-icon name="search" pdsBefore></svg-icon>
-              <svg-icon name="info" pdsAfter></svg-icon>
-            </pds-text-box>
-          </div>
+        <div fxFlex>
+          <h4>icon after</h4>
+        </div>
+        <div fxFlex>
+          <h4>icon before & after</h4>
         </div>
       </div>
-    </pds-card-content>
-  </pds-card>
-
-  <pds-card>
-    <pds-card-header><h3>Text Box (with label)</h3></pds-card-header>
-    <pds-card-content>
-      <div fxLayout="column" fxLayoutGap="16px">
-        <div fxFlex
-             fxLayout="row"
-             fxLayoutGap="32px">
-          <div fxFlex="0 0 15"></div>
-          <div fxFlex>
-            <h4>icon before</h4>
-          </div>
-          <div fxFlex>
-            <h4>icon after</h4>
-          </div>
-          <div fxFlex>
-            <h4>icon before & after</h4>
-          </div>
+      <div *ngFor="let elementState of htmlElementStates"
+           fxFlex
+           fxLayout="row"
+           fxLayoutGap="32px">
+        <div fxFlex="1 0">
+          <h4>{{elementState}}</h4>
         </div>
-        <div *ngFor="let elementState of htmlElementStates"
-             fxFlex
-             fxLayout="row"
-             fxLayoutGap="32px">
-          <div fxFlex="1 0">
-            <h4>{{elementState}}</h4>
-          </div>
-          <div fxFlex="0 1">
-            <pds-text-box [ngClass]="elementState" placeholder="Placeholder...">
-              <svg-icon name="search" pdsAfter></svg-icon>
-            </pds-text-box>
-          </div>
-          <div fxFlex="0 1">
-            <pds-text-box [ngClass]="elementState" placeholder="Placeholder...">
-              <svg-icon name="search" pdsBefore></svg-icon>
-            </pds-text-box>
-          </div>
-          <div fxFlex="0 1">
-            <pds-text-box [ngClass]="elementState" placeholder="Placeholder...">
-              <svg-icon name="search" pdsBefore></svg-icon>
-              <svg-icon name="info" pdsAfter></svg-icon>
-            </pds-text-box>
-          </div>
+        <div fxFlex="0 1">
+          <pds-text-box [ngClass]="elementState" placeholder="Placeholder...">
+            <svg-icon name="search" pdsAfter></svg-icon>
+          </pds-text-box>
+        </div>
+        <div fxFlex="0 1">
+          <pds-text-box [ngClass]="elementState" placeholder="Placeholder...">
+            <svg-icon name="search" pdsBefore></svg-icon>
+          </pds-text-box>
+        </div>
+        <div fxFlex="0 1">
+          <pds-text-box [ngClass]="elementState" placeholder="Placeholder...">
+            <svg-icon name="search" pdsBefore></svg-icon>
+            <svg-icon name="info" pdsAfter></svg-icon>
+          </pds-text-box>
         </div>
       </div>
-    </pds-card-content>
-  </pds-card>
-  <pds-card>
-    <pds-card-header>
-      <h3>Text Box with dropdown</h3>
-    </pds-card-header>
-    <pds-card-content>
-      <section fxFlex="50">
-        <pds-text-box [pdsInputDropdown]="searchDropdown" placeholder="Type something...">
-          <svg-icon name="search" pdsBefore></svg-icon>
-        </pds-text-box>
+    </div>
+  </ng-template>
 
-        <pds-dropdown #searchDropdown pdsInputDropdownDef>
-          <pds-select-list>
-            <ng-container *ngIf="['option 1', 'option 2', 'option 3', 'option 4'] | pdsInputFilter as filteredOptions">
-              <ng-container *ngIf="filteredOptions?.length; else noMatchTemplate">
-                <pds-select-option *ngFor="let option of filteredOptions" [value]="option">
-                  {{ option }}
-                </pds-select-option>
-              </ng-container>
+  <ng-template #textboxwlabel>
+    <div fxLayout="column" fxLayoutGap="16px">
+      <div fxFlex
+           fxLayout="row"
+           fxLayoutGap="32px">
+        <div fxFlex="0 0 15"></div>
+        <div fxFlex>
+          <h4>icon before</h4>
+        </div>
+        <div fxFlex>
+          <h4>icon after</h4>
+        </div>
+        <div fxFlex>
+          <h4>icon before & after</h4>
+        </div>
+      </div>
+      <div *ngFor="let elementState of htmlElementStates"
+           fxFlex
+           fxLayout="row"
+           fxLayoutGap="32px">
+        <div fxFlex="1 0">
+          <h4>{{elementState}}</h4>
+        </div>
+        <div fxFlex="0 1">
+          <pds-text-box [ngClass]="elementState" placeholder="Placeholder...">
+            <svg-icon name="search" pdsAfter></svg-icon>
+          </pds-text-box>
+        </div>
+        <div fxFlex="0 1">
+          <pds-text-box [ngClass]="elementState" placeholder="Placeholder...">
+            <svg-icon name="search" pdsBefore></svg-icon>
+          </pds-text-box>
+        </div>
+        <div fxFlex="0 1">
+          <pds-text-box [ngClass]="elementState" placeholder="Placeholder...">
+            <svg-icon name="search" pdsBefore></svg-icon>
+            <svg-icon name="info" pdsAfter></svg-icon>
+          </pds-text-box>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #textboxwithselectdropdown>
+    <section fxFlex="50">
+      <pds-text-box [pdsInputDropdown]="searchDropdown" placeholder="Type something...">
+        <svg-icon name="search" pdsBefore></svg-icon>
+      </pds-text-box>
+
+      <pds-dropdown #searchDropdown pdsInputDropdownDef>
+        <pds-select-list>
+          <ng-container *ngIf="['option 1', 'option 2', 'option 3', 'option 4'] | pdsInputFilter as filteredOptions">
+            <ng-container *ngIf="filteredOptions?.length; else noMatchTemplate">
+              <pds-select-option *ngFor="let option of filteredOptions" [value]="option">
+                {{ option }}
+              </pds-select-option>
             </ng-container>
-            <ng-template #noMatchTemplate>
-              <pds-select-option disabled="true">No matches</pds-select-option>
-            </ng-template>
-          </pds-select-list>
-        </pds-dropdown>
-      </section>
-    </pds-card-content>
-  </pds-card>
+          </ng-container>
+          <ng-template #noMatchTemplate>
+            <pds-select-option disabled="true">No matches</pds-select-option>
+          </ng-template>
+        </pds-select-list>
+      </pds-dropdown>
+    </section>
+  </ng-template>
 
+  <ng-template #combobox>
+    <div fxLayout="row wrap" fxLayoutGap="32px grid">
+      <section fxFlex="50">
+        <label>Default value style</label>
+        <pds-combo-box placeholder="Type something and hit enter..."></pds-combo-box>
+      </section>
+      <fx-break></fx-break>
+      <section fxFlex="50">
+        <label>Tag value style</label>
+        <pds-combo-box placeholder="Type something and hit enter...">
+          <pds-tag *pdsComboDef="let value">{{ value }}</pds-tag>
+        </pds-combo-box>
+      </section>
+      <section fxFlex="50">
+        <label>Readonly tag value style</label>
+        <pds-combo-box [value]="[ 'foo', 'bar' ]" readOnly="true">
+          <pds-tag *pdsComboDef="let value">{{ value }}</pds-tag>
+        </pds-combo-box>
+      </section>
+      <section fxFlex="50"></section>
+    </div>
+  </ng-template>
 
 </ng-template>

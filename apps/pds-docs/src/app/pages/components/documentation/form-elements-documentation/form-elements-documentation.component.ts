@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import {
   DEFAULT_DOCUMENTATION_TABS,
   HTML_ELEMENT_SEMANTICS,
   HTML_ELEMENT_STATES
 } from '../../base-documentation/base-documentation.component';
+import { BaseDocumentationCardComponent } from '../../base-documentation/base-documentation-card/base-documentation-card.component';
 
 @Component({
   selector: 'pds-app-form-elements-documentation',
@@ -13,6 +14,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormElementsDocumentationComponent {
+  @ViewChildren(BaseDocumentationCardComponent) documentationCards: QueryList<BaseDocumentationCardComponent>;
+
   readonly DEFAULT_DOCUMENTATION_TABS = DEFAULT_DOCUMENTATION_TABS;
   htmlElementStates = [
     ...Object.values(HTML_ELEMENT_STATES),

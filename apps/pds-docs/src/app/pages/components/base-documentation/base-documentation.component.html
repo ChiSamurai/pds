@@ -1,0 +1,39 @@
+<pds-page-layout *ngIf="!inline; else docTemplate" footer="fixed">
+  <pds-page-content fxLayout="row wrap" fxLayoutGap="32px grid">
+    <section fxFlex="100">
+      <ng-container [ngTemplateOutlet]="docTemplate"></ng-container>
+    </section>
+  </pds-page-content>
+</pds-page-layout>
+
+<ng-template #docTemplate>
+  <pds-card>
+    <pds-card-header *ngIf="inline">
+      <h3 (click)="openComponentDoc()" [ngStyle]="{cursor: 'pointer'}">{{heading}}</h3>
+    </pds-card-header>
+    <pds-card-content>
+      <div [id]="heading | lowercase" fxLayout="column" fxLayoutGap="32px">
+        <pds-tabs>
+          <pds-tab (click)="onTabClick(tab)"
+                   *ngFor="let tab of documentationTabs"
+                   [ngClass]="{'active': activeTab === tab.id}">
+            {{tab.id | uppercase}}
+          </pds-tab>
+        </pds-tabs>
+        <div class="container">
+          <div *ngFor="let tab of documentationTabs"
+               [hidden]="activeTab !== tab.id">
+            <ng-container [ngTemplateOutlet]="tab.content"></ng-container>
+          </div>
+        </div>
+      </div>
+    </pds-card-content>
+  </pds-card>
+</ng-template>
+
+<ng-template #guideTemplate>
+  <div fxLayout="column">
+    <pds-app-guide-card *ngIf="guide$ | async as guide" [guide]="guide">
+    </pds-app-guide-card>
+  </div>
+</ng-template>

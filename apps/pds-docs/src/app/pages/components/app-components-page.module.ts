@@ -34,6 +34,7 @@ import { CardDocumentationComponent } from './documentation/card/card-documentat
 import { TogglesDocumentationComponent } from './documentation/toggles/toggles-documentation.component';
 import { AppGuideCardModule } from '../../components/app-guide-card/app-guide-card.component';
 import { FormElementsDocumentationComponent } from './documentation/form-elements-documentation/form-elements-documentation.component';
+import { BaseDocumentationCardComponent } from './base-documentation/base-documentation-card/base-documentation-card.component';
 
 interface IDocComponentRouteDef {
   name: string;
@@ -99,7 +100,8 @@ function generateRoutes(): Routes {
     ButtonDocumentationComponent,
     CardDocumentationComponent,
     TogglesDocumentationComponent,
-    FormElementsDocumentationComponent
+    FormElementsDocumentationComponent,
+    BaseDocumentationCardComponent
   ],
   imports: [
     DialogOverlayModule,

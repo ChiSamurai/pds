@@ -1,0 +1,13 @@
+<pds-card>
+  <pds-card-header>
+    <div>
+      <pds-fab-button (click)="topElement.scrollIntoView()">
+        <svg-icon name="arrow-up"></svg-icon>
+      </pds-fab-button>
+      <h3 #headingElement>{{title}}</h3>
+    </div>
+  </pds-card-header>
+  <pds-card-content>
+    <ng-container [ngTemplateOutlet]="content"></ng-container>
+  </pds-card-content>
+</pds-card>

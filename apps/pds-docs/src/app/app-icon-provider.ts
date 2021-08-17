@@ -5,11 +5,12 @@ import { faBrandIconGithub } from '../icons/fa-brand-icons';
 import {
   faSolidIconArrowLeft,
   faSolidIconArrowRight,
+  faSolidIconArrowUp,
   faSolidIconExpand,
   faSolidIconGlobe,
   faSolidIconInfo,
   faSolidIconSearch,
-  faSolidIconTimes,
+  faSolidIconTimes
 } from '../icons/fa-solid-icons';
 
 export const APP_ICON_IMPORT_PROVIDER: Provider = {
@@ -20,11 +21,12 @@ export const APP_ICON_IMPORT_PROVIDER: Provider = {
       faSolidIconExpand,
       faSolidIconSearch,
       faSolidIconTimes,
+      faSolidIconArrowUp,
       faSolidIconArrowRight,
       faSolidIconArrowLeft,
       faSolidIconInfo,
       faSolidIconGlobe,
-      faBrandIconGithub,
-    ],
-  } as SvgIconImportConfig,
+      faBrandIconGithub
+    ]
+  } as SvgIconImportConfig
 };
