@@ -18,6 +18,7 @@ import {
   PdsRingLoaderModule,
   PdsSelectBoxModule,
   PdsSelectListModule,
+  PdsStepCounterModule,
   PdsTabsModule,
   PdsTagModule,
   PdsTextBoxModule,
@@ -39,6 +40,7 @@ import { TabsDocumentationComponent } from './documentation/tabs-documentation/t
 import { DialogDocumentationComponent } from './documentation/dialog-documentation/dialog-documentation.component';
 import { TagsDocumentationComponent } from './documentation/tags-documentation/tags-documentation.component';
 import { RingLoaderDocumentationComponent } from './documentation/ring-loader-documentation/ring-loader-documentation.component';
+import { StepCounterDocumentationComponent } from './documentation/step-counter-documentation/step-counter-documentation.component';
 
 interface IDocComponentRouteDef {
   name: string;
@@ -69,6 +71,10 @@ const docComponents: IDocComponentRouteDef[] = [
   {
     name: 'ring-loader',
     comp: RingLoaderDocumentationComponent
+  },
+  {
+    name: 'step-counter',
+    comp: StepCounterDocumentationComponent
   },
   {
     name: 'tabs',
@@ -125,7 +131,8 @@ function generateRoutes(): Routes {
     TabsDocumentationComponent,
     DialogDocumentationComponent,
     TagsDocumentationComponent,
-    RingLoaderDocumentationComponent
+    RingLoaderDocumentationComponent,
+    StepCounterDocumentationComponent
   ],
   imports: [
     DialogOverlayModule,
@@ -155,7 +162,8 @@ function generateRoutes(): Routes {
     PdsFabButtonModule,
     AppGuideCardModule,
     FormsModule,
-    SelectionModule
+    SelectionModule,
+    PdsStepCounterModule
   ]
 })
 export class AppComponentsPageModule {

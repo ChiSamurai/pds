@@ -1,0 +1,29 @@
+<pds-app-base-documentation-component
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview }
+  ]"
+  heading="Step Counter"
+  id="step-counter"
+></pds-app-base-documentation-component>
+<ng-template #overview>
+  <div fxLayout="column" fxLayoutGap="32px">
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="stepCounter"
+      title="Step Counter">
+    </pds-app-base-documentation-card>
+
+  </div>
+</ng-template>
+
+<ng-template #stepCounter>
+  <div fxLayout="column" fxLayoutGap="32px">
+    <div *ngFor="let state of ELEMENT_STATES" fxFlex fxLayout="row" fxLayoutGap="32px">
+      <h4 fxFlex="0 0 10">{{state | titlecase}}</h4>
+      <div fxFlex="0 1">
+        <button (click)="counter.value = counter.value > 1 ? counter.value - 1 : counter.value">-</button>&nbsp;
+        <pds-step-counter #counter [ngClass]="state" max="10"></pds-step-counter>&nbsp;
+        <button (click)="counter.value = counter.value < counter.max ? counter.value + 1 : counter.value">+</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
