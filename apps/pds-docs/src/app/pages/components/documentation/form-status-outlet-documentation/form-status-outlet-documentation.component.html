@@ -1,0 +1,38 @@
+<pds-app-base-documentation-component
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview },
+  ]"
+  heading="Form Status Outlet"
+  id="form-status-outlet"
+></pds-app-base-documentation-component>
+<ng-template #overview>
+
+  <div fxLayout="column" fxLayoutGap="32px">
+
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="formStatus"
+      [title]="'Form Status Indicator'">
+    </pds-app-base-documentation-card>
+
+  </div>
+</ng-template>
+
+<ng-template #formStatus>
+  This shows the usage of the form-status-outlet. There are two validators for the input:
+  <ul>
+    <li>required (sync)</li>
+    <li>value < 10 (async, delays for 2000ms)</li>
+  </ul>
+  <form [formGroup]="exampleFormGroup">
+    <label>Type your number (<10)</label>
+    <input [ngStyle]="getInputStyle()"
+           formControlName="myInput"
+           type="number"/>
+
+    <form-status-outlet [control]="exampleFormGroup.get('myInput')">
+      <ng-template formStatusPendingDef>Waiting for result...</ng-template>
+      <ng-template formStatusValidDef>Result is valid!</ng-template>
+    </form-status-outlet>
+  </form>
+</ng-template>
+

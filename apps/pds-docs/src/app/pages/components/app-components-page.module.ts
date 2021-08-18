@@ -13,6 +13,7 @@ import {
   PdsComboBoxModule,
   PdsDropdownModule,
   PdsFabButtonModule,
+  PdsFormStatusModule,
   PdsInputDropdownModule,
   PdsRadioBoxModule,
   PdsRingLoaderModule,
@@ -41,6 +42,8 @@ import { DialogDocumentationComponent } from './documentation/dialog-documentati
 import { TagsDocumentationComponent } from './documentation/tags-documentation/tags-documentation.component';
 import { RingLoaderDocumentationComponent } from './documentation/ring-loader-documentation/ring-loader-documentation.component';
 import { StepCounterDocumentationComponent } from './documentation/step-counter-documentation/step-counter-documentation.component';
+import { FormStatusOutletDocumentationComponent } from './documentation/form-status-outlet-documentation/form-status-outlet-documentation.component';
+import { MarkedPipeModule } from '../../pipes/marked.pipe';
 
 interface IDocComponentRouteDef {
   name: string;
@@ -67,6 +70,10 @@ const docComponents: IDocComponentRouteDef[] = [
   {
     name: 'form-elements',
     comp: FormElementsDocumentationComponent
+  },
+  {
+    name: 'form-status-outlet',
+    comp: FormStatusOutletDocumentationComponent
   },
   {
     name: 'ring-loader',
@@ -132,7 +139,8 @@ function generateRoutes(): Routes {
     DialogDocumentationComponent,
     TagsDocumentationComponent,
     RingLoaderDocumentationComponent,
-    StepCounterDocumentationComponent
+    StepCounterDocumentationComponent,
+    FormStatusOutletDocumentationComponent
   ],
   imports: [
     DialogOverlayModule,
@@ -163,7 +171,9 @@ function generateRoutes(): Routes {
     AppGuideCardModule,
     FormsModule,
     SelectionModule,
-    PdsStepCounterModule
+    PdsStepCounterModule,
+    PdsFormStatusModule,
+    MarkedPipeModule
   ]
 })
 export class AppComponentsPageModule {

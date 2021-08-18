@@ -33,7 +33,8 @@
 
 <ng-template #guideTemplate>
   <div fxLayout="column">
-    <pds-app-guide-card *ngIf="guide$ | async as guide" [guide]="guide">
-    </pds-app-guide-card>
+    <ng-container *ngIf="guide$ | async as guide">
+      <div [innerHTML]="guide.content | md"></div>
+    </ng-container>
   </div>
 </ng-template>

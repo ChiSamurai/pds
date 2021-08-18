@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { from, Observable, Subscription } from 'rxjs';
-import { AppGuide } from '../../../interfaces/app-guide.interface';
+import { AppGuideWithContent } from '../../../interfaces/app-guide.interface';
 import { AppGuidesService } from '../../../services/app-guides.service';
 
 export enum DEFAULT_DOCUMENTATION_TABS {
@@ -52,7 +52,7 @@ export class BaseDocumentationComponent implements OnInit, OnDestroy, AfterConte
 
   @Input() activeTab: string;
   @Input() inline = true;
-  guide$: Observable<AppGuide>;
+  guide$: Observable<AppGuideWithContent>;
   private subscriptions: Subscription[] = [];
 
   constructor(
@@ -84,7 +84,7 @@ export class BaseDocumentationComponent implements OnInit, OnDestroy, AfterConte
   }
 
   ngAfterViewInit() {
-    if (!this.documentationTabs.find(tab => tab.id === 'examples')) {
+    if (!this.documentationTabs.find(tab => tab.id === 'examples') && this.guidesService.has(this.id)) {
       this.guide$ = from(this.guidesService.resolve(this.id));
       this.documentationTabs.push({
         id: 'examples',
@@ -92,7 +92,6 @@ export class BaseDocumentationComponent implements OnInit, OnDestroy, AfterConte
       });
       this.changeDetectorRef.detectChanges();
     }
-
   }
 
   ngOnDestroy() {
