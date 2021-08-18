@@ -1,0 +1,47 @@
+<pds-app-base-documentation-component
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview },
+  ]"
+  [inline]="true"
+  heading="Combo Box"
+  id="combo-box"
+></pds-app-base-documentation-component>
+<ng-template #overview>
+  <div #top fxLayout="row" fxLayoutGap="32px">
+    <div *ngFor="let card of documentationCards">
+      <button (click)="card.anchorRef.nativeElement.scrollIntoView()" fxFlex>{{card.title}}</button>
+    </div>
+  </div>
+
+
+  <div fxLayout="column" fxLayoutGap="32px">
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="combobox"
+      [title]="'Combobox'"
+      [topElement]="top">
+    </pds-app-base-documentation-card>
+  </div>
+
+  <ng-template #combobox>
+    <div fxLayout="row wrap" fxLayoutGap="32px grid">
+      <section fxFlex="50">
+        <label>Default value style</label>
+        <pds-combo-box placeholder="Type something and hit enter..."></pds-combo-box>
+      </section>
+      <fx-break></fx-break>
+      <section fxFlex="50">
+        <label>Tag value style</label>
+        <pds-combo-box placeholder="Type something and hit enter...">
+          <pds-tag *pdsComboDef="let value">{{ value }}</pds-tag>
+        </pds-combo-box>
+      </section>
+      <section fxFlex="50">
+        <label>Readonly tag value style</label>
+        <pds-combo-box [value]="[ 'foo', 'bar' ]" readOnly="true">
+          <pds-tag *pdsComboDef="let value">{{ value }}</pds-tag>
+        </pds-combo-box>
+      </section>
+    </div>
+  </ng-template>
+
+</ng-template>

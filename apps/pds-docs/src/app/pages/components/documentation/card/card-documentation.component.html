@@ -6,17 +6,24 @@
   id="card"
 ></pds-app-base-documentation-component>
 <ng-template #overview>
-  <pds-app-base-documentation-card
-    [contentTemplateRef]="cards"
-    title="Cards"
-  ></pds-app-base-documentation-card>
+  <section>
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="cardExample"
+      title="Full Card Examples"
+    ></pds-app-base-documentation-card>
+  </section>
+  <section>
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="cards"
+      title="Cards with state classes"
+    ></pds-app-base-documentation-card>
+  </section>
 </ng-template>
 
 <ng-template #cards>
   <section>
-    The entire card can be clicked or tapped. In addition, buttons can be placed on the card, which perform a
-    different
-    action.
+    Use the theme's css classes for decoration. You can access the @Input <code>disabled</code> to disable hovering
+    effects and button access.
   </section>
   <div fxLayout="row wrap" fxLayoutGap="32px grid">
     <div *ngFor="let cardState of ['enabled', 'disabled', 'active', 'hover', 'focus']"
@@ -34,10 +41,45 @@
     </pds-card-header>
     <pds-card-content>
       Bacon ipsum dolor amet burgdoggen sunt laboris sed, beef ribs cupim consectetur meatball chislic enim
-      tempor. Ex ham hock mollit salami. Mollit andouille ut swine sed kevin, ea excepteur ad ball tip leberkas
-      sausage pork belly short loin. Lorem in sint in pork jowl corned beef ut jerky tongue enim ham meatball duis
-      pork belly. Chuck sint in tenderloin mollit incididunt fugiat in ut culpa eu ex sausage esse pork loin.
+      tempor.
     </pds-card-content>
     <pds-card-footer>The card footer</pds-card-footer>
   </pds-card>
+</ng-template>
+
+<ng-template #cardExample>
+  <div fxLayout="row" fxLayoutGap="32px">
+    <pds-card fxFlex="50">
+      <pds-card-header>
+        Thats some funny card
+      </pds-card-header>
+      <pds-card-content>
+        <svg-icon name="info"></svg-icon>
+        Bacon ipsum dolor amet burgdoggen sunt laboris sed, beef ribs cupim consectetur meatball chislic enim
+        tempor. Ex ham hock mollit salami. Mollit andouille ut swine sed kevin, ea excepteur ad ball tip leberkas
+        sausage pork belly short loin. Lorem in sint in pork jowl corned beef ut jerky tongue enim ham meatball duis
+        pork belly. Chuck sint in tenderloin mollit incididunt fugiat in ut culpa eu ex sausage esse pork loin.
+      </pds-card-content>
+      <pds-card-footer>
+        <button class="secondary">Cancel</button>
+        <button class="primary">Ok</button>
+      </pds-card-footer>
+    </pds-card>
+    <pds-card [disabled]="true" fxFlex="50">
+      <pds-card-header>
+        Thats some funny card
+      </pds-card-header>
+      <pds-card-content>
+        <svg-icon name="info"></svg-icon>
+        Bacon ipsum dolor amet burgdoggen sunt laboris sed, beef ribs cupim consectetur meatball chislic enim
+        tempor. Ex ham hock mollit salami. Mollit andouille ut swine sed kevin, ea excepteur ad ball tip leberkas
+        sausage pork belly short loin. Lorem in sint in pork jowl corned beef ut jerky tongue enim ham meatball duis
+        pork belly. Chuck sint in tenderloin mollit incididunt fugiat in ut culpa eu ex sausage esse pork loin.
+      </pds-card-content>
+      <pds-card-footer>
+        <button class="secondary">Cancel</button>
+        <button class="primary">Ok</button>
+      </pds-card-footer>
+    </pds-card>
+  </div>
 </ng-template>

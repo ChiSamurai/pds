@@ -35,7 +35,6 @@ import { AlertDocumentationComponent } from './documentation/alert/alert-documen
 import { CardDocumentationComponent } from './documentation/card/card-documentation.component';
 import { TogglesDocumentationComponent } from './documentation/toggles/toggles-documentation.component';
 import { AppGuideCardModule } from '../../components/app-guide-card/app-guide-card.component';
-import { FormElementsDocumentationComponent } from './documentation/form-elements-documentation/form-elements-documentation.component';
 import { BaseDocumentationCardComponent } from './base-documentation/base-documentation-card/base-documentation-card.component';
 import { TabsDocumentationComponent } from './documentation/tabs-documentation/tabs-documentation.component';
 import { DialogDocumentationComponent } from './documentation/dialog-documentation/dialog-documentation.component';
@@ -44,6 +43,10 @@ import { RingLoaderDocumentationComponent } from './documentation/ring-loader-do
 import { StepCounterDocumentationComponent } from './documentation/step-counter-documentation/step-counter-documentation.component';
 import { FormStatusOutletDocumentationComponent } from './documentation/form-status-outlet-documentation/form-status-outlet-documentation.component';
 import { MarkedPipeModule } from '../../pipes/marked.pipe';
+import { ComboBoxDocumentationComponent } from './documentation/combo-box-documentation/combo-box-documentation.component';
+import { DropdownDocumentationComponent } from './documentation/dropdown-documentation/dropdown-documentation.component';
+import { TextBoxDocumentationComponent } from './documentation/text-box-documentation/text-box-documentation.component';
+import { InputDocumentationComponent } from './documentation/input/input-documentation.component';
 
 interface IDocComponentRouteDef {
   name: string;
@@ -64,12 +67,20 @@ const docComponents: IDocComponentRouteDef[] = [
     comp: CardDocumentationComponent
   },
   {
+    name: 'combo-box',
+    comp: ComboBoxDocumentationComponent
+  },
+  {
     name: 'dialog',
     comp: DialogDocumentationComponent
   },
   {
-    name: 'form-elements',
-    comp: FormElementsDocumentationComponent
+    name: 'dropdown',
+    comp: DropdownDocumentationComponent
+  },
+  {
+    name: 'input',
+    comp: InputDocumentationComponent
   },
   {
     name: 'form-status-outlet',
@@ -90,6 +101,10 @@ const docComponents: IDocComponentRouteDef[] = [
   {
     name: 'tags',
     comp: TagsDocumentationComponent
+  },
+  {
+    name: 'text-box',
+    comp: TextBoxDocumentationComponent
   },
   {
     name: 'toggles',
@@ -132,15 +147,18 @@ function generateRoutes(): Routes {
     BaseDocumentationComponent,
     ButtonDocumentationComponent,
     CardDocumentationComponent,
+    ComboBoxDocumentationComponent,
+    DropdownDocumentationComponent,
     TogglesDocumentationComponent,
-    FormElementsDocumentationComponent,
+    InputDocumentationComponent,
     BaseDocumentationCardComponent,
     TabsDocumentationComponent,
     DialogDocumentationComponent,
     TagsDocumentationComponent,
     RingLoaderDocumentationComponent,
     StepCounterDocumentationComponent,
-    FormStatusOutletDocumentationComponent
+    FormStatusOutletDocumentationComponent,
+    TextBoxDocumentationComponent
   ],
   imports: [
     DialogOverlayModule,

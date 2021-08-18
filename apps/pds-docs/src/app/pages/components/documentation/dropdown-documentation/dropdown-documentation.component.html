@@ -1,0 +1,156 @@
+<pds-app-base-documentation-component
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview },
+  ]"
+  heading="Dropdown"
+  id="dropdown"
+></pds-app-base-documentation-component>
+<ng-template #overview>
+  <div #top fxLayout="row" fxLayoutGap="32px">
+    <div *ngFor="let card of documentationCards">
+      <button (click)="card.anchorRef.nativeElement.scrollIntoView()" fxFlex>{{card.title}}</button>
+    </div>
+  </div>
+
+
+  <div fxLayout="column" fxLayoutGap="32px">
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="textboxwithselectdropdown"
+      [title]="'Textbox with select dropdown'"
+      [topElement]="top">
+    </pds-app-base-documentation-card>
+
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="selectbox"
+      [title]="'Select Box'"
+      [topElement]="top">
+    </pds-app-base-documentation-card>
+
+  </div>
+
+  <ng-template #textboxwithselectdropdown>
+    <section fxFlex="50">
+      <pds-text-box [pdsInputDropdown]="searchDropdown" placeholder="Type something...">
+        <svg-icon name="search" pdsBefore></svg-icon>
+      </pds-text-box>
+
+      <pds-dropdown #searchDropdown pdsInputDropdownDef>
+        <pds-select-list>
+          <ng-container *ngIf="['option 1', 'option 2', 'option 3', 'option 4'] | pdsInputFilter as filteredOptions">
+            <ng-container *ngIf="filteredOptions?.length; else noMatchTemplate">
+              <pds-select-option *ngFor="let option of filteredOptions" [value]="option">
+                {{ option }}
+              </pds-select-option>
+            </ng-container>
+          </ng-container>
+          <ng-template #noMatchTemplate>
+            <pds-select-option disabled="true">There is no match... only Zuul!</pds-select-option>
+          </ng-template>
+        </pds-select-list>
+      </pds-dropdown>
+    </section>
+  </ng-template>
+
+  <ng-template #selectbox>
+    <div fxLayout="row wrap" fxLayoutGap="32px grid">
+      <section fxFlex="50">
+        <label>Single selection behavior</label>
+        <pds-select-box placeholder="Select an option...">
+          <pds-select-list mode="single">
+            <pds-select-option [value]="'foo'">foo</pds-select-option>
+            <pds-select-option [value]="'bar'">bar</pds-select-option>
+          </pds-select-list>
+        </pds-select-box>
+      </section>
+
+      <section fxFlex="50">
+        <label>Multi selection behavior&nbsp;&nbsp;<pds-tag>default</pds-tag>
+        </label>
+        <pds-select-box placeholder="Select options...">
+          <pds-select-list mode="multiple">
+            <pds-select-option [value]="'foo'">foo</pds-select-option>
+            <pds-select-option [value]="'bar'">bar</pds-select-option>
+          </pds-select-list>
+        </pds-select-box>
+      </section>
+
+      <fx-break></fx-break>
+      <section fxFlex="50">
+        <label>Tag value style with multi selection behavior</label>
+        <pds-select-box placeholder="Select options...">
+          <pds-tag *pdsSelectDef="let value">{{ value }}</pds-tag>
+          <pds-select-list mode="multiple">
+            <pds-select-option [value]="'foo'">foo</pds-select-option>
+            <pds-select-option [value]="'bar'">bar</pds-select-option>
+          </pds-select-list>
+        </pds-select-box>
+      </section>
+      <section fxFlex="50">
+        <label>Read only tag value style</label>
+        <pds-select-box [value]="[ 'foo', 'bar' ]" readOnly="true">
+          <pds-tag *pdsSelectDef="let value">{{ value }}</pds-tag>
+          <pds-select-list mode="multiple">
+            <pds-select-option [value]="'foo'">foo</pds-select-option>
+            <pds-select-option [value]="'bar'">bar</pds-select-option>
+          </pds-select-list>
+        </pds-select-box>
+      </section>
+
+      <section fxFlex="100">
+        <h5>Autocomplete Behavior</h5>
+      </section>
+
+      <section fxFlex="50">
+        <label>Combo box with single auto complete selection</label>
+        <pds-combo-box [pdsInputDropdown]="comboBoxSingleDropdown" placeholder="Type something an hit enter...">
+          <span *pdsComboDef="let value">{{ value }}</span>
+        </pds-combo-box>
+
+        <pds-dropdown #comboBoxSingleDropdown pdsInputDropdownDef>
+          <pds-select-list #selectList3>
+            <ng-container
+              *ngIf="(['single option 1', 'single option 2', 'single option 3', 'single option 4'] | pdsInputFilter) as filteredOptions">
+              <ng-container *ngIf="filteredOptions?.length; else noMatchTemplate">
+                <pds-select-option *ngFor="let option of filteredOptions" [value]="option">
+                  <pds-check-box [checked]="selectList3.isSelected(option)">
+                    <label>{{ option }}</label>
+                  </pds-check-box>
+                </pds-select-option>
+              </ng-container>
+            </ng-container>
+            <ng-template #noMatchTemplate>
+              <pds-select-option disabled="true">There is no match... only Zuul!</pds-select-option>
+            </ng-template>
+          </pds-select-list>
+        </pds-dropdown>
+      </section>
+
+
+      <section fxFlex="50">
+        <label>Combo box with multi auto complete selection</label>
+        <pds-combo-box [pdsInputDropdown]="comboBoxMultiDropdown" placeholder="Type something an hit enter...">
+          <pds-tag *pdsComboDef="let value">{{ value }}</pds-tag>
+        </pds-combo-box>
+
+        <pds-dropdown #comboBoxMultiDropdown pdsInputDropdownDef>
+          <pds-select-list #selectList2 mode="multiple">
+            <ng-container
+              *ngIf="(['option 1', 'option 2', 'option 3', 'option 4'] | pdsInputFilter) as filteredOptions">
+              <ng-container *ngIf="filteredOptions?.length; else noMatchTemplate">
+                <pds-select-option *ngFor="let option of filteredOptions" [value]="option">
+                  <pds-check-box [checked]="selectList2.isSelected(option)">
+                    <label>{{ option }}</label>
+                  </pds-check-box>
+                </pds-select-option>
+              </ng-container>
+            </ng-container>
+            <ng-template #noMatchTemplate>
+              <pds-select-option disabled="true">There is no match... only Zuul!</pds-select-option>
+            </ng-template>
+          </pds-select-list>
+        </pds-dropdown>
+      </section>
+    </div>
+  </ng-template>
+
+</ng-template>

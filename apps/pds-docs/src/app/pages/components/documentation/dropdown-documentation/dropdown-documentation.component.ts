@@ -7,12 +7,11 @@ import {
 import { BaseDocumentationCardComponent } from '../../base-documentation/base-documentation-card/base-documentation-card.component';
 
 @Component({
-  selector: 'pds-app-form-elements-documentation',
-  templateUrl: './form-elements-documentation.component.html',
-  styleUrls: ['./form-elements-documentation.component.scss'],
+  selector: 'pds-app-dropdown-documentation',
+  templateUrl: './dropdown-documentation.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class FormElementsDocumentationComponent {
+export class DropdownDocumentationComponent {
   @ContentChildren(BaseDocumentationCardComponent) documentationCards: QueryList<BaseDocumentationCardComponent>;
 
   readonly DEFAULT_DOCUMENTATION_TABS = DEFAULT_DOCUMENTATION_TABS;

@@ -7,13 +7,6 @@
     "description": "Navigation component concepts"
   },
   {
-    "slug": "button",
-    "src": "packages/pds-components/src/button/README",
-    "title": "Buttons",
-    "chapter": "Components",
-    "description": "Button examples"
-  },
-  {
     "slug": "alert",
     "src": "packages/pds-components/src/alert/README",
     "title": "Alerts / Banners",
@@ -21,9 +14,44 @@
     "description": "Alerts examples"
   },
   {
+    "slug": "button",
+    "src": "packages/pds-components/src/button/README",
+    "title": "Buttons",
+    "chapter": "Components",
+    "description": "Button examples"
+  },
+  {
+    "slug": "card",
+    "src": "packages/pds-components/src/card/README",
+    "title": "Cards",
+    "chapter": "Components",
+    "description": "Cards examples"
+  },
+  {
+    "slug": "combo-box",
+    "src": "packages/pds-components/src/combo-box/README",
+    "title": "Combo Box",
+    "chapter": "Components",
+    "description": "Combo Box examples"
+  },
+  {
+    "slug": "dropdown",
+    "src": "packages/pds-components/src/dropdown/README",
+    "title": "Dropdown",
+    "chapter": "Components",
+    "description": "Dropdown examples"
+  },
+  {
+    "slug": "text-box",
+    "src": "packages/pds-components/src/text-box/README",
+    "title": "Text Box",
+    "chapter": "Components",
+    "description": "Text Box Examples"
+  },
+  {
     "slug": "toggles",
     "src": "packages/pds-components/src/toggles/README",
-    "title": "Toggles (Chechboxes, RadioButtons, ToggleBoxes)",
+    "title": "Toggles (Checkboxes, RadioButtons, ToggleBoxes)",
     "chapter": "Components",
     "description": "Toggle Examples"
   }

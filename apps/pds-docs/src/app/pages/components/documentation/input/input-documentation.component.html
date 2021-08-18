@@ -1,0 +1,59 @@
+<pds-app-base-documentation-component
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview },
+  ]"
+  heading="Inputs"
+  id="input"
+></pds-app-base-documentation-component>
+<ng-template #overview>
+  <div #top fxLayout="row" fxLayoutGap="32px">
+    <div *ngFor="let card of documentationCards">
+      <button (click)="card.anchorRef.nativeElement.scrollIntoView()" fxFlex>{{card.title}}</button>
+    </div>
+  </div>
+
+
+  <div fxLayout="column" fxLayoutGap="32px">
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="simplehtmlinputs"
+      [title]="'Simple HTML Inputs'"
+      [topElement]="top">
+    </pds-app-base-documentation-card>
+
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="inputdropdown"
+      [title]="'Input with dropdown'"
+      [topElement]="top">
+    </pds-app-base-documentation-card>
+  </div>
+</ng-template>
+
+<ng-template #simplehtmlinputs>
+  <div fxLayout="column"
+       fxLayoutGap="16px">
+    <div *ngFor="let elementState of htmlElementStates"
+         fxFlex
+         fxLayout="row">
+      <div fxFlex="0 0 15">
+        <h4>{{elementState}}</h4>
+      </div>
+      <div fxFlex="0 1">
+        <input [ngClass]="elementState">
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #inputdropdown>
+  <div>
+    <input [pdsInputDropdown]="test" name="test">
+    <pds-dropdown #test pdsInputDropdownDef>
+      <pds-select-list>
+        <ng-container *ngIf="['one', 'two', 'three'] | pdsInputFilter as filteredOptions">
+          <pds-select-option *ngFor="let option of filteredOptions" [value]="option">{{option}}</pds-select-option>
+        </ng-container>
+      </pds-select-list>
+    </pds-dropdown>
+  </div>
+</ng-template>
