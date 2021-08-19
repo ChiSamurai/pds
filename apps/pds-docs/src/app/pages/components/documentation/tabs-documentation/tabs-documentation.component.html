@@ -27,22 +27,24 @@
       <div fxFlex="0 1">
         <pds-tabs>
           <pds-tab [ngClass]="tabState">
-            Label
+            <span>Label</span>
           </pds-tab>
           <pds-tab [ngClass]="tabState">
-            Label + Icon
+            <span>Label + Icon</span>
             <svg-icon name="info"></svg-icon>
           </pds-tab>
           <pds-tab [ngClass]="tabState">
-            Label + Badge (TBD)
+            <span>Label + Badge</span>
+            <pds-badge>20</pds-badge>
           </pds-tab>
           <pds-tab [ngClass]="tabState">
             <svg-icon name="info"></svg-icon>
-            Icon + Label
+            <span>Icon + Label</span>
           </pds-tab>
           <pds-tab [ngClass]="tabState">
             <svg-icon name="info"></svg-icon>
-            Icon + Label + Badge (TBD)
+            <span>Icon + Label + Badge</span>
+            <pds-badge>20</pds-badge>
           </pds-tab>
         </pds-tabs>
       </div>

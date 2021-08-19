@@ -3,6 +3,7 @@
     <pds-app-alert-documentation fxFlex="100"></pds-app-alert-documentation>
     <pds-app-button-documentation fxFlex="100"></pds-app-button-documentation>
     <pds-app-card-documentation fxFlex="100"></pds-app-card-documentation>
+    <pds-app-chips-documentation fxFlex="100"></pds-app-chips-documentation>
     <pds-app-combo-box-documentation fxFlex="100"></pds-app-combo-box-documentation>
     <pds-app-dialog-documentation fxFlex="100"></pds-app-dialog-documentation>
     <pds-app-form-status-outlet-documentation fxFlex="100"></pds-app-form-status-outlet-documentation>
@@ -11,7 +12,6 @@
     <pds-app-ring-loader-documentation fxFlex="100"></pds-app-ring-loader-documentation>
     <pds-app-step-counter-documentation fxFlex="100"></pds-app-step-counter-documentation>
     <pds-app-tabs-documentation fxFlex="100"></pds-app-tabs-documentation>
-    <pds-app-tags-documentation fxFlex="100"></pds-app-tags-documentation>
     <pds-app-text-box-documentation fxFlex="100"></pds-app-text-box-documentation>
     <pds-app-toggles-documentation fxFlex="100"></pds-app-toggles-documentation>
 
@@ -38,11 +38,11 @@
     <fx-break></fx-break>
     <section fxFlex="50">
       <label>Usage with a <em>search</em> icon <em>before</em></label>
-      <pds-text-box placeholder="Type something..." [pdsInputDropdown]="searchDropdown">
+      <pds-text-box [pdsInputDropdown]="searchDropdown" placeholder="Type something...">
         <svg-icon name="search" pdsBefore></svg-icon>
       </pds-text-box>
 
-      <pds-dropdown pdsInputDropdownDef #searchDropdown>
+      <pds-dropdown #searchDropdown pdsInputDropdownDef>
         <pds-select-list>
           <ng-container *ngIf="(options | pdsInputFilter) as filteredOptions">
             <ng-container *ngIf="filteredOptions?.length; else noMatchTemplate">
@@ -140,8 +140,8 @@
         <pds-chip *pdsComboDef="let value">{{ value }}</pds-chip>
       </pds-combo-box>
 
-      <pds-dropdown pdsInputDropdownDef #comboBoxDropdown>
-        <pds-select-list mode="multiple" #selectList2>
+      <pds-dropdown #comboBoxDropdown pdsInputDropdownDef>
+        <pds-select-list #selectList2 mode="multiple">
           <ng-container *ngIf="(options | pdsInputFilter) as filteredOptions">
             <ng-container *ngIf="filteredOptions?.length; else noMatchTemplate">
               <pds-select-option *ngFor="let option of filteredOptions" [value]="option">
@@ -162,7 +162,7 @@
 
     <section fxFlex="33.33">
       <h5>Radio Box</h5>
-      <div pdsRadioGroup fxLayout fxLayoutGap="24px">
+      <div fxLayout fxLayoutGap="24px" pdsRadioGroup>
         <pds-radio-box label="foo"></pds-radio-box>
         <pds-radio-box label="bar" labelAlign="before"></pds-radio-box>
       </div>

@@ -2,7 +2,7 @@
   [documentationTabs]="[
     { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview }
   ]"
-  heading="Alert / Banner"
+  heading="Alert"
   id="alert"
 ></pds-app-base-documentation-component>
 <ng-template #overview>
@@ -12,34 +12,41 @@
       reaction to an action of the user, for example, in the form of an error message.
     </section>
 
-    <pds-app-base-documentation-card [contentTemplateRef]="banners"
-                                     title="Banners">
+    <pds-app-base-documentation-card [contentTemplateRef]="alerts"
+                                     title="Alerts">
     </pds-app-base-documentation-card>
-    
+
     <pds-app-base-documentation-card [contentTemplateRef]="longTexts"
-                                     title="Banners with long texts">
+                                     title="Alerts with long texts">
     </pds-app-base-documentation-card>
   </div>
-  <ng-template #banners>
-    <ng-container *ngFor="let bannerClass of ['info', 'success', 'warning', 'error']">
-      <pds-alert [ngClass]="bannerClass">
+  <ng-template #alerts>
+    <ng-container *ngFor="let alertClass of ['info', 'success', 'warning', 'error']">
+      <pds-alert [ngClass]="alertClass">
         <svg-icon name="info" pdsBefore></svg-icon>
-        <p>{{bannerClass}}</p>
+        <p>{{alertClass}}</p>
       </pds-alert>
-      <pds-alert [ngClass]="bannerClass">
+      <pds-alert [ngClass]="alertClass">
         <svg-icon name="info" pdsAfter></svg-icon>
-        <p>{{bannerClass}}</p>
+        <p>{{alertClass}}</p>
       </pds-alert>
     </ng-container>
   </ng-template>
 
   <ng-template #longTexts>
-    <pds-alert *ngFor="let bannerClass of ['info', 'success', 'warning', 'error']" [ngClass]="bannerClass">
+    <pds-alert *ngFor="let alertClass of ['info', 'success', 'warning', 'error']" [ngClass]="alertClass">
       <svg-icon name="info" pdsBefore></svg-icon>
-      <p>Bacon ipsum dolor amet burgdoggen sunt laboris sed, beef ribs cupim consectetur meatball chislic enim
+      <p>
+        Bacon ipsum dolor amet burgdoggen sunt laboris sed, beef ribs cupim consectetur meatball chislic enim
         tempor. Ex ham hock mollit salami. Mollit andouille ut swine sed kevin, ea excepteur ad ball tip leberkas
+      </p>
+      <p>
+        <a>That's a link!</a>
+      </p>
+      <p>
         sausage pork belly short loin. Lorem in sint in pork jowl corned beef ut jerky tongue enim ham meatball duis
-        pork belly. Chuck sint in tenderloin mollit incididunt fugiat in ut culpa eu ex sausage esse pork loin.</p>
+        pork belly. Chuck sint in tenderloin mollit incididunt fugiat in ut culpa eu ex sausage esse pork loin.
+      </p>
     </pds-alert>
   </ng-template>
 </ng-template>

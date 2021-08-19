@@ -12,6 +12,7 @@ import {
   CardModule,
   PdsBadgeModule,
   PdsCheckBoxModule,
+  PdsChipModule,
   PdsComboBoxModule,
   PdsDropdownModule,
   PdsFabButtonModule,
@@ -24,9 +25,8 @@ import {
   PdsSelectListModule,
   PdsStepCounterModule,
   PdsTabsModule,
-  PdsChipModule,
   PdsTextBoxModule,
-  PdsToggleBoxModule,
+  PdsToggleBoxModule
 } from '@vitagroup/pds-components';
 import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 import { AppDialogComponentModule } from '../../components/app-dialog/app-dialog.component';
@@ -41,7 +41,6 @@ import { AppGuideCardModule } from '../../components/app-guide-card/app-guide-ca
 import { BaseDocumentationCardComponent } from './base-documentation/base-documentation-card/base-documentation-card.component';
 import { TabsDocumentationComponent } from './documentation/tabs-documentation/tabs-documentation.component';
 import { DialogDocumentationComponent } from './documentation/dialog-documentation/dialog-documentation.component';
-import { TagsDocumentationComponent } from './documentation/tags-documentation/tags-documentation.component';
 import { RingLoaderDocumentationComponent } from './documentation/ring-loader-documentation/ring-loader-documentation.component';
 import { StepCounterDocumentationComponent } from './documentation/step-counter-documentation/step-counter-documentation.component';
 import { FormStatusOutletDocumentationComponent } from './documentation/form-status-outlet-documentation/form-status-outlet-documentation.component';
@@ -51,6 +50,8 @@ import { DropdownDocumentationComponent } from './documentation/dropdown-documen
 import { TextBoxDocumentationComponent } from './documentation/text-box-documentation/text-box-documentation.component';
 import { InputDocumentationComponent } from './documentation/input-documentation/input-documentation.component';
 import { NavDocumentationComponent } from './documentation/nav-documentation/nav-documentation.component';
+import { ChipsDocumentationComponent } from './documentation/chips-documentation/chips-documentation.component';
+import { BadgeDocumentationComponent } from './documentation/badge-documentation/badge-documentation.component';
 
 interface IDocComponentRouteDef {
   name: string;
@@ -67,8 +68,16 @@ export const docComponents: IDocComponentRouteDef[] = [
     comp: ButtonDocumentationComponent
   },
   {
+    name: 'badge',
+    comp: BadgeDocumentationComponent
+  },
+  {
     name: 'card',
     comp: CardDocumentationComponent
+  },
+  {
+    name: 'chips',
+    comp: ChipsDocumentationComponent
   },
   {
     name: 'combo-box',
@@ -107,10 +116,6 @@ export const docComponents: IDocComponentRouteDef[] = [
     comp: TabsDocumentationComponent
   },
   {
-    name: 'tags',
-    comp: TagsDocumentationComponent
-  },
-  {
     name: 'text-box',
     comp: TextBoxDocumentationComponent
   },
@@ -125,9 +130,9 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
     path: '',
     component: AppComponentsPageComponent,
     data: {
-      title: $localize`Components`,
-    },
-  },
+      title: $localize`Components`
+    }
+  }
 ];
 
 function generateRoutes(): Routes {
@@ -153,6 +158,7 @@ function generateRoutes(): Routes {
     AlertDocumentationComponent,
     AvatarDocumentationComponent,
     BaseDocumentationComponent,
+    BadgeDocumentationComponent,
     ButtonDocumentationComponent,
     CardDocumentationComponent,
     ComboBoxDocumentationComponent,
@@ -162,7 +168,7 @@ function generateRoutes(): Routes {
     BaseDocumentationCardComponent,
     TabsDocumentationComponent,
     DialogDocumentationComponent,
-    TagsDocumentationComponent,
+    ChipsDocumentationComponent,
     RingLoaderDocumentationComponent,
     StepCounterDocumentationComponent,
     FormStatusOutletDocumentationComponent,
@@ -204,8 +210,8 @@ function generateRoutes(): Routes {
     PdsNavModule,
     PdsPageLayoutModule,
     PdsBadgeModule,
-    ClipPipeModule,
-  ],
+    ClipPipeModule
+  ]
 })
 export class AppComponentsPageModule {
   constructor(@Inject(NAV_ENTRIES) protected navEntries: NavEntry[]) {

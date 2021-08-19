@@ -11,4 +11,5 @@ export class TabsDocumentationComponent {
   readonly TABS_STATES = [
     ...Object.values(HTML_ELEMENT_STATES)
   ];
+  activeExampleTab = 0;
 }

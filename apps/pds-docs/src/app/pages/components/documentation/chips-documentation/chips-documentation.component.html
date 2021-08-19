@@ -1,0 +1,67 @@
+<pds-app-base-documentation-component
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview }
+  ]"
+  heading="Chips"
+  id="chips"
+></pds-app-base-documentation-component>
+<ng-template #overview>
+  <div fxLayout="column" fxLayoutGap="32px">
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="chips"
+      title="Chips">
+    </pds-app-base-documentation-card>
+
+  </div>
+</ng-template>
+
+<ng-template #chips>
+  <section>
+    <div fxLayout="column" fxLayoutGap="32px">
+      <div fxFlex fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="16px">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+          <div fxFlex>
+            <label>string value:</label>
+            <input [(ngModel)]="stringValue">
+          </div>
+          <div fxFlex>
+            <label>clip to:</label>
+            <input [(ngModel)]="stringClipTo" type="number">
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+          <div fxFlex>
+            <label>number value:</label>
+            <input [(ngModel)]="numberValue" type="number">
+          </div>
+          <div fxFlex>
+            <label>clip to:</label>
+            <input [(ngModel)]="numberClipTo" type="number">
+          </div>
+        </div>
+      </div>
+      <div fxFlex fxLayout="row" fxLayoutGap="32px">
+        <div fxFlex="0 0 10">&nbsp;</div>
+        <div fxFlex>String</div>
+        <div fxFlex>String with clip to {{stringClipTo}}</div>
+        <div fxFlex>Number</div>
+        <div fxFlex>Number with clip to {{numberClipTo}}</div>
+      </div>
+      <div *ngFor="let tabState of TAGS_STATES" fxFlex fxLayout="row" fxLayoutGap="32px">
+        <h4 fxFlex="0 0 10">{{ tabState | titlecase }}</h4>
+        <div fxFlex>
+          <pds-chip [ngClass]="tabState">{{ stringValue }}</pds-chip>
+        </div>
+        <div fxFlex>
+          <pds-chip [ngClass]="tabState">{{ stringValue | clip: stringClipTo }}</pds-chip>
+        </div>
+        <div fxFlex>
+          <pds-chip [ngClass]="tabState">{{ numberValue }}</pds-chip>
+        </div>
+        <div fxFlex>
+          <pds-chip [ngClass]="tabState">{{ numberValue | clip: numberClipTo }}</pds-chip>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-template>

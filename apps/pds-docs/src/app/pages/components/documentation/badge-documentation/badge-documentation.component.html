@@ -1,0 +1,63 @@
+<pds-app-base-documentation-component
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview }
+  ]"
+  heading="Chips"
+  id="chips"
+></pds-app-base-documentation-component>
+<ng-template #overview>
+  <div fxLayout="column" fxLayoutGap="32px">
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="badge"
+      title="Chips">
+    </pds-app-base-documentation-card>
+
+  </div>
+</ng-template>
+
+<ng-template #badge>
+  <section>
+    <div fxLayout="column" fxLayoutGap="32px">
+      <div fxFlex fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="16px">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+          <div fxFlex>
+            <label>string value:</label>
+            <input [(ngModel)]="stringValue">
+          </div>
+          <div fxFlex>
+            <label>clip to:</label>
+            <input [(ngModel)]="stringClipTo" type="number">
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+          <div fxFlex>
+            <label>number value:</label>
+            <input [(ngModel)]="numberValue" type="number">
+          </div>
+          <div fxFlex>
+            <label>clip to:</label>
+            <input [(ngModel)]="numberClipTo" type="number">
+          </div>
+        </div>
+      </div>
+      <div fxFlex="50" fxLayout="column" fxLayoutGap="32px">
+        <div fxFlex>
+          <span>String:&nbsp;</span>
+          <pds-badge>{{ stringValue }}</pds-badge>
+        </div>
+        <div fxFlex>
+          <span>String with clip to {{stringClipTo}}:&nbsp;</span>
+          <pds-badge>{{ stringValue | clip: stringClipTo }}</pds-badge>
+        </div>
+        <div fxFlex>
+          <span>Number: &nbsp;</span>
+          <pds-badge>{{ numberValue }}</pds-badge>
+        </div>
+        <div fxFlex>
+          <span>Number with clip to {{numberValue}}: &nbsp;</span>
+          <pds-badge>{{ numberValue | clip: numberClipTo }}</pds-badge>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-template>
