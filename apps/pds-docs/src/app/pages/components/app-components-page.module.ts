@@ -14,6 +14,7 @@ import {
   PdsCheckBoxModule,
   PdsChipModule,
   PdsComboBoxModule,
+  PdsDividerModule,
   PdsDropdownModule,
   PdsFabButtonModule,
   PdsFormStatusModule,
@@ -52,6 +53,7 @@ import { InputDocumentationComponent } from './documentation/input-documentation
 import { NavDocumentationComponent } from './documentation/nav-documentation/nav-documentation.component';
 import { ChipsDocumentationComponent } from './documentation/chips-documentation/chips-documentation.component';
 import { BadgeDocumentationComponent } from './documentation/badge-documentation/badge-documentation.component';
+import { DividerDocumentationComponent } from './documentation/divider-documentation/divider-documentation.component';
 
 interface IDocComponentRouteDef {
   name: string;
@@ -86,6 +88,10 @@ export const docComponents: IDocComponentRouteDef[] = [
   {
     name: 'dialog',
     comp: DialogDocumentationComponent
+  },
+  {
+    name: 'divider',
+    comp: DividerDocumentationComponent
   },
   {
     name: 'dropdown',
@@ -162,6 +168,7 @@ function generateRoutes(): Routes {
     ButtonDocumentationComponent,
     CardDocumentationComponent,
     ComboBoxDocumentationComponent,
+    DividerDocumentationComponent,
     DropdownDocumentationComponent,
     TogglesDocumentationComponent,
     InputDocumentationComponent,
@@ -210,7 +217,8 @@ function generateRoutes(): Routes {
     PdsNavModule,
     PdsPageLayoutModule,
     PdsBadgeModule,
-    ClipPipeModule
+    ClipPipeModule,
+    PdsDividerModule
   ]
 })
 export class AppComponentsPageModule {

@@ -1,0 +1,46 @@
+<pds-app-base-documentation-component
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview }
+  ]"
+  heading="Divider"
+  id="divider"
+></pds-app-base-documentation-component>
+<ng-template #overview>
+  <div fxLayout="column" fxLayoutGap="32px">
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="divider"
+      title="Divider">
+    </pds-app-base-documentation-card>
+
+  </div>
+</ng-template>
+
+<ng-template #divider>
+  <div fxLayout="column" fxLayoutGap="16px">
+
+    <div class="dividerContainer" fxLayout="row">
+      <div fxFlex="33" fxLayoutAlign="center center">
+        <h4>primary (default)</h4>
+      </div>
+      <div fxFlex="33" fxLayoutAlign="center center">
+        <pds-divider></pds-divider>
+      </div>
+      <div fxFlex="33" fxLayoutAlign="center center">
+        <pds-divider class="vertical"></pds-divider>
+      </div>
+    </div>
+
+    <div class="dividerContainer" fxLayout="row">
+      <div fxFlex="33" fxLayoutAlign="center center">
+        <h4>secondary</h4>
+      </div>
+      <div fxFlex="33" fxLayoutAlign="center center">
+        <pds-divider class="secondary"></pds-divider>
+      </div>
+      <div fxFlex="33" fxLayoutAlign="center center">
+        <pds-divider class="secondary vertical"></pds-divider>
+      </div>
+    </div>
+  </div>
+
+</ng-template>
