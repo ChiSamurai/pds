@@ -1,0 +1,24 @@
+@use "styleguide" as pds;
+
+pds-divider {
+  display: inline-block;
+  background-color: var(--background-darker);
+
+  &.secondary {
+    background-color: var(--background);
+  }
+
+  &:not(.vertical) {
+    @include pds.outer-spacing(--space-sm, y);
+
+    width: 100%;
+    height: 1px;
+  }
+  &.vertical {
+    @include pds.outer-spacing(--space-sm, x);
+
+    min-height: 1em;
+    height: 100%;
+    width: 1px;
+  }
+}

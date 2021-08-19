@@ -1,7 +1,11 @@
 @use "styleguide" as pds;
 @use "util";
 
-pds-tag {
+pds-chip {
+  --primary-lighter: var(--background-lighter);
+  --primary: var(--background);
+  --primary-darker: var(--background-darker);
+
   @include pds.typography(--body-small);
   @include pds.inner-spacing(--space-sm, x);
   @include pds.outer-sibling-spacing(--space-xs);
@@ -10,15 +14,15 @@ pds-tag {
   user-select: none;
   align-items: center;
   display: inline-flex;
-  background-color: var(--background);
-  height: var(--tag-height, 32px);
+  background-color: var(--primary);
+  height: var(--tag-height, 28px);
   color: currentColor;
 
   @include util.hover-state {
-    background-color: var(--background-lighter);
+    background-color: var(--primary-lighter);
   }
   @include util.active-state {
-    background-color: var(--background-darker);
+    background-color: var(--primary-darker);
   }
 
   @include util.focus-state {

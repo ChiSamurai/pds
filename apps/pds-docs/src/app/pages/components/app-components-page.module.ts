@@ -6,9 +6,11 @@ import { Route, RouterModule, Routes } from '@angular/router';
 import { DialogOverlayModule, NAV_ENTRIES, NavEntry, SelectionModule, SvgIconModule } from '@vitagroup/cdk';
 import { FormStatusOutletModule } from '@vitagroup/cdk/forms';
 import { FlexContainerModule } from '@vitagroup/cdk/layout';
+import { ClipPipeModule } from '@vitagroup/common';
 import {
   AlertModule,
   CardModule,
+  PdsBadgeModule,
   PdsCheckBoxModule,
   PdsComboBoxModule,
   PdsDropdownModule,
@@ -22,9 +24,9 @@ import {
   PdsSelectListModule,
   PdsStepCounterModule,
   PdsTabsModule,
-  PdsTagModule,
+  PdsChipModule,
   PdsTextBoxModule,
-  PdsToggleBoxModule
+  PdsToggleBoxModule,
 } from '@vitagroup/pds-components';
 import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 import { AppDialogComponentModule } from '../../components/app-dialog/app-dialog.component';
@@ -123,9 +125,9 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
     path: '',
     component: AppComponentsPageComponent,
     data: {
-      title: $localize`Components`
-    }
-  }
+      title: $localize`Components`,
+    },
+  },
 ];
 
 function generateRoutes(): Routes {
@@ -177,7 +179,7 @@ function generateRoutes(): Routes {
     PdsSelectBoxModule,
     PdsSelectListModule,
     CommonModule,
-    PdsTagModule,
+    PdsChipModule,
     FlexContainerModule,
     SvgIconModule,
     PdsRadioBoxModule,
@@ -199,8 +201,11 @@ function generateRoutes(): Routes {
     PdsStepCounterModule,
     PdsFormStatusModule,
     MarkedPipeModule,
-    PdsNavModule
-  ]
+    PdsNavModule,
+    PdsPageLayoutModule,
+    PdsBadgeModule,
+    ClipPipeModule,
+  ],
 })
 export class AppComponentsPageModule {
   constructor(@Inject(NAV_ENTRIES) protected navEntries: NavEntry[]) {

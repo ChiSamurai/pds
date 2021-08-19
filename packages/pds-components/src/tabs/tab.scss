@@ -4,28 +4,37 @@
 $tab-active-indicator-width: 4px !default;
 
 pds-tab {
-  @include pds.inner-spacing(--space-xs, y);
-  @include pds.outer-sibling-spacing(--space-sm);
+  @include pds.rounding(--rounding-lg);
+  @include pds.inner-spacing(--space-sm);
+  @include pds.outer-sibling-spacing(--space-sm, x, $trim: true, $justify: true);
+  @include pds.outer-child-spacing(--space-xs, x, $trim: true, $justify: true);
 
   user-select: none;
   position: relative;
   transition: 100ms ease-in;
+  border: 2px solid transparent;
   font-weight: 500;
   cursor: pointer;
 
   @include util.hover-state {
+    color: var(--primary-lighter);
+  }
+  &.active {
+    color: var(--primary);
+
     &:after {
       background-color: var(--primary);
     }
+  }
+  &:active {
+    color: var(--primary-darker);
   }
   @include util.focus-visible-state {
+    border-color: var(--focus);
+    color: var(--focus);
+
     &:after {
-      background-color: var(--primary);
-    }
-  }
-  @include util.active-state {
-    &:after {
-      background-color: var(--primary-light);
+      background-color: transparent;
     }
   }
   @include util.disabled_state($within_parent: true) {

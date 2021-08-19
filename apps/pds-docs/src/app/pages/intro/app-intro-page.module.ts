@@ -4,7 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule, Routes } from '@angular/router';
 import { SvgIconModule } from '@vitagroup/cdk';
 import { RouterLinkOrHrefModule } from '@vitagroup/common';
-import { CardModule, PdsSelectBoxModule, PdsSelectListModule, PdsTagModule } from '@vitagroup/pds-components';
+import { CardModule, PdsSelectBoxModule, PdsSelectListModule, PdsChipModule } from '@vitagroup/pds-components';
 import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 import { AppGuideCardModule } from '../../components/app-guide-card/app-guide-card.component';
 import { MarkedPipeModule } from '../../pipes/marked.pipe';
@@ -15,28 +15,27 @@ export const APP_INTRO_PAGE_ROUTES: Routes = [
     path: '',
     component: AppIntroPageComponent,
     data: {
-      title: $localize`Introduction`
-    }
-  }
+      title: $localize`Introduction`,
+    },
+  },
 ];
 
 @NgModule({
-  exports: [ AppIntroPageComponent ],
-  declarations: [ AppIntroPageComponent ],
+  exports: [AppIntroPageComponent],
+  declarations: [AppIntroPageComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(APP_INTRO_PAGE_ROUTES),
     FlexLayoutModule,
     PdsSelectBoxModule,
     PdsSelectListModule,
-    PdsTagModule,
+    PdsChipModule,
     SvgIconModule,
     CardModule,
     RouterLinkOrHrefModule,
     MarkedPipeModule,
     AppGuideCardModule,
-    PdsPageLayoutModule
-  ]
+    PdsPageLayoutModule,
+  ],
 })
-export class AppIntroPageModule {
-}
+export class AppIntroPageModule {}

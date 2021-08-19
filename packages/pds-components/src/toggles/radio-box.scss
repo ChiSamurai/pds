@@ -1,7 +1,7 @@
 @use "styleguide" as pds;
 @use 'toggle-base' as *;
 
-$indicator-size: 12px !default;
+$indicator-size: 8px !default;
 
 pds-radio-box {
   @include pds-toggle-base;

@@ -1,6 +1,8 @@
 export * from './alert/module';
 export * from './alert/alert';
 
+export * from './badge/badge';
+
 export * from './button/fab-button';
 
 export * from './card/module';
@@ -10,6 +12,8 @@ export * from './card/card';
 export * from './combo-box/module';
 export * from './combo-box/combo-box';
 export * from './combo-box/combo-def';
+
+export * from './divider/divider';
 
 export * from './dropdown/module';
 export * from './dropdown/dropdown';
@@ -53,8 +57,8 @@ export * from './tabs/module';
 export * from './tabs/tabs';
 export * from './tabs/tab';
 
-export * from './tag/module';
-export * from './tag/tag';
+export * from './chip/module';
+export * from './chip/chip';
 
 export * from './text-box/module';
 export * from './text-box/text-box';

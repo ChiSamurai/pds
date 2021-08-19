@@ -2,6 +2,7 @@
 @use "util";
 
 $toggle-size: 20px !default;
+$toggle-border-width: 2px !default;
 
 @mixin pds-toggle-base {
   user-select: none;
@@ -26,8 +27,8 @@ $toggle-size: 20px !default;
   .toggle-indicator {
     @include pds.input-base($spacing: false);
 
-    border-width: 2px;
-    background-color: var(--page);
+    border-width: $toggle-border-width;
+    background-color: transparent;
     color: var(--primary);
     height: $toggle-size;
     width: $toggle-size;
@@ -47,7 +48,7 @@ $toggle-size: 20px !default;
       @include pds.input-focus;
 
       color: var(--focus);
-      border-width: 1px;
+      box-shadow: none;
     }
   }
   @include util.active-state {
@@ -55,7 +56,6 @@ $toggle-size: 20px !default;
       @include pds.input-active;
 
       color: var(--primary-darker);
-      border-width: 2px;
     }
   }
 

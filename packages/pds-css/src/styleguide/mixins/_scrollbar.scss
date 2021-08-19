@@ -17,6 +17,8 @@ $scrollbar-thumb-color: var(--page) !default;
     width: $scrollbar-size;
   }
   ::-webkit-scrollbar-track {
+    @include rounding($scrollbar-rounding);
+
     background-color: $scrollbar-track-color;
 
     &:hover {

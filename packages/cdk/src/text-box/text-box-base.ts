@@ -1,6 +1,5 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
-  AfterContentInit,
   ChangeDetectorRef,
   Directive,
   ElementRef,

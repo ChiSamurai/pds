@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'pds-tag',
-  styleUrls: ['./tag.scss'],
+  selector: 'pds-chip',
+  styleUrls: ['./chip.scss'],
   encapsulation: ViewEncapsulation.None,
   template: `
     <ng-content></ng-content>
   `,
 })
-export class PdsTag {}
+export class PdsChip {}

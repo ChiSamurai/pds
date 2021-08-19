@@ -1,16 +1,19 @@
 @use "styleguide" as pds;
 
 pds-app-header {
-  height: var(--app-header-height);
+  @include pds.inner-spacing(--space-sm, top);
 
-  display: flex;
   flex: 1 0 auto;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
 
-  .page-headline {
+  .page-head {
+    display: flex;
+    align-items: center;
     user-select: none;
+
+    > div {
+      flex: 1 0 0;
+    }
 
     .page-title {
       @include pds.outer-spacing(--space-4, right);

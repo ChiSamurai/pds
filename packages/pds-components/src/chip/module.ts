@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { PdsTag } from './tag';
+import { PdsChip } from './chip';
 
-const declarations = [PdsTag];
+const declarations = [PdsChip];
 
 @NgModule({
   declarations,
   exports: declarations,
 })
-export class PdsTagModule {}
+export class PdsChipModule {}
