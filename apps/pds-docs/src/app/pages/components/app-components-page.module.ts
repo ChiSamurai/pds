@@ -205,7 +205,6 @@ function generateRoutes(): Routes {
 export class AppComponentsPageModule {
   constructor(@Inject(NAV_ENTRIES) protected navEntries: NavEntry[]) {
     const componentsNavEntry = navEntries.find(navEntry => navEntry?.id === 'components');
-    console.log(componentsNavEntry);
     if (componentsNavEntry) {
       componentsNavEntry.children = [];
       docComponents.forEach(docCompDef => {
