@@ -69,14 +69,20 @@
     <div fxFlex>
       <button [ngClass]="buttonClasses">
         <svg-icon name="info"></svg-icon>
-        Icon & Label
+        <span>Icon & Label</span>
       </button>
     </div>
     <div fxFlex>
-      <button [ngClass]="buttonClasses">Label & Icon (TBD)</button>
+      <button [ngClass]="buttonClasses">
+        <span>Label & Icon</span>
+        <svg-icon name="info"></svg-icon>
+      </button>
     </div>
     <div fxFlex>
-      <button [ngClass]="buttonClasses">Icon Top & Label (TBD)</button>
+      <button [ngClass]="buttonClasses">
+        <svg-icon name="info"></svg-icon>
+        <span>Icon Top & Label TBD</span>
+      </button>
     </div>
   </div>
 </ng-template>

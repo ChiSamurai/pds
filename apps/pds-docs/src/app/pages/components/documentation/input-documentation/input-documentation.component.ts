@@ -14,6 +14,8 @@ import { BaseDocumentationCardComponent } from '../../base-documentation/base-do
 export class InputDocumentationComponent {
   @ViewChildren(BaseDocumentationCardComponent) documentationCards: QueryList<BaseDocumentationCardComponent>;
 
+  inputValue: string = null;
+
   readonly DEFAULT_DOCUMENTATION_TABS = DEFAULT_DOCUMENTATION_TABS;
   htmlElementStates = [
     ...Object.values(HTML_ELEMENT_STATES),
