@@ -21,6 +21,7 @@ pds-app {
       color: var(--primary);
       flex: 0 0;
     }
+
     .pds-app-brand {
       flex: 1 0;
     }
@@ -28,7 +29,13 @@ pds-app {
 
   pds-nav {
     width: var(--app-menu-width);
+
+    .nav-entry-children {
+      font-size: smaller;
+      padding-left: 1em;
+    }
   }
+
   router-outlet + * {
     display: block;
     max-width: calc(100vw - var(--app-menu-width));

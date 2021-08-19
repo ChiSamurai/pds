@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { Inject, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Route, RouterModule, Routes } from '@angular/router';
-import { DialogOverlayModule, SelectionModule, SvgIconModule } from '@vitagroup/cdk';
+import { DialogOverlayModule, NAV_ENTRIES, NavEntry, SelectionModule, SvgIconModule } from '@vitagroup/cdk';
 import { FormStatusOutletModule } from '@vitagroup/cdk/forms';
 import { FlexContainerModule } from '@vitagroup/cdk/layout';
 import {
@@ -15,6 +15,7 @@ import {
   PdsFabButtonModule,
   PdsFormStatusModule,
   PdsInputDropdownModule,
+  PdsNavModule,
   PdsRadioBoxModule,
   PdsRingLoaderModule,
   PdsSelectBoxModule,
@@ -28,12 +29,12 @@ import {
 import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 import { AppDialogComponentModule } from '../../components/app-dialog/app-dialog.component';
 import { AppComponentsPageComponent } from './app-components-page.component';
-import { AvatarDocumentationComponent } from './documentation/avatar/avatar-documentation.component';
+import { AvatarDocumentationComponent } from './documentation/avatar-documentation/avatar-documentation.component';
 import { BaseDocumentationComponent } from './base-documentation/base-documentation.component';
-import { ButtonDocumentationComponent } from './documentation/button/button-documentation.component';
-import { AlertDocumentationComponent } from './documentation/alert/alert-documentation.component';
-import { CardDocumentationComponent } from './documentation/card/card-documentation.component';
-import { TogglesDocumentationComponent } from './documentation/toggles/toggles-documentation.component';
+import { ButtonDocumentationComponent } from './documentation/button-documentation/button-documentation.component';
+import { AlertDocumentationComponent } from './documentation/alert-documentation/alert-documentation.component';
+import { CardDocumentationComponent } from './documentation/card-documentation/card-documentation.component';
+import { TogglesDocumentationComponent } from './documentation/toggles-documentation/toggles-documentation.component';
 import { AppGuideCardModule } from '../../components/app-guide-card/app-guide-card.component';
 import { BaseDocumentationCardComponent } from './base-documentation/base-documentation-card/base-documentation-card.component';
 import { TabsDocumentationComponent } from './documentation/tabs-documentation/tabs-documentation.component';
@@ -46,14 +47,15 @@ import { MarkedPipeModule } from '../../pipes/marked.pipe';
 import { ComboBoxDocumentationComponent } from './documentation/combo-box-documentation/combo-box-documentation.component';
 import { DropdownDocumentationComponent } from './documentation/dropdown-documentation/dropdown-documentation.component';
 import { TextBoxDocumentationComponent } from './documentation/text-box-documentation/text-box-documentation.component';
-import { InputDocumentationComponent } from './documentation/input/input-documentation.component';
+import { InputDocumentationComponent } from './documentation/input-documentation/input-documentation.component';
+import { NavDocumentationComponent } from './documentation/nav-documentation/nav-documentation.component';
 
 interface IDocComponentRouteDef {
   name: string;
   comp: any;
 }
 
-const docComponents: IDocComponentRouteDef[] = [
+export const docComponents: IDocComponentRouteDef[] = [
   {
     name: 'alert',
     comp: AlertDocumentationComponent
@@ -79,12 +81,16 @@ const docComponents: IDocComponentRouteDef[] = [
     comp: DropdownDocumentationComponent
   },
   {
+    name: 'form-status-outlet',
+    comp: FormStatusOutletDocumentationComponent
+  },
+  {
     name: 'input',
     comp: InputDocumentationComponent
   },
   {
-    name: 'form-status-outlet',
-    comp: FormStatusOutletDocumentationComponent
+    name: 'nav',
+    comp: NavDocumentationComponent
   },
   {
     name: 'ring-loader',
@@ -158,7 +164,8 @@ function generateRoutes(): Routes {
     RingLoaderDocumentationComponent,
     StepCounterDocumentationComponent,
     FormStatusOutletDocumentationComponent,
-    TextBoxDocumentationComponent
+    TextBoxDocumentationComponent,
+    NavDocumentationComponent
   ],
   imports: [
     DialogOverlayModule,
@@ -191,8 +198,22 @@ function generateRoutes(): Routes {
     SelectionModule,
     PdsStepCounterModule,
     PdsFormStatusModule,
-    MarkedPipeModule
+    MarkedPipeModule,
+    PdsNavModule
   ]
 })
 export class AppComponentsPageModule {
+  constructor(@Inject(NAV_ENTRIES) protected navEntries: NavEntry[]) {
+    const componentsNavEntry = navEntries.find(navEntry => navEntry?.id === 'components');
+    console.log(componentsNavEntry);
+    if (componentsNavEntry) {
+      componentsNavEntry.children = [];
+      docComponents.forEach(docCompDef => {
+        componentsNavEntry.children.push({
+          name: docCompDef.name,
+          linkUrl: '/components/' + docCompDef.name
+        } as NavEntry);
+      });
+    }
+  }
 }

@@ -1,0 +1,165 @@
+<pds-app-base-documentation-component
+  [documentationTabs]="[
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview },
+  ]"
+  heading="Nav Menu"
+  id="nav"
+></pds-app-base-documentation-component>
+<ng-template #overview>
+
+  <div #top fxLayout="column" fxLayoutGap="32px">
+
+    <div fxLayout="row" fxLayoutGap="16px">
+      <div *ngFor="let card of documentationCards">
+        <button (click)="card.anchorRef.nativeElement.scrollIntoView()" fxFlex>{{card.title}}</button>
+      </div>
+    </div>
+
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="navConditionalEntries"
+      [title]="'Templates with conditionals'"
+      [topElement]="top">
+    </pds-app-base-documentation-card>
+
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="nav"
+      [title]="'Simple Navigation Menu'"
+      [topElement]="top">
+    </pds-app-base-documentation-card>
+
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="navEntryTemplates"
+      [title]="'Using Entry Templates'"
+      [topElement]="top">
+    </pds-app-base-documentation-card>
+
+    <pds-app-base-documentation-card
+      [contentTemplateRef]="navEntryTemplatesIcons"
+      [title]="'Using Icons in Entry Templates'"
+      [topElement]="top">
+    </pds-app-base-documentation-card>
+
+  </div>
+</ng-template>
+
+<ng-template #nav>
+  <div fxLayout="column" fxLayoutGap="16px">
+
+    <section fxFlex>
+      To provide navigation entries, you can either use the injection tokens <code>NAV_ENTRIES</code> and <code>PDS_SECONDARY_NAV_ENTRIES</code>
+      or the <code>[entries]</code> (which will be shown at the top of the nav menu) and <code>[secondaryEntries]</code>
+      inputs (shown at the bottom). Build up your navigation entries lists as
+      arrays of <code>NavEntry</code>'s.
+    </section>
+    <section fxFlex>
+      <div fxLayout="column" fxLayoutGap="16px">
+        <section fxFlex>
+          <pds-nav [entries]="navEntries" [secondaryEntries]="secondaryNavEntries">
+            <div class="pds-app-branding">
+              <svg-icon name="vitagroup-signet" size="100px"></svg-icon>
+              MyExampleMenu
+            </div>
+          </pds-nav>
+        </section>
+      </div>
+    </section>
+  </div>
+</ng-template>
+
+<ng-template #navEntryTemplates>
+  <div fxLayout="column" fxLayoutGap="16px">
+    <section fxFlex>
+      You can make use of the <code>&lt;pds-nav-entry&gt;</code> component to customize the display of your nav
+      elements.
+    </section>
+    <section fxFlex>
+      <pds-nav [entries]="navEntries" [secondaryEntries]="secondaryNavEntries">
+        <div class="pds-app-branding">
+          <svg-icon name="vitagroup-signet" size="80px"></svg-icon>
+          MyExampleMenu
+        </div>
+        <pds-nav-entry *navEntryDef="let entry" [entry]="entry" [ngStyle]="{backgroundColor: 'var(--info)'}">
+          <span>{{ entry.name }}</span>
+        </pds-nav-entry>
+      </pds-nav>
+    </section>
+
+    <section fxFlex>
+      Or you may even use an own element instead of <code>&lt;pds-nav-entry&gt;</code>. We use
+      <code>&lt;a&gt;</code> elements with css style definitions in the following example. The style definitions are
+      <code>
+        {{customEntryStyle | json}}
+      </code>
+    </section>
+    <section fxFlex>
+      <pds-nav [entries]="navEntries" [secondaryEntries]="secondaryNavEntries">
+        <div class="pds-app-branding">
+          <svg-icon name="vitagroup-signet" size="80px"></svg-icon>
+          MyExampleMenu
+        </div>
+        <div *navEntryDef="let entry"
+             [navEntryLink]="entry"
+             [ngStyle]="customEntryStyle">
+          {{ entry.name }}
+        </div>
+      </pds-nav>
+    </section>
+  </div>
+
+</ng-template>
+
+<ng-template #navEntryTemplatesIcons>
+  <div fxLayout="column" fxLayoutGap="16px">
+    <section fxFlex>
+      You can also use <code>&lt;svg-icons&gt;</code> inside of <code>&lt;pds-nav-entry&gt;</code> with directives
+      <code>pdsBefore</code> and/or
+      <code>pdsAfter</code>
+      to add icons to the entry
+    </section>
+    <section fxFlex>
+      <pds-nav [entries]="navEntries" [secondaryEntries]="secondaryNavEntries">
+        <div class="pds-app-branding">
+          <svg-icon name="vitagroup-signet" size="80px"></svg-icon>
+          MyExampleMenu
+        </div>
+        <pds-nav-entry *navEntryDef="let entry" [entry]="entry">
+          <span>{{ entry.name }}</span>
+          <svg-icon name="info" pdsBefore></svg-icon>
+          <svg-icon name="search" pdsAfter></svg-icon>
+        </pds-nav-entry>
+      </pds-nav>
+    </section>
+  </div>
+
+</ng-template>
+
+<ng-template #navConditionalEntries>
+  <div fxLayout="column" fxLayoutGap="16px">
+    <section fxFlex>
+      You may add custom values for one <code>NavEntry</code> by adding any key/value pair. In the following example we
+      added a key 'children' containing an array of child <code>NavEntry</code>s only for the second root entry. Using
+      <code>&lt;div *navEntryDef="let entry; when: hasChildren"&gt;</code> directive passes the entry to a function,
+      returning a boolean value. In this case we just check if the key 'children' exists and we then display a custom
+      rendering for this entry, adding the child elements to the DOM.
+    </section>
+
+    <section fxFlex>
+      <pds-nav [entries]="navEntriesWithChildren" [secondaryEntries]="secondaryNavEntries">
+        <div class="pds-app-branding">
+          <svg-icon name="vitagroup-signet" size="80px"></svg-icon>
+          MyExampleMenu
+        </div>
+        <div *navEntryDef="let entry; when: hasChildren" [ngStyle]="{border: '1px dashed black'}">
+          <pds-nav-entry [entry]="entry">{{ entry.name }}</pds-nav-entry>
+
+          <pds-nav-entry *ngFor="let childEntry of entry.children">
+            <svg-icon name="arrow-right" pdsBefore></svg-icon>
+            <span>{{ childEntry.name }}</span>
+          </pds-nav-entry>
+        </div>
+      </pds-nav>
+    </section>
+  </div>
+</ng-template>
+
+

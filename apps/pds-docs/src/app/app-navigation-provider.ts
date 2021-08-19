@@ -7,21 +7,22 @@ export const APP_NAV_ENTRY_PROVIDER: Provider = {
   useValue: [
     {
       name: $localize`Introduction`,
-      linkUrl: '/',
+      linkUrl: '/'
     },
     {
       name: $localize`Guides`,
-      linkUrl: '/guides',
+      linkUrl: '/guides'
     },
     {
+      id: 'components',
       name: $localize`Components`,
-      linkUrl: '/components',
+      linkUrl: '/components'
     },
     {
       name: $localize`CSS`,
-      linkUrl: '/css',
-    },
-  ] as NavEntry[],
+      linkUrl: '/css'
+    }
+  ] as NavEntry[]
 };
 
 export const APP_SECONDARY_NAV_ENTRY_PROVIDER: Provider = {
@@ -30,12 +31,12 @@ export const APP_SECONDARY_NAV_ENTRY_PROVIDER: Provider = {
     {
       name: 'Github',
       linkUrl: 'https://github.com/vitagroupag',
-      iconName: 'github',
+      iconName: 'github'
     },
     {
       name: 'Homepage',
       linkUrl: 'https://vitagroup.ag',
-      iconName: 'globe',
-    },
-  ] as NavEntry[],
+      iconName: 'globe'
+    }
+  ] as NavEntry[]
 };
