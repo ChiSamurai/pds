@@ -29,8 +29,8 @@ import { AppComponent } from '../../app.component';
       <ng-content></ng-content>
     </div>
     <pds-toggle-box [formControl]="darkModeControl">
-      <label [class.text-warning]="!darkModeControl.value">
-        <svg-icon size="24" [name]="darkModeControl.value ? 'moon' : 'sun'"></svg-icon>
+      <label [class.text-warning]="darkModeControl.value">
+        <svg-icon size="24" [name]="darkModeControl.value ? 'sun' : 'moon'"></svg-icon>
       </label>
     </pds-toggle-box>
   `,
