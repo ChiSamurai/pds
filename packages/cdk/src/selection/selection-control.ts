@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { ShortcutManager } from '@vitagroup/common';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import {
   ElementFocusAccessor,
   ElementFocusState,
