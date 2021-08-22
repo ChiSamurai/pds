@@ -1,10 +1,10 @@
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import {
+  ChangeDetectorRef,
   ContentChildren,
   Directive,
   ElementRef,
   EventEmitter,
-  Input,
   OnDestroy,
   OnInit,
   Output,
@@ -13,7 +13,6 @@ import {
 } from '@angular/core';
 import { ShortcutManager } from '@vitagroup/common';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import {
   ElementFocusAccessor,
   ElementFocusState,
@@ -49,14 +48,13 @@ export class SelectionControl<T> extends SelectionModel<T> implements OnInit, On
   readonly shortcuts = new ShortcutManager(this.renderer, this.elementRef);
   readonly focus = new ElementFocusState(this.elementRef, this.renderer);
 
-  @Input() mode: 'single' | 'preservedSingle' | 'multiple' = 'single';
+  mode: 'single' | 'preservedSingle' | 'multiple' = 'single';
 
-  @Input() set model(value: T[]) {
+  set model(value: T[]) {
     this.reset(value);
   }
-  @Output() readonly modelChange = new EventEmitter<T[]>();
+  readonly modelChange = new EventEmitter<T[]>();
 
-  @Input()
   set limit(value: number | null) {
     this._limit = coerceNumberProperty(value, null);
   }
@@ -73,9 +71,13 @@ export class SelectionControl<T> extends SelectionModel<T> implements OnInit, On
 
   @Output() readonly changes = new EventEmitter<SelectionChange<T>>();
 
-  @Input() trackBy: PrimitiveTrackByFn<T> = (value) => value;
+  trackBy: PrimitiveTrackByFn<T> = (value) => value;
 
-  constructor(protected elementRef: ElementRef, protected renderer: Renderer2) {
+  constructor(
+    protected changeDetectorRef: ChangeDetectorRef,
+    protected elementRef: ElementRef,
+    protected renderer: Renderer2
+  ) {
     super([]);
   }
 
@@ -154,5 +156,6 @@ export class SelectionControl<T> extends SelectionModel<T> implements OnInit, On
 
   protected emitChange(type: 'select' | 'deselect' | 'clear', value?: T): void {
     this.changes.emit({ source: this, type, value });
+    this.changeDetectorRef.detectChanges();
   }
 }

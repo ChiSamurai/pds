@@ -37,10 +37,6 @@ export abstract class ComboBoxBase<T, C extends ComboDefContext<T> = ComboDefCon
     return this.defs?.find((def) => def.when?.(value))?.template || this.defaultTemplate;
   }
   resolveTemplateContext(value: T, index: number): ComboDefContext<T> {
-    const count = this.value?.length || 0;
-    const first = index === 0;
-    const last = index === count - 1;
-
-    return { $implicit: value, index, count, first, last };
+    return new ComboDefContext<T>(value, this.value, index, this.value?.length || 0);
   }
 }

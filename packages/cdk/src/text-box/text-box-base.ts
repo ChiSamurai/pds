@@ -82,7 +82,7 @@ export abstract class TextBoxBase<T = any>
     this._value = obj;
     this.valueChange.emit(this._value);
 
-    this.changeDetectorRef.markForCheck();
+    this.changeDetectorRef.detectChanges();
   }
 
   ngOnInit() {

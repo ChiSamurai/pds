@@ -1,6 +1,6 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Directive, ElementRef, InjectionToken, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { EventUnlistener, ShortcutManager } from '@vitagroup/common';
+import { EventUnlistener } from '@vitagroup/common';
 import { ElementDisabledState } from '../element-state/element-disabled-state';
 import {
   ElementFocusAccessor,
@@ -22,7 +22,8 @@ export const SELECTION_VALUE = new InjectionToken<SelectionValue>('SELECTION_VAL
 export class SelectionValue<T = any> implements OnInit, OnDestroy, ElementFocusAccessor {
   private _unlistenClicks: EventUnlistener;
 
-  @Input('disabled') private set _disabled(value: boolean) {
+  @Input('disabled')
+  private set _disabled(value: boolean) {
     if (coerceBooleanProperty(value)) this.disabled.set();
     else this.disabled.unset();
   }

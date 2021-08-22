@@ -1,12 +1,7 @@
+import { NgForOfContext } from '@angular/common';
 import { Directive, Input, Predicate, TemplateRef } from '@angular/core';
 
-export interface ComboDefContext<T = any> {
-  $implicit: T;
-  index: number;
-  count: number;
-  first: boolean;
-  last: boolean;
-}
+export class ComboDefContext<T = any> extends NgForOfContext<T> {}
 
 @Directive()
 export class ComboDefBase<T, C extends ComboDefContext<T> = ComboDefContext<T>> {

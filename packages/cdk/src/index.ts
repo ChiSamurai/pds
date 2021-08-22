@@ -1,3 +1,6 @@
+export * from './breadcrumbs/breadcrumb-def-base';
+export * from './breadcrumbs/breadcrumbs-base';
+
 export * from './combo-box/combo-box-base';
 export * from './combo-box/combo-def-base';
 
