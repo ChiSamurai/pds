@@ -14,6 +14,7 @@ import {
   PdsCheckBoxModule,
   PdsChipModule,
   PdsComboBoxModule,
+  PdsDividerModule,
   PdsDropdownModule,
   PdsInputDropdownModule,
   PdsRadioBoxModule,
@@ -31,7 +32,6 @@ import { MarkedPipeModule } from '../../pipes/marked.pipe';
 import { AppGuideResolve } from '../../resolves/app-guide.resolve';
 import { AppComponentApiPageComponent } from './[component]/api/app-component-api-page.component';
 import { AppComponentPageComponent } from './[component]/app-component-page.component';
-import { AppComponentExamplePageComponent } from './[component]/example/app-component-example-page.component';
 import { AppComponentGuidePageComponent } from './[component]/guide/app-component-guide-page.component';
 import { AppComponentsPageComponent } from './app-components-page.component';
 
@@ -57,7 +57,10 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
       },
       {
         path: 'example',
-        component: AppComponentExamplePageComponent,
+        loadChildren: () =>
+          import('./[component]/example/app-component-example-page.module').then(
+            (m) => m.AppComponentExamplePageModule
+          ),
       },
       {
         path: '**',
@@ -74,7 +77,6 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
     AppComponentPageComponent,
     AppComponentGuidePageComponent,
     AppComponentApiPageComponent,
-    AppComponentExamplePageComponent,
   ],
   providers: [AppGuideResolve],
   imports: [
@@ -110,6 +112,7 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
     PdsTabsModule,
     RouterLinkOrHrefModule,
     AppGuideCardModule,
+    PdsDividerModule,
   ],
 })
 export class AppComponentsPageModule {}

@@ -18,23 +18,21 @@ import { AppComponent } from '../../app.component';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="page-head">
-      <ng-container *ngIf="'title' | routeData | async as title">
-        <pds-breadcrumbs>
-          <a *pdsBreadcrumbDef="let site" [routerLink]="site.linkUrl">
-            {{ site.route.data.guide?.title || site.route.data.title }}
-          </a>
-        </pds-breadcrumbs>
-      </ng-container>
-      <div>
-        <ng-content></ng-content>
-      </div>
-      <pds-toggle-box [formControl]="darkModeControl">
-        <label [class.text-warning]="!darkModeControl.value">
-          <svg-icon size="24" [name]="darkModeControl.value ? 'moon' : 'sun'"></svg-icon>
-        </label>
-      </pds-toggle-box>
+    <ng-container *ngIf="'title' | routeData | async as title">
+      <pds-breadcrumbs>
+        <a class="no-deco" *pdsBreadcrumbDef="let site" [routerLink]="site.linkUrl">
+          {{ site.route.data?.guide?.title || site.route.data?.title }}
+        </a>
+      </pds-breadcrumbs>
+    </ng-container>
+    <div>
+      <ng-content></ng-content>
     </div>
+    <pds-toggle-box [formControl]="darkModeControl">
+      <label [class.text-warning]="!darkModeControl.value">
+        <svg-icon size="24" [name]="darkModeControl.value ? 'moon' : 'sun'"></svg-icon>
+      </label>
+    </pds-toggle-box>
   `,
 })
 export class AppHeaderComponent implements OnInit, OnDestroy {

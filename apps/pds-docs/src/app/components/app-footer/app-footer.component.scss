@@ -17,16 +17,18 @@ pds-app-footer {
     @include pds.outer-child-spacing(--space-3, $trim: true);
   }
   .app-legal-claims {
+    @include pds.typography-style(--body-small);
+
     color: var(--gray-darker);
   }
 
   .app-love-indicator {
-    @include pds.typography-style(--small);
+    @include pds.typography-style(--body-small);
     @include pds.outer-spacing(--space-4, x);
 
     color: var(--gray-dark);
 
-    > span {
+    .app-love-heart {
       color: var(--primary-light);
     }
   }

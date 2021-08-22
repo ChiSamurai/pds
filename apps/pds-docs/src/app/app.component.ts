@@ -25,7 +25,6 @@ import { WINDOW } from '@ng-web-apis/common';
         >
           <svg-icon [name]="entry.iconName" *ngIf="entry.iconName" pdsBefore></svg-icon>
           <span>{{ entry.name }}</span>
-          <svg-icon fallback="expand" pdsAfter></svg-icon>
         </pds-nav-entry>
       </ng-template>
       <ng-container *navEntryDef="let entry">

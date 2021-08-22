@@ -7,13 +7,15 @@ import { AppGuidesService } from '../../../services/app-guides.service';
   template: `
     <pds-page-layout>
       <pds-page-header>
-        <pds-tabs fxLayoutAlign="center">
+        <pds-divider vertical space="lg"></pds-divider>
+        <pds-tabs fxLayoutAlign="center" fxFlex="100">
           <ng-container *ngFor="let tab of displayTabs">
             <pds-tab [routerLinkOrHref]="tab" routerLinkActive="active">
               {{ tab | titlecase }}
             </pds-tab>
           </ng-container>
         </pds-tabs>
+        <pds-divider vertical space="lg"></pds-divider>
       </pds-page-header>
 
       <pds-page-content>

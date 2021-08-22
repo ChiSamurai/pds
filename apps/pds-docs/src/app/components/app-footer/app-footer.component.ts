@@ -11,8 +11,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
     </div>
     <div class="app-love-indicator">
       made with
-      <span>❤</span>
-      in Germany
+      <span class="app-love-heart">❤</span>
+      on earth
     </div>
     <div class="app-legal-claims small">
       <span>&copy; vitagroup AG 2020-2021</span>

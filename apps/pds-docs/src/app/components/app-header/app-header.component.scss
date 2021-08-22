@@ -2,29 +2,15 @@
 
 pds-app-header {
   display: flex;
-  flex-direction: column;
-  height: var(--app-header-height);
-  flex: 1 0 auto;
+  align-items: center;
+  min-height: var(--app-header-height);
+  user-select: none;
   width: 100%;
+  flex: 1 0 0;
 
-  pds-breadcrumbs {
-    @include pds.outer-spacing(--space-lg, right);
-  }
-
-  .page-head {
-    display: flex;
-    align-items: center;
-    user-select: none;
+  > div {
     flex: 1 0 0;
-
-    > div {
-      flex: 1 0 0;
-    }
-
-    .page-title {
-      @include pds.outer-spacing(--space-4, right);
-
-      flex: 0 1 auto;
-    }
+    align-items: stretch;
+    display: flex;
   }
 }

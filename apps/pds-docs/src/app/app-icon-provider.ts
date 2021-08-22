@@ -5,6 +5,7 @@ import { faBrandIconGithub } from '../icons/fa-brand-icons';
 import {
   faSolidIconArrowLeft,
   faSolidIconArrowRight,
+  faSolidIconExclamationTriangle,
   faSolidIconExpand,
   faSolidIconGlobe,
   faSolidIconInfo,
@@ -26,6 +27,7 @@ export const APP_ICON_IMPORT_PROVIDER: Provider = {
       faSolidIconTimes,
       faSolidIconArrowRight,
       faSolidIconArrowLeft,
+      faSolidIconExclamationTriangle,
       faSolidIconInfo,
       faSolidIconGlobe,
       faBrandIconGithub,
