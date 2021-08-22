@@ -6,4 +6,12 @@ pds-breadcrumbs {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
+
+  [pdsBreadcrumbDivider] {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 1em;
+    width: 1em;
+  }
 }

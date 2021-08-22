@@ -1,4 +1,6 @@
-import { Component, NgModule, ViewEncapsulation } from '@angular/core';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Component, HostBinding, Input, NgModule, ViewEncapsulation } from '@angular/core';
+import { PdsSpacingKey } from '../utils';
 
 @Component({
   selector: 'pds-divider',
@@ -6,7 +8,25 @@ import { Component, NgModule, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
   template: ``,
 })
-export class PdsDivider {}
+export class PdsDivider {
+  private _vertical = false;
+
+  @Input() space: PdsSpacingKey = 'sm';
+
+  @Input()
+  @HostBinding('class.vertical')
+  set vertical(value: boolean) {
+    this._vertical = coerceBooleanProperty(value);
+  }
+  get vertical(): boolean {
+    return this._vertical;
+  }
+
+  @HostBinding('style.--divider-spacing')
+  protected get cssSpacingVar() {
+    return `var(--space-${this.space})`;
+  }
+}
 
 @NgModule({
   declarations: [PdsDivider],

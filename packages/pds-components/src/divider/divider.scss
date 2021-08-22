@@ -1,24 +1,28 @@
 @use "styleguide" as pds;
 
 pds-divider {
-  display: inline-block;
+  --divider-spacing: var(--space-sm);
+
+  flex: 0 0 auto;
+  display: inline-flex;
   background-color: var(--background-darker);
+  justify-self: stretch;
+  align-self: stretch;
 
   &.secondary {
     background-color: var(--background);
   }
 
   &:not(.vertical) {
-    @include pds.outer-spacing(--space-sm, y);
+    @include pds.outer-spacing(--divider-spacing, y);
 
-    width: 100%;
+    min-width: calc(100% - (var(--divider-spacing) * 2));
     height: 1px;
   }
   &.vertical {
-    @include pds.outer-spacing(--space-sm, x);
+    @include pds.outer-spacing(--divider-spacing, x);
 
-    min-height: 1em;
-    height: 100%;
+    min-height: calc(100% - (var(--divider-spacing) * 2));
     width: 1px;
   }
 }

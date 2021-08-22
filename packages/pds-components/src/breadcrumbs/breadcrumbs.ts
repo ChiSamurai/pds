@@ -8,13 +8,13 @@ import { PdsBreadcrumbDivider } from './breadcrumb-divider';
   encapsulation: ViewEncapsulation.None,
   template: `
     <ng-template #defaultDividerTemplate>
-      <span>&raquo;</span>
+      <div pdsBreadcrumbDivider>&raquo;</div>
     </ng-template>
     <ng-template #defaultBreadcrumbTemplate let-site>
       <a [routerLink]="site.linkUrl">{{ site.route.path }}</a>
     </ng-template>
 
-    <ng-container *ngFor="let site of breadcrumbs.asObservable() | async; let i = index; let last = last">
+    <ng-container *ngFor="let site of activeSitePath | async; let i = index; let last = last">
       <ng-container
         *ngTemplateOutlet="resolveTemplate(site) || defaultBreadcrumbTemplate; context: resolveTemplateContext(site, i)"
       ></ng-container>
