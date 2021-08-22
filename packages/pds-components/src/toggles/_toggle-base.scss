@@ -14,7 +14,7 @@ $toggle-border-width: 2px !default;
 
   label {
     cursor: pointer;
-    color: currentColor !important;
+    color: currentColor;
     font: inherit;
 
     &:first-child {
@@ -43,6 +43,10 @@ $toggle-border-width: 2px !default;
   }
   @include util.focus-state {
     color: var(--focus);
+
+    label {
+      color: var(--focus) !important;
+    }
 
     .toggle-indicator {
       @include pds.input-focus;

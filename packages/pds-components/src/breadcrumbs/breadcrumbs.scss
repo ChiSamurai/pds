@@ -1,0 +1,9 @@
+@use "styleguide" as pds;
+
+pds-breadcrumbs {
+  @include pds.outer-child-spacing(--space-sm, x, $trim: true, $justify: true);
+
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}

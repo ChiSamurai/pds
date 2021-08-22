@@ -10,4 +10,4 @@ const declarations = [PdsCardHeader, PdsCardContent, PdsCardFooter, PdsCard];
   exports: declarations,
   imports: [CommonModule],
 })
-export class CardModule {}
+export class PdsCardModule {}

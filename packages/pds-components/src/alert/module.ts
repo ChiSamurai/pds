@@ -5,4 +5,4 @@ import { PdsAlert } from './alert';
   declarations: [PdsAlert],
   exports: [PdsAlert],
 })
-export class AlertModule {}
+export class PdsAlertModule {}

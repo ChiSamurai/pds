@@ -5,6 +5,11 @@ export * from './badge/badge';
 
 export * from './button/fab-button';
 
+export * from './breadcrumbs/module';
+export * from './breadcrumbs/breadcrumbs';
+export * from './breadcrumbs/breadcrumb-def';
+export * from './breadcrumbs/breadcrumb-divider';
+
 export * from './card/module';
 export * from './card/card-content';
 export * from './card/card';

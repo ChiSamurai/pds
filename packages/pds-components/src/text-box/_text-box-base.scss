@@ -42,6 +42,10 @@
   }
 
   &.ng-invalid.ng-touched {
-    // todo
+    border-color: var(--error);
+
+    @include util.focus-state {
+      box-shadow: 0 0 0 1px var(--error);
+    }
   }
 }

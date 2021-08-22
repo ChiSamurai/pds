@@ -34,21 +34,21 @@ pds-card {
   }
 
   @include util.hover-state {
-    color: var(--primary-lighter);
+    // color: var(--primary-lighter);
 
     &:after {
       background-color: var(--primary-lighter);
     }
   }
   @include util.focus-state {
-    color: var(--focus);
+    // color: var(--focus);
 
     &:after {
       background-color: var(--focus);
     }
   }
   @include util.active-state {
-    color: var(--primary-darker);
+    // color: var(--primary-darker);
 
     &:after {
       background-color: var(--primary-darker);
