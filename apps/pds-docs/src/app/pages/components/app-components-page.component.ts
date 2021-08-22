@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { AsyncValidatorFn, FormControl, Validators } from '@angular/forms';
 import { DialogOverlay } from '@vitagroup/cdk';
 import { AppDialogComponent } from '../../components/app-dialog/app-dialog.component';
+import { AppGuidesService } from '../../services/app-guides.service';
 
 @Component({
   selector: 'pds-app-components-page',
@@ -34,7 +35,7 @@ export class AppComponentsPageComponent {
     'Audie Almeida',
   ];
 
-  constructor(protected dialog: DialogOverlay) {}
+  constructor(protected dialog: DialogOverlay, readonly appGuides: AppGuidesService) {}
 
   openModal(): void {
     this.dialog.create(AppDialogComponent).subscribe();

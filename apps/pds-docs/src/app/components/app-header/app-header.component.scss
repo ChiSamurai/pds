@@ -1,15 +1,21 @@
 @use "styleguide" as pds;
 
 pds-app-header {
-  @include pds.inner-spacing(--space-sm, top);
-
+  display: flex;
+  flex-direction: column;
+  height: var(--app-header-height);
   flex: 1 0 auto;
   width: 100%;
+
+  pds-breadcrumbs {
+    @include pds.outer-spacing(--space-lg, right);
+  }
 
   .page-head {
     display: flex;
     align-items: center;
     user-select: none;
+    flex: 1 0 0;
 
     > div {
       flex: 1 0 0;
@@ -17,11 +23,8 @@ pds-app-header {
 
     .page-title {
       @include pds.outer-spacing(--space-4, right);
-    }
-  }
 
-  .app-search {
-    display: flex;
-    align-items: center;
+      flex: 0 1 auto;
+    }
   }
 }

@@ -20,6 +20,7 @@ import {
   PdsChipModule,
   PdsTextBoxModule,
   PdsToggleBoxModule,
+  PdsBreadcrumbsModule,
 } from '@vitagroup/pds-components';
 import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 import { APP_ICON_IMPORT_PROVIDER } from './app-icon-provider';
@@ -62,6 +63,7 @@ import { APP_GUIDES_INIT_PROVIDER } from './services/app-guides.service';
     PdsToggleBoxModule,
     PdsFormStatusModule.forRoot(),
     PdsDividerModule,
+    PdsBreadcrumbsModule,
   ],
   providers: [
     {

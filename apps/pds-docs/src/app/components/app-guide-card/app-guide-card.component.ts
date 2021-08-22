@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ContentChild, Input, NgModule, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SvgIconModule } from '@vitagroup/cdk';
-import { CardModule, PdsCardFooter } from '@vitagroup/pds-components';
+import { PdsCardModule, PdsCardFooter } from '@vitagroup/pds-components';
 import { AppGuide } from '../../interfaces/app-guide.interface';
 import { MarkedPipeModule } from '../../pipes/marked.pipe';
 
@@ -21,8 +21,7 @@ import { MarkedPipeModule } from '../../pipes/marked.pipe';
       </pds-card-header>
       <pds-card-content *ngIf="description" [innerHTML]="guide.description | md"></pds-card-content>
       <pds-card-footer *ngIf="!hasContentFooter; else ngContentFooter">
-        <button [routerLink]="['/', 'guides', guide.slug]">
-          <span>Read</span>
+        <button [routerLink]="linkUrl || ['/', 'guides', guide.slug]">
           <svg-icon name="arrow-right"></svg-icon>
         </button>
       </pds-card-footer>
@@ -38,12 +37,13 @@ export class AppGuideCardComponent {
   }
 
   @Input() guide: AppGuide;
+  @Input() linkUrl: string;
   @Input() description = true;
 }
 
 @NgModule({
   declarations: [AppGuideCardComponent],
   exports: [AppGuideCardComponent],
-  imports: [CardModule, RouterModule, SvgIconModule, MarkedPipeModule, CommonModule],
+  imports: [PdsCardModule, RouterModule, SvgIconModule, MarkedPipeModule, CommonModule],
 })
 export class AppGuideCardModule {}

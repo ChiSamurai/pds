@@ -4,7 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule, Routes } from '@angular/router';
 import { SvgIconModule } from '@vitagroup/cdk';
 import { RouterLinkOrHrefModule } from '@vitagroup/common';
-import { CardModule, PdsSelectBoxModule, PdsSelectListModule, PdsChipModule } from '@vitagroup/pds-components';
+import { PdsCardModule, PdsSelectBoxModule, PdsSelectListModule, PdsChipModule } from '@vitagroup/pds-components';
 import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 import { AppGuideCardModule } from '../../components/app-guide-card/app-guide-card.component';
 import { MarkedPipeModule } from '../../pipes/marked.pipe';
@@ -14,9 +14,6 @@ export const APP_INTRO_PAGE_ROUTES: Routes = [
   {
     path: '',
     component: AppIntroPageComponent,
-    data: {
-      title: $localize`Introduction`,
-    },
   },
 ];
 
@@ -31,7 +28,7 @@ export const APP_INTRO_PAGE_ROUTES: Routes = [
     PdsSelectListModule,
     PdsChipModule,
     SvgIconModule,
-    CardModule,
+    PdsCardModule,
     RouterLinkOrHrefModule,
     MarkedPipeModule,
     AppGuideCardModule,

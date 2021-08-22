@@ -8,7 +8,11 @@ import { AppGuidesService } from '../../services/app-guides.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class AppGuidesPageComponent {
-  chapters = this.appGuides.asObservable().pipe(map(() => this.appGuides.chapters));
+  readonly excludedChapters = ['Components'];
+
+  chapters = this.appGuides
+    .asObservable()
+    .pipe(map(() => this.appGuides.chapters?.filter((chapter) => !this.excludedChapters.includes(chapter))));
 
   constructor(readonly appGuides: AppGuidesService) {}
 }

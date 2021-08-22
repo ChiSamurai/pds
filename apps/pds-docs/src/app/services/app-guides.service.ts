@@ -64,7 +64,7 @@ export function initAppGuides(appGuides: AppGuidesService): () => void {
 
     await appGuides.import('common.json');
     await appGuides.import('cdk.json');
-    await appGuides.import('components.json');
+    await appGuides.import('pds-components.json');
   };
 }
 

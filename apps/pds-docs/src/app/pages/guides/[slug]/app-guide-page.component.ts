@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { AppGuidesService } from '../../services/app-guides.service';
+import { AppGuidesService } from '../../../services/app-guides.service';
 
 @Component({
   selector: 'pds-app-guide-page',
