@@ -39,7 +39,7 @@
 }
 
 @mixin link-hover {
-  // color: util.var(--link-hover, --link);
+  color: util.var(--link-hover, --link);
   border-bottom-color: util.var(--link-hover, --link);
 }
 @mixin link-focus {
@@ -47,6 +47,6 @@
   border-bottom-color: util.var(--link-focus, --focus);
 }
 @mixin link-active {
-  // color: util.var(--link-active, --link-hover);
+  color: util.var(--link-active, --link-hover);
   border-bottom-color: util.var(--link-active, --link-hover);
 }
