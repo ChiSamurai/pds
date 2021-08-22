@@ -44,25 +44,35 @@ export class Breadcrumbs extends ArrayBehaviorState<SiteRef> {
       return activeChildSite;
     });
 
-    let fullRouteData = this.router.routerState.root.snapshot.data;
+    const activeLeafSite = activeSitePath[activeSitePath?.length - 1];
+    const activeRoute: Route = traverse(this.router.routerState.root.snapshot, (snapshot) => snapshot.firstChild)
+      ?.routeConfig;
 
-    const activeBreadcrumb = activeSitePath[activeSitePath?.length - 1];
-    const activeRouteSnapshot = traverse(this.router.routerState.root.snapshot, (snapshot) => {
-      fullRouteData = { ...fullRouteData, ...snapshot.data };
-      return snapshot.firstChild;
-    });
-    const activeRoute: Route = {
-      ...activeRouteSnapshot?.routeConfig,
-      data: fullRouteData,
-    };
-
-    if (activeRoute?.path.startsWith(':') && activeRoute?.path !== activeBreadcrumb?.route.path) {
+    if (activeRoute?.path.startsWith(':') && activeRoute?.path !== activeLeafSite?.route.path) {
       activeSitePath.push({
         route: activeRoute,
         linkUrl: '.',
       } as SiteRef);
     }
 
-    return activeSitePath;
+    return activeSitePath.map(this.mapActiveSiteRef.bind(this));
+  }
+
+  protected mapActiveSiteRef(site: SiteRef): SiteRef {
+    if (site.route.resolve != null) {
+      const resolvedRouteData = traverse(
+        this.router.routerState.root.snapshot,
+        (snapshot) => snapshot.firstChild,
+        (snapshot) => snapshot.routeConfig.resolve != null
+      )?.data;
+
+      return {
+        ...site,
+        route: {
+          ...site.route,
+          data: { ...site.route.data, ...resolvedRouteData },
+        },
+      };
+    } else return site;
   }
 }
