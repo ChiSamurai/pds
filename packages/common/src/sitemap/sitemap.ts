@@ -1,30 +1,22 @@
-import { InjectionToken, Predicate } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { Route, Routes } from '@angular/router';
-import { ObjectPropertySelector, resolveObjectPropertySelector } from '../reflection/resolve-object-property-selector';
-import { ArrayBehaviorState } from '../rx';
 import { normalizeUrl } from '../utils/normalize-url';
 
-export const SITEMAP = new InjectionToken<Sitemap>('SITEMAP');
+/** Describes a {@link Route.path} string */
+export type RoutePath = string;
+/** Describes a parameterized {@link Route.path} string */
+export type ParameterizedRoutePath = `:${string}`;
 
 export interface SitemapDescriptor {
-  routes?: Routes;
-  lazyChildren?: Record<string, SitemapDescriptor>;
-  routeParamOptions?: Record<string, string[]>;
+  /** Defines the {@link Routes} that are available directly after {@link ApplicationRef.bootstrap} */
+  routes: Routes;
   /**
-   * Defines how to and what property of the {@link Route} should be used to
-   * retrieve the {@link SiteRef.title} value. Defaults to {@link Route.data.title}
+   * Loads any potentially lazily defined route to make sure that the **full** sitemap
+   * tree can be generated at any time
    */
-  titleSelector?: ObjectPropertySelector<Route>;
-  /**
-   * Defines how to and what property of the {@link Route} should be used to
-   * retrieve the {@link SiteRef.key} value. Defaults to {@link Route.path}
-   */
-  keySelector?: ObjectPropertySelector<Route>;
-  /**
-   * Defines a filter predicate that determines whether or not to include a {@link Route}
-   * into the {@link SiteRef} generation process
-   */
-  filter?: Predicate<Route>;
+  loadChildren?: Record<RoutePath, SitemapDescriptor | Routes>;
+  /** Loads any potential param values for the desired parameterized routes */
+  loadParamValues?: Record<ParameterizedRoutePath, string[]>;
 }
 
 /** @internal */
@@ -33,78 +25,71 @@ interface NestedSitemapDescriptor extends SitemapDescriptor {
 }
 
 export interface SiteRef {
-  readonly key: string;
+  readonly route: Route;
+
   linkUrl: string;
   children?: SiteRef[];
-  title?: string;
 }
 
-function createSiteRefs(descriptor: SitemapDescriptor): SiteRef[] {
-  const siteRefs: SiteRef[] = [];
-  const resolveBaseUrl = (path) => {
+@Injectable()
+export class Sitemap extends Array<SiteRef> {
+  constructor(@Optional() descriptor?: SitemapDescriptor) {
+    super(...((descriptor && createSitemap(descriptor)) || []));
+  }
+}
+
+export function createSitemap(descriptor: SitemapDescriptor | Routes): Sitemap {
+  const sitemap = [];
+
+  const resolveBaseUrl = (path: string) => {
     const { baseUrl } = descriptor as NestedSitemapDescriptor;
     return baseUrl != null ? normalizeUrl('/', baseUrl, path) : normalizeUrl('/', path);
   };
 
+  // we need to ensure that the code that follows this statement is dealing with a `SitemapDescriptor` value!
+  if (Array.isArray(descriptor)) descriptor = { routes: descriptor as Routes };
+
   if (descriptor.routes != null) {
-    const { titleSelector, keySelector, filter } = descriptor;
-
     for (const route of descriptor.routes) {
-      const routeKey = resolveObjectPropertySelector(route, keySelector, route.path);
-      const routeDescriptor = descriptor.lazyChildren?.[routeKey];
-      const routeTitle = resolveObjectPropertySelector(route, titleSelector, route.data?.title);
+      const routePath = route.path;
 
-      const isEmptyRoute = !route.path && !route.children?.length;
-      const isWildcardRoute = route.path?.includes('*');
-      const isFiltered = filter?.(route);
-      const isParameterized = route.path?.includes(':');
+      const isWildcardRoute = routePath?.includes('*');
+      const isParameterized = routePath?.includes(':');
 
-      if (!isEmptyRoute && !isWildcardRoute && !isFiltered) {
-        const routeParamOptions = descriptor.routeParamOptions?.[routeKey];
-        const routes = (route.children || []).concat(routeDescriptor?.routes || []);
+      if (!isWildcardRoute) {
+        const childDescriptor = descriptor.loadChildren?.[routePath];
+        const routeParamOptions = descriptor.loadParamValues?.[routePath];
+        const routes = (route.children || []).concat(
+          Array.isArray(childDescriptor) ? childDescriptor : childDescriptor?.routes || []
+        );
 
-        if (isParameterized && routeParamOptions != null) {
-          for (const paramValue of routeParamOptions) {
-            const baseUrl = resolveBaseUrl(paramValue);
-            const title = typeof routeTitle === 'object' ? routeTitle[paramValue] : null;
-            const children = createSiteRefs({
-              ...routeDescriptor,
-              baseUrl,
-              routes,
-            } as NestedSitemapDescriptor);
-
-            siteRefs.push({ children, title, linkUrl: baseUrl, key: paramValue });
-          }
-        } else {
-          const baseUrl = resolveBaseUrl(route.path);
-          const title = typeof routeTitle === 'string' ? routeTitle : null;
-          const children = createSiteRefs({
-            ...routeDescriptor,
+        const resolveChildren = (baseUrl: string) => {
+          const children = createSitemap({
+            ...childDescriptor,
             baseUrl,
             routes,
           } as NestedSitemapDescriptor);
 
-          if (routeKey) siteRefs.push({ children, title, linkUrl: baseUrl, key: routeKey });
-          else siteRefs.push(...children);
+          return (children?.length && children) || null;
+        };
+
+        if (isParameterized && routeParamOptions != null) {
+          for (const paramValue of routeParamOptions) {
+            const baseUrl = resolveBaseUrl(paramValue);
+            const children = resolveChildren(baseUrl);
+
+            sitemap.push({ children, linkUrl: baseUrl, route });
+          }
+        } else {
+          const baseUrl = resolveBaseUrl(routePath);
+          const children = resolveChildren(baseUrl);
+
+          if (routePath || route.loadChildren) sitemap.push({ children, linkUrl: baseUrl, route });
+          else if (children) sitemap.push(...children);
         }
       }
     }
   }
-  return siteRefs;
-}
 
-export class Sitemap implements Iterable<SiteRef> {
-  protected readonly state = new ArrayBehaviorState<SiteRef>();
-
-  constructor(descriptor: SitemapDescriptor) {
-    this.invalidate(descriptor);
-  }
-
-  invalidate(descriptor?: SitemapDescriptor): SiteRef[] {
-    return this.state.reset(...createSiteRefs(descriptor));
-  }
-
-  [Symbol.iterator](): Iterator<SiteRef> {
-    return this.state.snapshot[Symbol.iterator]();
-  }
+  return 'baseUrl' in descriptor ? sitemap : new Sitemap().concat(...sitemap);
 }

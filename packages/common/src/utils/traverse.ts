@@ -13,5 +13,5 @@ export function traverse<T = any>(obj: T, nextObjSelector: (obj: T) => any, brea
   const nextObj = nextObjSelector(obj);
 
   if (nextObj != null && !breakPredicate?.(nextObj)) return traverse(nextObj, nextObjSelector, breakPredicate);
-  else return nextObj;
+  else return nextObj || obj;
 }

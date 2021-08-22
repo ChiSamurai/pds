@@ -1,3 +1,5 @@
+export * from './breadcrumbs/breadcrumbs';
+
 export * from './css/css-unit';
 export * from './css/coerce-css-unit';
 
@@ -19,7 +21,6 @@ export * from './router-link-or-href/router-link-or-href';
 export * from './shortcut-manager/shortcut-manager';
 
 export * from './sitemap/sitemap';
-export * from './sitemap/sitemap-intl';
 
 export * from './sort/sort';
 export * from './sort/sort-model';
