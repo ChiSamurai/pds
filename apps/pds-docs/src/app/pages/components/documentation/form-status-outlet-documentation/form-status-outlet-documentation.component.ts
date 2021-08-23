@@ -3,18 +3,30 @@ import { DEFAULT_DOCUMENTATION_TABS } from '../../base-documentation/base-docume
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { FORM_ERROR_MESSAGES, FormErrorMessages } from '@vitagroup/cdk/forms';
 
 @Component({
   selector: 'pds-app-form-status-outlet-documentation',
   templateUrl: './form-status-outlet-documentation.component.html',
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: FORM_ERROR_MESSAGES,
+      useValue: {
+        required: 'I\'m required',
+        tooBig: 'I\'m too big'
+      } as FormErrorMessages
+    }
+  ]
 })
 export class FormStatusOutletDocumentationComponent {
   readonly DEFAULT_DOCUMENTATION_TABS = DEFAULT_DOCUMENTATION_TABS;
   exampleFormGroup: FormGroup;
 
-  constructor(protected fb: FormBuilder) {
+  constructor(
+    protected fb: FormBuilder
+  ) {
     this.exampleFormGroup = this.fb.group({
       myInput: [null, Validators.required, this.dummyValidator]
     });

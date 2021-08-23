@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Inject, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Route, RouterModule, Routes } from '@angular/router';
-import { DialogOverlayModule, NAV_ENTRIES, NavEntry, SelectionModule, SvgIconModule } from '@vitagroup/cdk';
+import { DialogOverlayModule, NavEntry, NavEntryState, SelectionModule, SvgIconModule } from '@vitagroup/cdk';
 import { FormStatusOutletModule } from '@vitagroup/cdk/forms';
 import { FlexContainerModule } from '@vitagroup/cdk/layout';
 import { ClipPipeModule } from '@vitagroup/common';
@@ -222,16 +222,16 @@ function generateRoutes(): Routes {
   ]
 })
 export class AppComponentsPageModule {
-  constructor(@Inject(NAV_ENTRIES) protected navEntries: NavEntry[]) {
-    const componentsNavEntry = navEntries.find(navEntry => navEntry?.id === 'components');
-    if (componentsNavEntry) {
-      componentsNavEntry.children = [];
-      docComponents.forEach(docCompDef => {
-        componentsNavEntry.children.push({
-          name: docCompDef.name,
-          linkUrl: '/components/' + docCompDef.name
-        } as NavEntry);
+  constructor(protected navEntryState: NavEntryState) {
+    const entryIndex = navEntryState.snapshot?.findIndex(thisEntry => thisEntry.id === 'components');
+    const entry = navEntryState.snapshot[entryIndex];
+
+    if (entry) {
+      entry.children = docComponents.map(docCompDef => <NavEntry>{
+        name: docCompDef.name,
+        linkUrl: '/components/' + docCompDef.name
       });
+      navEntryState.patch([entry], entryIndex);
     }
   }
 }
