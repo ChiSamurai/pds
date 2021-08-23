@@ -5,6 +5,7 @@ pds-app {
   display: flex;
   align-items: stretch;
   height: 100vh;
+  overflow: hidden;
 
   .pds-app-branding {
     @include pds.inner-spacing(--space-lg, x);
@@ -29,6 +30,7 @@ pds-app {
 
   pds-nav {
     width: var(--app-menu-width);
+    overflow: auto;
 
     .nav-entry-children {
       font-size: smaller;
