@@ -30,15 +30,15 @@
       </section>
       <fx-break></fx-break>
       <section fxFlex="50">
-        <label>Tag value style</label>
+        <label>chip value style</label>
         <pds-combo-box placeholder="Type something and hit enter...">
-          <pds-tag *pdsComboDef="let value">{{ value }}</pds-tag>
+          <pds-chip *pdsComboDef="let value">{{ value }}</pds-chip>
         </pds-combo-box>
       </section>
       <section fxFlex="50">
-        <label>Readonly tag value style</label>
+        <label>Readonly chip value style</label>
         <pds-combo-box [value]="[ 'foo', 'bar' ]" readOnly="true">
-          <pds-tag *pdsComboDef="let value">{{ value }}</pds-tag>
+          <pds-chip *pdsComboDef="let value">{{ value }}</pds-chip>
         </pds-combo-box>
       </section>
     </div>
