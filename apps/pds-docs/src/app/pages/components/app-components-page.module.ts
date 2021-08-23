@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -54,6 +54,7 @@ import { NavDocumentationComponent } from './documentation/nav-documentation/nav
 import { ChipsDocumentationComponent } from './documentation/chips-documentation/chips-documentation.component';
 import { BadgeDocumentationComponent } from './documentation/badge-documentation/badge-documentation.component';
 import { DividerDocumentationComponent } from './documentation/divider-documentation/divider-documentation.component';
+
 
 interface IDocComponentRouteDef {
   name: string;
@@ -219,16 +220,21 @@ function generateRoutes(): Routes {
     PdsBadgeModule,
     ClipPipeModule,
     PdsDividerModule
+  ],
+  providers: [
+    TitleCasePipe
   ]
 })
 export class AppComponentsPageModule {
-  constructor(protected navEntryState: NavEntryState) {
+  constructor(
+    protected navEntryState: NavEntryState,
+    protected titleCasePipe: TitleCasePipe) {
     const entryIndex = navEntryState.snapshot?.findIndex(thisEntry => thisEntry.id === 'components');
     const entry = navEntryState.snapshot[entryIndex];
 
     if (entry) {
       entry.children = docComponents.map(docCompDef => <NavEntry>{
-        name: docCompDef.name,
+        name: titleCasePipe.transform(docCompDef.name),
         linkUrl: '/components/' + docCompDef.name
       });
       navEntryState.patch([entry], entryIndex);

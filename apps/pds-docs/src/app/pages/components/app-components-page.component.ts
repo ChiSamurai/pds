@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AsyncValidatorFn, FormControl, Validators } from '@angular/forms';
 import { DialogOverlay } from '@vitagroup/cdk';
 import { AppDialogComponent } from '../../components/app-dialog/app-dialog.component';
@@ -7,7 +7,8 @@ import { AppDialogComponent } from '../../components/app-dialog/app-dialog.compo
   selector: 'pds-app-components-page',
   styleUrls: ['./app-components-page.components.scss'],
   templateUrl: './app-components-page.component.html',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponentsPageComponent {
 

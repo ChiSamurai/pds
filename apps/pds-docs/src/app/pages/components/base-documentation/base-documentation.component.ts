@@ -1,6 +1,7 @@
 import {
   AfterContentInit,
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   Input,
@@ -41,7 +42,8 @@ export interface IDocumentationTab {
 
 @Component({
   selector: 'pds-app-base-documentation-component',
-  templateUrl: './base-documentation.component.html'
+  templateUrl: './base-documentation.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BaseDocumentationComponent implements OnInit, OnDestroy, AfterContentInit, AfterViewInit {
   @ViewChild('guideTemplate') guideTemplateRef: TemplateRef<never>;
