@@ -38,7 +38,9 @@
         <pds-select-list>
           <ng-container *ngIf="['option 1', 'option 2', 'option 3', 'option 4'] | pdsInputFilter as filteredOptions">
             <ng-container *ngIf="filteredOptions?.length; else noMatchTemplate">
-              <pds-select-option *ngFor="let option of filteredOptions" [value]="option">
+              <pds-select-option *ngFor="let option of filteredOptions"
+                                 [ngStyle]="{fontWeight: searchDropdown.selectionModel?.toArray().includes(option)? 'bold': 'normal'}"
+                                 [value]="option">
                 {{ option }}
               </pds-select-option>
             </ng-container>
@@ -55,40 +57,47 @@
     <div fxLayout="row wrap" fxLayoutGap="32px grid">
       <section fxFlex="50">
         <label>Single selection behavior</label>
-        <pds-select-box placeholder="Select an option...">
+        <pds-select-box #singleSelect placeholder="Select an option...">
           <pds-select-list mode="single">
-            <pds-select-option [value]="'foo'">foo</pds-select-option>
-            <pds-select-option [value]="'bar'">bar</pds-select-option>
+            <pds-select-option *ngFor="let value of ['foo', 'bar', 'baz']"
+                               [ngStyle]="{fontWeight: singleSelect.selectionModel?.toArray().includes(value)? 'bold': 'normal'}"
+                               [value]="value"
+            >{{value}}</pds-select-option>
           </pds-select-list>
         </pds-select-box>
       </section>
 
       <section fxFlex="50">
-        <label>Multi selection behavior&nbsp;&nbsp;<pds-tag>default</pds-tag>
+        <label>Multi selection behavior&nbsp;&nbsp;<pds-chip>default</pds-chip>
         </label>
-        <pds-select-box placeholder="Select options...">
+        <pds-select-box #multipleChip placeholder="Select options...">
           <pds-select-list mode="multiple">
-            <pds-select-option [value]="'foo'">foo</pds-select-option>
-            <pds-select-option [value]="'bar'">bar</pds-select-option>
+            <pds-select-option *ngFor="let value of ['foo', 'bar', 'baz']"
+                               [ngStyle]="{fontWeight: multipleChip.selectionModel?.toArray().includes(value)? 'bold': 'normal'}"
+                               [value]="value"
+            >{{value}}</pds-select-option>
           </pds-select-list>
         </pds-select-box>
       </section>
+
 
       <fx-break></fx-break>
       <section fxFlex="50">
         <label>Tag value style with multi selection behavior</label>
-        <pds-select-box placeholder="Select options...">
-          <pds-tag *pdsSelectDef="let value">{{ value }}</pds-tag>
+        <pds-select-box #multiTag placeholder="Select options...">
+          <pds-chip *pdsSelectDef="let value">{{ value }}</pds-chip>
           <pds-select-list mode="multiple">
-            <pds-select-option [value]="'foo'">foo</pds-select-option>
-            <pds-select-option [value]="'bar'">bar</pds-select-option>
+            <pds-select-option *ngFor="let value of ['foo', 'bar', 'baz']"
+                               [ngStyle]="{fontWeight: multiTag.selectionModel?.toArray().includes(value)? 'bold': 'normal'}"
+                               [value]="value"
+            >{{value}}</pds-select-option>
           </pds-select-list>
         </pds-select-box>
       </section>
       <section fxFlex="50">
         <label>Read only tag value style</label>
         <pds-select-box [value]="[ 'foo', 'bar' ]" readOnly="true">
-          <pds-tag *pdsSelectDef="let value">{{ value }}</pds-tag>
+          <pds-chip *pdsSelectDef="let value">{{ value }}</pds-chip>
           <pds-select-list mode="multiple">
             <pds-select-option [value]="'foo'">foo</pds-select-option>
             <pds-select-option [value]="'bar'">bar</pds-select-option>
@@ -129,7 +138,7 @@
       <section fxFlex="50">
         <label>Combo box with multi auto complete selection</label>
         <pds-combo-box [pdsInputDropdown]="comboBoxMultiDropdown" placeholder="Type something an hit enter...">
-          <pds-tag *pdsComboDef="let value">{{ value }}</pds-tag>
+          <pds-chip *pdsComboDef="let value">{{ value }}</pds-chip>
         </pds-combo-box>
 
         <pds-dropdown #comboBoxMultiDropdown pdsInputDropdownDef>

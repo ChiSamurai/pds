@@ -27,7 +27,7 @@
 
     <pds-app-base-documentation-card
       [contentTemplateRef]="textboxwithselectdropdown"
-      [title]="'Textbox with select dropdown'"
+      [title]="'Textbox with select dropdown (multi)'"
       [topElement]="top">
     </pds-app-base-documentation-card>
 
@@ -129,16 +129,18 @@
       </pds-text-box>
 
       <pds-dropdown #searchDropdown pdsInputDropdownDef>
-        <pds-select-list>
+        <pds-select-list mode="multiple">
           <ng-container *ngIf="['option 1', 'option 2', 'option 3', 'option 4'] | pdsInputFilter as filteredOptions">
             <ng-container *ngIf="filteredOptions?.length; else noMatchTemplate">
-              <pds-select-option *ngFor="let option of filteredOptions" [value]="option">
+              <pds-select-option *ngFor="let option of filteredOptions"
+                                 [ngStyle]="{fontWeight: searchDropdown.selectionModel?.toArray().includes(option)? 'bold': 'normal'}"
+                                 [value]="option">
                 {{ option }}
               </pds-select-option>
             </ng-container>
           </ng-container>
           <ng-template #noMatchTemplate>
-            <pds-select-option disabled="true">No matches</pds-select-option>
+            <pds-select-option disabled="true">There is no match, only Zuul!</pds-select-option>
           </ng-template>
         </pds-select-list>
       </pds-dropdown>
