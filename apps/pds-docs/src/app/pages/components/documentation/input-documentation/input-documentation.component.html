@@ -47,7 +47,7 @@
 
 <ng-template #inputdropdown>
   <div>
-    <input [(ngModel)]="inputValue" [pdsInputDropdown]="test" name="test">
+    <input [(ngModel)]="inputValue" [pdsInputDropdown]="test" [readOnly]="true" name="test">
     <pds-dropdown #test pdsInputDropdownDef>
       <pds-select-list>
         <ng-container *ngIf="['one', 'two', 'three'] | pdsInputFilter as filteredOptions">
