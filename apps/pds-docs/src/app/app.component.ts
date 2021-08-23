@@ -37,22 +37,24 @@ import { WINDOW } from '@ng-web-apis/common';
       </ng-container>
     </pds-nav>
     <router-outlet></router-outlet>
-  `,
+  `
 })
 export class AppComponent implements OnInit {
-  set darkMode(value: boolean) {
-    if (value) this.document.body.classList.add('dark');
-    else this.document.body.classList.remove('dark');
+  constructor(@Inject(DOCUMENT) readonly document: Document, @Inject(WINDOW) protected window: Window) {
   }
+
   get darkMode(): boolean {
     return this.document.body.classList.contains('dark');
   }
 
-  constructor(@Inject(DOCUMENT) readonly document: Document, @Inject(WINDOW) protected window: Window) {}
+  set darkMode(value: boolean) {
+    if (value) this.document.body.classList.add('dark');
+    else this.document.body.classList.remove('dark');
+  }
 
   ngOnInit() {
     const colorSchemeMediaQuery = this.window.matchMedia('(prefers-color-scheme: dark)');
-    colorSchemeMediaQuery.addEventListener('change', ({ matches }) => (this.darkMode = matches));
+    colorSchemeMediaQuery.addEventListener('change', ({matches}) => (this.darkMode = matches));
     this.darkMode = colorSchemeMediaQuery.matches;
   }
 }
