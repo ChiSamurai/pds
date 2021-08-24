@@ -54,6 +54,10 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
     },
     children: [
       {
+        path: 'example',
+        component: AppComponentExamplePageComponent,
+      },
+      {
         path: 'guide',
         component: AppComponentGuidePageComponent,
       },
@@ -62,13 +66,9 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
         component: AppComponentApiPageComponent,
       },
       {
-        path: 'example',
-        component: AppComponentExamplePageComponent,
-      },
-      {
         path: '**',
         pathMatch: 'full',
-        redirectTo: 'guide',
+        redirectTo: 'example',
       },
     ],
   },

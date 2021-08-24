@@ -1,5 +1,5 @@
 import { Clipboard } from '@angular/cdk/clipboard';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { AppExample } from '../../../../interfaces/app-example.interface';
 @Component({
   selector: 'pds-app-component-example-page',
   styleUrls: ['app-component-example-page.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   template: `
     <ng-container *ngIf="routeExamples | async as examples">
       <ng-container *ngFor="let example of examples; let last = last">

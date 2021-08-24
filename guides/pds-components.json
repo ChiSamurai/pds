@@ -1,5 +1,16 @@
 [
   {
+    "slug": "buttons",
+    "src": "packages/pds-components/src/button/README",
+    "title": "Buttons",
+    "chapter": "Components",
+    "description": "Buttons and variants",
+    "exampleUrls": [
+      "guides/examples/buttons/html5.html",
+      "guides/examples/buttons/html5-small.html"
+    ]
+  },
+  {
     "slug": "nav",
     "src": "packages/pds-components/src/nav/README",
     "title": "Nav",

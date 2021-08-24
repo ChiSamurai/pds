@@ -1,15 +1,15 @@
 @use "styleguide" as pds;
 
-:host {
+pds-app-component-example-page {
   .example-container {
     @include pds.outer-spacing(--space-md, bottom);
-    @include pds.inner-spacing(--space-xs);
+    @include pds.inner-spacing(--space-sm);
     @include pds.rounding(--rounding-md);
 
     background-color: var(--sheet);
     border: 2px dashed var(--background);
     overflow: hidden auto;
-    height: 420px;
+    // height: 420px;
   }
   .example-source-header {
     @include pds.outer-spacing(--space-md, bottom);
@@ -21,5 +21,11 @@
       flex: 1 0 0;
       margin: 0;
     }
+  }
+
+  ng-component {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
   }
 }
