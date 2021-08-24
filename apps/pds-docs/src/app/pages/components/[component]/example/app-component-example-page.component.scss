@@ -1,0 +1,25 @@
+@use "styleguide" as pds;
+
+:host {
+  .example-container {
+    @include pds.outer-spacing(--space-md, bottom);
+    @include pds.inner-spacing(--space-xs);
+    @include pds.rounding(--rounding-md);
+
+    background-color: var(--sheet);
+    border: 2px dashed var(--background);
+    overflow: hidden auto;
+    height: 420px;
+  }
+  .example-source-header {
+    @include pds.outer-spacing(--space-md, bottom);
+
+    display: flex;
+    align-items: center;
+
+    .example-source-h {
+      flex: 1 0 0;
+      margin: 0;
+    }
+  }
+}

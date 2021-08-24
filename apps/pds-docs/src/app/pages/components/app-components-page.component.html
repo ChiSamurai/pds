@@ -2,7 +2,10 @@
   <pds-page-content fxLayout="row wrap" fxLayoutGap="32px grid">
 
     <ng-container *ngFor="let guide of appGuides.getChapter('Components')">
-      <pds-app-guide-card [guide]="guide" linkUrl="/components/{{ guide.slug }}" fxFlex="33.33"></pds-app-guide-card>
+      <pds-app-guide-card
+        fxFlex="33.33" fxFlex.lt-lg="50" fxFlex.lt-md="100"
+        [guide]="guide" linkUrl="/components/{{ guide.slug }}">
+      </pds-app-guide-card>
     </ng-container>
 
   </pds-page-content>

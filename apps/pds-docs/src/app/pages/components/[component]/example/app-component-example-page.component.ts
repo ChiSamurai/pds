@@ -1,47 +1,37 @@
-import { AfterViewInit, Compiler, Component, NgModule, ViewChild, ViewContainerRef } from '@angular/core';
-import { SvgIconModule } from '@vitagroup/cdk';
-import { PdsAlertModule } from '@vitagroup/pds-components';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { AppExample } from '../../../../interfaces/app-example.interface';
 
 @Component({
   selector: 'pds-app-component-example-page',
-  styles: [':host { display: block }'],
+  styleUrls: ['app-component-example-page.component.scss'],
   template: `
-    <div #exampleContainer></div>
+    <ng-container *ngIf="routeExamples | async as examples">
+      <ng-container *ngFor="let example of examples; let last = last">
+        <div class="example-container">{{ example.template | ngCompile: example }}</div>
+        <div class="example-source-header">
+          <h4 class="example-source-h">Template Source</h4>
+          <button class="secondary small" (click)="clipboard.copy(example.template.trim())">
+            <svg-icon name="copy"></svg-icon>
+            <span>Copy</span>
+          </button>
+        </div>
+        <div class="example-source">
+          <pre><code [innerHTML]="example.template | hljs: 'html'"></code></pre>
+        </div>
+        <pds-divider space="xxl" *ngIf="!last"></pds-divider>
+      </ng-container>
+    </ng-container>
   `,
 })
-export class AppComponentExamplePageComponent implements AfterViewInit {
-  @ViewChild('exampleContainer', { read: ViewContainerRef })
-  protected exampleViewContainer: ViewContainerRef;
+export class AppComponentExamplePageComponent {
+  @ViewChild('exampleEditorContainer')
+  protected readonly editorContainer: ElementRef;
 
-  constructor(protected compiler: Compiler) {}
+  readonly routeExamples: Observable<AppExample[]> = this.route.parent.data.pipe(map((data) => data.examples));
 
-  ngAfterViewInit() {
-    this.compiler.clearCache();
-
-    const component = Component({
-      template: `
-        <pds-alert class="info">
-          <span pdsBefore>🎉</span>
-          <span>Wait, <strong>this</strong> is actually compiled during runtime. <strong>Fabulous</strong></span>
-        </pds-alert>
-        <br>
-        <pds-alert class="warning">
-          <svg-icon name="exclamation-triangle" pdsBefore></svg-icon>
-          <span>This section is still in progress btw</span>
-          <span pdsAfter>😉</span>
-        </pds-alert>
-      `,
-    })(class {});
-
-    const module = NgModule({
-      declarations: [component],
-      imports: [PdsAlertModule, SvgIconModule],
-    })(class {});
-
-    this.compiler.compileModuleAndAllComponentsAsync(module).then((factories) => {
-      const componentFactory = factories.componentFactories[0];
-      const componentRef = this.exampleViewContainer.createComponent(componentFactory);
-      componentRef.changeDetectorRef.detectChanges();
-    });
-  }
+  constructor(readonly clipboard: Clipboard, protected route: ActivatedRoute) {}
 }

@@ -157,7 +157,7 @@
               "apps/pds-docs/src/favicon.ico",
               "apps/pds-docs/src/assets",
               {
-                "glob": "**/*.{json,md}",
+                "glob": "**/*.{json,md,html}",
                 "input": "guides",
                 "output": "assets/guides"
               },

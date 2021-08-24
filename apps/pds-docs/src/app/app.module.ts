@@ -13,14 +13,14 @@ import {
 } from '@vitagroup/cdk/layout';
 import { RouteDataPipeModule, TemplateOutletModule } from '@vitagroup/common';
 import {
+  PdsBreadcrumbsModule,
+  PdsChipModule,
   PdsDividerModule,
   PdsFormStatusModule,
   PdsNavModule,
   PdsRingLoader,
-  PdsChipModule,
   PdsTextBoxModule,
   PdsToggleBoxModule,
-  PdsBreadcrumbsModule,
 } from '@vitagroup/pds-components';
 import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 import { APP_ICON_IMPORT_PROVIDER } from './app-icon-provider';
@@ -49,7 +49,7 @@ import { APP_GUIDES_INIT_PROVIDER } from './services/app-guides.service';
       overlayStrategy: 'onRouterEvent',
     }),
     FlexContainerModule.forRoot({
-      default: { maxWidth: 1270, padding: 32 },
+      default: { maxWidth: 1270, padding: 42 },
     }),
     HttpClientModule,
     ReactiveFormsModule,

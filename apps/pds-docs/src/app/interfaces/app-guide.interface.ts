@@ -18,6 +18,9 @@ export interface AppGuide {
   next?: string;
   /** Gets or sets the previous slug this guide wants to refer to */
   previous?: string;
+
+  /** Gets or sets a list of asset urls that should point to an angular (html) template file */
+  exampleUrls?: string[];
 }
 
 export interface AppGuideWithContent extends AppGuide {

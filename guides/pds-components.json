@@ -4,6 +4,10 @@
     "src": "packages/pds-components/src/nav/README",
     "title": "Nav",
     "chapter": "Components",
-    "description": "Navigation sidebar component"
+    "description": "Navigation sidebar component",
+    "exampleUrls": [
+      "guides/examples/nav/plain.html",
+      "guides/examples/nav/advanced-entry-templates.html"
+    ]
   }
 ]

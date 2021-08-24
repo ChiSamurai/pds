@@ -2,7 +2,6 @@ import { Provider } from '@angular/core';
 import { Sitemap } from '@vitagroup/common';
 import { APP_ROUTES } from './app-routes';
 import { AppComponentPages } from './enums/app-component-pages.enum';
-import { APP_COMPONENT_EXAMPLE_PAGE_ROUTES } from './pages/components/[component]/example/app-component-example-page.module';
 import { APP_COMPONENTS_PAGE_ROUTES } from './pages/components/app-components-page.module';
 import { APP_CSS_PAGE_ROUTES } from './pages/css/app-css-page.module';
 import { APP_GUIDES_PAGE_ROUTES } from './pages/guides/app-guides-page.module';
@@ -17,9 +16,6 @@ export const APP_SITEMAP_PROVIDER: Provider = {
       guides: APP_GUIDES_PAGE_ROUTES,
       components: {
         routes: APP_COMPONENTS_PAGE_ROUTES,
-        loadChildren: {
-          example: APP_COMPONENT_EXAMPLE_PAGE_ROUTES,
-        },
         loadParamValues: {
           ':component': Object.values(AppComponentPages),
         },

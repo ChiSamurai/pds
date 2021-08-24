@@ -1,0 +1,7 @@
+<pds-nav>
+  <pds-nav-entry *navEntryDef="let entry" [entry]="entry">
+    <svg-icon class="text-primary" name="vitagroup-signet" pdsBefore></svg-icon>
+    <span>{{ entry.name }}</span>
+    <pds-badge pdsAfter>{{ 100 | clip: 99 }}</pds-badge>
+  </pds-nav-entry>
+</pds-nav>

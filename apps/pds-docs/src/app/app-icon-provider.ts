@@ -5,8 +5,8 @@ import { faBrandIconGithub } from '../icons/fa-brand-icons';
 import {
   faSolidIconArrowLeft,
   faSolidIconArrowRight,
+  faSolidIconCopy,
   faSolidIconExclamationTriangle,
-  faSolidIconExpand,
   faSolidIconGlobe,
   faSolidIconInfo,
   faSolidIconMoon,
@@ -20,7 +20,6 @@ export const APP_ICON_IMPORT_PROVIDER: Provider = {
   useValue: {
     icons: [
       appIconVitagroupSignet,
-      faSolidIconExpand,
       faSolidIconSun,
       faSolidIconMoon,
       faSolidIconSearch,
@@ -28,6 +27,7 @@ export const APP_ICON_IMPORT_PROVIDER: Provider = {
       faSolidIconArrowRight,
       faSolidIconArrowLeft,
       faSolidIconExclamationTriangle,
+      faSolidIconCopy,
       faSolidIconInfo,
       faSolidIconGlobe,
       faBrandIconGithub,

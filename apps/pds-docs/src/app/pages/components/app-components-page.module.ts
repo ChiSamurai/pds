@@ -1,3 +1,4 @@
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -28,10 +29,14 @@ import {
 import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 import { AppDialogComponentModule } from '../../components/app-dialog/app-dialog.component';
 import { AppGuideCardModule } from '../../components/app-guide-card/app-guide-card.component';
+import { HighlightJsPipeModule } from '../../pipes/highlightjs.pipe';
 import { MarkedPipeModule } from '../../pipes/marked.pipe';
+import { NgCompilePipeModule } from '../../pipes/ng-compile.pipe';
+import { AppExamplesResolve } from '../../resolves/app-examples.resolve';
 import { AppGuideResolve } from '../../resolves/app-guide.resolve';
 import { AppComponentApiPageComponent } from './[component]/api/app-component-api-page.component';
 import { AppComponentPageComponent } from './[component]/app-component-page.component';
+import { AppComponentExamplePageComponent } from './[component]/example/app-component-example-page.component';
 import { AppComponentGuidePageComponent } from './[component]/guide/app-component-guide-page.component';
 import { AppComponentsPageComponent } from './app-components-page.component';
 
@@ -45,6 +50,7 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
     component: AppComponentPageComponent,
     resolve: {
       guide: AppGuideResolve,
+      examples: AppExamplesResolve,
     },
     children: [
       {
@@ -57,10 +63,7 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
       },
       {
         path: 'example',
-        loadChildren: () =>
-          import('./[component]/example/app-component-example-page.module').then(
-            (m) => m.AppComponentExamplePageModule
-          ),
+        component: AppComponentExamplePageComponent,
       },
       {
         path: '**',
@@ -77,8 +80,9 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
     AppComponentPageComponent,
     AppComponentGuidePageComponent,
     AppComponentApiPageComponent,
+    AppComponentExamplePageComponent,
   ],
-  providers: [AppGuideResolve],
+  providers: [AppGuideResolve, AppExamplesResolve],
   imports: [
     DialogOverlayModule,
     AppDialogComponentModule,
@@ -113,6 +117,9 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
     RouterLinkOrHrefModule,
     AppGuideCardModule,
     PdsDividerModule,
+    NgCompilePipeModule,
+    HighlightJsPipeModule,
+    ClipboardModule,
   ],
 })
 export class AppComponentsPageModule {}

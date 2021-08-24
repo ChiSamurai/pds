@@ -25,7 +25,7 @@ import { AppGuidesService } from '../../../services/app-guides.service';
   `,
 })
 export class AppComponentPageComponent {
-  readonly displayTabs = ['guide', 'api', 'example'];
+  readonly displayTabs = ['guide', /* 'api', */ 'example'];
 
   constructor(protected appGuides: AppGuidesService) {}
 }
