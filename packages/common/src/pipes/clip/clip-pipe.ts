@@ -4,9 +4,9 @@ export function clip<T extends string | number>(value: T, max: number): string {
   const ELLIPSIS = '\u2026'; // unicode for …
 
   if (typeof value === 'number') {
-    return `${Math.min(value, max)}+`;
+    return `${Math.min(value, max)}${value <= max ? '' : '+'}`;
   } else if (typeof value === 'string') {
-    return `${value.length > max ? value.slice(0, max) : value}${ELLIPSIS}`;
+    return `${value.length > max ? value.slice(0, max) : value}${value.length <= max ? '' : ELLIPSIS}`;
   } else return value?.toString();
 }
 

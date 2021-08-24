@@ -5,7 +5,7 @@ import { normalizeUrl } from '../utils/normalize-url';
 /** Describes a {@link Route.path} string */
 export type RoutePath = string;
 /** Describes a parameterized {@link Route.path} string */
-export type ParameterizedRoutePath = `:${string}`;
+export type ParameterizedRoutePath = `:${RoutePath}`;
 
 export interface SitemapDescriptor {
   /** Defines the {@link Routes} that are available directly after {@link ApplicationRef.bootstrap} */

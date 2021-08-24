@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { BreadcrumbDefBase, BreadcrumbDefContext } from './breadcrumb-def-base';
 
 @Directive()
-export class BreadcrumbsBase {
+export abstract class BreadcrumbsBase {
   private _skipEmptyRouteData = true;
 
   @ContentChildren(BreadcrumbDefBase, { descendants: true })
