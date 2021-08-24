@@ -5,8 +5,8 @@
 
 $button-height: var(--input-height, auto) !default;
 $button-rounding: var(--rounding-md) !default;
-$button-spacing-y: --space-sm !default;
-$button-spacing-x: --space-sm !default;
+$button-space-y: var(--space-sm) !default;
+$button-space-x: var(--space-sm) !default;
 $button-transition: 100ms ease-out !default;
 
 @mixin button-base {
@@ -79,13 +79,16 @@ $button-transition: 100ms ease-out !default;
 @mixin button {
   button,
   .button {
+    --button-space-x: #{$button-space-x};
+    --button-space-y: #{$button-space-y};
+
     @include button-base;
     @include button-primary;
 
     @include outer-sibling-spacing(--space-md);
-    @include outer-child-spacing($button-spacing-y, x, $trim: true, $justify: true);
-    @include inner-spacing($button-spacing-x, x);
-    @include inner-spacing($button-spacing-y, y);
+    @include outer-child-spacing(--button-space-y, x, $trim: true, $justify: true);
+    @include inner-spacing(--button-space-x, x);
+    @include inner-spacing(--button-space-y, y);
     @include rounding($button-rounding);
 
     @content;
@@ -94,13 +97,16 @@ $button-transition: 100ms ease-out !default;
       @include button-secondary;
     }
     &.even {
-      @include inner-spacing($button-spacing-y, x);
+      @include inner-spacing(--button-space-y, x);
     }
     &.block {
       width: 100%;
     }
     &.small {
-      height: var(--input-height-small, 26px);
+      --button-space-x: var(--space-xs);
+      --button-space-y: var(--space-xs);
+
+      height: var(--input-height-small, auto);
     }
   }
 }

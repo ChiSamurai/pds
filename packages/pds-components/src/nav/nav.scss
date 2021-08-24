@@ -10,7 +10,11 @@ pds-nav {
   height: 100%;
 
   > nav-entry-outlet {
-    @include pds.outer-spacing(--space-xs, bottom);
+    @include pds.outer-spacing(--space-sm, y);
+
+    &:not(:first-child) {
+      margin-top: 0;
+    }
 
     user-select: none;
     flex-direction: column;

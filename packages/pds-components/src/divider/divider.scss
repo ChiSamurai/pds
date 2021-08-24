@@ -16,13 +16,13 @@ pds-divider {
   &:not(.vertical) {
     @include pds.outer-spacing(--divider-spacing, y);
 
-    min-width: calc(100% - (var(--divider-spacing) * 2));
+    min-width: 100%;
     height: 1px;
   }
   &.vertical {
     @include pds.outer-spacing(--divider-spacing, x);
 
-    min-height: calc(100% - (var(--divider-spacing) * 2));
+    min-height: 100%;
     width: 1px;
   }
 }

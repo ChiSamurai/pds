@@ -15,6 +15,7 @@ pds-page-layout {
     pds-page-content,
     .pds-page-content {
       flex: 1 0 0;
+      max-width: 100%;
     }
     pds-page-footer {
       flex: 0 1 auto;
