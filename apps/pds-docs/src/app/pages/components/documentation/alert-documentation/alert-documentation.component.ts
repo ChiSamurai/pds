@@ -20,6 +20,8 @@ export class AlertDocumentationComponent implements OnInit {
 
   readonly fileList = [
     'index.html',
+    '.angular-cli.json',
+    'styles.scss',
     'tsconfig.json',
     'src/main.ts',
     'src/app/app.component.ts',
@@ -40,7 +42,6 @@ export class AlertDocumentationComponent implements OnInit {
       template: 'angular-cli',
       tags: ['stackblitz', 'sdk'],
       dependencies: {
-        moment: '*',
         '@vitagroup/pds-components': '*',
         '@vitagroup/pds-css': '*',
         '@vitagroup/cdk': '*',

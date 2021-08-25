@@ -1,0 +1,14 @@
+{
+  "apps": [
+    {
+      "styles": [
+        "styles.scss"
+      ],
+      "stylePreprocessorOptions": {
+        "includePaths": [
+          "@vitagroup/pds-css/sass"
+        ]
+      }
+    }
+  ]
+}
