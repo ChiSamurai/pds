@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import foo from './example1';
 
 @Component({
   selector: 'pds-app-alert-example1',
@@ -7,4 +8,5 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertExample1Component {
+  foo = foo;
 }

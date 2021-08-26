@@ -28,23 +28,33 @@ export class SnippetSourceComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.http.get(SOURCE_ASSETS_BASE + this.docName + '/snippets/' + this.snippetName + '.html', {responseType: 'text'}).subscribe(result => {
-      this.addSnippet({
-        code: result,
-        language: 'html'
-      });
-    });
-
-    this.http.get(SOURCE_ASSETS_BASE + this.docName + '/snippets/' + this.snippetName + '.ts', {responseType: 'text'}).subscribe(result => {
-      this.addSnippet({
-        code: result,
-        language: 'typescript'
-      });
-      console.log(this.snippets);
-    });
+    this.fetchSnippet('html');
+    this.fetchSnippet('ts');
   }
 
-  addSnippet(snippet: ISnippet) {
+  private fetchSnippet(fileExtension: string): void {
+    let language = 'plaintext';
+    switch (fileExtension) {
+      case 'ts':
+        language = 'typescript';
+        break;
+      case 'html':
+        language = 'html';
+        break;
+    }
+    this.http.get(SOURCE_ASSETS_BASE + this.docName + '/snippets/' + this.snippetName + '.' + fileExtension, {responseType: 'text'}).subscribe(result => {
+        this.addSnippet({
+          code: result,
+          language
+        });
+      },
+      () => {
+        console.log("no " + language + "snippet found for this example")
+      });
+
+  }
+
+  private addSnippet(snippet: ISnippet) {
     this.snippets = [...this.snippets, snippet];
   }
 }
