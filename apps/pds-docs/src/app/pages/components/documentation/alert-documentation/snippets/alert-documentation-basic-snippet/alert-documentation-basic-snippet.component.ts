@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import foo from './alert-documentation-basic-snippet';
 
 @Component({
   selector: 'pds-app-alert-basic-snippet',
@@ -8,5 +7,4 @@ import foo from './alert-documentation-basic-snippet';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertDocumentationBasicSnippetComponent {
-  foo = foo;
 }

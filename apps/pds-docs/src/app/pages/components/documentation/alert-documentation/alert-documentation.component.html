@@ -1,7 +1,6 @@
 <pds-app-base-documentation-component
   [documentationTabs]="[
     { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview },
-    { id: 'snippets', content: snippets}
   ]"
   heading="Alert"
   id="alert"
@@ -11,8 +10,13 @@
     <section>
       A banner is permanently displayed on a page to emphasize an information. In addition, a banner can be used as a
       reaction to an action of the user, for example, in the form of an error message.
-    </section>
 
+      <pds-app-alert-basic-snippet></pds-app-alert-basic-snippet>
+      <pds-app-snippet-source [collapsed]="true"
+                              docName="alert-documentation"
+                              snippetName="alert-documentation-basic-snippet"></pds-app-snippet-source>
+    </section>
+    
     <pds-app-base-documentation-card [contentTemplateRef]="alerts"
                                      title="Alerts">
     </pds-app-base-documentation-card>
@@ -51,11 +55,4 @@
       </p>
     </pds-alert>
   </ng-template>
-</ng-template>
-
-<ng-template #snippets>
-  <div>Look at these wonderful alert snippets!</div>
-  <pds-app-alert-basic-snippet></pds-app-alert-basic-snippet>
-  <pds-app-snippet-source docName="alert-documentation"
-                          snippetName="alert-documentation-basic-snippet"></pds-app-snippet-source>
 </ng-template>
