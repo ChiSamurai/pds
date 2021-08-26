@@ -11,11 +11,21 @@ export interface ISnippet {
 @Component({
   selector: 'pds-app-snippet-source',
   template: `
-    <div *ngFor="let snippet of snippets">
-      <div><span [ngStyle]="{fontStyle: 'italic'}">{{snippet.language | titlecase}}</span></div>
-      <div>
-        <pre><code [innerHTML]="snippet.code | hljs : snippet.language"></code>
-        </pre>
+    <div [hidden]="!collapsed">
+      <button class="secondary" (click)="collapsed = false">
+        Show snippet
+      </button>
+    </div>
+    <div [hidden]="collapsed">
+      <button class="secondary" (click)="collapsed = true">
+        hide snippet
+      </button>
+      <div *ngFor="let snippet of snippets">
+        <div><span [ngStyle]="{fontStyle: 'italic'}">{{snippet.language | titlecase}}</span></div>
+        <div>
+          <pre><code [innerHTML]="snippet.code | hljs : snippet.language"></code>
+          </pre>
+        </div>
       </div>
     </div>`,
   encapsulation: ViewEncapsulation.None,
@@ -24,6 +34,7 @@ export interface ISnippet {
 export class SnippetSourceComponent implements AfterViewInit {
   @Input() docName: string;
   @Input() snippetName: string;
+  @Input() collapsed = false;
 
   snippets: ISnippet[] = [];
 

@@ -23,3 +23,11 @@ export const MY_SECONDARY_NAV_ENTRIES: NavEntry[] = [
     name: 'Secondary Entry 2'
   }
 ];
+
+export const customEntryStyle = {
+  fontStyle: 'italic',
+  cursor: 'crosshair',
+  alignSelf: 'flex-end',
+  paddingRight: '1em',
+  borderBottom: '1px solid grey'
+};

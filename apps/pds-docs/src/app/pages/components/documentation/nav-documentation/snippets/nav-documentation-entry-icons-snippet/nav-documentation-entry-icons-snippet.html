@@ -1,0 +1,11 @@
+<pds-nav [entries]="MY_NAV_ENTRIES" [secondaryEntries]="MY_SECONDARY_NAV_ENTRIES">
+  <div class="pds-app-branding">
+    <svg-icon name="vitagroup-signet" size="80px"></svg-icon>
+    MyExampleMenu
+  </div>
+  <pds-nav-entry *navEntryDef="let entry" [entry]="entry">
+    <span>{{ entry.name }}</span>
+    <svg-icon name="info" pdsBefore></svg-icon>
+    <svg-icon name="search" pdsAfter></svg-icon>
+  </pds-nav-entry>
+</pds-nav>

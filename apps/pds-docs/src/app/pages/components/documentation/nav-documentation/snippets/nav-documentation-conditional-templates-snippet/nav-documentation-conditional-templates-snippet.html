@@ -1,0 +1,14 @@
+<pds-nav [entries]="MY_NAV_ENTRIES_W_CHILDREN" [secondaryEntries]="MY_SECONDARY_NAV_ENTRIES">
+  <div class="pds-app-branding">
+    <svg-icon name="vitagroup-signet" size="80px"></svg-icon>
+    MyNavMenu<br>WithCustomEntries
+  </div>
+  <div *navEntryDef="let entry; when: hasChildren" [ngStyle]="{border: '1px dashed black'}">
+    <pds-nav-entry [entry]="entry">{{ entry.name }}</pds-nav-entry>
+
+    <pds-nav-entry *ngFor="let childEntry of entry.children">
+      <svg-icon name="arrow-right" pdsBefore></svg-icon>
+      <span>{{ childEntry.name }}</span>
+    </pds-nav-entry>
+  </div>
+</pds-nav>

@@ -1,7 +1,6 @@
 <pds-app-base-documentation-component
   [documentationTabs]="[
-    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview },
-    { id: 'snippets', content: snippets}
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview }
   ]"
   heading="Nav Menu"
   id="nav"
@@ -53,16 +52,11 @@
       arrays of <code>NavEntry</code>'s.
     </section>
     <section fxFlex>
-      <div fxLayout="column" fxLayoutGap="16px">
-        <section fxFlex>
-          <pds-nav [entries]="navEntries" [secondaryEntries]="secondaryNavEntries">
-            <div class="pds-app-branding">
-              <svg-icon name="vitagroup-signet" size="100px"></svg-icon>
-              MyExampleMenu
-            </div>
-          </pds-nav>
-        </section>
-      </div>
+      <pds-app-nav-documentation-simple-snippet></pds-app-nav-documentation-simple-snippet>
+      <pds-app-snippet-source [collapsed]="true"
+                              docName="nav-documentation"
+                              snippetName="nav-documentation-simple-snippet">
+      </pds-app-snippet-source>
     </section>
   </div>
 </ng-template>
@@ -74,36 +68,21 @@
       elements.
     </section>
     <section fxFlex>
-      <pds-nav [entries]="navEntries" [secondaryEntries]="secondaryNavEntries">
-        <div class="pds-app-branding">
-          <svg-icon name="vitagroup-signet" size="80px"></svg-icon>
-          MyExampleMenu
-        </div>
-        <pds-nav-entry *navEntryDef="let entry" [entry]="entry" [ngStyle]="{backgroundColor: 'var(--info)'}">
-          <span>{{ entry.name }}</span>
-        </pds-nav-entry>
-      </pds-nav>
+      <pds-app-nav-documentation-entry-customized-snippet></pds-app-nav-documentation-entry-customized-snippet>
+      <pds-app-snippet-source [collapsed]="true"
+                              docName="nav-documentation"
+                              snippetName="nav-documentation-entry-customized-snippet"></pds-app-snippet-source>
     </section>
 
     <section fxFlex>
-      Or you may even use an own element instead of <code>&lt;pds-nav-entry&gt;</code>. We use
-      <code>&lt;a&gt;</code> elements with css style definitions in the following example. The style definitions are
-      <code>
-        {{customEntryStyle | json}}
-      </code>
+      Or you may even use an own element instead of <code>&lt;pds-nav-entry&gt;</code>.
     </section>
     <section fxFlex>
-      <pds-nav [entries]="navEntries" [secondaryEntries]="secondaryNavEntries">
-        <div class="pds-app-branding">
-          <svg-icon name="vitagroup-signet" size="80px"></svg-icon>
-          MyExampleMenu
-        </div>
-        <div *navEntryDef="let entry"
-             [navEntryLink]="entry"
-             [ngStyle]="customEntryStyle">
-          {{ entry.name }}
-        </div>
-      </pds-nav>
+      <pds-app-nav-documentation-entry-templates-snippet></pds-app-nav-documentation-entry-templates-snippet>
+      <pds-app-snippet-source [collapsed]="true"
+                              docName="nav-documentation"
+                              snippetName="nav-documentation-entry-templates-snippet"></pds-app-snippet-source>
+
     </section>
   </div>
 
@@ -118,20 +97,14 @@
       to add icons to the entry
     </section>
     <section fxFlex>
-      <pds-nav [entries]="navEntries" [secondaryEntries]="secondaryNavEntries">
-        <div class="pds-app-branding">
-          <svg-icon name="vitagroup-signet" size="80px"></svg-icon>
-          MyExampleMenu
-        </div>
-        <pds-nav-entry *navEntryDef="let entry" [entry]="entry">
-          <span>{{ entry.name }}</span>
-          <svg-icon name="info" pdsBefore></svg-icon>
-          <svg-icon name="search" pdsAfter></svg-icon>
-        </pds-nav-entry>
-      </pds-nav>
+      <pds-app-nav-documentation-entry-icons-snippet></pds-app-nav-documentation-entry-icons-snippet>
+      <pds-app-snippet-source [collapsed]="true"
+                              docName="nav-documentation"
+                              snippetName="nav-documentation-entry-icons-snippet">
+
+      </pds-app-snippet-source>
     </section>
   </div>
-
 </ng-template>
 
 <ng-template #navConditionalEntries>
@@ -145,28 +118,12 @@
     </section>
 
     <section fxFlex>
-      <pds-nav [entries]="navEntriesWithChildren" [secondaryEntries]="secondaryNavEntries">
-        <div class="pds-app-branding">
-          <svg-icon name="vitagroup-signet" size="80px"></svg-icon>
-          MyExampleMenu
-        </div>
-        <div *navEntryDef="let entry; when: hasChildren" [ngStyle]="{border: '1px dashed black'}">
-          <pds-nav-entry [entry]="entry">{{ entry.name }}</pds-nav-entry>
+      <pds-app-nav-documentation-conditional-templates-snippet></pds-app-nav-documentation-conditional-templates-snippet>
+      <pds-app-snippet-source [collapsed]="true"
+                              docName="nav-documentation"
+                              snippetName="nav-documentation-conditional-templates-snippet">
+      </pds-app-snippet-source>
 
-          <pds-nav-entry *ngFor="let childEntry of entry.children">
-            <svg-icon name="arrow-right" pdsBefore></svg-icon>
-            <span>{{ childEntry.name }}</span>
-          </pds-nav-entry>
-        </div>
-      </pds-nav>
     </section>
   </div>
 </ng-template>
-
-<ng-template #snippets>
-  <pds-app-nav-documentation-simple-snippet></pds-app-nav-documentation-simple-snippet>
-  <pds-app-snippet-source docName="nav-documentation"
-                          snippetName="nav-documentation-simple-snippet"></pds-app-snippet-source>
-</ng-template>
-
-
