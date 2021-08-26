@@ -1,0 +1,30 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@vitagroup/cdk": ["packages/cdk/src/index.ts"],
+      "@vitagroup/cdk/forms": ["packages/cdk/forms/src/index.ts"],
+      "@vitagroup/cdk/layout": ["packages/cdk/layout/src/index.ts"],
+      "@vitagroup/common": ["packages/common/src/index.ts"],
+      "@vitagroup/common/forms": ["packages/common/forms/src/index.ts"],
+      "@vitagroup/common/http": ["packages/common/http/src/index.ts"],
+      "@vitagroup/pds-components": ["packages/pds-components/src/index.ts"],
+      "@vitagroup/pds-components/layout": ["packages/pds-components/layout/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
