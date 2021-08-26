@@ -54,6 +54,9 @@ import { NavDocumentationComponent } from './documentation/nav-documentation/nav
 import { ChipsDocumentationComponent } from './documentation/chips-documentation/chips-documentation.component';
 import { BadgeDocumentationComponent } from './documentation/badge-documentation/badge-documentation.component';
 import { DividerDocumentationComponent } from './documentation/divider-documentation/divider-documentation.component';
+import { AlertExample1Component } from './documentation/alert-documentation/snippets/alert-example1.component';
+import { SnippetSourceComponent } from './base-documentation/base-snippet/snippet-source.component';
+import { HighlightJsPipeModule } from '../../pipes/highlightjs.pipe';
 
 
 interface IDocComponentRouteDef {
@@ -161,6 +164,8 @@ function generateRoutes(): Routes {
 
 @NgModule({
   declarations: [
+    AlertExample1Component,
+    SnippetSourceComponent,
     AppComponentsPageComponent,
     AlertDocumentationComponent,
     AvatarDocumentationComponent,
@@ -219,7 +224,8 @@ function generateRoutes(): Routes {
     PdsPageLayoutModule,
     PdsBadgeModule,
     ClipPipeModule,
-    PdsDividerModule
+    PdsDividerModule,
+    HighlightJsPipeModule
   ],
   providers: [
     TitleCasePipe

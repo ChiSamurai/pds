@@ -22,12 +22,17 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["packages/cdk/src/**/*.ts", "packages/cdk/src/**/*.html"]
+            "lintFilePatterns": [
+              "packages/cdk/src/**/*.ts",
+              "packages/cdk/src/**/*.html"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/packages/cdk"],
+          "outputs": [
+            "coverage/packages/cdk"
+          ],
           "options": {
             "jestConfig": "packages/cdk/jest.config.js",
             "passWithNoTests": true
@@ -56,12 +61,17 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["packages/common/src/**/*.ts", "packages/common/src/**/*.html"]
+            "lintFilePatterns": [
+              "packages/common/src/**/*.ts",
+              "packages/common/src/**/*.html"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/packages/common"],
+          "outputs": [
+            "coverage/packages/common"
+          ],
           "options": {
             "jestConfig": "packages/common/jest.config.js",
             "passWithNoTests": true
@@ -90,12 +100,17 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["packages/pds-components/src/**/*.ts", "packages/pds-components/src/**/*.html"]
+            "lintFilePatterns": [
+              "packages/pds-components/src/**/*.ts",
+              "packages/pds-components/src/**/*.html"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/packages/pds-components"],
+          "outputs": [
+            "coverage/packages/pds-components"
+          ],
           "options": {
             "jestConfig": "packages/pds-components/jest.config.js",
             "passWithNoTests": true
@@ -115,11 +130,15 @@
             "outDir": "dist/packages/pds-css",
             "rootDir": "packages/pds-css",
             "prebuild": {
-              "files": ["src/prebuilt/*.scss"],
+              "files": [
+                "src/prebuilt/*.scss"
+              ],
               "outDir": "dist/packages/pds-css/prebuilt"
             },
             "stylePreprocessorOptions": {
-              "includePaths": ["packages/pds-css/src"]
+              "includePaths": [
+                "packages/pds-css/src"
+              ]
             },
             "postcssConfig": "packages/pds-css/postcss.config.js",
             "copy": [
@@ -146,7 +165,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": ["highlight.js"],
+            "allowedCommonJsDependencies": [
+              "highlight.js"
+            ],
             "outputPath": "dist/apps/pds-docs",
             "index": "apps/pds-docs/src/index.html",
             "main": "apps/pds-docs/src/main.ts",
@@ -156,6 +177,11 @@
             "assets": [
               "apps/pds-docs/src/favicon.ico",
               "apps/pds-docs/src/assets",
+              {
+                "glob": "*/snippets/*.{html,ts}",
+                "input": "apps/pds-docs/src/app/pages/components/documentation",
+                "output": "assets/snippets"
+              },
               {
                 "glob": "**/*.{json,md}",
                 "input": "guides",
@@ -167,9 +193,13 @@
                 "output": "assets/guides/packages"
               }
             ],
-            "styles": ["apps/pds-docs/src/styles.scss"],
+            "styles": [
+              "apps/pds-docs/src/styles.scss"
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": ["packages/pds-css/src"]
+              "includePaths": [
+                "packages/pds-css/src"
+              ]
             },
             "scripts": []
           },
@@ -234,12 +264,17 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/pds-docs/src/**/*.ts", "apps/pds-docs/src/**/*.html"]
+            "lintFilePatterns": [
+              "apps/pds-docs/src/**/*.ts",
+              "apps/pds-docs/src/**/*.html"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/pds-docs"],
+          "outputs": [
+            "coverage/apps/pds-docs"
+          ],
           "options": {
             "jestConfig": "apps/pds-docs/jest.config.js",
             "passWithNoTests": true
@@ -268,7 +303,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/pds-docs-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/pds-docs-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }

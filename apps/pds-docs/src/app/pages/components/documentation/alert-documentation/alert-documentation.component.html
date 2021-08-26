@@ -1,6 +1,7 @@
 <pds-app-base-documentation-component
   [documentationTabs]="[
-    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview }
+    { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview },
+    { id: 'snippets', content: snippets}
   ]"
   heading="Alert"
   id="alert"
@@ -20,6 +21,7 @@
                                      title="Alerts with long texts">
     </pds-app-base-documentation-card>
   </div>
+
   <ng-template #alerts>
     <ng-container *ngFor="let alertClass of ['info', 'success', 'warning', 'error']">
       <pds-alert [ngClass]="alertClass">
@@ -49,4 +51,10 @@
       </p>
     </pds-alert>
   </ng-template>
+</ng-template>
+
+<ng-template #snippets>
+  <div>Look at these wonderful alert snippets!</div>
+  <pds-app-alert-example1></pds-app-alert-example1>
+  <pds-app-snippet-source docName="alert-documentation" snippetName="example1"></pds-app-snippet-source>
 </ng-template>
