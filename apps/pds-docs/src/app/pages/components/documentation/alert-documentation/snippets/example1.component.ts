@@ -7,6 +7,6 @@ import foo from './example1';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AlertExample1Component {
+export class Example1Component {
   foo = foo;
 }

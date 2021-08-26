@@ -33,13 +33,11 @@ import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 import { AppDialogComponentModule } from '../../components/app-dialog/app-dialog.component';
 import { AppComponentsPageComponent } from './app-components-page.component';
 import { AvatarDocumentationComponent } from './documentation/avatar-documentation/avatar-documentation.component';
-import { BaseDocumentationComponent } from './base-documentation/base-documentation.component';
 import { ButtonDocumentationComponent } from './documentation/button-documentation/button-documentation.component';
 import { AlertDocumentationComponent } from './documentation/alert-documentation/alert-documentation.component';
 import { CardDocumentationComponent } from './documentation/card-documentation/card-documentation.component';
 import { TogglesDocumentationComponent } from './documentation/toggles-documentation/toggles-documentation.component';
 import { AppGuideCardModule } from '../../components/app-guide-card/app-guide-card.component';
-import { BaseDocumentationCardComponent } from './base-documentation/base-documentation-card/base-documentation-card.component';
 import { TabsDocumentationComponent } from './documentation/tabs-documentation/tabs-documentation.component';
 import { DialogDocumentationComponent } from './documentation/dialog-documentation/dialog-documentation.component';
 import { RingLoaderDocumentationComponent } from './documentation/ring-loader-documentation/ring-loader-documentation.component';
@@ -54,9 +52,9 @@ import { NavDocumentationComponent } from './documentation/nav-documentation/nav
 import { ChipsDocumentationComponent } from './documentation/chips-documentation/chips-documentation.component';
 import { BadgeDocumentationComponent } from './documentation/badge-documentation/badge-documentation.component';
 import { DividerDocumentationComponent } from './documentation/divider-documentation/divider-documentation.component';
-import { AlertExample1Component } from './documentation/alert-documentation/snippets/alert-example1.component';
-import { SnippetSourceComponent } from './base-documentation/base-snippet/snippet-source.component';
 import { HighlightJsPipeModule } from '../../pipes/highlightjs.pipe';
+import { AlertDocumentationModule } from './documentation/alert-documentation/alert-documentation.module';
+import { BaseDocumentationModule } from './base-documentation/base-documentation.module';
 
 
 interface IDocComponentRouteDef {
@@ -164,12 +162,8 @@ function generateRoutes(): Routes {
 
 @NgModule({
   declarations: [
-    AlertExample1Component,
-    SnippetSourceComponent,
     AppComponentsPageComponent,
-    AlertDocumentationComponent,
     AvatarDocumentationComponent,
-    BaseDocumentationComponent,
     BadgeDocumentationComponent,
     ButtonDocumentationComponent,
     CardDocumentationComponent,
@@ -178,7 +172,6 @@ function generateRoutes(): Routes {
     DropdownDocumentationComponent,
     TogglesDocumentationComponent,
     InputDocumentationComponent,
-    BaseDocumentationCardComponent,
     TabsDocumentationComponent,
     DialogDocumentationComponent,
     ChipsDocumentationComponent,
@@ -225,7 +218,9 @@ function generateRoutes(): Routes {
     PdsBadgeModule,
     ClipPipeModule,
     PdsDividerModule,
-    HighlightJsPipeModule
+    HighlightJsPipeModule,
+    AlertDocumentationModule,
+    BaseDocumentationModule
   ],
   providers: [
     TitleCasePipe

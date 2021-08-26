@@ -12,8 +12,11 @@ export interface ISnippet {
   selector: 'pds-app-snippet-source',
   template: `
     <div *ngFor="let snippet of snippets">
-    <pre><code [innerHTML]="snippet.code | hljs : snippet.language"></code>
-    </pre>
+      <div><span [ngStyle]="{fontStyle: 'italic'}">{{snippet.language | titlecase}}</span></div>
+      <div>
+        <pre><code [innerHTML]="snippet.code | hljs : snippet.language"></code>
+        </pre>
+      </div>
     </div>`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.Default
@@ -49,7 +52,7 @@ export class SnippetSourceComponent implements AfterViewInit {
         });
       },
       () => {
-        console.log("no " + language + "snippet found for this example")
+        console.log('no ' + language + 'snippet found for this example');
       });
 
   }
