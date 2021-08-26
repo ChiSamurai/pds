@@ -55,6 +55,7 @@ import { DividerDocumentationComponent } from './documentation/divider-documenta
 import { HighlightJsPipeModule } from '../../pipes/highlightjs.pipe';
 import { AlertDocumentationModule } from './documentation/alert-documentation/alert-documentation.module';
 import { BaseDocumentationModule } from './base-documentation/base-documentation.module';
+import { NavDocumentationModule } from './documentation/nav-documentation/nav-documentation.module';
 
 
 interface IDocComponentRouteDef {
@@ -178,8 +179,7 @@ function generateRoutes(): Routes {
     RingLoaderDocumentationComponent,
     StepCounterDocumentationComponent,
     FormStatusOutletDocumentationComponent,
-    TextBoxDocumentationComponent,
-    NavDocumentationComponent
+    TextBoxDocumentationComponent
   ],
   imports: [
     DialogOverlayModule,
@@ -220,7 +220,8 @@ function generateRoutes(): Routes {
     PdsDividerModule,
     HighlightJsPipeModule,
     AlertDocumentationModule,
-    BaseDocumentationModule
+    BaseDocumentationModule,
+    NavDocumentationModule
   ],
   providers: [
     TitleCasePipe

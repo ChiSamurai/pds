@@ -45,7 +45,7 @@ export class SnippetSourceComponent implements AfterViewInit {
         language = 'html';
         break;
     }
-    this.http.get(SOURCE_ASSETS_BASE + this.docName + '/snippets/' + this.snippetName + '.' + fileExtension, {responseType: 'text'}).subscribe(result => {
+    this.http.get(SOURCE_ASSETS_BASE + this.docName + '/snippets/' + this.snippetName + '/' + this.snippetName + '.' + fileExtension, {responseType: 'text'}).subscribe(result => {
         this.addSnippet({
           code: result,
           language

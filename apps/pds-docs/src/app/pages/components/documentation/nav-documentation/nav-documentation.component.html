@@ -1,6 +1,7 @@
 <pds-app-base-documentation-component
   [documentationTabs]="[
     { id: DEFAULT_DOCUMENTATION_TABS.OVERVIEW, content: overview },
+    { id: 'snippets', content: snippets}
   ]"
   heading="Nav Menu"
   id="nav"
@@ -160,6 +161,12 @@
       </pds-nav>
     </section>
   </div>
+</ng-template>
+
+<ng-template #snippets>
+  <pds-app-nav-documentation-simple-snippet></pds-app-nav-documentation-simple-snippet>
+  <pds-app-snippet-source docName="nav-documentation"
+                          snippetName="nav-documentation-simple-snippet"></pds-app-snippet-source>
 </ng-template>
 
 

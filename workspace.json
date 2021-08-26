@@ -178,7 +178,7 @@
               "apps/pds-docs/src/favicon.ico",
               "apps/pds-docs/src/assets",
               {
-                "glob": "*/snippets/*.{html,ts}",
+                "glob": "*/snippets/**/*.{html,ts}",
                 "input": "apps/pds-docs/src/app/pages/components/documentation",
                 "output": "assets/snippets"
               },
