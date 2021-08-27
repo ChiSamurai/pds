@@ -1,0 +1,11 @@
+@use "styleguide" as pds;
+
+.example-container {
+  @include pds.outer-spacing(--space-md, bottom);
+  @include pds.inner-spacing(--space-sm);
+  @include pds.rounding(--rounding-md);
+
+  background-color: var(--sheet);
+  border: 2px dashed var(--background);
+  overflow: hidden auto;
+}

@@ -8,33 +8,36 @@ export const SOURCE_ASSETS_BASE = '/assets/snippets/';
 
 @Component({
   selector: 'pds-app-snippet-source',
+  styleUrls: ['snippet-source.component.scss'],
   template: `
-    <div fxLayout="row" fxLayoutAlign="center center">
-      <div fxFlex>
-        <button class="secondary"
-                (click)="collapsed = true"
-                *ngIf="!collapsed">
-          Hide snippet
-        </button>
-        <button class="secondary"
-                (click)="collapsed = false"
-                *ngIf="collapsed">
-          Show snippet
-        </button>
+    <div class="example-container">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <div fxFlex>
+          <button class="secondary"
+                  (click)="collapsed = true"
+                  *ngIf="!collapsed">
+            Hide snippet
+          </button>
+          <button class="secondary"
+                  (click)="collapsed = false"
+                  *ngIf="collapsed">
+            Show snippet
+          </button>
+        </div>
+        <div fxFlex>
+          <button class="secondary" (click)="startSandbox()">
+            Start stackblitz
+          </button>
+        </div>
       </div>
-      <div fxFlex>
-        <button class="secondary" (click)="startSandbox()">
-          Start stackblitz
-        </button>
-      </div>
-    </div>
 
-    <div [hidden]="collapsed">
-      <div *ngFor="let snippet of snippets">
-        <div><span [ngStyle]="{fontStyle: 'italic'}">{{snippet.language | titlecase}}</span></div>
-        <div>
+      <div [hidden]="collapsed">
+        <div *ngFor="let snippet of snippets">
+          <div><span [ngStyle]="{fontStyle: 'italic'}">{{snippet.language | titlecase}}</span></div>
+          <div>
           <pre><code [innerHTML]="snippet.code | hljs : snippet.language"></code>
           </pre>
+          </div>
         </div>
       </div>
     </div>`,
