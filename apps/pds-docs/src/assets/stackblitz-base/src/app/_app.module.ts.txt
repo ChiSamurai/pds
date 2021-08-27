@@ -1,7 +1,7 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-###snippetModuleImport###
+$importString
 
 @Component({
   selector: 'pds-app',
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: [],
   encapsulation: ViewEncapsulation.None,
   template: `
-    ###snippetComponent###
+    <$componentTagName></$componentTagName>
   `
 })
 export class AppComponent {
@@ -23,7 +23,7 @@ export class AppComponent {
   imports: [
     CommonModule,
     BrowserModule,
-    ###snippetModuleName###
+    $moduleName
   ],
   providers: [],
   bootstrap: [AppComponent]

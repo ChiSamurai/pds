@@ -3,13 +3,7 @@ import { Project } from '@stackblitz/sdk/typings/interfaces';
 import sdk from '@stackblitz/sdk';
 import { HttpClient } from '@angular/common/http';
 import { IStackblitzComponent } from '../interfaces/stackblitzComponent.interface';
-
-enum APP_MODULE_TEMPLATE_PLACEHOLDERS {
-  MODULE_IMPORT = '###snippetModuleImport###',
-  MODULE_NAME = '###snippetModuleName###',
-  COMPONENT = '###snippetComponent###'
-}
-
+import { StringInterpolator } from '@vitagroup/common';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +18,7 @@ export class AppStackblitzService {
   ];
   private stackblitzBaseFiles: { [key: string]: string } = {};
 
-  constructor(protected http: HttpClient) {
+  constructor(protected http: HttpClient, protected stringInterpolator: StringInterpolator) {
     this.loadStackblitzFiles();
   }
 
@@ -75,12 +69,10 @@ export class AppStackblitzService {
     return this.http.get(filename, {responseType: 'text'}).toPromise();
   }
 
-  private async createAppModule(moduleName: string, componentName: string, componentSelector: string): Promise<string> {
+  private async createAppModule(moduleName: string, componentName: string, componentTagName: string): Promise<string> {
     let appModuleString = await this.fetchAsset('./assets/stackblitz-base/src/app/_app.module.ts.txt');
     const importString = `import { ${moduleName} } from './${componentName}/${componentName}.module';\n`;
-    appModuleString = appModuleString.replace(APP_MODULE_TEMPLATE_PLACEHOLDERS.MODULE_NAME, moduleName);
-    appModuleString = appModuleString.replace(APP_MODULE_TEMPLATE_PLACEHOLDERS.COMPONENT, `<${componentSelector}></${componentSelector}>`);
-    appModuleString = appModuleString.replace(APP_MODULE_TEMPLATE_PLACEHOLDERS.MODULE_IMPORT, importString);
+    appModuleString = this.stringInterpolator.interpolate(appModuleString, { moduleName, componentTagName, importString });
     return Promise.resolve(appModuleString);
   }
 }
