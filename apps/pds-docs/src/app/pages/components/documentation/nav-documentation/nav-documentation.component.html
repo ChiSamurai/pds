@@ -55,7 +55,9 @@
       <pds-app-nav-documentation-simple-snippet></pds-app-nav-documentation-simple-snippet>
       <pds-app-snippet-source [collapsed]="true"
                               docName="nav-documentation"
-                              snippetName="nav-documentation-simple-snippet">
+                              snippetComponentSelector="pds-app-nav-documentation-simple-snippet"
+                              snippetDirectory="nav-documentation-simple-snippet"
+                              snippetModuleName="NavDocumentationSimpleSnippetModule">
       </pds-app-snippet-source>
     </section>
   </div>
@@ -71,7 +73,12 @@
       <pds-app-nav-documentation-entry-customized-snippet></pds-app-nav-documentation-entry-customized-snippet>
       <pds-app-snippet-source [collapsed]="true"
                               docName="nav-documentation"
-                              snippetName="nav-documentation-entry-customized-snippet"></pds-app-snippet-source>
+                              snippetComponentSelector="pds-app-nav-documentation-entry-customized-snippet"
+                              snippetDirectory="nav-documentation-entry-customized-snippet"
+                              snippetModuleName="NavDocumentationEntryCustomizedSnippetModule"
+      >
+
+      </pds-app-snippet-source>
     </section>
 
     <section fxFlex>
@@ -79,9 +86,12 @@
     </section>
     <section fxFlex>
       <pds-app-nav-documentation-entry-templates-snippet></pds-app-nav-documentation-entry-templates-snippet>
-      <pds-app-snippet-source [collapsed]="true"
+      <pds-app-snippet-source #snippet [collapsed]="true"
                               docName="nav-documentation"
-                              snippetName="nav-documentation-entry-templates-snippet"></pds-app-snippet-source>
+                              snippetComponentSelector="pds-app-nav-documentation-entry-templates-snippet"
+                              snippetDirectory="nav-documentation-entry-templates-snippet"
+                              snippetModuleName="NavDocumentationEntryTemplatesSnippetModule"
+      ></pds-app-snippet-source>
 
     </section>
   </div>
@@ -100,7 +110,10 @@
       <pds-app-nav-documentation-entry-icons-snippet></pds-app-nav-documentation-entry-icons-snippet>
       <pds-app-snippet-source [collapsed]="true"
                               docName="nav-documentation"
-                              snippetName="nav-documentation-entry-icons-snippet">
+                              snippetComponentSelector="pds-app-nav-documentation-entry-icons-snippet"
+                              snippetDirectory="nav-documentation-entry-icons-snippet"
+                              snippetModuleName="NavDocumentationEntryIconsSnippetModule"
+      >
 
       </pds-app-snippet-source>
     </section>
@@ -121,7 +134,9 @@
       <pds-app-nav-documentation-conditional-templates-snippet></pds-app-nav-documentation-conditional-templates-snippet>
       <pds-app-snippet-source [collapsed]="true"
                               docName="nav-documentation"
-                              snippetName="nav-documentation-conditional-templates-snippet">
+                              snippetComponentSelector="pds-app-nav-documentation-conditional-templates-snippet"
+                              snippetDirectory="nav-documentation-conditional-templates-snippet"
+                              snippetModuleName="NavDocumentationConditionalTemplatesSnippetModule">
       </pds-app-snippet-source>
 
     </section>

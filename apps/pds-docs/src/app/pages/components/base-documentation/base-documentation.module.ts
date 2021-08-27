@@ -7,6 +7,7 @@ import { CardModule, PdsTabsModule } from '@vitagroup/pds-components';
 import { MarkedPipeModule } from '../../../pipes/marked.pipe';
 import { SnippetSourceComponent } from './base-snippet/snippet-source.component';
 import { HighlightJsPipeModule } from '../../../pipes/highlightjs.pipe';
+import { FlexModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [BaseDocumentationCardComponent, BaseDocumentationComponent, SnippetSourceComponent],
@@ -17,8 +18,8 @@ import { HighlightJsPipeModule } from '../../../pipes/highlightjs.pipe';
     CardModule,
     PdsTabsModule,
     MarkedPipeModule,
-    HighlightJsPipeModule
-
+    HighlightJsPipeModule,
+    FlexModule
   ]
 })
 export class BaseDocumentationModule {

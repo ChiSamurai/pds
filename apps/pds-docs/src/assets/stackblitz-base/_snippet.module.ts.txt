@@ -1,0 +1,9 @@
+import { NgModule } from '@angular/core';
+###importsStatements###
+
+@NgModule({
+  declarations: [###declarations###],
+  imports: [###imports###],
+  exports: [###exports###]
+})
+export class SnippetModule {}

@@ -4,12 +4,12 @@ import { BaseDocumentationModule } from '../../base-documentation/base-documenta
 import { AlertModule } from '@vitagroup/pds-components';
 import { SvgIconModule } from '@vitagroup/cdk';
 import { CommonModule } from '@angular/common';
-import { AlertDocumentationBasicSnippetComponent } from './snippets/alert-documentation-basic-snippet/alert-documentation-basic-snippet.component';
+import { AlertDocumentationBasicSnippetModule } from './snippets/alert-documentation-basic-snippet/alert-documentation-basic-snippet.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
-  declarations: [AlertDocumentationBasicSnippetComponent, AlertDocumentationComponent],
-  imports: [CommonModule, BaseDocumentationModule, AlertModule, SvgIconModule, FlexLayoutModule],
+  declarations: [AlertDocumentationComponent],
+  imports: [CommonModule, BaseDocumentationModule, AlertModule, SvgIconModule, FlexLayoutModule, AlertDocumentationBasicSnippetModule],
   exports: [AlertDocumentationComponent]
 })
 export class AlertDocumentationModule {

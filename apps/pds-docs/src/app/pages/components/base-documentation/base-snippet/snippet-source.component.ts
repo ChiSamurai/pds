@@ -1,25 +1,35 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { AppStackblitzService } from '../../../../services/app-stackblitz.service';
+import { ISnippet } from '../../../../interfaces/snippet.inteface';
+import { IStackblitzComponent, IStackblitzComponentAsset } from '../../../../interfaces/stackblitzComponent.interface';
 
 export const SOURCE_ASSETS_BASE = '/assets/snippets/';
-
-export interface ISnippet {
-  code: string,
-  language: string
-}
 
 @Component({
   selector: 'pds-app-snippet-source',
   template: `
-    <div [hidden]="!collapsed">
-      <button class="secondary" (click)="collapsed = false">
-        Show snippet
-      </button>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <div fxFlex>
+        <button class="secondary"
+                (click)="collapsed = true"
+                *ngIf="!collapsed">
+          Hide snippet
+        </button>
+        <button class="secondary"
+                (click)="collapsed = false"
+                *ngIf="collapsed">
+          Show snippet
+        </button>
+      </div>
+      <div fxFlex>
+        <button class="secondary" (click)="startSandbox()">
+          Start stackblitz
+        </button>
+      </div>
     </div>
+
     <div [hidden]="collapsed">
-      <button class="secondary" (click)="collapsed = true">
-        hide snippet
-      </button>
       <div *ngFor="let snippet of snippets">
         <div><span [ngStyle]="{fontStyle: 'italic'}">{{snippet.language | titlecase}}</span></div>
         <div>
@@ -33,12 +43,22 @@ export interface ISnippet {
 })
 export class SnippetSourceComponent implements AfterViewInit {
   @Input() docName: string;
-  @Input() snippetName: string;
+  @Input() snippetDirectory: string;
+  @Input() snippetModuleName: string;
+  @Input() snippetComponentSelector: string;
   @Input() collapsed = false;
+
+  @Input() imports: { [key: string]: string } = {};
+  @Input() declarations: { [key: string]: string } = {};
+  @Input() dependencies: { [key: string]: string } = {};
 
   snippets: ISnippet[] = [];
 
-  constructor(protected http: HttpClient) {
+
+  constructor(
+    protected http: HttpClient,
+    protected stackblitz: AppStackblitzService
+  ) {
   }
 
   ngAfterViewInit() {
@@ -46,7 +66,33 @@ export class SnippetSourceComponent implements AfterViewInit {
     this.fetchSnippet('ts');
   }
 
+  public startSandbox() {
+    const sbComponentData = {
+      name: this.snippetDirectory,
+      moduleName: this.snippetModuleName,
+      componentSelector: this.snippetComponentSelector,
+      dependencies: this.dependencies,
+      assets: []
+    } as IStackblitzComponent;
+
+    // Fetch the snippet files (html template & typescript)
+    sbComponentData.assets = this.snippets.map(snippet => <IStackblitzComponentAsset>{
+      assetUrl: SOURCE_ASSETS_BASE + this.docName + '/snippets/' + this.snippetDirectory + '/' + snippet.filename,
+      stackblitzFilename: this.snippetDirectory + '/' + snippet.filename
+    });
+
+    // Fetch the snippet module template file
+    const moduleFilename = `${this.snippetDirectory}.module.ts`;
+    sbComponentData.assets.push({
+      assetUrl: SOURCE_ASSETS_BASE + this.docName + '/snippets/' + this.snippetDirectory + '/' + moduleFilename,
+      stackblitzFilename: this.snippetDirectory + '/' + moduleFilename
+    });
+
+    this.stackblitz.startProject(sbComponentData);
+  }
+
   private fetchSnippet(fileExtension: string): void {
+    const filename = this.snippetDirectory + '.' + fileExtension;
     let language = 'plaintext';
     switch (fileExtension) {
       case 'ts':
@@ -56,8 +102,9 @@ export class SnippetSourceComponent implements AfterViewInit {
         language = 'html';
         break;
     }
-    this.http.get(SOURCE_ASSETS_BASE + this.docName + '/snippets/' + this.snippetName + '/' + this.snippetName + '.' + fileExtension, {responseType: 'text'}).subscribe(result => {
+    this.http.get(SOURCE_ASSETS_BASE + this.docName + '/snippets/' + this.snippetDirectory + '/' + filename, {responseType: 'text'}).subscribe(result => {
         this.addSnippet({
+          filename,
           code: result,
           language
         });
