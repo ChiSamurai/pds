@@ -35,6 +35,16 @@
 </ng-template>
 
 <ng-template #buttons>
+  <p>
+    <pds-app-button-documentation-basic-snippet></pds-app-button-documentation-basic-snippet>
+    <pds-app-snippet-source [collapsed]="true"
+                            docName="button-documentation"
+                            snippetComponentSelector="pds-app-button-documentation-basic-snippet"
+                            snippetDirectory="button-documentation-basic-snippet"
+                            snippetModuleName="ButtonDocumentationBasicSnippetModule">
+    </pds-app-snippet-source>
+  </p>
+
   <ng-container *ngFor="let buttonRank of buttonRanks"
                 [ngTemplateOutletContext]="{buttonRank: buttonRank}"
                 [ngTemplateOutlet]="buttonRankTemplate"></ng-container>

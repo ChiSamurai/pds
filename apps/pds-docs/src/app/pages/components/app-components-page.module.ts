@@ -56,6 +56,7 @@ import { HighlightJsPipeModule } from '../../pipes/highlightjs.pipe';
 import { AlertDocumentationModule } from './documentation/alert-documentation/alert-documentation.module';
 import { BaseDocumentationModule } from './base-documentation/base-documentation.module';
 import { NavDocumentationModule } from './documentation/nav-documentation/nav-documentation.module';
+import { ButtonDocumentationBasicSnippetModule } from './documentation/button-documentation/snippets/button-documentation-basic-snippet/button-documentation-basic-snippet.module';
 
 
 interface IDocComponentRouteDef {
@@ -221,7 +222,8 @@ function generateRoutes(): Routes {
     HighlightJsPipeModule,
     AlertDocumentationModule,
     BaseDocumentationModule,
-    NavDocumentationModule
+    NavDocumentationModule,
+    ButtonDocumentationBasicSnippetModule
   ],
   providers: [
     TitleCasePipe
