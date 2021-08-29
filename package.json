@@ -23,7 +23,8 @@
     "update": "nx migrate latest",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "postinstall": "ngcc",
+    "pds-doc-icons-to-ts": "svg-to-ts --config svg-to-ts.json && svg-to-ts --config svg-to-ts.fa.json && svg-to-ts --config svg-to-ts.fa-brands.json",
+    "postinstall": "ngcc && npm run pds-doc-icons-to-ts",
     "workspace-generator": "nx workspace-generator"
   },
   "private": true,
