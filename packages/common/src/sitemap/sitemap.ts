@@ -33,7 +33,7 @@ export interface SiteRef {
 
 @Injectable()
 export class Sitemap extends Array<SiteRef> {
-  constructor(@Optional() descriptor?: SitemapDescriptor) {
+  constructor(@Optional() descriptor?: /** @dynamic */ SitemapDescriptor) {
     super(...((descriptor && createSitemap(descriptor)) || []));
   }
 }
