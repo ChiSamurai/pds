@@ -17,9 +17,14 @@ import { Subject } from 'rxjs';
 import { distinctUntilChanged, take, takeUntil } from 'rxjs/operators';
 import { DropdownOutletBase } from '../dropdown/dropdown-outlet-base';
 import { ElementFocusState } from '../element-state/element-focus-state';
+import { OverlayDeactivateOptions } from '../overlay/overlay-outlet-base';
 import { SelectionModel } from '../selection/selection-model';
 import { ControlValueAccessorBase } from '../utils/control-value-accessor-base';
 import { ControlInputAccessor, INPUT_ACCESSOR } from './control-input-accessor';
+
+export interface InputDropdownDeactivateOptions extends OverlayDeactivateOptions {
+  clearInput?: boolean;
+}
 
 @Directive()
 export abstract class InputDropdownOutletBase extends DropdownOutletBase implements OnInit, OnChanges, OnDestroy {
@@ -48,7 +53,7 @@ export abstract class InputDropdownOutletBase extends DropdownOutletBase impleme
   }
 
   protected onEscShortcut() {
-    if (this.isActive) this.deactivate({ setControlFocus: true, clearInputAccessor: true });
+    if (this.isActive) this.deactivate({ setFocus: true, clearInput: true });
   }
 
   activate() {
@@ -59,11 +64,10 @@ export abstract class InputDropdownOutletBase extends DropdownOutletBase impleme
 
     super.activate();
   }
-  deactivate(options?: { setControlFocus?: boolean; clearInputAccessor?: boolean }) {
+  deactivate(options?: InputDropdownDeactivateOptions) {
     super.deactivate();
 
-    if (options?.setControlFocus) this.focus.set();
-    if (options?.clearInputAccessor) this.inputAccessor.input.patch(null);
+    if (options?.clearInput) this.inputAccessor.input.patch(null);
   }
 
   ngOnInit() {
@@ -115,7 +119,7 @@ export abstract class InputDropdownOutletBase extends DropdownOutletBase impleme
           this.valueAccessor.writeValue(value);
 
           if (this._latestKeyDownEvent?.key?.toLowerCase() === 'enter' && !this._latestKeyDownEvent.shiftKey)
-            this.deactivate({ setControlFocus: true, clearInputAccessor: true });
+            this.deactivate({ setFocus: true, clearInput: true });
         });
       });
     }

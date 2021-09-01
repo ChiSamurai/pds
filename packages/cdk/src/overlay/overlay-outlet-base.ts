@@ -17,6 +17,10 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { ElementFocusState } from '../element-state/element-focus-state';
 import { OverlayDefBase } from './overlay-def-base';
 
+export interface OverlayDeactivateOptions {
+  setFocus?: boolean;
+}
+
 @Directive()
 export abstract class OverlayOutletBase<T extends OverlayDefBase> implements OnInit, OnDestroy {
   private _unlistener: EventUnlistener[] = [];
@@ -69,10 +73,12 @@ export abstract class OverlayOutletBase<T extends OverlayDefBase> implements OnI
       this._viewRef = this.overlayRef.attach(this.portal);
     }
   }
-  deactivate(): void {
+  deactivate(options?: OverlayDeactivateOptions): void {
     if (this.overlayDef != null) {
       this.overlayRef.detach();
     }
+
+    if (options?.setFocus) this.focus.set();
   }
 
   ngOnInit() {

@@ -51,6 +51,11 @@ export abstract class DropdownOutletBase extends OverlayOutletBase<DropdownDefBa
   ngOnInit() {
     super.ngOnInit();
 
+    this.shortcuts.register('enter', () => this.toggle());
+
     this.listenUntilDestroyed(this.viewContainerRef.element, 'click', () => this.toggle());
+
+    this.listenUntilDestroyed(this.overlayRef.overlayElement, 'mouseup', () => this.deactivate({ setFocus: true }));
+    this.listenUntilDestroyed(this.overlayRef.overlayElement, 'keyup.enter', () => this.deactivate({ setFocus: true }));
   }
 }
