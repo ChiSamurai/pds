@@ -75,11 +75,13 @@ export abstract class SelectBoxBase<T, C extends SelectDefContext<T> = SelectDef
       this.overlayRef.updateSize({ width });
       this.overlayRef.attach(new TemplatePortal(this.overlayTemplate, this.viewContainerRef));
     }
+    this.changeDetectorRef.detectChanges();
   }
   detachOverlay(): void {
     if (this.hasAttachedOverlay) {
       this.overlayRef.detach();
     }
+    this.changeDetectorRef.detectChanges();
   }
 
   toggleOverlay(): void {
