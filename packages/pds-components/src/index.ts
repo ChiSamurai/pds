@@ -1,5 +1,5 @@
-export * from './alert/module';
-export * from './alert/alert';
+export * from './banner/module';
+export * from './banner/banner';
 
 export * from './avatar/avatar';
 

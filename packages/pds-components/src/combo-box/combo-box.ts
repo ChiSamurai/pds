@@ -16,7 +16,7 @@ import {
   INPUT_ACCESSOR,
   resolveElementFocusState,
 } from '@vitagroup/cdk';
-import { PrimitiveBehaviorState, ShortcutManager } from '@vitagroup/common';
+import { PrimitiveBehaviorState } from '@vitagroup/common';
 
 @Component({
   selector: 'pds-combo-box',

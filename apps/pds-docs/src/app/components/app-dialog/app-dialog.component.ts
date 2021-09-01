@@ -1,6 +1,6 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { DialogOverlayModule } from '@vitagroup/cdk';
-import { PdsAlertModule, PdsModalModule } from '@vitagroup/pds-components';
+import { PdsBannerModule, PdsModalModule } from '@vitagroup/pds-components';
 
 @Component({
   selector: 'pds-app-dialog',
@@ -13,7 +13,7 @@ import { PdsAlertModule, PdsModalModule } from '@vitagroup/pds-components';
       </pds-modal-header>
 
       <pds-modal-content>
-        <pds-alert>We are using cookies to maintain and improve the quality of our service.</pds-alert>
+        <pds-banner>We are using cookies to maintain and improve the quality of our service.</pds-banner>
       </pds-modal-content>
 
       <pds-modal-footer>
@@ -28,6 +28,6 @@ export class AppDialogComponent {}
 @NgModule({
   declarations: [AppDialogComponent],
   exports: [AppDialogComponent],
-  imports: [PdsModalModule, DialogOverlayModule, PdsAlertModule],
+  imports: [PdsModalModule, DialogOverlayModule, PdsBannerModule],
 })
 export class AppDialogComponentModule {}

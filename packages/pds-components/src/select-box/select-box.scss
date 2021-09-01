@@ -29,6 +29,7 @@ pds-select-box {
 
 .pds-select-box-overlay-container {
   @include pds.elevation(pds.$level-2);
+  @include pds.rounding(--rounding-sm);
 
   min-width: 120px;
   width: 100%;

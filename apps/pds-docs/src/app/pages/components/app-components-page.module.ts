@@ -9,8 +9,8 @@ import { FormStatusOutletModule } from '@vitagroup/cdk/forms';
 import { FlexContainerModule } from '@vitagroup/cdk/layout';
 import { ClipPipeModule, RouteDataPipeModule, RouterLinkOrHrefModule } from '@vitagroup/common';
 import {
-  PdsAlertModule,
   PdsBadgeModule,
+  PdsBannerModule,
   PdsCardModule,
   PdsCheckBoxModule,
   PdsChipModule,
@@ -100,7 +100,7 @@ export const APP_COMPONENTS_PAGE_ROUTES: Routes = [
     PdsCheckBoxModule,
     PdsTabsModule,
     PdsCardModule,
-    PdsAlertModule,
+    PdsBannerModule,
     PdsDropdownModule,
     PdsInputDropdownModule,
     PdsToggleBoxModule,
