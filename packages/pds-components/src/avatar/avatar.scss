@@ -1,0 +1,73 @@
+@use "styleguide" as pds;
+@use "util";
+
+pds-avatar {
+  @include pds.rounding(50%);
+
+  --avatar-size-lg: 88px;
+  --avatar-size-md: 44px;
+  --avatar-size-sm: 32px;
+
+  --avatar-icon-size-lg: 48px;
+  --avatar-icon-size-md: 24px;
+  --avatar-icon-size-sm: 24px;
+
+  --avatar-size: var(--avatar-size-md);
+  --avatar-icon-size: var(--avatar-icon-size-md);
+
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  transition: 100ms ease-out;
+  border: 1px solid var(--background);
+  color: var(--gray-secondary);
+  height: var(--avatar-size);
+  width: var(--avatar-size);
+  position: relative;
+  user-select: none;
+  overflow: hidden;
+
+  &:after {
+    display: block;
+    position: absolute;
+    transition: inherit;
+    content: ' ';
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+  }
+
+  &[interactive] {
+    cursor: pointer;
+
+    @include util.hover-state {
+      &:after {
+        background-color: rgba(#000, 0.12);
+      }
+    }
+    @include util.active-state {
+      &:after {
+        background-color: rgba(#000, 0.26);
+      }
+    }
+  }
+
+  @include util.focus-state {
+    border-color: var(--focus);
+    box-shadow: 0 0 0 1px var(--focus);
+  }
+  @include util.disabled-state {
+    pointer-events: none;
+
+    &:after {
+      background-color: var(--page, #fff);
+      opacity: 26%;
+    }
+  }
+
+  svg-icon svg {
+    height: var(--avatar-icon-size);
+    width: var(--avatar-icon-size);
+  }
+}

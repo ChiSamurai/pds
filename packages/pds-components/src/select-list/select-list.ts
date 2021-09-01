@@ -6,6 +6,7 @@ import { ElementFocusState, resolveElementFocusState, SelectionModel, SelectList
   styleUrls: ['select-list.scss'],
   encapsulation: ViewEncapsulation.None,
   host: { '[attr.tabindex]': '0' },
+  inputs: ['model', 'mode', 'limit', 'focusIndex', 'trackBy'],
   providers: [
     { provide: SelectionModel, useExisting: PdsSelectList },
     { provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [PdsSelectList] },

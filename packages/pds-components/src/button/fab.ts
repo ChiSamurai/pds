@@ -2,8 +2,8 @@ import { Component, ElementRef, NgModule, Renderer2, ViewEncapsulation } from '@
 import { ElementActiveState, ElementDisabledState, ElementFocusState, SVG_ICON_SIZE } from '@vitagroup/cdk';
 
 @Component({
-  selector: 'pds-fab-button',
-  styleUrls: ['./fab-button.scss'],
+  selector: 'pds-fab',
+  styleUrls: ['./fab.scss'],
   encapsulation: ViewEncapsulation.None,
   providers: [{ provide: SVG_ICON_SIZE, useValue: 24 }],
   template: `
@@ -24,4 +24,4 @@ export class PdsFabButton {
   exports: [PdsFabButton],
   imports: [],
 })
-export class PdsFabButtonModule {}
+export class PdsFabModule {}

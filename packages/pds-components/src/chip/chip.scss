@@ -18,18 +18,19 @@ pds-chip {
   height: var(--tag-height, 28px);
   color: currentColor;
 
-  @include util.hover-state {
-    background-color: var(--primary-lighter);
-  }
-  @include util.active-state {
-    background-color: var(--primary-darker);
+  &[interactive] {
+    @include util.hover-state {
+      background-color: var(--primary-lighter);
+    }
+    @include util.active-state {
+      background-color: var(--primary-darker);
+    }
   }
 
   @include util.focus-state {
     background-color: var(--focus);
     color: var(--focus-contrast);
   }
-
   @include util.disabled-state {
     color: var(--disabled);
     pointer-events: none;

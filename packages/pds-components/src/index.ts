@@ -1,9 +1,11 @@
 export * from './alert/module';
 export * from './alert/alert';
 
+export * from './avatar/avatar';
+
 export * from './badge/badge';
 
-export * from './button/fab-button';
+export * from './button/fab';
 
 export * from './breadcrumbs/module';
 export * from './breadcrumbs/breadcrumbs';
