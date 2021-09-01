@@ -11,19 +11,21 @@ pds-app-component-example-page {
     overflow: hidden auto;
     // height: 420px;
   }
-  .example-source-header {
+  .example-header {
     @include pds.outer-spacing(--space-md, bottom);
 
     display: flex;
     align-items: center;
 
-    .example-source-h {
+    .example-h {
       flex: 1 0 0;
       margin: 0;
     }
   }
 
   ng-component {
+    @include pds.outer-child-spacing(--space-md, x, $trim: true, $justify: true);
+
     display: flex;
     align-items: center;
     flex-wrap: wrap;

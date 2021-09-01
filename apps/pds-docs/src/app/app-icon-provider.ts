@@ -5,6 +5,7 @@ import { faBrandIconGithub } from '../icons/fa-brand-icons';
 import {
   faSolidIconArrowLeft,
   faSolidIconArrowRight,
+  faSolidIconBuilding,
   faSolidIconCopy,
   faSolidIconExclamationTriangle,
   faSolidIconGlobe,
@@ -13,6 +14,8 @@ import {
   faSolidIconSearch,
   faSolidIconSun,
   faSolidIconTimes,
+  faSolidIconUser,
+  faSolidIconUsers,
 } from '../icons/fa-solid-icons';
 
 export const APP_ICON_IMPORT_PROVIDER: Provider = {
@@ -30,6 +33,9 @@ export const APP_ICON_IMPORT_PROVIDER: Provider = {
       faSolidIconCopy,
       faSolidIconInfo,
       faSolidIconGlobe,
+      faSolidIconUser,
+      faSolidIconUsers,
+      faSolidIconBuilding,
       faBrandIconGithub,
     ],
   } as SvgIconImportConfig,

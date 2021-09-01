@@ -1,3 +1,5 @@
+import { AppExample } from './app-example.interface';
+
 export interface AppGuide {
   /** Gets the unique slug of the guide */
   readonly slug: string;
@@ -14,13 +16,15 @@ export interface AppGuide {
   chapter?: string;
   /** Gets or sets an optional description for the guide */
   description?: string;
+  /** Gets or sets an optional list of tags */
+  tags?: string[];
   /** Gets or sets the next slug this guide wants to refer to */
   next?: string;
   /** Gets or sets the previous slug this guide wants to refer to */
   previous?: string;
 
-  /** Gets or sets a list of asset urls that should point to an angular (html) template file */
-  exampleUrls?: string[];
+  /** Gets or sets a list of example definitions */
+  examples?: AppExample[];
 }
 
 export interface AppGuideWithContent extends AppGuide {

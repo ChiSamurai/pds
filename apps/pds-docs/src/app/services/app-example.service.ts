@@ -1,37 +1,31 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable, InjectionToken } from '@angular/core';
-import { SvgIconModule } from '@vitagroup/cdk';
-import { ClipPipeModule, normalizeUrl } from '@vitagroup/common';
-import { PdsBadgeModule, PdsNavModule } from '@vitagroup/pds-components';
-import { AppExample, AppExampleModuleDef } from '../interfaces/app-example.interface';
-import { NgCompileOptions } from '../pipes/ng-compile.pipe';
+import { Inject, Injectable, InjectionToken, Type } from '@angular/core';
+import * as vgCdk from '@vitagroup/cdk';
+import * as vgCommon from '@vitagroup/common';
+import * as pdsComponents from '@vitagroup/pds-components';
+import { AppExample, AppExampleWithTemplate } from '../interfaces/app-example.interface';
 
 export const APP_EXAMPLES_BASE_URL = new InjectionToken<string>('The base url of the app examples asset directory', {
   providedIn: 'root',
   factory: () => '/assets',
 });
 
-export const APP_EXAMPLE_MODULE_DEFS = new InjectionToken<AppExampleModuleDef[]>(
-  'Module imports that are available to example compilations',
+export function findMembersWithModuleInName(obj: unknown): Type<unknown>[] {
+  return Object.values(obj).filter((member) => {
+    return (member as Type<unknown>)?.name?.includes('Module');
+  }) as Type<unknown>[];
+}
+
+export const APP_EXAMPLE_MODULE_IMPORTS = new InjectionToken<Type<unknown>[]>(
+  'Module imports that should be available for example templates',
   {
     providedIn: 'root',
     factory: () => [
-      {
-        import: [PdsNavModule],
-        for: /<\s*pds-nav/m,
-      },
-      {
-        import: [PdsBadgeModule],
-        for: /<\s*pds-badge/m,
-      },
-      {
-        import: [SvgIconModule],
-        for: /<\s*svg-icon/m,
-      },
-      {
-        import: [ClipPipeModule],
-        for: /{{.+\|\s*clip/m,
-      },
+      CommonModule,
+      ...findMembersWithModuleInName(vgCommon),
+      ...findMembersWithModuleInName(vgCdk),
+      ...findMembersWithModuleInName(pdsComponents),
     ],
   }
 );
@@ -40,29 +34,25 @@ export const APP_EXAMPLE_MODULE_DEFS = new InjectionToken<AppExampleModuleDef[]>
 export class AppExampleService {
   constructor(
     @Inject(APP_EXAMPLES_BASE_URL) readonly baseUrl: string,
-    @Inject(APP_EXAMPLE_MODULE_DEFS) readonly moduleDefs: AppExampleModuleDef[],
+    @Inject(APP_EXAMPLE_MODULE_IMPORTS) protected moduleImports: Type<unknown>[],
     protected http: HttpClient
   ) {}
 
   resolveTemplate(exampleUrl: string): Promise<string> {
-    return this.http.get(normalizeUrl(this.baseUrl, exampleUrl), { responseType: 'text' }).toPromise();
+    return this.http.get(vgCommon.normalizeUrl(this.baseUrl, exampleUrl), { responseType: 'text' }).toPromise();
   }
-  resolveCompileOptionsFromTemplate(template: string): NgCompileOptions {
-    const options: NgCompileOptions = {
-      imports: [],
-    };
-
-    for (const moduleDef of this.moduleDefs) {
-      if (moduleDef.for.test(template)) options.imports.push(...moduleDef.import);
-    }
-
-    return options;
+  resolveModuleImport(moduleName: string): Type<unknown> {
+    return this.moduleImports?.find((moduleType) => moduleType.name === moduleName);
   }
 
-  async resolve(exampleUrl: string): Promise<AppExample> {
-    const template = await this.resolveTemplate(exampleUrl);
-    const options = this.resolveCompileOptionsFromTemplate(template);
+  async resolve(example: AppExample): Promise<AppExampleWithTemplate> {
+    const template = await this.resolveTemplate(example.templateUrl);
+    // since the example definition may only hold string representations of the actual module imports, we are
+    // trying to map each potential module name to a available module within APP_EXAMPLE_MODULE_IMPORTS
+    const imports = ((example.imports as unknown) as string[])
+      ?.map((moduleName) => this.resolveModuleImport(moduleName))
+      ?.filter((module) => typeof module === 'function');
 
-    return { template, ...options };
+    return { template, ...example, imports };
   }
 }

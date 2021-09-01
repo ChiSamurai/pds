@@ -1,0 +1,7 @@
+<pds-select-box placeholder="Select something...">
+  <pds-select-list mode="multiple">
+    <pds-select-option *ngFor="let value of [ 1, 2, 3, 4, 5 ]" [value]="value">
+      Option #{{ value }}
+    </pds-select-option>
+  </pds-select-list>
+</pds-select-box>

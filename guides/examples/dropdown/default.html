@@ -1,0 +1,11 @@
+<button [pdsDropdown]="dropdown">Open</button>
+
+<a [pdsDropdown]="dropdown">Open</a>
+
+<pds-dropdown [preferredPosition]="['end', 'bottom']" #dropdown>
+  <pds-select-list>
+    <pds-select-option *ngFor="let value of [ 1, 2, 3, 4, 5 ]">
+      Option #{{ value }}
+    </pds-select-option>
+  </pds-select-list>
+</pds-dropdown>

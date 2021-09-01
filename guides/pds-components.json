@@ -1,13 +1,74 @@
 [
   {
+    "slug": "avatar",
+    "src": "packages/pds-components/src/avatar/README",
+    "title": "Avatar",
+    "chapter": "Components",
+    "description": "Avatars in different sizes",
+    "examples": [
+      {
+        "title": "Default Avatar",
+        "templateUrl": "guides/examples/avatar/default.html",
+        "imports": ["PdsAvatarModule","SvgIconModule"]
+      },
+      {
+        "title": "Avatar Sizes",
+        "templateUrl": "guides/examples/avatar/sizing.html",
+        "imports": ["PdsAvatarModule", "SvgIconModule"]
+      },
+      {
+        "title": "Interactive & Disabled Avatars",
+        "templateUrl": "guides/examples/avatar/interactive.html",
+        "imports": ["PdsAvatarModule", "SvgIconModule"]
+      }
+    ]
+  },
+  {
     "slug": "buttons",
     "src": "packages/pds-components/src/button/README",
     "title": "Buttons",
     "chapter": "Components",
-    "description": "Buttons and variants",
-    "exampleUrls": [
-      "guides/examples/buttons/html5.html",
-      "guides/examples/buttons/html5-small.html"
+    "description": "Buttons and button variants",
+    "examples": [
+      {
+        "title": "Primary Buttons",
+        "templateUrl": "guides/examples/buttons/primary.html",
+        "imports": ["SvgIconModule"]
+      },
+      {
+        "title": "Secondary Buttons",
+        "templateUrl": "guides/examples/buttons/secondary.html",
+        "imports": ["SvgIconModule"]
+      },
+      {
+        "title": "Small Primary Buttons",
+        "templateUrl": "guides/examples/buttons/primary-small.html",
+        "imports": ["SvgIconModule"]
+      },
+      {
+        "title": "Small Secondary Buttons",
+        "templateUrl": "guides/examples/buttons/secondary-small.html",
+        "imports": ["SvgIconModule"]
+      },
+      {
+        "title": "Floating Action Buttons",
+        "templateUrl": "guides/examples/buttons/floating.html",
+        "imports": ["PdsFabModule","SvgIconModule"]
+      }
+    ]
+  },
+  {
+    "slug": "dropdown",
+    "src": "packages/pds-components/src/dropdown/README",
+    "title": "Dropdown",
+    "chapter": "Components",
+    "description": "Dropdown and context menu",
+    "examples": [
+      {
+        "title": "Default Dropdown",
+        "templateUrl": "guides/examples/dropdown/default.html",
+        "imports": ["CommonModule","PdsDropdownModule","PdsSelectListModule"]
+      }
     ]
   },
   {
@@ -16,9 +77,79 @@
     "title": "Nav",
     "chapter": "Components",
     "description": "Navigation sidebar component",
-    "exampleUrls": [
-      "guides/examples/nav/plain.html",
-      "guides/examples/nav/advanced-entry-templates.html"
+    "examples": [
+      {
+        "title": "Default Navigation",
+        "templateUrl": "guides/examples/nav/default.html",
+        "imports": ["PdsNavModule"]
+      },
+      {
+        "title": "Navigation with Entry Templating",
+        "templateUrl": "guides/examples/nav/templating.html",
+        "imports": ["PdsNavModule","PdsBadgeModule","SvgIconModule","ClipPipeModule"]
+      }
+    ]
+  },
+  {
+    "slug": "combo-box",
+    "src": "packages/pds-components/src/combo-box/README",
+    "title": "Combo Box",
+    "chapter": "Components",
+    "description": "Multi value input control",
+    "examples": [
+      {
+        "title": "Default Combo Box",
+        "templateUrl": "guides/examples/combo-box/default.html",
+        "imports": ["PdsComboBoxModule"]
+      },
+      {
+        "title": "Combo Box with custom Templating",
+        "templateUrl": "guides/examples/combo-box/templating.html",
+        "imports": ["PdsComboBoxModule","PdsChipModule"]
+      }
+    ]
+  },
+  {
+    "slug": "select-box",
+    "src": "packages/pds-components/src/select-box/README",
+    "title": "Select Box",
+    "chapter": "Components",
+    "description": "Selection value control",
+    "examples": [
+      {
+        "title": "Default Select Box",
+        "templateUrl": "guides/examples/select-box/default.html",
+        "imports": ["CommonModule","PdsSelectBoxModule","PdsSelectListModule"]
+      },
+      {
+        "title": "Multi Select Box",
+        "templateUrl": "guides/examples/select-box/multi.html",
+        "imports": ["CommonModule","PdsSelectBoxModule","PdsSelectListModule"]
+      },
+      {
+        "title": "Select Box with custom Templating",
+        "templateUrl": "guides/examples/select-box/templating.html",
+        "imports": ["CommonModule","PdsSelectBoxModule","PdsSelectListModule","PdsChipModule"]
+      }
+    ]
+  },
+  {
+    "slug": "input-dropdown",
+    "src": "packages/pds-components/src/input-dropdown/README",
+    "title": "Input Dropdowns",
+    "chapter": "Components",
+    "description": "AKA Autocomplete",
+    "examples": [
+      {
+        "title": "Default Input Dropdown",
+        "templateUrl": "guides/examples/input-dropdown/default.html",
+        "imports": ["CommonModule","PdsTextBoxModule","PdsInputDropdownModule","PdsDropdownModule","PdsSelectListModule", "SvgIconModule"]
+      },
+      {
+        "title": "Multi Select Input Dropdown",
+        "templateUrl": "guides/examples/input-dropdown/multi.html",
+        "imports": ["CommonModule","PdsComboBoxModule","PdsInputDropdownModule","PdsDropdownModule","PdsSelectListModule", "SvgIconModule"]
+      }
     ]
   }
 ]

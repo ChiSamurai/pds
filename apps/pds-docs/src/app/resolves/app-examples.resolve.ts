@@ -12,6 +12,6 @@ export class AppExamplesResolve implements Resolve<AppExample[]> {
     const { slug, component } = route.params;
     const guide = this.appGuides.get(slug || component);
 
-    return Promise.all(guide.exampleUrls?.map((url) => this.appExamples.resolve(url)));
+    return Promise.all(guide.examples?.map((example) => this.appExamples.resolve(example)));
   }
 }

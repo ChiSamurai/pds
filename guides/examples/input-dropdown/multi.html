@@ -1,0 +1,18 @@
+<pds-combo-box placeholder="Search..." [pdsInputDropdown]="inputDropdown">
+  <svg-icon name="search" pdsBefore></svg-icon>
+</pds-combo-box>
+
+<pds-dropdown pdsInputDropdownDef #inputDropdown>
+  <pds-select-list mode="multiple">
+    <ng-container *ngIf="([ 'foo', 'bar', 'baz' ] | pdsInputFilter) as filteredValues">
+      <ng-container *ngIf="filteredValues?.length; else noMatchTemplate">
+        <pds-select-option *ngFor="let value of filteredValues" [value]="value">
+          <code>{{ value }}</code>
+        </pds-select-option>
+      </ng-container>
+      <ng-template #noMatchTemplate>
+        <pds-select-option disabled>Unable to find a match</pds-select-option>
+      </ng-template>
+    </ng-container>
+  </pds-select-list>
+</pds-dropdown>
