@@ -127,12 +127,18 @@ $font-family: "PT Sans", sans-serif !default;
   @include input;
 }
 
-/// Includes utility classes based on the value of `$color-classes`
-@mixin color-classes {
+/// Includes the sheet "element" styling class
+@mixin sheet {
   .sheet {
+    @include rounding(--rounding-md);
+    @include inner-spacing(--space-md);
+
     background-color: var(--sheet);
   }
+}
 
+/// Includes utility classes based on the value of `$color-classes`
+@mixin color-classes {
   @include color-accent-classes($color-classes, "text");
 
   @if some($color-classes, "info") {

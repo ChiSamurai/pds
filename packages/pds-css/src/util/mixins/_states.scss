@@ -31,7 +31,7 @@
 }
 
 @mixin focus-state($within-parent: false) {
-  @include state((".focus", ":focus-visible"), $within-parent) {
+  @include state((/* ".focus", */ ":focus-visible"), $within-parent) {
     @content;
   }
 }
