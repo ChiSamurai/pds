@@ -54,7 +54,7 @@ $input-placeholder: var(--gray-secondary) !default;
   }
 }
 
-@mixin input-base($spacing: true) {
+@mixin input-base($spacing: true, $focus: true) {
   @include rounding(--rounding-md);
 
   @if $spacing {
@@ -68,6 +68,12 @@ $input-placeholder: var(--gray-secondary) !default;
   background-color: $input-background-color;
   border: $input-border;
   color: inherit;
+
+  @if $focus {
+    &:focus {
+      @include input-focus;
+    }
+  }
 }
 
 @mixin input-hover {

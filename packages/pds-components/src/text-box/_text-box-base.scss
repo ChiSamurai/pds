@@ -30,9 +30,14 @@
   @include util.read-only-state($with-pseudo: false) {
     @include pds.input-read-only;
   }
+
   @include util.focus-state {
     @include pds.input-focus;
   }
+  &.focus {
+    @include pds.input-focus;
+  }
+
   @include util.active-state {
     @include pds.input-active;
   }
