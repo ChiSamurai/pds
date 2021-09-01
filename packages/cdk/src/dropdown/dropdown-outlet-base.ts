@@ -1,5 +1,6 @@
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import { Directive, OnInit } from '@angular/core';
+import { EventUnlistener } from '@vitagroup/common';
 import { OverlayOutletBase } from '../overlay/overlay-outlet-base';
 import { DropdownDefBase, DropdownPosition, DropdownPositionX, DropdownPositionY } from './dropdown-def-base';
 
@@ -21,6 +22,9 @@ export const DROPDOWN_POSITIONS: Record<DropdownPositionY, Record<DropdownPositi
 
 @Directive()
 export abstract class DropdownOutletBase extends OverlayOutletBase<DropdownDefBase> implements OnInit {
+  private _unlistenEnterKeyUp: EventUnlistener;
+  private _unlistenMouseUp: EventUnlistener;
+
   preferredPosition: DropdownPosition;
 
   protected updatePreferredPosition(): void {
@@ -37,6 +41,10 @@ export abstract class DropdownOutletBase extends OverlayOutletBase<DropdownDefBa
     this.overlayRef.updatePositionStrategy(
       this.overlay.position().flexibleConnectedTo(this.viewContainerRef.element).withPositions(connectedPositions)
     );
+  }
+  protected preventDefaultDeactivation(): void {
+    this._unlistenEnterKeyUp();
+    this._unlistenMouseUp();
   }
 
   activate() {
@@ -57,7 +65,11 @@ export abstract class DropdownOutletBase extends OverlayOutletBase<DropdownDefBa
 
     this.listenUntilDestroyed(this.viewContainerRef.element, 'click', () => this.toggle());
 
-    this.listenUntilDestroyed(this.overlayRef.overlayElement, 'mouseup', () => this.deactivate({ setFocus: true }));
-    this.listenUntilDestroyed(this.overlayRef.overlayElement, 'keyup.enter', () => this.deactivate({ setFocus: true }));
+    this._unlistenMouseUp = this.listenUntilDestroyed(this.overlayRef.overlayElement, 'mouseup', () =>
+      this.deactivate({ setFocus: true })
+    );
+    this._unlistenEnterKeyUp = this.listenUntilDestroyed(this.overlayRef.overlayElement, 'keyup.enter', () =>
+      this.deactivate({ setFocus: true })
+    );
   }
 }

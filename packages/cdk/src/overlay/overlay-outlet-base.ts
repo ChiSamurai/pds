@@ -65,9 +65,15 @@ export abstract class OverlayOutletBase<T extends OverlayDefBase> implements OnI
     return new OverlayConfig({ scrollStrategy: this.overlay.scrollStrategies.close(), ...config });
   }
 
-  protected listenUntilDestroyed(target: ElementRef | any, eventName: string, listener: EventListener): void {
+  protected listenUntilDestroyed(
+    target: ElementRef | any,
+    eventName: string,
+    listener: EventListener
+  ): EventUnlistener {
     if (target instanceof ElementRef) target = target.nativeElement;
-    this._unlistener.push(this.renderer.listen(target, eventName, listener));
+    const unlistener = this.renderer.listen(target, eventName, listener);
+    this._unlistener.push(unlistener);
+    return unlistener;
   }
 
   protected onEscShortcut(): void {

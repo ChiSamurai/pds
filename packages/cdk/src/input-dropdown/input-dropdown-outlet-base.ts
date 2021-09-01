@@ -73,6 +73,8 @@ export abstract class InputDropdownOutletBase extends DropdownOutletBase impleme
   ngOnInit() {
     super.ngOnInit();
 
+    this.preventDefaultDeactivation();
+
     this.shortcuts.register('arrowdown', (e) => {
       e.preventDefault();
       this.activate();
@@ -110,12 +112,12 @@ export abstract class InputDropdownOutletBase extends DropdownOutletBase impleme
       this.overlayDef?.ngAfterContentInits.pipe(take(1)).subscribe(() => {
         if (this.valueAccessor instanceof ControlValueAccessorBase) {
           const value = this.valueAccessor.getValue();
-          this.overlayDef?.selectionModel?.reset(value ? coerceArray(value) : []);
+          this.selectionModel?.reset(value ? coerceArray(value) : []);
         }
         this.valueAccessor?.registerOnChange((value) => {
           this.overlayDef.selectionModel?.reset(coerceArray(value));
         });
-        this.overlayDef?.selectionModel.pipe(takeUntil(this.ngChanges)).subscribe((value) => {
+        this.selectionModel?.pipe(takeUntil(this.ngChanges)).subscribe((value) => {
           this.valueAccessor.writeValue(value);
 
           if (this._latestKeyDownEvent?.key?.toLowerCase() === 'enter' && !this._latestKeyDownEvent.shiftKey)
