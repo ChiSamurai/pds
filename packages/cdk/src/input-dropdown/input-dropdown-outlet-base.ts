@@ -65,7 +65,7 @@ export abstract class InputDropdownOutletBase extends DropdownOutletBase impleme
     super.activate();
   }
   deactivate(options?: InputDropdownDeactivateOptions) {
-    super.deactivate();
+    super.deactivate(options);
 
     if (options?.clearInput) this.inputAccessor.input.patch(null);
   }
