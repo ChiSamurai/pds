@@ -1,6 +1,6 @@
 <button [pdsDropdown]="dropdown">Open</button>
 
-<a [pdsDropdown]="dropdown">Open</a>
+<a [pdsDropdown]="dropdown" [pdsDropdownPreferredPosition]="['start', 'bottom']">Open</a>
 
 <pds-dropdown [preferredPosition]="['end', 'bottom']" #dropdown>
   <pds-select-list>
