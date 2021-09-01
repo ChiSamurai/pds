@@ -21,10 +21,10 @@ export const DROPDOWN_POSITIONS: Record<DropdownPositionY, Record<DropdownPositi
 
 @Directive()
 export abstract class DropdownOutletBase extends OverlayOutletBase<DropdownDefBase> implements OnInit {
-  deactivateOnBlur = true;
+  preferredPosition: DropdownPosition;
 
   protected updatePreferredPosition(): void {
-    const [preferredX, preferredY] = this.overlayDef.preferredPosition;
+    const [preferredX, preferredY] = this.preferredPosition || this.overlayDef.preferredPosition;
     const preferredPosition = DROPDOWN_POSITIONS[preferredY][preferredX];
     const positions = [
       ['start', 'bottom'],
@@ -50,6 +50,8 @@ export abstract class DropdownOutletBase extends OverlayOutletBase<DropdownDefBa
 
   ngOnInit() {
     super.ngOnInit();
+
+    this.deactivateOnBlur = true;
 
     this.shortcuts.register('enter', () => this.toggle());
 

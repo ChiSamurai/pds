@@ -1,3 +1,4 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
@@ -23,6 +24,7 @@ export interface OverlayDeactivateOptions {
 
 @Directive()
 export abstract class OverlayOutletBase<T extends OverlayDefBase> implements OnInit, OnDestroy {
+  private _deactivateOnBlur = false;
   private _unlistener: EventUnlistener[] = [];
   private _viewRef: EmbeddedViewRef<any>;
 
@@ -34,8 +36,14 @@ export abstract class OverlayOutletBase<T extends OverlayDefBase> implements OnI
 
   readonly shortcuts = new ShortcutManager(this.renderer, this.viewContainerRef.element);
 
-  deactivateOnBlur = false;
   overlayDef: T;
+
+  set deactivateOnBlur(value: boolean) {
+    this._deactivateOnBlur = coerceBooleanProperty(value);
+  }
+  get deactivateOnBlur(): boolean {
+    return this._deactivateOnBlur;
+  }
 
   get isActive(): boolean {
     return this.overlayRef.hasAttached();

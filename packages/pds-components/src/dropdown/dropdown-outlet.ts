@@ -1,10 +1,14 @@
 import { OverlayConfig } from '@angular/cdk/overlay';
-import { Directive, OnInit } from '@angular/core';
+import { Directive } from '@angular/core';
 import { DropdownOutletBase } from '@vitagroup/cdk';
 
 @Directive({
   selector: '[pdsDropdown]',
-  inputs: ['overlayDef: pdsDropdown'],
+  inputs: [
+    'overlayDef: pdsDropdown',
+    'preferredPosition: pdsDropdownPreferredPosition',
+    'deactivateOnBlur: pdsDropdownDeactivateOnBlur',
+  ],
 })
 export class PdsDropdownOutlet extends DropdownOutletBase {
   protected configureOverlay(): OverlayConfig {
