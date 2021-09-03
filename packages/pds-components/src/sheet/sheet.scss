@@ -1,0 +1,57 @@
+@use "styleguide" as pds;
+@use "util";
+
+$sheet-padding-x: var(--space-5) !default;
+$sheet-padding-y: var(--space-5) !default;
+
+$sheet-li-first-padding-top: var(--space-3) !default;
+
+pds-sheet {
+  @include pds.rounding(pds.$rounding-lg);
+
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--background);
+  background: var(--sheet);
+  position: relative;
+
+  @include pds.inner-spacing($sheet-padding-x, x);
+  @include pds.inner-spacing($sheet-padding-y, bottom);
+
+  &:first-child {
+    @include pds.inner-spacing($sheet-padding-y, top);
+  }
+
+  > ul {
+
+    &:nth-of-type(1) {
+      @include pds.outer-spacing($sheet-li-first-padding-top, top);
+
+      > li:nth-of-type(1) {
+        @include pds.inner-spacing(0, top);
+      }
+    }
+  }
+
+  ul {
+    li {
+      @include pds.inner-spacing(var(--space-2), top);
+      list-style-type: disc;
+    }
+  }
+
+  &:after {
+    @include pds.rounding(--rounding-xxs);
+    @include pds.outer-spacing($sheet-padding-x, x);
+
+    content: ' ';
+    display: block;
+    transition: inherit;
+    pointer-events: none;
+    position: absolute;
+    height: 3px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+}

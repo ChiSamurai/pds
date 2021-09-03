@@ -57,6 +57,9 @@ export * from './select-list/module';
 export * from './select-list/select-list';
 export * from './select-list/select-option';
 
+export * from './sheet/module';
+export * from './sheet/sheet';
+
 export * from './step-counter/step-counter';
 export * from './step-counter/module';
 
