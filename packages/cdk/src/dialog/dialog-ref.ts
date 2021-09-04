@@ -1,12 +1,12 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, Injector, Type } from '@angular/core';
-import { Observable, Subject, Subscriber, TeardownLogic } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ComponentProps } from '../utils/component-props';
 import { DialogOverlayConfig } from './dialog-overlay';
 
-export class DialogRef<R = any, T = any> extends Observable<R> {
+export class DialogRef<R = unknown, T = unknown> {
   private _componentRef: ComponentRef<T>;
 
   protected readonly subject = new Subject<R>();
@@ -24,8 +24,6 @@ export class DialogRef<R = any, T = any> extends Observable<R> {
     readonly overlayRef: OverlayRef,
     readonly config: DialogOverlayConfig
   ) {
-    super((subscriber) => this.subject.subscribe(subscriber));
-
     if (config && config.disposeOnBackdropClick) {
       overlayRef
         .backdropClick()
@@ -34,6 +32,7 @@ export class DialogRef<R = any, T = any> extends Observable<R> {
     }
 
     this.reattach();
+    this.setProps();
   }
 
   dispose(result?: R): void {
@@ -61,9 +60,7 @@ export class DialogRef<R = any, T = any> extends Observable<R> {
     return this.overlayRef.detach();
   }
 
-  _subscribe(subscriber: Subscriber<any>): TeardownLogic {
-    this.reattach();
-    this.setProps();
-    return super._subscribe(subscriber);
+  asObservable(): Observable<R> {
+    return this.subject.asObservable();
   }
 }

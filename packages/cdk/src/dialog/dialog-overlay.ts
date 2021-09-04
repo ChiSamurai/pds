@@ -22,7 +22,7 @@ export class DialogOverlay {
         ...config,
       })
     );
-    return new DialogRef<R>(componentType, overlayRef, config);
+    return new DialogRef<R, T>(componentType, overlayRef, config);
   }
 
   createOverlayConfig(config: DialogOverlayConfig = {}): OverlayConfig {

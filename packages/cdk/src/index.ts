@@ -65,6 +65,12 @@ export * from './svg-icon/svg-icon-registry';
 
 export * from './text-box/text-box-base';
 
+export * from './toaster/toaster';
+export * from './toaster/toast-container';
+export * from './toaster/toast-dispose';
+export * from './toaster/toast-ref';
+export * from './toaster/module';
+
 export * from './toggles/toggle-base';
 export * from './toggles/check-box-base';
 export * from './toggles/radio-box-base';
