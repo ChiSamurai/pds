@@ -3,4 +3,8 @@ pds-tabs {
   align-items: stretch;
   align-self: flex-start;
   justify-content: flex-start;
+
+  &.small pds-tab {
+    --spacing: 0.6;
+  }
 }

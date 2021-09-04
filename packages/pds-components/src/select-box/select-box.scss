@@ -9,7 +9,7 @@ pds-select-box {
   cursor: default;
 
   .pds-select-box-value {
-    @include pds.outer-child-spacing(--space-1, x, $trim: true, $justify: true);
+    @include pds.outer-child-spacing(--space-xs, x, $trim: true, $justify: true);
 
     flex: 1 0 0;
     align-items: inherit;

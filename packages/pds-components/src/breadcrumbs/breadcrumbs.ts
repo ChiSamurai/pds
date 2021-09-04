@@ -14,6 +14,7 @@ import { PdsBreadcrumbDivider } from './breadcrumb-divider';
       <a [routerLink]="site.linkUrl">{{ site.route.path }}</a>
     </ng-template>
 
+    <ng-content></ng-content>
     <ng-container *ngFor="let site of activeSitePath | async; let i = index; let last = last">
       <ng-container
         *ngTemplateOutlet="resolveTemplate(site) || defaultBreadcrumbTemplate; context: resolveTemplateContext(site, i)"

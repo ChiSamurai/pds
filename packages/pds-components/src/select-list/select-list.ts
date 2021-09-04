@@ -7,6 +7,8 @@ import { ElementFocusState, resolveElementFocusState, SelectionModel, SelectList
   encapsulation: ViewEncapsulation.None,
   host: { '[attr.tabindex]': '0' },
   inputs: ['model', 'mode', 'limit', 'focusIndex', 'trackBy'],
+  // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
+  outputs: ['modelChange', 'change'],
   providers: [
     { provide: SelectionModel, useExisting: PdsSelectList },
     { provide: ElementFocusState, useFactory: resolveElementFocusState, deps: [PdsSelectList] },
