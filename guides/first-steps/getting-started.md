@@ -11,10 +11,14 @@ to provide a set of schematics to simplify integration effort.
 **As of now, there are unfortunately no such schematics in place.** Therefore each desired **PDS**
 package has to be installed manually.
 
-## Components
+## Installation
 
+```shell
+npm i @vitagroup/{common,cdk,pds-css,pds-components}
 ```
-npm i @vitagroup/pds-components
+
+```shell
+npm i @vitagroup/common @vitagroup/cdk @vitagroup/pds-css @vitagroup/pds-components
 ```
 
 Built-in components and related declarations can be quickly accessed using a `pds` prefix when
@@ -24,10 +28,6 @@ feature a highly customizable dependency injection structure. Make sure to check
 independent guides about the different key concepts and configurable interfaces.
 
 ## CSS
-
-```
-npm i @vitagroup/pds-css
-```
 
 There are multiple ways to build up on the styling definitions and utilities provided within
 **PDS CSS**. The simplest way is to import a prebuilt `css` file from the `prebuilt` folder.
