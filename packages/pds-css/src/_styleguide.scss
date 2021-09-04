@@ -44,7 +44,7 @@ $rounding: $rounding !default;
 /// to `true` (eg. `--primary: #fff;` will generate `--primary-rbg: 255,255,255;` as well)
 $colors: ($accent-color-map, $semantic-color-map) !default;
 /// Gets or sets a list of class names generated for text accents (eg. text-primary, text-primary-dark, ...)
-$color-classes: ("primary", "info", "success", "warning", "error") !default;
+$color-classes: ("primary", "info", "success", "warning", "error", "gray", "gray-secondary") !default;
 /// Enables or disables additional custom property generation for color properties
 $color-rgb: false !default;
 
