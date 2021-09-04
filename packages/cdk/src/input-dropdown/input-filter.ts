@@ -1,18 +1,18 @@
 import { ChangeDetectorRef, Directive, Inject, InjectionToken, OnDestroy, PipeTransform } from '@angular/core';
-import { ControlInputAccessor, INPUT_ACCESSOR } from './control-input-accessor';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ControlInputAccessor, INPUT_ACCESSOR } from './control-input-accessor';
 
 export type InputFilterFn<T> = (value: T, input?: string) => boolean;
 
 export const DEFAULT_INPUT_FILTER = new InjectionToken<InputFilterFn<unknown>>('DEFAULT_INPUT_FILTER', {
   providedIn: 'root',
   factory: /* @dynamic */ () => (value, input) => {
-    const matchesInput = (value2) => `${value2}`.toLowerCase().includes(input.toLowerCase());
+    const matchesInput = (value2) => value2?.toString().toLowerCase().includes(input.toLowerCase());
 
     if (typeof value === 'function') return false;
     else if (typeof value !== 'object') return matchesInput(value);
-    else Object.values(value)?.some((innerValue) => matchesInput(innerValue));
+    else return Object.values(value)?.some((innerValue) => matchesInput(innerValue));
   },
 });
 

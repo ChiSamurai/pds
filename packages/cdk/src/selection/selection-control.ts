@@ -7,7 +7,6 @@ import {
   EventEmitter,
   OnDestroy,
   OnInit,
-  Output,
   QueryList,
   Renderer2,
 } from '@angular/core';
@@ -70,7 +69,7 @@ export class SelectionControl<T> extends SelectionModel<T> implements OnInit, On
     return this.selectionValues?.toArray().findIndex((value) => value.focus.isSet);
   }
 
-  @Output() readonly changes = new EventEmitter<SelectionChange<T>>();
+  readonly changes = new EventEmitter<SelectionChange<T>>();
 
   trackBy: PrimitiveTrackByFn<T> = (value) => value;
 

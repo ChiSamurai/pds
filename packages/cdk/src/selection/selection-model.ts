@@ -86,6 +86,9 @@ export class SelectionModel<T = any> extends Observable<T[]> {
   toArray(): T[] {
     return Array.from(this.value);
   }
+  first(): T {
+    return this.toArray()?.[0];
+  }
 
   protected shouldEmit(options: SelectOptions | DeselectOptions): boolean {
     return options && options.emitEvent != null ? options.emitEvent : true;

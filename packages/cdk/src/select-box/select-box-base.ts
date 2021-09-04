@@ -1,3 +1,4 @@
+import { coerceArray } from '@angular/cdk/coercion';
 import { ConnectedPosition, Overlay } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
@@ -69,6 +70,11 @@ export abstract class SelectBoxBase<T, C extends SelectDefContext<T> = SelectDef
     }
   }
 
+  writeValue(obj: unknown) {
+    this.selectionModel?.reset(coerceArray(obj) as T[]);
+    super.writeValue(obj);
+  }
+
   attachOverlay(): void {
     if (!this.hasAttachedOverlay) {
       const { width } = this.window.getComputedStyle(this.elementRef.nativeElement);
@@ -99,6 +105,9 @@ export abstract class SelectBoxBase<T, C extends SelectDefContext<T> = SelectDef
   ngAfterContentInit() {
     if (isDevMode() && this.selectionModel == null)
       console.warn(`${this.constructor.name} instantiated without a selection model as content child`);
-    else this.selectionModel.changes.pipe(takeUntil(this.ngDestroys)).subscribe(this.onSelectionChange.bind(this));
+    else {
+      if (this.value) this.selectionModel.reset(this.value);
+      this.selectionModel.changes.pipe(takeUntil(this.ngDestroys)).subscribe(this.onSelectionChange.bind(this));
+    }
   }
 }

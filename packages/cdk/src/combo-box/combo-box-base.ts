@@ -1,3 +1,4 @@
+import { coerceArray } from '@angular/cdk/coercion';
 import { ContentChildren, Directive, QueryList, TemplateRef } from '@angular/core';
 import { ShortcutManager } from '@vitagroup/common';
 import { TextBoxBase } from '../text-box/text-box-base';
@@ -12,6 +13,10 @@ export abstract class ComboBoxBase<T, C extends ComboDefContext<T> = ComboDefCon
 
   get defaultTemplate(): TemplateRef<C> | null {
     return this.defs?.find((def) => def.when == null)?.template as TemplateRef<C>;
+  }
+
+  writeValue(obj: unknown) {
+    super.writeValue(coerceArray(obj));
   }
 
   push(value: T): T[] {
