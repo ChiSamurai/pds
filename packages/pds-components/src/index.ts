@@ -64,6 +64,10 @@ export * from './tabs/module';
 export * from './tabs/tabs';
 export * from './tabs/tab';
 
+// export * from './toaster/toast';
+// export * from './toaster/toast-container';
+export * from './toaster/module';
+
 export * from './chip/module';
 export * from './chip/chip';
 

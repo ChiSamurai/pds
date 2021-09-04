@@ -1,0 +1,10 @@
+@use "styleguide" as pds;
+
+pds-toaster {
+  @include pds.inner-spacing(--space-md);
+  @include pds.outer-child-spacing(--space-sm, y, $trim: true, $justify: true);
+
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+}
