@@ -20,9 +20,9 @@
 @include pds.browser-scrollbar;
 @include ng.overlay;
 
-@import '~highlight.js/scss/vs';
+@import '~highlight.js/scss/atom-one-light';
 
 @at-root .dark {
   @include pds.theme(pds.$dark-theme);
-  @import '~highlight.js/scss/vs2015';
+  @import '~highlight.js/scss/atom-one-dark-reasonable';
 }

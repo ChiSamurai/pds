@@ -38,6 +38,6 @@ export class AppComponentsPageComponent {
   constructor(protected dialog: DialogOverlay, readonly appGuides: AppGuidesService) {}
 
   openModal(): void {
-    this.dialog.create(AppDialogComponent).subscribe();
+    this.dialog.create(AppDialogComponent);
   }
 }

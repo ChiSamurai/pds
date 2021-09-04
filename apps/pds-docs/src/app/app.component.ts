@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { WINDOW } from '@ng-web-apis/common';
+import { Toaster } from '@vitagroup/cdk';
 
 @Component({
   selector: 'pds-app',
@@ -37,9 +38,24 @@ import { WINDOW } from '@ng-web-apis/common';
       </ng-container>
     </pds-nav>
     <router-outlet></router-outlet>
+
+    <pds-banner *toastDef="let message; as: 'confirm'; let toast = toast">
+      <span pdsBefore>🍪</span>
+      <div [innerHTML]="message | md"></div>
+      <button class="small" (click)="toast.dispose(false)" pdsAfter>Decline</button>
+      <button class="small" (click)="toast.dispose(true)" pdsAfter>Accept</button>
+    </pds-banner>
+    <pds-banner class="success" *toastDef="let message; as: 'success'">
+      <span pdsBefore>🎉</span>
+      <div [innerHTML]="message | md"></div>
+    </pds-banner>
+    <pds-banner class="warning" *toastDef="let message; as: 'warning'">
+      <span pdsBefore>😢</span>
+      <div [innerHTML]="message | md"></div>
+    </pds-banner>
   `,
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   set darkMode(value: boolean) {
     if (value) this.document.body.classList.add('dark');
     else this.document.body.classList.remove('dark');
@@ -48,11 +64,31 @@ export class AppComponent implements OnInit {
     return this.document.body.classList.contains('dark');
   }
 
-  constructor(@Inject(DOCUMENT) readonly document: Document, @Inject(WINDOW) protected window: Window) {}
+  constructor(
+    @Inject(DOCUMENT) readonly document: Document,
+    @Inject(WINDOW) protected window: Window,
+    protected toaster: Toaster
+  ) {}
 
   ngOnInit() {
     const colorSchemeMediaQuery = this.window.matchMedia('(prefers-color-scheme: dark)');
     colorSchemeMediaQuery.addEventListener('change', ({ matches }) => (this.darkMode = matches));
     this.darkMode = colorSchemeMediaQuery.matches;
+  }
+  ngAfterViewInit() {
+    this.testUnnecessaryCookieToastFlow();
+  }
+
+  async testUnnecessaryCookieToastFlow() {
+    const didConfirm = await this.toaster
+      .push('We are using **cookies**, mainly **to improve our service**. [Read more 🠒](./cookies)', {
+        type: 'confirm',
+        position: ['center', 'bottom'],
+      })
+      .pop()
+      .toPromise();
+    if (didConfirm)
+      this.toaster.pushSuccess('Thanks for accepting! **You can revoke you consent at any time**').pop(4000);
+    else this.toaster.pushWarning('We are sorry to hear that. _You can change you mind at any time_').pop(4000);
   }
 }

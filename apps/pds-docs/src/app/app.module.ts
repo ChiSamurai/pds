@@ -13,6 +13,7 @@ import {
 } from '@vitagroup/cdk/layout';
 import { RouteDataPipeModule, TemplateOutletModule } from '@vitagroup/common';
 import {
+  PdsBannerModule,
   PdsBreadcrumbsModule,
   PdsChipModule,
   PdsDividerModule,
@@ -20,6 +21,7 @@ import {
   PdsNavModule,
   PdsRingLoader,
   PdsTextBoxModule,
+  PdsToasterModule,
   PdsToggleBoxModule,
 } from '@vitagroup/pds-components';
 import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
@@ -37,6 +39,7 @@ import { APP_SITEMAP_PROVIDER } from './app-sitemap-provider';
 import { AppComponent } from './app.component';
 import { AppFooterComponent } from './components/app-footer/app-footer.component';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
+import { MarkedPipeModule } from './pipes/marked.pipe';
 import { APP_GUIDES_INIT_PROVIDER } from './services/app-guides.service';
 
 @NgModule({
@@ -64,6 +67,9 @@ import { APP_GUIDES_INIT_PROVIDER } from './services/app-guides.service';
     PdsFormStatusModule.forRoot(),
     PdsDividerModule,
     PdsBreadcrumbsModule,
+    PdsToasterModule.forRoot(),
+    PdsBannerModule,
+    MarkedPipeModule,
   ],
   providers: [
     {
