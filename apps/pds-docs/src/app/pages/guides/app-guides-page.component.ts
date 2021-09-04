@@ -8,7 +8,7 @@ import { AppGuidesService } from '../../services/app-guides.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class AppGuidesPageComponent {
-  readonly excludedChapters = ['Components'];
+  readonly excludedChapters = ['Getting Started', 'Components', 'Css'];
 
   chapters = this.appGuides
     .asObservable()

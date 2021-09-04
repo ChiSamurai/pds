@@ -5,7 +5,8 @@
       <h3>{{ chapter }}</h3>
 
       <div fxLayout="row wrap" fxLayoutGap="32px grid">
-        <pds-app-guide-card *ngFor="let guide of appGuides.getChapter(chapter)" [guide]="guide" fxFlex="33.33">
+        <pds-app-guide-card *ngFor="let guide of appGuides.getChapter(chapter)" fxFlex="33.33" fxFlex.lt-lg="50"
+          fxFlex.lt-md="100" [guide]="guide">
         </pds-app-guide-card>
       </div>
     </section>

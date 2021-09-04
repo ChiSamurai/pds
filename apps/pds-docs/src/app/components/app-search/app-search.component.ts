@@ -8,17 +8,20 @@ import { AppGuidesService } from '../../services/app-guides.service';
   encapsulation: ViewEncapsulation.None,
   template: `
     <pds-text-box placeholder="Search docs..." [pdsInputDropdown]="searchDropdown">
-      <svg-icon name="search" pdsBefore></svg-icon>
+      <svg-icon name="search" pdsAfter></svg-icon>
     </pds-text-box>
 
     <pds-dropdown pdsInputDropdownDef #searchDropdown>
       <pds-select-list>
         <ng-container *ngIf="appGuides.asObservable() | async | pdsInputFilter as filteredGuides">
           <ng-container *ngIf="filteredGuides?.length; else noSearchResult">
-            <pds-select-option *ngFor="let guide of filteredGuides" [routerLinkOrHref]="resolveLinkUrl(guide)">
+            <pds-select-option
+              *ngFor="let guide of filteredGuides"
+              [routerLinkOrHref]="resolveLinkUrl(guide)"
+              [value]="guide.title"
+            >
               <svg-icon class="text-primary" [name]="resolveIconName(guide)"></svg-icon>
               <strong>{{ guide.title }}</strong>
-              <span class="text-gray-secondary">&bull;</span>
               <small class="text-gray-secondary">{{ guide.chapter }}</small>
             </pds-select-option>
           </ng-container>
@@ -37,6 +40,11 @@ export class AppSearchComponent {
     switch (guide.chapter) {
       case 'Components':
         return 'puzzle-piece';
+      case 'Common':
+      case 'CDK':
+        return 'tools';
+      case 'Css':
+        return 'sass';
       default:
         return 'book-open';
     }
