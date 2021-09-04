@@ -11,15 +11,18 @@ import {
   TEMPLATE_ENCAPSULATIONS,
   TemplateEncapsulation,
 } from '@vitagroup/cdk/layout';
-import { RouteDataPipeModule, TemplateOutletModule } from '@vitagroup/common';
+import { ClipPipeModule, RouteDataPipeModule, RouterLinkOrHrefModule, TemplateOutletModule } from '@vitagroup/common';
 import {
   PdsBannerModule,
   PdsBreadcrumbsModule,
   PdsChipModule,
   PdsDividerModule,
+  PdsDropdownModule,
   PdsFormStatusModule,
+  PdsInputDropdownModule,
   PdsNavModule,
   PdsRingLoader,
+  PdsSelectListModule,
   PdsTextBoxModule,
   PdsToasterModule,
   PdsToggleBoxModule,
@@ -39,11 +42,12 @@ import { APP_SITEMAP_PROVIDER } from './app-sitemap-provider';
 import { AppComponent } from './app.component';
 import { AppFooterComponent } from './components/app-footer/app-footer.component';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
+import { AppSearchComponent } from './components/app-search/app-search.component';
 import { MarkedPipeModule } from './pipes/marked.pipe';
 import { APP_GUIDES_INIT_PROVIDER } from './services/app-guides.service';
 
 @NgModule({
-  declarations: [AppComponent, AppFooterComponent, AppHeaderComponent],
+  declarations: [AppComponent, AppFooterComponent, AppHeaderComponent, AppSearchComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(APP_ROUTES),
@@ -70,6 +74,11 @@ import { APP_GUIDES_INIT_PROVIDER } from './services/app-guides.service';
     PdsToasterModule.forRoot(),
     PdsBannerModule,
     MarkedPipeModule,
+    PdsDropdownModule,
+    PdsInputDropdownModule,
+    PdsSelectListModule,
+    ClipPipeModule,
+    RouterLinkOrHrefModule,
   ],
   providers: [
     {

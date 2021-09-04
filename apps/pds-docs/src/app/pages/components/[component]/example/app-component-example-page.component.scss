@@ -13,13 +13,18 @@ pds-app-component-example-page {
   }
   .example-header {
     @include pds.outer-spacing(--space-md, bottom);
+    @include pds.outer-child-spacing(--space-lg, x, $trim: true, $justify: true);
 
     display: flex;
     align-items: center;
 
     .example-h {
-      flex: 1 0 0;
       margin: 0;
+      flex-shrink: 0;
+    }
+
+    pds-tabs {
+      flex: 1 0 0;
     }
   }
 
@@ -28,6 +33,5 @@ pds-app-component-example-page {
 
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
   }
 }

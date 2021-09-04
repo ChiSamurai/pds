@@ -4,11 +4,9 @@
 
 <pds-dropdown pdsInputDropdownDef #inputDropdown>
   <pds-select-list>
-    <ng-container *ngIf="([ 'foo', 'bar', 'baz' ] | pdsInputFilter) as filteredValues">
+    <ng-container *ngIf="([ 'foo', 'bar', 'baz', 'flu', 'foc', 'sna' ] | pdsInputFilter) as filteredValues">
       <ng-container *ngIf="filteredValues?.length; else noMatchTemplate">
-        <pds-select-option *ngFor="let value of filteredValues" [value]="value">
-          <code>{{ value }}</code>
-        </pds-select-option>
+        <pds-select-option *ngFor="let value of filteredValues" [value]="value">{{ value }}</pds-select-option>
       </ng-container>
       <ng-template #noMatchTemplate>
         <pds-select-option disabled>Unable to find a match</pds-select-option>

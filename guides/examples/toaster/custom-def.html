@@ -1,0 +1,8 @@
+<button (click)="popToast()">Pop Toast</button>
+
+<pds-banner *toastDef="let message as 'confirm'; let toast = toast">
+  <span pdsBefore>❔❕</span>
+  <span>{{ message }}</span>
+  <button (click)="toast.dispose(false)" pdsAfter>👎</button>
+  <button (click)="toast.dispose(true)" pdsAfter>👍</button>
+</pds-banner>

@@ -151,5 +151,28 @@
         "imports": ["CommonModule","PdsComboBoxModule","PdsInputDropdownModule","PdsDropdownModule","PdsSelectListModule", "SvgIconModule"]
       }
     ]
+  },
+  {
+    "slug": "toaster",
+    "src": "packages/cdk/src/toaster/README",
+    "title": "Toaster",
+    "chapter": "Components",
+    "description": "AKA Snackbar",
+    "examples": [
+      {
+        "title": "Built-In Toasts",
+        "templateUrl": "guides/examples/toaster/default.html",
+        "contextUrl": "guides/examples/toaster/default.ts",
+        "imports": ["PdsToasterModule","PdsTextBoxModule","PdsSelectBoxModule","PdsSelectListModule","SvgIconModule","ReactiveFormsModule","CommonModule"],
+        "context": "DefaultToasterExample"
+      },
+      {
+        "title": "Custom Toast Defs",
+        "templateUrl": "guides/examples/toaster/custom-def.html",
+        "contextUrl": "guides/examples/toaster/custom-def.ts",
+        "imports": ["PdsToasterModule","PdsBannerModule"],
+        "context": "CustomDefToasterExample"
+      }
+    ]
   }
 ]

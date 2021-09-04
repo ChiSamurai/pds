@@ -20,6 +20,10 @@ import { AppComponent } from '../../app.component';
   template: `
     <ng-container *ngIf="'title' | routeData | async as title">
       <pds-breadcrumbs>
+        <a class="no-deco" routerLink="/">
+          <svg-icon name="home"></svg-icon>
+        </a>
+        <div>&raquo;</div>
         <a class="no-deco" *pdsBreadcrumbDef="let site" [routerLink]="site.linkUrl">
           {{ site.route.data?.guide?.title || site.route.data?.title }}
         </a>

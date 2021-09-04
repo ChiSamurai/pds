@@ -1,0 +1,8 @@
+@use "styleguide" as pds;
+
+pds-app-search {
+  @include pds.inner-spacing(--space-lg, bottom);
+  @include pds.inner-spacing(--space-sm, x);
+
+  display: block;
+}

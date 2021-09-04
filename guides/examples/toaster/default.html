@@ -1,0 +1,18 @@
+<ng-container [formGroup]="toastControl">
+  <pds-text-box formControlName="message"></pds-text-box>
+  <pds-select-box formControlName="type">
+    <ng-container *pdsSelectDef="let value" class="{{ value }}">
+      <svg-icon name="circle" class="text-{{ value }}"></svg-icon>
+      <span>{{ value | titlecase }}</span>
+    </ng-container>
+
+    <pds-select-list>
+      <pds-select-option *ngFor="let option of toastTypes" [value]="option">
+        <svg-icon name="circle" class="text-{{ option }}"></svg-icon>
+        <span>{{ option | titlecase }}</span>
+      </pds-select-option>
+    </pds-select-list>
+  </pds-select-box>
+</ng-container>
+
+<button (click)="popToast()">Pop Toast</button>

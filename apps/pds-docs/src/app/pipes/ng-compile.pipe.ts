@@ -23,9 +23,9 @@ export class NgCompilePipe implements PipeTransform {
   transform(template: string, options?: NgCompileOptions): any {
     this.compiler.clearCache();
 
-    const { context, ...ngModule } = options || {};
+    const { context = class {}, ...ngModule } = options || {};
 
-    const component = Component({ template })(context || class {});
+    const component = Component({ template })(context);
     const module = NgModule({
       ...ngModule,
       declarations: [component],
