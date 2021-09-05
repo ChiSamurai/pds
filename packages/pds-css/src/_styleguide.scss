@@ -130,8 +130,8 @@ $font-family: "PT Sans", sans-serif !default;
 /// Includes the sheet "element" styling class
 @mixin sheet {
   .sheet {
+    @include inner-spacing(--space-sm);
     @include rounding(--rounding-md);
-    @include inner-spacing(--space-md);
 
     background-color: var(--sheet);
   }
@@ -141,6 +141,11 @@ $font-family: "PT Sans", sans-serif !default;
 @mixin color-classes {
   @include color-accent-classes($color-classes, "text");
 
+  @if some($color-classes, "primary") {
+    @at-root .primary {
+      @include theme($primary-theme);
+    }
+  }
   @if some($color-classes, "info") {
     @at-root .info {
       @include theme($info-theme);

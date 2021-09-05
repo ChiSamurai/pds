@@ -4,6 +4,15 @@
 @use "./theme";
 @use "util";
 
+$primary-theme: theme.define(
+  (
+    "primary-darker": $primary-darker,
+    "primary": $primary,
+    "primary-lighter": $primary-lighter,
+    "primary-contrast": $primary-contrast,
+  )
+) !default;
+
 $dark-theme: theme.define(
   (
     "primary-darker": $watermelon-darker,
