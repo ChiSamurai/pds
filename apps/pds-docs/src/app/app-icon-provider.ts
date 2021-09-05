@@ -1,7 +1,7 @@
 import { Provider } from '@angular/core';
 import { SVG_ICON_IMPORT, SvgIconImportConfig } from '@vitagroup/cdk';
 import { appIconVitagroupSignet } from '../icons/app-icons';
-import { faBrandIconGithub, faBrandIconSass } from '../icons/fa-brand-icons';
+import { faBrandIconAngular, faBrandIconGithub, faBrandIconSass } from '../icons/fa-brand-icons';
 import {
   faSolidIconArrowLeft,
   faSolidIconArrowRight,
@@ -14,11 +14,9 @@ import {
   faSolidIconHome,
   faSolidIconInfo,
   faSolidIconMoon,
-  faSolidIconPuzzlePiece,
   faSolidIconSearch,
   faSolidIconSun,
   faSolidIconTimes,
-  faSolidIconTools,
   faSolidIconUser,
   faSolidIconUsers,
 } from '../icons/fa-solid-icons';
@@ -43,10 +41,9 @@ export const APP_ICON_IMPORT_PROVIDER: Provider = {
       faSolidIconCircle,
       faSolidIconBuilding,
       faSolidIconBookOpen,
-      faSolidIconPuzzlePiece,
       faSolidIconHome,
-      faSolidIconTools,
       faBrandIconGithub,
+      faBrandIconAngular,
       faBrandIconSass,
     ],
   } as SvgIconImportConfig,

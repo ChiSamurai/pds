@@ -6,14 +6,14 @@
         <ng-container *ngIf="appGuides.get(guide.previous) as prevGuide">
           <button class="secondary" [routerLink]="[ '..', prevGuide.slug ]">
             <svg-icon name="arrow-left"></svg-icon>
-            <span>Previous</span>
+            <span>{{ prevGuide.title }}</span>
           </button>
         </ng-container>
       </div>
       <div fxFlex fxLayoutAlign="end">
         <ng-container *ngIf="appGuides.get(guide.next) as nextGuide">
           <button [routerLink]="[ '..', nextGuide.slug ]">
-            <span>Next</span>
+            <span>{{ nextGuide.title }}</span>
             <svg-icon name="arrow-right"></svg-icon>
           </button>
         </ng-container>

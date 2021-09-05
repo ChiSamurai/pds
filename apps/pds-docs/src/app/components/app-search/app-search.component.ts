@@ -39,10 +39,9 @@ export class AppSearchComponent {
   resolveIconName(guide: AppGuide): string {
     switch (guide.chapter) {
       case 'Components':
-        return 'puzzle-piece';
       case 'Common':
       case 'CDK':
-        return 'tools';
+        return 'angular';
       case 'Css':
         return 'sass';
       default:
