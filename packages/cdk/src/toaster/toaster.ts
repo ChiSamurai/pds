@@ -28,11 +28,11 @@ export const TOAST_COMPONENT = new InjectionToken<Type<unknown>>('TOAST_COMPONEN
 
 export const DEFAULT_TOAST_TYPE = new InjectionToken<BuiltInToastType | string>('DEFAULT_TOAST_TYPE', {
   providedIn: 'root',
-  factory: () => 'info',
+  factory: /* @dynamic */ () => 'info',
 });
 export const DEFAULT_TOAST_POSITION = new InjectionToken<ToastPosition>('DEFAULT_TOAST_POSITION', {
   providedIn: 'root',
-  factory: () => ['center', 'bottom'],
+  factory: /* @dynamic */ () => ['center', 'bottom'],
 });
 
 @Injectable({ providedIn: 'root' })
@@ -47,9 +47,9 @@ export class Toaster {
     protected injector: Injector,
     @Inject(TOAST_COMPONENT) protected componentType: Type<unknown>,
     @Inject(TOAST_CONTAINER) protected containerType: Type<ToastContainer>,
-    @Inject(DEFAULT_TOAST_POSITION) readonly defaultPosition: ToastPosition,
-    @Inject(DEFAULT_TOAST_TYPE) readonly defaultType: BuiltInToastType | string,
-    @Optional() @Inject(TOAST_CONTAINER_OFFSET) protected containerOffsets?: ToastContainerOffset[]
+    @Inject(DEFAULT_TOAST_POSITION) readonly defaultPosition: /* @dynamic */ ToastPosition,
+    @Inject(DEFAULT_TOAST_TYPE) readonly defaultType: /* @dynamic */ BuiltInToastType | string,
+    @Optional() @Inject(TOAST_CONTAINER_OFFSET) protected containerOffsets?: /* @dynamic */ ToastContainerOffset[]
   ) {}
 
   protected createOverlayConfig(position: ToastPosition): OverlayConfig {

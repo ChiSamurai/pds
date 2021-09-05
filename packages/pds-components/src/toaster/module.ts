@@ -8,7 +8,7 @@ import {
   ToasterModule,
   ToastPosition,
 } from '@vitagroup/cdk';
-import { PdsBannerModule } from '@vitagroup/pds-components';
+import { PdsBannerModule } from '../banner/module';
 import { PdsToast } from './toast';
 import { PdsToastContainer } from './toast-container';
 
