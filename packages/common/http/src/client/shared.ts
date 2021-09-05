@@ -1,7 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Params } from '@angular/router';
-
-export type QueryParams = Record<string, string[] | string>;
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { QueryParams } from '@vitagroup/common';
 
 /** Defines the strategy configuration for any resource operation */
 export interface ResourceOperationStrategy {
@@ -29,9 +29,8 @@ export type ResourceOperationKey = 'find' | 'list' | 'create' | 'update' | 'dele
 export type JsonPrimitive = string | number | boolean | null;
 export type JsonValue = JsonObject | JsonArray | JsonPrimitive | undefined;
 
-export interface JsonArray extends Array<JsonValue> {
-}
+export type JsonArray = Array<JsonValue>;
 
 export interface JsonObject {
-  [ propertyKey: string ]: JsonValue;
+  [propertyKey: string]: JsonValue;
 }

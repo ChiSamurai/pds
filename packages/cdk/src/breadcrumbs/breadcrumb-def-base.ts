@@ -1,12 +1,12 @@
 import { NgForOfContext } from '@angular/common';
 import { Directive, Input, Predicate, TemplateRef } from '@angular/core';
-import { SiteRef } from '@vitagroup/common';
+import { BreadcrumbSiteRef } from '@vitagroup/common';
 
-export class BreadcrumbDefContext extends NgForOfContext<SiteRef> {}
+export class BreadcrumbDefContext extends NgForOfContext<BreadcrumbSiteRef> {}
 
 @Directive()
 export class BreadcrumbDefBase {
-  @Input() when: Predicate<SiteRef> | null;
+  @Input() when: Predicate<BreadcrumbSiteRef> | null;
 
   constructor(readonly template: TemplateRef<BreadcrumbDefContext>) {}
 

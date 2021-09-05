@@ -1,13 +1,34 @@
-import { Injectable } from '@angular/core';
-import { IsActiveMatchOptions, NavigationEnd, Route, Router } from '@angular/router';
+import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
+import { ActivatedRouteSnapshot, IsActiveMatchOptions, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { ArrayBehaviorState } from '../rx';
 import { Sitemap, SiteRef } from '../sitemap/sitemap';
 import { traverse } from '../utils';
 
+export interface ActiveSiteRef extends SiteRef {
+  activatedRoute: ActivatedRouteSnapshot;
+}
+
+export interface BreadcrumbSiteRef extends ActiveSiteRef {
+  title?: string;
+}
+
+export type BreadcrumbTitleSelector = (site: ActiveSiteRef) => string;
+
+export const BREADCRUMB_TITLE_SELECTOR = new InjectionToken<BreadcrumbTitleSelector>('BREADCRUMB_TITLE_SELECTOR', {
+  providedIn: 'root',
+  factory: () => (site) => site.activatedRoute.data?.title,
+});
+
 @Injectable({ providedIn: 'root' })
-export class Breadcrumbs extends ArrayBehaviorState<SiteRef> {
-  constructor(readonly sitemap: Sitemap, protected router: Router) {
+export class Breadcrumbs extends ArrayBehaviorState<BreadcrumbSiteRef> {
+  constructor(
+    readonly sitemap: Sitemap,
+    protected router: Router,
+    @Optional()
+    @Inject(BREADCRUMB_TITLE_SELECTOR)
+    protected titleSelector?: BreadcrumbTitleSelector
+  ) {
     super();
 
     this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe(this.onNavigationEnd.bind(this));
@@ -34,7 +55,7 @@ export class Breadcrumbs extends ArrayBehaviorState<SiteRef> {
     });
   }
 
-  resolveActiveSitePath(): SiteRef[] {
+  resolveActiveSitePath(): BreadcrumbSiteRef[] {
     const activeRootSite = this.findActiveSite(this.sitemap, { paths: 'subset' });
     const activeSitePath: SiteRef[] = (activeRootSite && [activeRootSite]) || [];
 
@@ -44,35 +65,23 @@ export class Breadcrumbs extends ArrayBehaviorState<SiteRef> {
       return activeChildSite;
     });
 
-    const activeLeafSite = activeSitePath[activeSitePath?.length - 1];
-    const activeRoute: Route = traverse(this.router.routerState.root.snapshot, (snapshot) => snapshot.firstChild)
-      ?.routeConfig;
+    // todo: check whether the leaf site is parameterized and not included in the sitemap
+    //  and try to resolve and add it to the active site path, if possible!
 
-    if (activeRoute?.path.startsWith(':') && activeRoute?.path !== activeLeafSite?.route.path) {
-      activeSitePath.push({
-        route: activeRoute,
-        linkUrl: '.',
-      } as SiteRef);
-    }
-
-    return activeSitePath.map(this.mapActiveSiteRef.bind(this));
+    return activeSitePath
+      .map<BreadcrumbSiteRef>(this.mapActiveSiteRef.bind(this))
+      .filter((breadcrumb) => breadcrumb.activatedRoute.data?.breadcrumb !== false);
   }
 
-  protected mapActiveSiteRef(site: SiteRef): SiteRef {
-    if (site.route.resolve != null) {
-      const resolvedRouteData = traverse(
-        this.router.routerState.root.snapshot,
-        (snapshot) => snapshot.firstChild,
-        (snapshot) => snapshot.routeConfig.resolve != null
-      )?.data;
+  protected mapActiveSiteRef(site: SiteRef): BreadcrumbSiteRef {
+    const activatedRoute = traverse(
+      this.router.routerState.root.snapshot,
+      (snapshot) => snapshot.firstChild,
+      (snapshot) => snapshot.routeConfig.path === site.route.path
+    );
+    const breadcrumbRef = { ...site, activatedRoute };
+    const title = this.titleSelector?.(breadcrumbRef);
 
-      return {
-        ...site,
-        route: {
-          ...site.route,
-          data: { ...site.route.data, ...resolvedRouteData },
-        },
-      };
-    } else return site;
+    return title ? { ...breadcrumbRef, title } : breadcrumbRef;
   }
 }

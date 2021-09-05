@@ -15,6 +15,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { WINDOW } from '@ng-web-apis/common';
 import { ShortcutManager } from '../shortcut-manager/shortcut-manager';
+import { parseQueryParams } from '../utils';
 import { isAbsoluteURL } from '../utils/is-absolute-url';
 
 @Directive({
@@ -35,6 +36,10 @@ export class RouterLinkOrHref extends RouterLink implements OnInit, OnDestroy {
       this.resetRouterLink();
     } else {
       this._isRouterLink = true;
+      if (typeof value === 'string' && value.includes('?')) {
+        this.queryParams = parseQueryParams(value);
+        value = value.split('?')[0];
+      }
       if (value != null) this.routerLink = value;
       else this.resetRouterLink();
       this._href = null;

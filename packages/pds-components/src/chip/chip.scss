@@ -5,6 +5,7 @@ pds-chip {
   --primary-lighter: var(--background-lighter);
   --primary: var(--background);
   --primary-darker: var(--background-darker);
+  --primary-contrast: currentColor;
 
   @include pds.typography(--body-small);
   @include pds.inner-spacing(--space-sm, x);
@@ -16,7 +17,7 @@ pds-chip {
   display: inline-flex;
   background-color: var(--primary);
   height: var(--tag-height, 28px);
-  color: currentColor;
+  color: var(--primary-contrast);
 
   &[interactive] {
     @include util.hover-state {

@@ -58,7 +58,9 @@ export function createSitemap(descriptor: SitemapDescriptor | Routes): Sitemap {
 
       if (!isWildcardRoute) {
         const childDescriptor = descriptor.loadChildren?.[routePath];
-        const routeParamOptions = descriptor.loadParamValues?.[routePath];
+        // todo(@janunld): find a solution for routes with multiple parameters!!!
+        const routeParamKey = routePath.split('/').find((segment) => segment.startsWith(':'));
+        const routeParamOptions = descriptor.loadParamValues?.[routeParamKey];
         const routes = (route.children || []).concat(
           Array.isArray(childDescriptor) ? childDescriptor : childDescriptor?.routes || []
         );
@@ -75,7 +77,7 @@ export function createSitemap(descriptor: SitemapDescriptor | Routes): Sitemap {
 
         if (isParameterized && routeParamOptions != null) {
           for (const paramValue of routeParamOptions) {
-            const baseUrl = resolveBaseUrl(paramValue);
+            const baseUrl = resolveBaseUrl(routePath.replace(routeParamKey, paramValue));
             const children = resolveChildren(baseUrl);
 
             sitemap.push({ children, linkUrl: baseUrl, route });

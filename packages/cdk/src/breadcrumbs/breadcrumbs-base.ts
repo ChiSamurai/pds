@@ -1,30 +1,38 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ContentChildren, Directive, Input, QueryList, TemplateRef } from '@angular/core';
-import { Breadcrumbs, SiteRef } from '@vitagroup/common';
+import { Breadcrumbs, BreadcrumbSiteRef, SiteRef } from '@vitagroup/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BreadcrumbDefBase, BreadcrumbDefContext } from './breadcrumb-def-base';
 
 @Directive()
 export abstract class BreadcrumbsBase {
-  private _skipEmptyRouteData = true;
+  private _skipEmpty = true;
 
   @ContentChildren(BreadcrumbDefBase, { descendants: true })
   protected readonly defs: QueryList<BreadcrumbDefBase>;
 
-  readonly activeSitePath: Observable<SiteRef[]> = this.breadcrumbs.asObservable().pipe(
+  readonly activeSitePath: Observable<BreadcrumbSiteRef[]> = this.breadcrumbs.asObservable().pipe(
     map((sitePath) => {
-      if (this._skipEmptyRouteData) return sitePath.filter((site) => site.route.data != null);
-      else return sitePath;
+      const startIndex = !this.startAt ? 0 : sitePath.findIndex((site) => site.linkUrl === this.startAt);
+      const stopIndex = !this.stopAt ? sitePath.length : sitePath.findIndex((site) => site.linkUrl === this.stopAt);
+      return sitePath
+        .filter((site, index) => index >= startIndex && index <= stopIndex)
+        .filter((site) => !this._skipEmpty || site.title?.trim());
     })
   );
 
+  /** Gets or sets the {@link SiteRef.linkUrl} to start iterating the {@link activeSitePath} at */
+  @Input() startAt: string;
+  /** Gets or sets the {@link SiteRef.linkUrl} to stop iterating the {@link activeSitePath} at */
+  @Input() stopAt: string;
+
   @Input()
-  set skipEmptyRouteData(value: boolean) {
-    this._skipEmptyRouteData = coerceBooleanProperty(value);
+  set skipEmtpy(value: boolean) {
+    this._skipEmpty = coerceBooleanProperty(value);
   }
-  get skipEmptyRouteData(): boolean {
-    return this._skipEmptyRouteData;
+  get skipEmpty(): boolean {
+    return this._skipEmpty;
   }
 
   get defaultTemplate(): TemplateRef<BreadcrumbDefContext> | null {
@@ -33,10 +41,10 @@ export abstract class BreadcrumbsBase {
 
   constructor(protected breadcrumbs: Breadcrumbs) {}
 
-  resolveTemplate(site: SiteRef): TemplateRef<BreadcrumbDefContext> | null {
+  resolveTemplate(site: BreadcrumbSiteRef): TemplateRef<BreadcrumbDefContext> | null {
     return this.defs?.find((def) => def.when?.(site))?.template || this.defaultTemplate;
   }
-  resolveTemplateContext(site: SiteRef, index: number): BreadcrumbDefContext {
+  resolveTemplateContext(site: BreadcrumbSiteRef, index: number): BreadcrumbDefContext {
     const sites = this.breadcrumbs.snapshot;
     return new BreadcrumbDefContext(site, sites, index, sites?.length || 0);
   }

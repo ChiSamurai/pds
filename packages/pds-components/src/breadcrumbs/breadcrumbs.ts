@@ -10,14 +10,17 @@ import { PdsBreadcrumbDivider } from './breadcrumb-divider';
     <ng-template #defaultDividerTemplate>
       <div pdsBreadcrumbDivider>&raquo;</div>
     </ng-template>
-    <ng-template #defaultBreadcrumbTemplate let-site>
-      <a [routerLink]="site.linkUrl">{{ site.route.path }}</a>
+    <ng-template #defaultBreadcrumbTemplate let-breadcrumb>
+      <a class="no-deco" [routerLink]="breadcrumb.linkUrl">{{ breadcrumb.title | titlecase }}</a>
     </ng-template>
 
     <ng-content></ng-content>
-    <ng-container *ngFor="let site of activeSitePath | async; let i = index; let last = last">
+    <ng-container *ngFor="let breadcrumb of activeSitePath | async; let i = index; let last = last">
       <ng-container
-        *ngTemplateOutlet="resolveTemplate(site) || defaultBreadcrumbTemplate; context: resolveTemplateContext(site, i)"
+        *ngTemplateOutlet="
+          resolveTemplate(breadcrumb) || defaultBreadcrumbTemplate;
+          context: resolveTemplateContext(breadcrumb, i)
+        "
       ></ng-container>
       <ng-container *ngIf="!last">
         <ng-container *ngIf="!!contentDivider; else defaultDividerTemplate">
