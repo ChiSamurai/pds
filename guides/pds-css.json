@@ -3,7 +3,7 @@
     "slug": "pds-css",
     "src": "packages/pds-css/README",
     "title": "PDS CSS",
-    "chapter": "Css",
+    "chapter": "css",
     "description": "Getting started with the CSS and Sass feature modules",
     "next": "typography"
   },
@@ -11,7 +11,7 @@
     "slug": "typography",
     "src": "packages/pds-css/docs/typography",
     "title": "Typography",
-    "chapter": "Css",
+    "chapter": "css",
     "description": "Typography mixins, functions and variables",
     "next": "spacing",
     "previous": "pds-css"
@@ -20,7 +20,7 @@
     "slug": "spacing",
     "src": "packages/pds-css/docs/spacing",
     "title": "Spacing",
-    "chapter": "Css",
+    "chapter": "css",
     "description": "Spacing mixins, functions and variable",
     "next": "rounding",
     "previous": "typography"
@@ -29,7 +29,7 @@
     "slug": "rounding",
     "src": "packages/pds-css/docs/rounding",
     "title": "Rounding",
-    "chapter": "Css",
+    "chapter": "css",
     "description": "Rounding mixins, functions and variable",
     "previous": "spacing"
   }

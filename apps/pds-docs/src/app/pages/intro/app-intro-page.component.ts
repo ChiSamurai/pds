@@ -1,5 +1,5 @@
 import { Component, Inject, InjectionToken, ViewEncapsulation } from '@angular/core';
-import { AppGuidesService } from '../../services/app-guides.service';
+import { AppDocService } from '../../services/app-doc.service';
 
 export const APP_INTRO_PAGE_SPOTLIGHT_GUIDES = new InjectionToken<string[]>(
   'List of guide slugs presented on the intro page',
@@ -16,13 +16,11 @@ export const APP_INTRO_PAGE_SPOTLIGHT_GUIDES = new InjectionToken<string[]>(
   encapsulation: ViewEncapsulation.None,
 })
 export class AppIntroPageComponent {
-  readonly spotlightGuides = this.spotlightGuideSlugs
-    .map((slug) => this.appGuides.get(slug))
-    .filter((guide) => !!guide);
+  readonly spotlightDocs = this.spotlightGuideSlugs.map((slug) => this.docs.get(slug)).filter((doc) => !!doc);
 
   constructor(
     @Inject(APP_INTRO_PAGE_SPOTLIGHT_GUIDES)
     readonly spotlightGuideSlugs: string[],
-    protected appGuides: AppGuidesService
+    protected docs: AppDocService
   ) {}
 }

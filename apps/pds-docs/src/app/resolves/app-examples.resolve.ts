@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+import { traverse } from '@vitagroup/common';
 import { AppExample } from '../interfaces/app-example.interface';
+import { AppDocService } from '../services/app-doc.service';
 import { AppExampleService } from '../services/app-example.service';
-import { AppGuidesService } from '../services/app-guides.service';
 
 @Injectable()
 export class AppExamplesResolve implements Resolve<AppExample[]> {
-  constructor(protected appExamples: AppExampleService, protected appGuides: AppGuidesService) {}
+  constructor(protected examples: AppExampleService, protected docs: AppDocService) {}
 
-  resolve(route: ActivatedRouteSnapshot): Promise<AppExample[]> {
-    const { slug, component } = route.params;
-    const guide = this.appGuides.get(slug || component);
+  async resolve(route: ActivatedRouteSnapshot): Promise<AppExample[]> {
+    const slug =
+      route.params.slug ||
+      traverse(
+        route,
+        (r) => r.parent,
+        (r) => r.params?.slug
+      )?.params.slug;
 
-    return Promise.all(guide.examples?.map((example) => this.appExamples.resolve(example)));
+    const doc = this.docs.get(slug);
+    return this.examples.resolveAll(doc.examples);
   }
 }

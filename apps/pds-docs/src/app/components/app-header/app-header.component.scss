@@ -8,9 +8,12 @@ pds-app-header {
   width: 100%;
   flex: 1 0 0;
 
-  > div {
+  .header-content {
     flex: 1 0 0;
     align-items: stretch;
     display: flex;
+  }
+  .header-controls {
+    @include pds.outer-child-spacing(--space-lg, x, $trim: true, $justify: true);
   }
 }

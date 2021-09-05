@@ -9,9 +9,9 @@ export interface AppExample extends NgCompileOptions {
   contextUrl?: string;
 }
 
-export interface AppExampleWithTemplate extends AppExample {
+export interface AppExampleWithSources extends AppExample {
   /** Gets or sets the template source string */
-  template: string;
+  templateSource: string;
   /** Gets or sets the context source string */
   contextSource?: string;
 }

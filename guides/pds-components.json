@@ -3,7 +3,7 @@
     "slug": "avatar",
     "src": "packages/pds-components/src/avatar/README",
     "title": "Avatar",
-    "chapter": "Components",
+    "chapter": "components",
     "description": "Avatars in different sizes",
     "examples": [
       {
@@ -27,7 +27,7 @@
     "slug": "buttons",
     "src": "packages/pds-components/src/button/README",
     "title": "Buttons",
-    "chapter": "Components",
+    "chapter": "components",
     "description": "Buttons and button variants",
     "examples": [
       {
@@ -61,7 +61,7 @@
     "slug": "dropdown",
     "src": "packages/pds-components/src/dropdown/README",
     "title": "Dropdown",
-    "chapter": "Components",
+    "chapter": "components",
     "description": "Dropdown and context menu",
     "examples": [
       {
@@ -75,7 +75,7 @@
     "slug": "nav",
     "src": "packages/pds-components/src/nav/README",
     "title": "Nav",
-    "chapter": "Components",
+    "chapter": "components",
     "description": "Navigation sidebar component",
     "examples": [
       {
@@ -94,7 +94,7 @@
     "slug": "combo-box",
     "src": "packages/pds-components/src/combo-box/README",
     "title": "Combo Box",
-    "chapter": "Components",
+    "chapter": "components",
     "description": "Multi value input control",
     "examples": [
       {
@@ -113,7 +113,7 @@
     "slug": "select-box",
     "src": "packages/pds-components/src/select-box/README",
     "title": "Select Box",
-    "chapter": "Components",
+    "chapter": "components",
     "description": "Selection value control",
     "examples": [
       {
@@ -137,7 +137,7 @@
     "slug": "input-dropdown",
     "src": "packages/pds-components/src/input-dropdown/README",
     "title": "Input Dropdowns",
-    "chapter": "Components",
+    "chapter": "components",
     "description": "AKA Autocomplete",
     "examples": [
       {
@@ -156,7 +156,7 @@
     "slug": "toaster",
     "src": "packages/cdk/src/toaster/README",
     "title": "Toaster",
-    "chapter": "Components",
+    "chapter": "components",
     "description": "AKA Snackbar",
     "examples": [
       {

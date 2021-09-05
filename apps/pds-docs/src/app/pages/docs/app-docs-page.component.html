@@ -1,12 +1,31 @@
 <pds-page-layout footer="fixed">
-  <pds-page-content fxLayout="row wrap" fxLayoutGap="32px grid">
+  <pds-page-content>
 
-    <ng-container *ngFor="let guide of appGuides.getChapter('Components')">
-      <pds-app-guide-card
-        fxFlex="33.33" fxFlex.lt-lg="50" fxFlex.lt-md="100"
-        [guide]="guide" linkUrl="/components/{{ guide.slug }}">
-      </pds-app-guide-card>
-    </ng-container>
+    <div class="sheet">
+      <ng-container *ngFor="let chapter of docs.chapters">
+        <pds-chip interactive routerLink="/docs/chapters/{{ chapter }}" routerLinkActive="primary">
+          {{ chapter | titlecase }}
+        </pds-chip>
+      </ng-container>
+    </div>
+
+    <pds-divider space="lg"></pds-divider>
+
+    <div fxLayout="row wrap" fxLayoutGap="32px grid" *ngIf="routeChapters | async as chapters">
+      <ng-container *ngFor="let chapter of chapters; let last = last">
+        <div fxFlex="100" *ngIf="chapters.length > 1">
+          <h3>{{ chapter | titlecase }}</h3>
+        </div>
+
+        <ng-container *ngFor="let doc of docs.getChapter(chapter)">
+          <pds-app-doc-card fxFlex="33.33" fxFlex.lt-lg="50" fxFlex.lt-md="100" [doc]="doc"></pds-app-doc-card>
+        </ng-container>
+
+        <div *ngIf="!last" fxFlex="100">
+          <pds-divider></pds-divider>
+        </div>
+      </ng-container>
+    </div>
 
   </pds-page-content>
 

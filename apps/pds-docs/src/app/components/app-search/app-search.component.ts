@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { AppGuide } from '../../interfaces/app-guide.interface';
-import { AppGuidesService } from '../../services/app-guides.service';
+import { AppDoc } from '../../interfaces/app-doc.interface';
+import { AppDocService } from '../../services/app-doc.service';
 
 @Component({
   selector: 'pds-app-search',
@@ -13,16 +13,16 @@ import { AppGuidesService } from '../../services/app-guides.service';
 
     <pds-dropdown pdsInputDropdownDef #searchDropdown>
       <pds-select-list>
-        <ng-container *ngIf="appGuides.asObservable() | async | pdsInputFilter as filteredGuides">
+        <ng-container *ngIf="docs.asObservable() | async | pdsInputFilter as filteredGuides">
           <ng-container *ngIf="filteredGuides?.length; else noSearchResult">
             <pds-select-option
-              *ngFor="let guide of filteredGuides"
-              [routerLinkOrHref]="resolveLinkUrl(guide)"
-              [value]="guide.title"
+              *ngFor="let doc of filteredGuides"
+              routerLinkOrHref="/docs/chapters/{{ doc.chapter }}/{{ doc.slug }}"
+              [value]="doc.title"
             >
-              <svg-icon class="text-primary" [name]="resolveIconName(guide)"></svg-icon>
-              <strong>{{ guide.title }}</strong>
-              <small class="text-gray-secondary">{{ guide.chapter }}</small>
+              <svg-icon class="text-primary" [name]="resolveIconName(doc)"></svg-icon>
+              <strong>{{ doc.title }}</strong>
+              <small class="text-gray-secondary">{{ doc.chapter | titlecase }}</small>
             </pds-select-option>
           </ng-container>
           <ng-template #noSearchResult>
@@ -34,26 +34,18 @@ import { AppGuidesService } from '../../services/app-guides.service';
   `,
 })
 export class AppSearchComponent {
-  constructor(readonly appGuides: AppGuidesService) {}
+  constructor(readonly docs: AppDocService) {}
 
-  resolveIconName(guide: AppGuide): string {
-    switch (guide.chapter) {
-      case 'Components':
-      case 'Common':
-      case 'CDK':
+  resolveIconName(doc: AppDoc): string {
+    switch (doc.chapter) {
+      case 'components':
+      case 'common':
+      case 'cdk':
         return 'angular';
-      case 'Css':
+      case 'css':
         return 'sass';
       default:
         return 'book-open';
-    }
-  }
-  resolveLinkUrl(guide: AppGuide): string {
-    switch (guide.chapter) {
-      case 'Components':
-        return `/components/${guide.slug}`;
-      default:
-        return `/guides/${guide.slug}`;
     }
   }
 }

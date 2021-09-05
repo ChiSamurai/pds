@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { WINDOW } from '@ng-web-apis/common';
-import { AppGuidesService } from './services/app-guides.service';
+import { AppDocService } from './services/app-doc.service';
 
 @Component({
   selector: 'pds-app',
@@ -25,7 +25,7 @@ import { AppGuidesService } from './services/app-guides.service';
         routerLinkActive="active"
       >
         <svg-icon [name]="entry.iconName" *ngIf="entry.iconName" pdsBefore></svg-icon>
-        <span>{{ entry.name }}</span>
+        <span>{{ entry.name | titlecase }}</span>
       </pds-nav-entry>
     </pds-nav>
     <router-outlet></router-outlet>
@@ -40,10 +40,17 @@ export class AppComponent implements OnInit {
     return this.document.body.classList.contains('dark');
   }
 
+  set roundMode(value: boolean) {
+    this.document.body.style.setProperty('--rounding', (value ? 1 : 0).toString());
+  }
+  get roundMode(): boolean {
+    return !!parseInt(this.document.body.style['--rounding']);
+  }
+
   constructor(
     @Inject(DOCUMENT) readonly document: Document,
     @Inject(WINDOW) protected window: Window,
-    readonly appGuides: AppGuidesService
+    readonly docs: AppDocService
   ) {}
 
   ngOnInit() {

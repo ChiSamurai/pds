@@ -28,23 +28,24 @@ import {
   PdsToggleBoxModule,
 } from '@vitagroup/pds-components';
 import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
-import { APP_ICON_IMPORT_PROVIDER } from './app-icon-provider';
-import { APP_NAV_ENTRY_PROVIDER, APP_SECONDARY_NAV_ENTRY_PROVIDER } from './app-navigation-provider';
-import {
-  APP_PAGE_ENCAPSULATION_PROVIDER,
-  APP_PAGE_FOOTER_POSITION_PROVIDER,
-  APP_PAGE_FOOTER_PROVIDER,
-  APP_PAGE_HEADER_PROVIDER,
-} from './app-page-provider';
-import { APP_ROUTES } from './app-routes';
-import { APP_SITEMAP_PROVIDER } from './app-sitemap-provider';
 
 import { AppComponent } from './app.component';
 import { AppFooterComponent } from './components/app-footer/app-footer.component';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
 import { AppSearchComponent } from './components/app-search/app-search.component';
+import { APP_BREADCRUMB_TITLE_SELECTOR_PROVIDER } from './config/app-breadcrumbs';
+import { APP_DOCS_INIT_PROVIDER } from './config/app-docs';
+import { APP_ICON_IMPORT_PROVIDER } from './config/app-icons';
+import { APP_NAV_ENTRY_PROVIDER, APP_SECONDARY_NAV_ENTRY_PROVIDER } from './config/app-navigation';
+import {
+  APP_PAGE_ENCAPSULATION_PROVIDER,
+  APP_PAGE_FOOTER_POSITION_PROVIDER,
+  APP_PAGE_FOOTER_PROVIDER,
+  APP_PAGE_HEADER_PROVIDER,
+} from './config/app-page-layout';
+import { APP_ROUTES } from './config/app-routes';
+import { APP_SITEMAP_PROVIDER } from './config/app-sitemap';
 import { MarkedPipeModule } from './pipes/marked.pipe';
-import { APP_GUIDES_INIT_PROVIDER } from './services/app-guides.service';
 
 @NgModule({
   declarations: [AppComponent, AppFooterComponent, AppHeaderComponent, AppSearchComponent],
@@ -97,13 +98,13 @@ import { APP_GUIDES_INIT_PROVIDER } from './services/app-guides.service';
     APP_NAV_ENTRY_PROVIDER,
     APP_SECONDARY_NAV_ENTRY_PROVIDER,
     APP_SITEMAP_PROVIDER,
+    APP_BREADCRUMB_TITLE_SELECTOR_PROVIDER,
     APP_PAGE_HEADER_PROVIDER,
     APP_PAGE_FOOTER_PROVIDER,
     APP_PAGE_FOOTER_POSITION_PROVIDER,
     APP_PAGE_ENCAPSULATION_PROVIDER,
     APP_ICON_IMPORT_PROVIDER,
-
-    APP_GUIDES_INIT_PROVIDER,
+    APP_DOCS_INIT_PROVIDER,
   ],
   bootstrap: [AppComponent],
 })

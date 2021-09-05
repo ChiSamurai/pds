@@ -17,15 +17,16 @@
 @include pds.color-classes;
 @include pds.typography-classes;
 
+@include pds.sheet;
 @include pds.browser-scrollbar;
 @include ng.overlay;
 
 body {
   &:not(.dark) {
-    @import '~highlight.js/scss/atom-one-light';
+    @import '~highlight.js/scss/github';
   }
   &.dark {
     @include pds.theme(pds.$dark-theme);
-    @import '~highlight.js/scss/atom-one-dark';
+    @import '~highlight.js/scss/vs2015';
   }
 }

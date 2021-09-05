@@ -6,7 +6,7 @@ import * as vgCdk from '@vitagroup/cdk';
 import * as vgCommon from '@vitagroup/common';
 import * as pdsComponents from '@vitagroup/pds-components';
 import * as appExampleContexts from 'examples';
-import { AppExample, AppExampleWithTemplate } from '../interfaces/app-example.interface';
+import { AppExample, AppExampleWithSources } from '../interfaces/app-example.interface';
 
 export const APP_EXAMPLES_BASE_URL = new InjectionToken<string>('The base url of the app examples asset directory', {
   providedIn: 'root',
@@ -56,7 +56,7 @@ export class AppExampleService {
     return this.contexts.find((context) => context.name === className);
   }
 
-  async resolve(example: AppExample): Promise<AppExampleWithTemplate> {
+  async resolve(example: AppExample): Promise<AppExampleWithSources> {
     const template = await this.resourceSourceFile(example.templateUrl);
     const contextSource = example.contextUrl && (await this.resourceSourceFile(example.contextUrl));
 
@@ -67,6 +67,9 @@ export class AppExampleService {
       ?.map((moduleName) => this.resolveModuleImport(moduleName))
       ?.filter((module) => typeof module === 'function');
 
-    return { template, ...example, imports, context, contextSource };
+    return { templateSource: template, ...example, imports, context, contextSource };
+  }
+  async resolveAll(examples: AppExample[]): Promise<AppExampleWithSources[]> {
+    return await Promise.all(examples?.map((example) => this.resolve(example)) || []);
   }
 }

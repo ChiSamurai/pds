@@ -10,11 +10,11 @@
       </p>
     </section>
 
-    <section fxFlex="100" *ngIf="spotlightGuides?.length > 0">
+    <section fxFlex="100" *ngIf="spotlightDocs?.length > 0">
       <h2>Guides</h2>
       <div fxLayout="row wrap" fxLayoutGap="32px grid">
-        <div fxFlex="33.33" *ngFor="let guide of spotlightGuides">
-          <pds-app-guide-card [guide]="guide"></pds-app-guide-card>
+        <div fxFlex="33.33" *ngFor="let doc of spotlightDocs">
+          <pds-app-doc-card [doc]="doc"></pds-app-doc-card>
         </div>
       </div>
     </section>

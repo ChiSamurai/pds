@@ -4,9 +4,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule, Routes } from '@angular/router';
 import { SvgIconModule } from '@vitagroup/cdk';
 import { RouterLinkOrHrefModule } from '@vitagroup/common';
-import { PdsCardModule, PdsSelectBoxModule, PdsSelectListModule, PdsChipModule } from '@vitagroup/pds-components';
+import { PdsCardModule, PdsChipModule, PdsSelectBoxModule, PdsSelectListModule } from '@vitagroup/pds-components';
 import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
-import { AppGuideCardModule } from '../../components/app-guide-card/app-guide-card.component';
+import { AppGuideCardModule } from '../../components/app-doc-card/app-doc-card.component';
 import { MarkedPipeModule } from '../../pipes/marked.pipe';
 import { AppIntroPageComponent } from './app-intro-page.component';
 

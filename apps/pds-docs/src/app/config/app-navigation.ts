@@ -1,25 +1,22 @@
 import { Provider } from '@angular/core';
 import { NAV_ENTRIES, NavEntry } from '@vitagroup/cdk';
 import { PDS_SECONDARY_NAV_ENTRIES } from '@vitagroup/pds-components';
+import { AppDocChapters } from '../enums/app-doc-chapters';
 
 export const APP_NAV_ENTRY_PROVIDER: Provider = {
   provide: NAV_ENTRIES,
   useValue: [
     {
-      name: $localize`Introduction`,
+      name: `Introduction`,
       linkUrl: '/',
     },
     {
-      name: $localize`Guides`,
-      linkUrl: '/guides',
+      name: `Components`,
+      linkUrl: `/docs/chapters/${AppDocChapters.Components}`,
     },
     {
-      name: $localize`Components`,
-      linkUrl: '/components',
-    },
-    {
-      name: $localize`CSS`,
-      linkUrl: '/css',
+      name: `Css`,
+      linkUrl: `/docs/chapters/${AppDocChapters.Css}`,
     },
   ] as NavEntry[],
 };

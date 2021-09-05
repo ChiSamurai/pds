@@ -1,4 +1,4 @@
-export enum AppComponentPages {
+export enum AppDocPages {
   Avatar = 'avatar',
   Buttons = 'buttons',
   Dropdown = 'dropdown',
@@ -7,4 +7,8 @@ export enum AppComponentPages {
   SelectBox = 'select-box',
   InputDropdown = 'input-dropdown',
   Toaster = 'toaster',
+  PdsCss = 'pds-css',
+  Typography = 'typography',
+  Spacing = 'rounding',
+  Rounding = 'rounding',
 }

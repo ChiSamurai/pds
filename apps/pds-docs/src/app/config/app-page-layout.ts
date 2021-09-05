@@ -3,10 +3,10 @@ import {
   PDS_PAGE_ENCAPSULATION,
   PDS_PAGE_FOOTER_COMPONENT,
   PDS_PAGE_FOOTER_POSITION,
-  PDS_PAGE_HEADER_COMPONENT
+  PDS_PAGE_HEADER_COMPONENT,
 } from '@vitagroup/pds-components/layout';
-import { AppFooterComponent } from './components/app-footer/app-footer.component';
-import { AppHeaderComponent } from './components/app-header/app-header.component';
+import { AppFooterComponent } from '../components/app-footer/app-footer.component';
+import { AppHeaderComponent } from '../components/app-header/app-header.component';
 
 export const APP_PAGE_HEADER_PROVIDER: Provider = {
   provide: PDS_PAGE_HEADER_COMPONENT,
