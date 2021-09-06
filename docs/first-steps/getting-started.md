@@ -25,7 +25,7 @@ Built-in components and related declarations can be quickly accessed using a `pd
 typing inside a template or searching for potential integrations somewhere else. An overview
 however can be found in the [components](/components) section. Most of the components also
 feature a highly customizable dependency injection structure. Make sure to check out the
-independent guides about the different key concepts and configurable interfaces.
+independent docs about the different key concepts and configurable interfaces.
 
 ## CSS
 
@@ -40,7 +40,7 @@ If the integration approach targets for a more complex use case than just resett
 @import "~@vitagroup/pds-css/prebuilt/berry.css";
 ```
 
-Fore further information about integrating [Sass][sass] based APIs take a look at the [Styling Guide](/guides/styling).
+Fore further information about integrating [Sass][sass] based APIs take a look at the [Styling Guide](/docs/styling).
 
 
   [aio]: https://angular.io

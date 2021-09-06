@@ -1,6 +1,6 @@
-import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { WINDOW } from '@ng-web-apis/common';
+import { Theme } from '@vitagroup/cdk';
 import { AppDocService } from './services/app-doc.service';
 
 @Component({
@@ -33,25 +33,21 @@ import { AppDocService } from './services/app-doc.service';
 })
 export class AppComponent implements OnInit {
   set darkMode(value: boolean) {
-    if (value) this.document.body.classList.add('dark');
-    else this.document.body.classList.remove('dark');
+    if (value) this.theme.activate('dark');
+    else this.theme.deactivate('dark');
   }
   get darkMode(): boolean {
-    return this.document.body.classList.contains('dark');
+    return this.theme.isActive('dark');
   }
 
   set roundMode(value: boolean) {
-    this.document.body.style.setProperty('--rounding', (value ? 1 : 0).toString());
+    this.theme.setProperty('--rounding', (value ? 1 : 0).toString());
   }
   get roundMode(): boolean {
-    return !!parseInt(this.document.body.style['--rounding']);
+    return !!parseInt(this.theme.getProperty('--rounding'));
   }
 
-  constructor(
-    @Inject(DOCUMENT) readonly document: Document,
-    @Inject(WINDOW) protected window: Window,
-    readonly docs: AppDocService
-  ) {}
+  constructor(@Inject(WINDOW) protected window: Window, readonly docs: AppDocService, protected theme: Theme) {}
 
   ngOnInit() {
     const colorSchemeMediaQuery = this.window.matchMedia('(prefers-color-scheme: dark)');

@@ -25,6 +25,7 @@ body {
   &:not(.dark) {
     @import '~highlight.js/scss/github';
   }
+
   &.dark {
     @include pds.theme(pds.$dark-theme);
     @import '~highlight.js/scss/vs2015';

@@ -1,9 +1,10 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FlexModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { LoadingStateModule, SvgIconModule } from '@vitagroup/cdk';
+import { LoadingStateModule, SvgIconModule, ThemeModule } from '@vitagroup/cdk';
 import { FORM_ERROR_MESSAGES, FormErrorMessages } from '@vitagroup/cdk/forms';
 import {
   FlexContainer,
@@ -52,6 +53,10 @@ import { MarkedPipeModule } from './pipes/marked.pipe';
   imports: [
     BrowserModule,
     RouterModule.forRoot(APP_ROUTES),
+    ThemeModule.forRoot({
+      themes: ['dark'],
+      activeThemes: ['dark'],
+    }),
     LoadingStateModule.forRoot({
       indicator: PdsRingLoader,
       overlayStrategy: 'onRouterEvent',
@@ -80,6 +85,7 @@ import { MarkedPipeModule } from './pipes/marked.pipe';
     PdsSelectListModule,
     ClipPipeModule,
     RouterLinkOrHrefModule,
+    FlexModule,
   ],
   providers: [
     {

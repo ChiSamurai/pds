@@ -9,7 +9,7 @@ import { MarkedPipeModule } from '../../pipes/marked.pipe';
 @Component({
   selector: 'pds-app-doc-card',
   encapsulation: ViewEncapsulation.None,
-  styles: ['pds-app-doc-card { display: block }'],
+  styleUrls: ['app-doc-card.component.scss'],
   template: `
     <ng-template #ngContentFooter>
       <ng-content select="pds-card-footer"></ng-content>

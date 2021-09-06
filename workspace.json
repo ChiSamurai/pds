@@ -158,13 +158,13 @@
               "apps/pds-docs/src/assets",
               {
                 "glob": "**/*.{json,md,html,ts}",
-                "input": "guides",
-                "output": "assets/guides"
+                "input": "docs",
+                "output": "assets/docs"
               },
               {
                 "glob": "**/*.md",
                 "input": "packages",
-                "output": "assets/guides/packages"
+                "output": "assets/docs/packages"
               },
               {
                 "glob": "**/*.{ttf,txt}",

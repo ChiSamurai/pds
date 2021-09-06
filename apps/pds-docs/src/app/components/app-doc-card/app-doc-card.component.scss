@@ -1,0 +1,13 @@
+pds-app-doc-card {
+  display: block;
+
+  pds-card {
+    height: 280px;
+    flex-direction: column;
+    display: flex;
+
+    pds-card-content {
+      flex: 1 0 auto;
+    }
+  }
+}

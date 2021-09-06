@@ -5,12 +5,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import * as vgCdk from '@vitagroup/cdk';
 import * as vgCommon from '@vitagroup/common';
 import * as pdsComponents from '@vitagroup/pds-components';
-import * as appExampleContexts from 'examples';
+import * as appExampleContexts from 'docs/examples';
 import { AppExample, AppExampleWithSources } from '../interfaces/app-example.interface';
 
 export const APP_EXAMPLES_BASE_URL = new InjectionToken<string>('The base url of the app examples asset directory', {
   providedIn: 'root',
-  factory: () => '/assets',
+  factory: () => '/assets/docs',
 });
 
 export function findMembersWithNameIncluding(obj: unknown, str: string): Type<unknown>[] {

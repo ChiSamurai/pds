@@ -5,9 +5,9 @@ import { map, tap } from 'rxjs/operators';
 import { AppDocChapters } from '../enums/app-doc-chapters';
 import { AppDoc, AppDocWithContent } from '../interfaces/app-doc.interface';
 
-export const APP_DOC_BASE_URL = new InjectionToken('The base url of the app guides asset directory', {
+export const APP_DOC_BASE_URL = new InjectionToken('The base url of the app docs asset directory', {
   providedIn: 'root',
-  factory: () => '/assets/guides',
+  factory: () => '/assets/docs',
 });
 
 @Injectable({ providedIn: 'root' })
@@ -54,7 +54,7 @@ export class AppDocService extends ArrayBehaviorState<AppDoc> {
     if (!path.endsWith('.json')) path = normalizeUrl(path, 'index.json');
     return this.http
       .get<AppDoc[]>(normalizeUrl(this.baseUrl, path), { responseType: 'json' })
-      .pipe(tap((guides) => guides.forEach(this.pushOrUpdate.bind(this))))
+      .pipe(tap((docs) => docs.forEach(this.pushOrUpdate.bind(this))))
       .toPromise();
   }
 }

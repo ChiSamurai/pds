@@ -16,7 +16,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "examples": ["guides/examples/index.ts"],
       "@vitagroup/cdk": ["packages/cdk/src/index.ts"],
       "@vitagroup/cdk/forms": ["packages/cdk/forms/src/index.ts"],
       "@vitagroup/cdk/layout": ["packages/cdk/layout/src/index.ts"],

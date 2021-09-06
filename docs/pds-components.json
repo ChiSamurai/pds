@@ -8,17 +8,17 @@
     "examples": [
       {
         "title": "Default Avatar",
-        "templateUrl": "guides/examples/avatar/default.html",
+        "templateUrl": "examples/avatar/default.html",
         "imports": ["PdsAvatarModule","SvgIconModule"]
       },
       {
         "title": "Avatar Sizes",
-        "templateUrl": "guides/examples/avatar/sizing.html",
+        "templateUrl": "examples/avatar/sizing.html",
         "imports": ["PdsAvatarModule", "SvgIconModule"]
       },
       {
         "title": "Interactive & Disabled Avatars",
-        "templateUrl": "guides/examples/avatar/interactive.html",
+        "templateUrl": "examples/avatar/interactive.html",
         "imports": ["PdsAvatarModule", "SvgIconModule"]
       }
     ]
@@ -32,27 +32,27 @@
     "examples": [
       {
         "title": "Primary Buttons",
-        "templateUrl": "guides/examples/buttons/primary.html",
+        "templateUrl": "examples/buttons/primary.html",
         "imports": ["SvgIconModule"]
       },
       {
         "title": "Secondary Buttons",
-        "templateUrl": "guides/examples/buttons/secondary.html",
+        "templateUrl": "examples/buttons/secondary.html",
         "imports": ["SvgIconModule"]
       },
       {
         "title": "Small Primary Buttons",
-        "templateUrl": "guides/examples/buttons/primary-small.html",
+        "templateUrl": "examples/buttons/primary-small.html",
         "imports": ["SvgIconModule"]
       },
       {
         "title": "Small Secondary Buttons",
-        "templateUrl": "guides/examples/buttons/secondary-small.html",
+        "templateUrl": "examples/buttons/secondary-small.html",
         "imports": ["SvgIconModule"]
       },
       {
         "title": "Floating Action Buttons",
-        "templateUrl": "guides/examples/buttons/floating.html",
+        "templateUrl": "examples/buttons/floating.html",
         "imports": ["PdsFabModule","SvgIconModule"]
       }
     ]
@@ -66,7 +66,7 @@
     "examples": [
       {
         "title": "Default Dropdown",
-        "templateUrl": "guides/examples/dropdown/default.html",
+        "templateUrl": "examples/dropdown/default.html",
         "imports": ["CommonModule","PdsDropdownModule","PdsSelectListModule"]
       }
     ]
@@ -80,12 +80,12 @@
     "examples": [
       {
         "title": "Default Navigation",
-        "templateUrl": "guides/examples/nav/default.html",
+        "templateUrl": "examples/nav/default.html",
         "imports": ["PdsNavModule"]
       },
       {
         "title": "Navigation with Entry Templating",
-        "templateUrl": "guides/examples/nav/templating.html",
+        "templateUrl": "examples/nav/templating.html",
         "imports": ["PdsNavModule","PdsBadgeModule","SvgIconModule","ClipPipeModule"]
       }
     ]
@@ -99,12 +99,12 @@
     "examples": [
       {
         "title": "Default Combo Box",
-        "templateUrl": "guides/examples/combo-box/default.html",
+        "templateUrl": "examples/combo-box/default.html",
         "imports": ["PdsComboBoxModule"]
       },
       {
         "title": "Combo Box with custom Templating",
-        "templateUrl": "guides/examples/combo-box/templating.html",
+        "templateUrl": "examples/combo-box/templating.html",
         "imports": ["PdsComboBoxModule","PdsChipModule"]
       }
     ]
@@ -118,17 +118,17 @@
     "examples": [
       {
         "title": "Default Select Box",
-        "templateUrl": "guides/examples/select-box/default.html",
+        "templateUrl": "examples/select-box/default.html",
         "imports": ["CommonModule","PdsSelectBoxModule","PdsSelectListModule"]
       },
       {
         "title": "Multi Select Box",
-        "templateUrl": "guides/examples/select-box/multi.html",
+        "templateUrl": "examples/select-box/multi.html",
         "imports": ["CommonModule","PdsSelectBoxModule","PdsSelectListModule"]
       },
       {
         "title": "Select Box with custom Templating",
-        "templateUrl": "guides/examples/select-box/templating.html",
+        "templateUrl": "examples/select-box/templating.html",
         "imports": ["CommonModule","PdsSelectBoxModule","PdsSelectListModule","PdsChipModule"]
       }
     ]
@@ -142,12 +142,12 @@
     "examples": [
       {
         "title": "Default Input Dropdown",
-        "templateUrl": "guides/examples/input-dropdown/default.html",
+        "templateUrl": "examples/input-dropdown/default.html",
         "imports": ["CommonModule","PdsTextBoxModule","PdsInputDropdownModule","PdsDropdownModule","PdsSelectListModule", "SvgIconModule"]
       },
       {
         "title": "Multi Select Input Dropdown",
-        "templateUrl": "guides/examples/input-dropdown/multi.html",
+        "templateUrl": "examples/input-dropdown/multi.html",
         "imports": ["CommonModule","PdsComboBoxModule","PdsInputDropdownModule","PdsDropdownModule","PdsSelectListModule", "SvgIconModule"]
       }
     ]
@@ -161,15 +161,15 @@
     "examples": [
       {
         "title": "Built-In Toasts",
-        "templateUrl": "guides/examples/toaster/default.html",
-        "contextUrl": "guides/examples/toaster/default.ts",
+        "templateUrl": "examples/toaster/default.html",
+        "contextUrl": "examples/toaster/default.ts",
         "imports": ["PdsToasterModule","PdsTextBoxModule","PdsSelectBoxModule","PdsSelectListModule","SvgIconModule","ReactiveFormsModule","CommonModule"],
         "context": "DefaultToasterExample"
       },
       {
         "title": "Custom Toast Defs",
-        "templateUrl": "guides/examples/toaster/custom-def.html",
-        "contextUrl": "guides/examples/toaster/custom-def.ts",
+        "templateUrl": "examples/toaster/custom-def.html",
+        "contextUrl": "examples/toaster/custom-def.ts",
         "imports": ["PdsToasterModule","PdsBannerModule"],
         "context": "CustomDefToasterExample"
       }
