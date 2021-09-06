@@ -65,6 +65,9 @@ export * from './svg-icon/svg-icon-registry';
 
 export * from './text-box/text-box-base';
 
+export * from './theme/theme';
+export * from './theme/module';
+
 export * from './toaster/toaster';
 export * from './toaster/toast-container';
 export * from './toaster/toast-dispose';
