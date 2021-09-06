@@ -1,9 +1,10 @@
+@use "sass:math";
 @use "styleguide" as pds;
 @use "toggle-base" as *;
 @use "util";
 
 pds-toggle-box {
-  $toggle-knob-spacing: $toggle-border-width / 2;
+  $toggle-knob-spacing: math.div($toggle-border-width, 2);
   $toggle-knob-size: $toggle-size - ($toggle-knob-spacing * 2);
 
   @include pds-toggle-base;
