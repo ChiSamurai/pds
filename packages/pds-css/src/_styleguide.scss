@@ -107,6 +107,9 @@ $font-family: "PT Sans", sans-serif !default;
   // content-sectioning
   @include headline;
 
+  // table-content
+  @include table;
+
   // text-content
   @include blockquote;
   @include paragraph;

@@ -38,9 +38,16 @@ and simplify the usage of the extensive underlying module foundation consisting 
 mixin, function and variable definitions.
 
 ```scss
-@use "styleguide";
+@use "styleguide" as pds;
 @use "util";
 ```
+
+#### Core Sass API
+
+- [Typography](./docs/typography.md)
+- [Spacing](./docs/spacing.md)
+- [Rounding](./docs/rounding.md)
+- [Elevation](./docs/elevation.md)
 
 ### Building a Styleguide
 

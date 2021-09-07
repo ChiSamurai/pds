@@ -1,0 +1,11 @@
+@use "../../spacing" as *;
+
+@mixin table() {
+  table {
+    th,
+    td {
+      @include inner-spacing(--space-xs, y);
+      @include inner-spacing(--space-md, x);
+    }
+  }
+}
