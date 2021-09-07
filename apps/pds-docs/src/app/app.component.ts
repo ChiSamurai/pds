@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
     this.theme.setProperty('--rounding', (value ? 1 : 0).toString());
   }
   get roundMode(): boolean {
-    return !!parseInt(this.theme.getProperty('--rounding'));
+    return !!parseInt(this.theme.getProperty('--rounding') || '1');
   }
 
   constructor(@Inject(WINDOW) protected window: Window, readonly docs: AppDocService, protected theme: Theme) {}

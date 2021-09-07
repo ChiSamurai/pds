@@ -55,7 +55,6 @@ import { MarkedPipeModule } from './pipes/marked.pipe';
     RouterModule.forRoot(APP_ROUTES),
     ThemeModule.forRoot({
       themes: ['dark'],
-      activeThemes: ['dark'],
     }),
     LoadingStateModule.forRoot({
       indicator: PdsRingLoader,

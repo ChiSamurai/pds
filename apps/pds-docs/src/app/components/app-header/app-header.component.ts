@@ -47,7 +47,7 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
   protected readonly ngDestroys = new Subject();
 
   readonly lightModeControl = new FormControl(!this.app.darkMode);
-  readonly roundModeControl = new FormControl(true);
+  readonly roundModeControl = new FormControl(this.app.roundMode);
 
   constructor(
     readonly parent: PdsPageHeader,

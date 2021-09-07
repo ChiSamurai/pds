@@ -9,13 +9,16 @@ export class AppDocResolve implements Resolve<AppDocWithContent> {
   constructor(protected docs: AppDocService) {}
 
   resolve(route: ActivatedRouteSnapshot): Promise<AppDocWithContent> {
-    const slug =
+    let slug: string =
       route.params.slug ||
       traverse(
         route,
         (r) => r.parent,
         (r) => r.params?.slug
       )?.params.slug;
+
+    // try to separate off any potential file extensions
+    if (slug.includes('.')) slug = slug.split('.')[0];
 
     return this.docs.resolve(slug);
   }
