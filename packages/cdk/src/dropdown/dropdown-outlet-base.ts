@@ -41,7 +41,7 @@ export abstract class DropdownOutletBase extends OverlayOutletBase<DropdownDefBa
   }
 
   protected updatePreferredPosition(): void {
-    const [preferredX, preferredY] = this.preferredPosition || this.overlayDef.preferredPosition;
+    const [preferredX, preferredY] = this.preferredPosition || this.overlayDef.preferredPosition || ['left', 'bottom'];
     const preferredPosition = DROPDOWN_POSITIONS[preferredY][preferredX];
     const positions = [
       ['left', 'bottom'],
