@@ -68,6 +68,11 @@ export * from './tabs/tab';
 // export * from './toaster/toast-container';
 export * from './toaster/module';
 
+export * from './tooltip/tooltip';
+export * from './tooltip/tooltip-def';
+export * from './tooltip/tooltip-outlet';
+export * from './tooltip/module';
+
 export * from './chip/module';
 export * from './chip/chip';
 

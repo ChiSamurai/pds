@@ -1,0 +1,13 @@
+@use "styleguide" as pds;
+
+pds-tooltip {
+  display: none;
+  appearance: none;
+}
+
+.pds-tooltip-overlay-container > * {
+  @include pds.outer-spacing(--space-sm);
+  @include pds.elevation(pds.$level-1);
+
+  max-width: 480px;
+}
