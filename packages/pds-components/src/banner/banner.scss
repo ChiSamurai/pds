@@ -2,9 +2,12 @@
 @use "util";
 
 pds-banner {
+  --banner-space-x: var(--space-md);
+  --banner-space-y: var(--space-sm);
+
   @include pds.outer-child-spacing(--space-md, x, $trim: true, $justify: true);
-  @include pds.inner-spacing(--space-md, x);
-  @include pds.inner-spacing(--space-sm, y);
+  @include pds.inner-spacing(--banner-space-x, x);
+  @include pds.inner-spacing(--banner-space-y, y);
   @include pds.rounding(--rounding-md);
 
   z-index: 0;
@@ -13,6 +16,11 @@ pds-banner {
   color: var(--primary-contrast);
   background-color: var(--primary);
   position: relative;
+
+  &.xs {
+    --banner-space-x: var(--space-xs);
+    --banner-space-y: var(--space-xxs);
+  }
 
   > div:nth-child(2) {
     flex: 1 0 0;

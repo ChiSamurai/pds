@@ -30,16 +30,23 @@ import { AppComponent } from '../../app.component';
       <ng-content></ng-content>
     </div>
     <div class="header-controls">
-      <pds-toggle-box [formControl]="roundModeControl">
+      <pds-toggle-box [formControl]="roundModeControl" [pdsTooltip]="roundingTooltip">
         <label class="text-gray-secondary">
           <svg-icon size="24" [name]="roundModeControl.value ? 'circle' : 'square-full'"></svg-icon>
         </label>
       </pds-toggle-box>
-      <pds-toggle-box [formControl]="lightModeControl">
+      <pds-tooltip preferredPosition="bottom" #roundingTooltip>
+        <pds-banner class="xs">{{ roundModeControl.value ? 'Disable' : 'Enable' }}&nbsp;Rounding</pds-banner>
+      </pds-tooltip>
+
+      <pds-toggle-box [formControl]="lightModeControl" [pdsTooltip]="darkModeTooltip">
         <label [class.text-warning]="lightModeControl.value">
           <svg-icon size="24" [name]="lightModeControl.value ? 'sun' : 'moon'"></svg-icon>
         </label>
       </pds-toggle-box>
+      <pds-tooltip preferredPosition="bottom" #darkModeTooltip>
+        <pds-banner class="xs">{{ lightModeControl.value ? 'Enable' : 'Disable' }}&nbsp;Dark Mode</pds-banner>
+      </pds-tooltip>
     </div>
   `,
 })

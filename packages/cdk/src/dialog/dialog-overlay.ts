@@ -4,7 +4,7 @@ import { ComponentProps } from '../utils';
 import { DialogRef } from './dialog-ref';
 
 /** Configurable options for the creation of a {@link DialogRef} */
-export interface DialogOverlayConfig<C = any> {
+export interface DialogOverlayConfig<C = unknown> {
   injector?: Injector;
   overlay?: OverlayConfig;
   disposeOnBackdropClick?: boolean;
@@ -15,7 +15,7 @@ export interface DialogOverlayConfig<C = any> {
 export class DialogOverlay {
   constructor(protected overlay: Overlay, protected injector: Injector) {}
 
-  create<R = any, T = any>(componentType: Type<T>, config?: DialogOverlayConfig<T>): DialogRef<R, T> {
+  create<R = unknown, T = unknown>(componentType: Type<T>, config?: DialogOverlayConfig<T>): DialogRef<R, T> {
     const overlayRef = this.overlay.create(
       this.createOverlayConfig({
         injector: this.injector,

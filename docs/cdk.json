@@ -1,5 +1,12 @@
 [
   {
+    "slug": "cdk",
+    "src": "packages/cdk/README",
+    "title": "CDK",
+    "chapter": "cdk",
+    "description": "Component Development Kit"
+  },
+  {
     "slug": "encapsulate",
     "src": "packages/cdk/layout/src/encapsulation/README",
     "title": "Encapsulation",

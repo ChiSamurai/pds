@@ -27,6 +27,7 @@ import {
   PdsTextBoxModule,
   PdsToasterModule,
   PdsToggleBoxModule,
+  PdsTooltipModule,
 } from '@vitagroup/pds-components';
 import { PdsPageLayoutModule } from '@vitagroup/pds-components/layout';
 
@@ -85,6 +86,7 @@ import { MarkedPipeModule } from './pipes/marked.pipe';
     ClipPipeModule,
     RouterLinkOrHrefModule,
     FlexModule,
+    PdsTooltipModule,
   ],
   providers: [
     {

@@ -16,9 +16,14 @@ import { OverlayDefBase } from '../overlay/overlay-def-base';
 import { SelectionModel } from '../selection/selection-model';
 
 export type DropdownPositionY = 'top' | 'bottom';
-export type DropdownPositionX = 'start' | 'end';
+export type DropdownPositionX = 'left' | 'right';
 
 export type DropdownPosition = [DropdownPositionX, DropdownPositionY];
+export type DropdownPositionString = `${DropdownPositionX},${DropdownPositionY}`;
+
+export function parseDropdownPosition(str: DropdownPositionString): DropdownPosition {
+  return str?.split(',')?.map((s) => s.trim()) as DropdownPosition;
+}
 
 @Directive()
 export abstract class DropdownDefBase
@@ -27,6 +32,7 @@ export abstract class DropdownDefBase
   @ContentChild(SelectionModel)
   private readonly _contentSelectionModel: SelectionModel | null;
   private readonly _selectionModel: SelectionModel;
+  private _preferredPosition: DropdownPosition;
 
   @ContentChildren(ElementFocusState, { descendants: true })
   protected readonly contentFocusStates: QueryList<ElementFocusState>;
@@ -42,7 +48,12 @@ export abstract class DropdownDefBase
     return this.contentFocusStates?.first;
   }
 
-  preferredPosition: DropdownPosition = ['start', 'bottom'];
+  set preferredPosition(value: DropdownPosition | DropdownPositionString) {
+    this._preferredPosition = typeof value === 'string' ? parseDropdownPosition(value) : value;
+  }
+  get preferredPosition(): DropdownPosition | DropdownPositionString {
+    return this._preferredPosition;
+  }
 
   constructor(
     template: TemplateRef<any>,
