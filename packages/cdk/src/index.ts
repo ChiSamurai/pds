@@ -74,6 +74,9 @@ export * from './toaster/toast-dispose';
 export * from './toaster/toast-ref';
 export * from './toaster/module';
 
+export * from './tooltip/tooltip-def-base';
+export * from './tooltip/tooltip-outlet-base';
+
 export * from './toggles/toggle-base';
 export * from './toggles/check-box-base';
 export * from './toggles/radio-box-base';
