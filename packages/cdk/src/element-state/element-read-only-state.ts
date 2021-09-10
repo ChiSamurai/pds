@@ -1,7 +1,5 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Directive, ElementRef, Injectable, Input, Renderer2 } from '@angular/core';
-import { ElementActiveState } from './element-active-state';
-import { ElementFocusState } from './element-focus-state';
 import { ElementState } from './element-state';
 
 @Injectable()
@@ -28,7 +26,7 @@ export function resolveElementReadOnlyState(accessor: ElementReadOnlyAccessor): 
   ],
 })
 export class ElementReadonlyAccessorDirective implements ElementReadOnlyAccessor {
-  @Input('readOnly') private set _readOnly(value: boolean) {
+  @Input('readOnly') set readOnlyState(value: boolean) {
     this.readOnly.set(coerceBooleanProperty(value));
   }
 

@@ -32,9 +32,17 @@ export abstract class ToggleBase<T = any> extends ControlValueAccessorBase<T> im
   readonly shortcuts = new ShortcutManager(this.renderer, this.elementRef);
 
   readonly active = new ElementActiveState(this.elementRef, this.renderer);
-  readonly focused = new ElementFocusState(this.elementRef, this.renderer);
+  readonly focus = new ElementFocusState(this.elementRef, this.renderer);
+
   readonly readOnly = new ElementReadOnlyState(this.elementRef, this.renderer);
   readonly disabled = new ElementDisabledState(this.elementRef, this.renderer);
+
+  @Input('readOnly') set readOnlyState(value: boolean) {
+    this.readOnly.set(coerceBooleanProperty(value));
+  }
+  @Input('disabled') set disabledState(value: boolean) {
+    this.disabled.set(coerceBooleanProperty(value));
+  }
 
   @Input() value: T;
 
@@ -62,24 +70,26 @@ export abstract class ToggleBase<T = any> extends ControlValueAccessorBase<T> im
 
   protected changeControlValue(value?: T): void {
     value = value || this.value;
-    if (this.checked && value != null) super.changeControlValue(value);
-    else if (this.checked && value == null) super.changeControlValue(true as any);
+    if (this.checked) super.changeControlValue(value || (true as any));
     else super.changeControlValue(false as any);
   }
 
-  writeValue(obj: any): void {
-    if (coerceBooleanProperty(obj)) this.check({ value: obj });
+  writeValue(obj: unknown): void {
+    if (obj) this.check({ value: obj });
     else this.uncheck();
   }
 
   check(options?: ToggleCheckOptions): void {
-    if (options != null && 'value' in options) this.value = options.value;
-    if (!this.checked && (this.value == null || options == null || options.value === this.value)) {
+    const value = options?.value || this.value;
+
+    if (!this.checked || value !== this.getValue()) {
       this.renderer.addClass(this.elementRef.nativeElement, 'checked');
       this._checked = true;
+      this.value = value;
+
       if (options == null || options.emitTouch) this.touchControl();
       if (options == null || options.emitEvent) this.checks.emit();
-      if (options == null || options.emitChange) this.changeControlValue();
+      if (options == null || options.emitChange) this.changeControlValue(value);
     }
     this.changeDetectorRef.detectChanges();
   }
@@ -87,9 +97,11 @@ export abstract class ToggleBase<T = any> extends ControlValueAccessorBase<T> im
     if (this.checked) {
       this.renderer.removeClass(this.elementRef.nativeElement, 'checked');
       this._checked = false;
+      this.value = null;
+
       if (options == null || options.emitTouch) this.touchControl();
       if (options == null || options.emitEvent) this.unchecks.emit();
-      if (options == null || options.emitChange) this.changeControlValue();
+      if (options == null || options.emitChange) this.changeControlValue(null);
     }
     this.changeDetectorRef.detectChanges();
   }

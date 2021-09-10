@@ -45,8 +45,6 @@ export class TooltipOutletBase extends OverlayOutletBase<TooltipDefBase> impleme
     ) as TooltipPosition[];
     const connectedPositions = positionsInOrder.map((position) => TOOLTIP_POSITIONS[position]);
 
-    console.log(positionsInOrder);
-
     this.overlayRef.updatePositionStrategy(
       this.overlay.position().flexibleConnectedTo(this.viewContainerRef.element).withPositions(connectedPositions)
     );

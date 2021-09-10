@@ -1,6 +1,5 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Directive, ElementRef, Injectable, Input, Renderer2 } from '@angular/core';
-import { ElementFocusState } from './element-focus-state';
 import { ElementState } from './element-state';
 
 @Injectable()
@@ -22,14 +21,13 @@ export function resolveElementActiveState(accessor: ElementActiveAccessor): Elem
 }
 
 @Directive({
-  selector: '[active], [activated]',
-  inputs: ['_active: active', '_active: activated'],
+  selector: '[active]',
   providers: [
     { provide: ElementActiveState, useFactory: resolveElementActiveState, deps: [ElementActiveAccessorDirective] },
   ],
 })
 export class ElementActiveAccessorDirective implements ElementActiveAccessor {
-  private set _active(value: boolean) {
+  @Input('active') set activeState(value: boolean) {
     this.active.set(coerceBooleanProperty(value));
   }
 

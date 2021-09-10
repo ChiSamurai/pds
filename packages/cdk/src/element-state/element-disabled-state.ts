@@ -26,8 +26,7 @@ export function resolveElementDisabledState(accessor: ElementDisabledAccessor): 
   ],
 })
 export class ElementDisabledAccessorDirective implements ElementDisabledAccessor {
-  @Input('disabled')
-  private set _disabled(value: boolean) {
+  @Input('disabled') set disabledState(value: boolean) {
     this.disabled.set(coerceBooleanProperty(value));
   }
 
