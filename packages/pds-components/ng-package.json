@@ -8,6 +8,13 @@
   ],
   "lib": {
     "entryFile": "src/index.ts",
-    "styleIncludePaths": [ "../pds-css/src" ]
+    "styleIncludePaths": [ "../pds-css/src" ],
+    "umdId": "vg.pds.components",
+    "umdModuleIds": {
+      "@vitagroup/common": "vg.common",
+      "@vitagroup/cdk": "vg.cdk",
+      "@vitagroup/cdk/forms": "vg.cdk.forms",
+      "@vitagroup/cdk/layout": "vg.cdk.layout"
+    }
   }
 }

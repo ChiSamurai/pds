@@ -2,12 +2,18 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/packages/cdk",
   "allowedNonPeerDependencies": [
+    "@ng-web-apis/common",
     "@vitagroup/common",
     "@angular/flex-layout",
     "@angular/cdk"
   ],
   "lib": {
-    "entryFile": "src/index.ts"
+    "entryFile": "src/index.ts",
+    "umdId": "vg.cdk",
+    "umdModuleIds": {
+      "@vitagroup/common": "vg.common",
+      "@ng-web-apis/common": "ng-web-apis.common"
+    }
   },
   "assets": [
     "sass/*.scss",

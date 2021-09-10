@@ -5,6 +5,10 @@
     "@ng-web-apis/common"
   ],
   "lib": {
-    "entryFile": "src/index.ts"
+    "entryFile": "src/index.ts",
+    "umdId": "vg.common",
+    "umdModuleIds": {
+      "@ng-web-apis/common": "ng-web-apis.common"
+    }
   }
 }

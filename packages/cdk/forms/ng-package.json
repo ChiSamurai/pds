@@ -2,6 +2,10 @@
   "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/packages/cdk/forms",
   "lib": {
-    "entryFile": "src/index.ts"
+    "entryFile": "src/index.ts",
+    "umdId": "vg.cdk.forms",
+    "umdModuleIds": {
+      "@vitagroup/common/forms": "vg.common.forms"
+    }
   }
 }
