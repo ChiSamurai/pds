@@ -7,6 +7,20 @@
     "description": "Component Development Kit"
   },
   {
+    "slug": "toggle",
+    "src": "packages/cdk/src/toggles/README",
+    "title": "Toggle",
+    "chapter": "cdk",
+    "description": "AKA Button Toggle",
+    "examples": [
+      {
+        "title": "Toggle Directive",
+        "templateUrl": "examples/toggle/default.html",
+        "imports": ["ToggleModule"]
+      }
+    ]
+  },
+  {
     "slug": "encapsulate",
     "src": "packages/cdk/layout/src/encapsulation/README",
     "title": "Encapsulation",
