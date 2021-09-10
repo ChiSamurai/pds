@@ -157,7 +157,7 @@
     "src": "packages/cdk/src/toaster/README",
     "title": "Toaster",
     "chapter": "components",
-    "description": "AKA Snackbar",
+    "description": "Re-usable and easy to extend toaster module",
     "examples": [
       {
         "title": "Built-In Toasts",
@@ -172,6 +172,20 @@
         "contextUrl": "examples/toaster/custom-def.ts",
         "imports": ["PdsToasterModule","PdsBannerModule"],
         "context": "CustomDefToasterExample"
+      }
+    ]
+  },
+  {
+    "slug": "tooltip",
+    "src": "packages/pds-components/src/tooltip/README",
+    "title": "Tooltip",
+    "chapter": "components",
+    "description": "Simple tooltip behavior",
+    "examples": [
+      {
+        "title": "Default with Banner",
+        "templateUrl": "examples/tooltip/default.html",
+        "imports": ["PdsTooltipModule","PdsBannerModule"]
       }
     ]
   }
