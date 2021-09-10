@@ -142,7 +142,7 @@ $font-family: "PT Sans", sans-serif !default;
 
 /// Includes utility classes based on the value of `$color-classes`
 @mixin color-classes {
-  @include color-accent-classes($color-classes, "text");
+  @include color-accent-classes($color-classes, "text", $important: true);
 
   @if some($color-classes, "primary") {
     @at-root .primary {
