@@ -35,7 +35,7 @@ export const TOOLTIP_POSITIONS: Record<TooltipPosition, ConnectedPosition> = {
 };
 
 @Directive()
-export class TooltipOutletBase extends OverlayOutletBase<TooltipDefBase> implements OnInit {
+export abstract class TooltipOutletBase extends OverlayOutletBase<TooltipDefBase> implements OnInit {
   preferredPosition: TooltipPosition;
 
   protected updatePreferredPosition(): void {
