@@ -8,6 +8,8 @@ export * from './date-time/native-date-time-adapter';
 export * from './date-time/parse-date';
 export * from './date-time/time-unit';
 
+export * from './event-manager/plugins/event-debounce-plugin';
+export * from './event-manager/plugins/event-prevention-plugin';
 export * from './event-manager/plugins/event-listener-options-plugin';
 export * from './event-manager/event-manager-plugin';
 

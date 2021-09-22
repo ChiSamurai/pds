@@ -14,16 +14,12 @@ export abstract class EventManagerPlugin {
    * Evaluates whether a given event name, including custom angular appendix, is
    * supported by the {@link EventManagerPlugin} instance
    */
-  abstract supports(eventName: string): boolean;
+  abstract supports(eventExpr: string): boolean;
 
   /**
    * Attaches an event listener function to the event defined by the event name
    * parameter for the given target element. This function should return an
    * event "unlisten" function
    */
-  abstract addEventListener(
-    element: Element,
-    eventName: string,
-    listener: EventListener
-  ): EventUnlistener;
+  abstract addEventListener(element: Element, eventExpr: string, listener: EventListener): EventUnlistener;
 }
