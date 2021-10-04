@@ -4,7 +4,7 @@ import { NavEntryContainer } from './nav-entry-container';
 import { NavEntryState } from './nav-entry-state';
 
 @Directive()
-export class NavBase extends NavEntryContainer {
+export abstract class NavBase extends NavEntryContainer {
   @Input()
   set entries(value: NavEntry[]) {
     this.state.reset(...value);
