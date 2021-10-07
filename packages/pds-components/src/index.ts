@@ -27,6 +27,11 @@ export * from './dropdown/dropdown';
 export * from './dropdown/dropdown-def';
 export * from './dropdown/dropdown-outlet';
 
+export * from './expansion-panel/expansion-panel';
+export * from './expansion-panel/expansion-panel-group';
+export * from './expansion-panel/expansion-panel-content';
+export * from './expansion-panel/module';
+
 export * from './form-status/module';
 export * from './form-status/form-status';
 

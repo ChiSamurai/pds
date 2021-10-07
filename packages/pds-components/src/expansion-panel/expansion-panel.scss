@@ -1,0 +1,49 @@
+@use "styleguide" as pds;
+@use "util";
+
+pds-expansion-panel {
+  display: block;
+  border-bottom: 1px solid var(--background);
+  width: 100%;
+
+  .pds-expansion-panel-header-container {
+    @include pds.inner-spacing(--space-sm, x);
+    @include pds.inner-spacing(--space-xs, y);
+    @include pds.rounding(--rounding-md);
+
+    display: flex;
+    align-items: center;
+    border: 2px solid transparent;
+    cursor: pointer;
+
+    pds-expansion-panel-header {
+      display: block;
+      flex: 1 0 0;
+    }
+    svg-icon {
+      @include pds.inner-spacing(--space-sm, left);
+
+      flex-shrink: 0;
+    }
+
+    @include util.hover-state {
+      color: var(--primary-light);
+    }
+    @include util.active-state {
+      color: var(--primary);
+    }
+    @include util.focus-state {
+      border-color: var(--focus);
+      color: var(--focus);
+    }
+
+    @include util.disabled-state {
+      color: var(--disabled);
+      pointer-events: none;
+    }
+  }
+  .pds-expansion-panel-content-container {
+    @include pds.inner-spacing(--space-sm, x top);
+    @include pds.inner-spacing(--space-md, bottom);
+  }
+}
