@@ -18,6 +18,9 @@ export * from './element-state/element-focus-state';
 export * from './element-state/element-read-only-state';
 export * from './element-state/element-state';
 
+export * from './expansion-panel/expansion-panel-base';
+export * from './expansion-panel/expansion-panel-group-base';
+
 export * from './input-dropdown/control-input-accessor';
 export * from './input-dropdown/input-dropdown-outlet-base';
 export * from './input-dropdown/input-dropdown-def-base';
