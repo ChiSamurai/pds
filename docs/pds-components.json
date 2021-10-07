@@ -72,6 +72,25 @@
     ]
   },
   {
+    "slug": "expansion-panel",
+    "src": "packages/pds-components/src/expansion-panel/README",
+    "title": "Expansion Panel",
+    "chapter": "components",
+    "description": "Expansion panels and panel groups",
+    "examples": [
+      {
+        "title": "Default Expansion Panel",
+        "templateUrl": "examples/expansion-panel/default.html",
+        "imports": ["PdsExpansionPanelModule"]
+      },
+      {
+        "title": "Expansion Panel Group",
+        "templateUrl": "examples/expansion-panel/group.html",
+        "imports": ["PdsExpansionPanelModule"]
+      }
+    ]
+  },
+  {
     "slug": "nav",
     "src": "packages/pds-components/src/nav/README",
     "title": "Nav",
