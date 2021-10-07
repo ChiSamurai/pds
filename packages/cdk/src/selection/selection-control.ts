@@ -125,6 +125,9 @@ export class SelectionControl<T> extends SelectionModel<T> implements OnInit, On
   }
 
   select(value: T, options?: SelectOptions): void {
+    if ((this.mode === 'preservedSingle' || this.mode === 'single') && !this.isEmpty) {
+      this.deselect({ emitEvent: false });
+    }
     if (this._limit == null || this.size < this._limit) {
       super.select(value, options);
     }
