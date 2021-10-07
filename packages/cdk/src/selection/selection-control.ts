@@ -35,6 +35,7 @@ import { SELECTION_VALUE, SelectionValue } from './selection-value';
     'limit: selectionLimit',
     'focusIndex: selectionFocusIndex',
     'trackBy: selectionTrackBy',
+    'allowsMultiple: selectionAllowsMultiple',
   ],
   outputs: ['modelChange: selectionControlChange', 'change: selectionChange'],
 })
@@ -48,6 +49,7 @@ export class SelectionControl<T> extends SelectionModel<T> implements OnInit, On
   readonly shortcuts = new ShortcutManager(this.renderer, this.elementRef);
   readonly focus = new ElementFocusState(this.elementRef, this.renderer);
 
+  /** @deprecated Use {@link SelectionModel.allowsMultiple} instead */
   mode: 'single' | 'preservedSingle' | 'multiple' = 'single';
 
   set model(value: T[]) {
@@ -123,9 +125,6 @@ export class SelectionControl<T> extends SelectionModel<T> implements OnInit, On
   }
 
   select(value: T, options?: SelectOptions): void {
-    if ((this.mode === 'preservedSingle' || this.mode === 'single') && !this.isEmpty) {
-      this.deselect({ emitEvent: false });
-    }
     if (this._limit == null || this.size < this._limit) {
       super.select(value, options);
     }

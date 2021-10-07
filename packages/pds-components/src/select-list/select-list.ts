@@ -6,7 +6,7 @@ import { ElementFocusState, resolveElementFocusState, SelectionModel, SelectList
   styleUrls: ['select-list.scss'],
   encapsulation: ViewEncapsulation.None,
   host: { '[attr.tabindex]': '0' },
-  inputs: ['model', 'mode', 'limit', 'focusIndex', 'trackBy'],
+  inputs: ['model', 'mode', 'limit', 'focusIndex', 'trackBy', 'allowsMultiple: multiple'],
   // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
   outputs: ['modelChange', 'change'],
   providers: [

@@ -1,3 +1,4 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -20,12 +21,23 @@ export type PrimitiveTrackByFn<T> = (value: T) => any;
 
 export class SelectionModel<T = any> extends Observable<T[]> {
   private _changes = new Subject<SelectionChange<T>>();
+  private _allowsMultiple = true;
 
   protected value: T[];
 
   readonly changes: Observable<SelectionChange<T>> = this._changes.asObservable();
 
   trackBy: PrimitiveTrackByFn<T>;
+
+  set allowsMultiple(value: boolean) {
+    this._allowsMultiple = coerceBooleanProperty(value);
+    if (!this._allowsMultiple && this.size > 1) {
+      this.select(this.last(), { emitEvent: false });
+    }
+  }
+  get allowsMultiple(): boolean {
+    return this._allowsMultiple;
+  }
 
   get isEmpty(): boolean {
     return this.size === 0;
@@ -52,7 +64,7 @@ export class SelectionModel<T = any> extends Observable<T[]> {
   }
 
   select(value: T, options?: SelectOptions): void {
-    if (!this.isSelected(value)) this.value = [...this.value, value];
+    if (!this.isSelected(value)) this.value = this._allowsMultiple ? [...this.value, value] : [value];
     if (this.shouldEmit(options)) this.emitChange('select', value);
   }
 
@@ -86,8 +98,12 @@ export class SelectionModel<T = any> extends Observable<T[]> {
   toArray(): T[] {
     return Array.from(this.value);
   }
+
   first(): T {
     return this.toArray()?.[0];
+  }
+  last(): T {
+    return this.toArray()?.[this.size - 1];
   }
 
   protected shouldEmit(options: SelectOptions | DeselectOptions): boolean {
@@ -109,6 +125,7 @@ export class SelectionModel<T = any> extends Observable<T[]> {
   }
 }
 
+/** @deprecated Use {@link SelectionModel.allowsMultiple} instead */
 export class SingleSelectionModel<T> extends SelectionModel<T> {
   select(value: T, options?: SelectOptions): void {
     if (!this.isEmpty) this.deselect(options);
