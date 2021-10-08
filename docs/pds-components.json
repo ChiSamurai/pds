@@ -81,7 +81,7 @@
       {
         "title": "Default Expansion Panel",
         "templateUrl": "examples/expansion-panel/default.html",
-        "imports": ["PdsExpansionPanelModule"]
+        "imports": ["PdsExpansionPanelModule","SvgIconModule"]
       },
       {
         "title": "Expansion Panel Group",

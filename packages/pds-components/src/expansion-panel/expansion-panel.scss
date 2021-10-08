@@ -12,15 +12,18 @@ pds-expansion-panel {
     @include pds.rounding(--rounding-md);
 
     display: flex;
-    align-items: center;
     border: 2px solid transparent;
     cursor: pointer;
 
     pds-expansion-panel-header {
-      display: block;
+      @include pds.outer-child-spacing(--space-sm, x, $trim: true, $justify: true);
+
+      display: flex;
+      align-items: center;
       flex: 1 0 0;
     }
-    svg-icon {
+
+    .pds-expansion-panel-toggle {
       @include pds.inner-spacing(--space-sm, left);
 
       flex-shrink: 0;
@@ -42,6 +45,7 @@ pds-expansion-panel {
       pointer-events: none;
     }
   }
+
   .pds-expansion-panel-content-container {
     @include pds.inner-spacing(--space-sm, x top);
     @include pds.inner-spacing(--space-md, bottom);
