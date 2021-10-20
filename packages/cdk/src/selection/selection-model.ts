@@ -32,7 +32,7 @@ export class SelectionModel<T = any> extends Observable<T[]> {
   set allowsMultiple(value: boolean) {
     this._allowsMultiple = coerceBooleanProperty(value);
     if (!this._allowsMultiple && this.size > 1) {
-      this.select(this.last(), { emitEvent: false });
+      this.select(this.last, { emitEvent: false });
     }
   }
   get allowsMultiple(): boolean {
@@ -45,6 +45,13 @@ export class SelectionModel<T = any> extends Observable<T[]> {
 
   get size(): number {
     return this.value.length;
+  }
+
+  get first(): T {
+    return this.toArray()?.[0];
+  }
+  get last(): T {
+    return this.toArray()?.[this.size - 1];
   }
 
   constructor(trackBy?: PrimitiveTrackByFn<T>);
@@ -97,13 +104,6 @@ export class SelectionModel<T = any> extends Observable<T[]> {
 
   toArray(): T[] {
     return Array.from(this.value);
-  }
-
-  first(): T {
-    return this.toArray()?.[0];
-  }
-  last(): T {
-    return this.toArray()?.[this.size - 1];
   }
 
   protected shouldEmit(options: SelectOptions | DeselectOptions): boolean {

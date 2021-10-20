@@ -29,14 +29,14 @@ export type AppComponentExampleDisplayTabs = 'html' | 'typescript';
               </pds-tab>
             </ng-container>
           </pds-tabs>
-          <button class="secondary small" (click)="copyActiveSource($any(activeTab.first()), example)">
+          <button class="secondary small" (click)="copyActiveSource($any(activeTab.first), example)">
             <svg-icon name="copy"></svg-icon>
             <span>Copy to clipboard</span>
           </button>
         </div>
         <div class="example-source">
           <pre><code
-            [innerHTML]="resolveActiveSource($any(activeTab.first()), example) | hljs: $any(activeTab.first())"></code></pre>
+            [innerHTML]="resolveActiveSource($any(activeTab.first), example) | hljs: $any(activeTab.first)"></code></pre>
         </div>
         <pds-divider space="xxl" *ngIf="!last"></pds-divider>
       </ng-container>
