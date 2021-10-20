@@ -60,6 +60,8 @@ export * from './sort/module';
 export * from './sort/sort-group';
 export * from './sort/sort-toggle';
 
+export * from './stepping/step-model';
+
 export * from './svg-icon/module';
 export * from './svg-icon/svg-icon';
 export * from './svg-icon/svg-icon-host';
