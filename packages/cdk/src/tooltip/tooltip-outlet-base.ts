@@ -40,7 +40,7 @@ export abstract class TooltipOutletBase extends OverlayOutletBase<TooltipDefBase
 
   protected updatePreferredPosition(): void {
     const preferredPosition = this.preferredPosition || this.overlayDef.preferredPosition;
-    const positionsInOrder = ['top', 'left', 'bottom', 'right'].sort((position) =>
+    const positionsInOrder = Object.keys(TOOLTIP_POSITIONS).sort((position) =>
       position !== preferredPosition ? 0 : -1
     ) as TooltipPosition[];
     const connectedPositions = positionsInOrder.map((position) => TOOLTIP_POSITIONS[position]);
