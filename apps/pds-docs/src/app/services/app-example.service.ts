@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Type } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import * as vgCdk from '@vitagroup/cdk';
+import { FlexContainerModule } from '@vitagroup/cdk/layout';
 import * as vgCommon from '@vitagroup/common';
 import * as pdsComponents from '@vitagroup/pds-components';
 import * as appExampleContexts from 'docs/examples';
@@ -26,6 +28,8 @@ export const APP_EXAMPLE_MODULE_IMPORTS = new InjectionToken<Type<unknown>[]>(
     factory: () => [
       CommonModule,
       ReactiveFormsModule,
+      FlexLayoutModule,
+      FlexContainerModule,
       ...findMembersWithNameIncluding(vgCommon, 'Module'),
       ...findMembersWithNameIncluding(vgCdk, 'Module'),
       ...findMembersWithNameIncluding(pdsComponents, 'Module'),

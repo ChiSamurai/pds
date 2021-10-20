@@ -1,0 +1,42 @@
+<div style="width:100%">
+
+  <div>
+    <ng-container *ngFor="let step of steps">
+      <pds-chip [class.primary]="step.isActive">
+        {{ step.name | titlecase }}
+      </pds-chip>
+    </ng-container>
+  </div>
+
+  <pds-divider class="secondary"></pds-divider>
+
+  <div class="sheet" [ngSwitch]="steps.active?.name" [formGroup]="formGroup">
+    <ng-template ngSwitchCase="first">
+      <pds-text-box formControlName="first" placeholder="Required!"></pds-text-box>
+    </ng-template>
+    <ng-template ngSwitchCase="second">
+      <pds-text-box formControlName="second" placeholder="Optional..."></pds-text-box>
+    </ng-template>
+    <ng-template ngSwitchCase="third">
+      <pds-text-box formControlName="third" placeholder="Required!"></pds-text-box>
+    </ng-template>
+    <ng-template ngSwitchCase="fourth">
+      <pds-text-box formControlName="fourth" placeholder="Optional..."></pds-text-box>
+    </ng-template>
+  </div>
+
+  <pds-divider class="secondary"></pds-divider>
+
+  <div>
+    <button class="secondary" (click)="steps.previous.activate()" *ngIf="steps.previous">
+      Back
+    </button>
+    <button (click)="steps.next.activate()" *ngIf="steps.next">
+      Next
+    </button>
+    <button class="secondary" (click)="steps.first.activate({ skipGuards: true })" *ngIf="steps.last.isActive">
+      Restart
+    </button>
+  </div>
+
+</div>

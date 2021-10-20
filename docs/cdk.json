@@ -21,6 +21,22 @@
     ]
   },
   {
+    "slug": "stepping",
+    "src": "packages/cdk/src/stepping/README",
+    "title": "Stepping",
+    "chapter": "cdk",
+    "description": "Step models and controlling directives",
+    "examples": [
+      {
+        "title": "Step Model",
+        "templateUrl": "examples/stepping/step-model.html",
+        "contextUrl": "examples/stepping/step-model.ts",
+        "imports": ["CommonModule","ReactiveFormsModule","PdsChipModule","PdsDividerModule","PdsTextBoxModule"],
+        "context": "StepModelExample"
+      }
+    ]
+  },
+  {
     "slug": "encapsulate",
     "src": "packages/cdk/layout/src/encapsulation/README",
     "title": "Encapsulation",
