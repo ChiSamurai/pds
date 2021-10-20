@@ -41,7 +41,16 @@ export class BehaviorState<T> {
 export class ArrayBehaviorState<T> extends BehaviorState<T[]> {
   /** Gets the length of the current value */
   get length(): number {
-    return this.snapshot.length;
+    return this.snapshot.length || 0;
+  }
+
+  /** Gets the first element within the current state snapshot */
+  get first(): T | null {
+    return this.snapshot?.[0];
+  }
+  /** Gets the last element within the current state snapshot */
+  get last(): T | null {
+    return this.snapshot?.[this.length - 1];
   }
 
   constructor(initialValue: Iterable<T> = []) {
@@ -55,11 +64,7 @@ export class ArrayBehaviorState<T> extends BehaviorState<T[]> {
    * @param index Optional index value. Defaults to `0`
    */
   patch(value: T[], index: number = 0): T[] {
-    this.subject.next([
-      ...this.snapshot.slice(0, index),
-      ...value,
-      ...this.snapshot.slice(index + value.length)
-    ]);
+    this.subject.next([...this.snapshot.slice(0, index), ...value, ...this.snapshot.slice(index + value.length)]);
     return this.snapshot;
   }
 
@@ -69,7 +74,7 @@ export class ArrayBehaviorState<T> extends BehaviorState<T[]> {
    * @param values The values that should be added to the state
    */
   push(...values: T[]): T[] {
-    this.subject.next([ ...this.snapshot, ...values ]);
+    this.subject.next([...this.snapshot, ...values]);
     return this.snapshot;
   }
 
