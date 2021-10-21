@@ -32,6 +32,8 @@ export * from './expansion-panel/expansion-panel-group';
 export * from './expansion-panel/expansion-panel-content';
 export * from './expansion-panel/module';
 
+export * from './form-field/form-field';
+
 export * from './form-status/module';
 export * from './form-status/form-status';
 
