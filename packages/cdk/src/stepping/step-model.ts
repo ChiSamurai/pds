@@ -39,8 +39,8 @@ export interface StepActivateOptions extends StepGuardOptions {
 export class Step {
   private _canActivate: StepCanDeactivate[];
   private _canDeactivate: StepCanDeactivate[];
-  private _didActivateOnce = false;
-  private _didDeactivateOnce = false;
+  private _touched = false;
+  private _done = false;
 
   readonly model: StepModel | null;
 
@@ -57,11 +57,29 @@ export class Step {
 
   /** Gets whether the step got touched, meaning it did activate at least once successfully */
   get touched(): boolean {
-    return this._didActivateOnce;
+    return this._touched;
   }
-  /** Gets whether the step is done, meaning it did deactivate at least once successfully */
+  /** Gets whether the step is still untouched, meaning it did not activate once yet */
+  get untouched(): boolean {
+    return !this.touched;
+  }
+
+  /** Gets whether the step is done, meaning it did deactivate at least once forwards successfully */
   get done(): boolean {
-    return this._didDeactivateOnce;
+    return this._done;
+  }
+  /** Gets whether the step is not done, meaning it did not deactivate once forwards successfully yet */
+  get undone(): boolean {
+    return !this.done;
+  }
+
+  get isFirst(): boolean {
+    const first = this.model?.first;
+    return first?.name === this.name || first?.index === this.index;
+  }
+  get isLast(): boolean {
+    const last = this.model?.last;
+    return last?.name === this.name || last?.index === this.index;
   }
 
   constructor(formControlOrOptions: AbstractControl | StepOptions, model?: StepModel) {
@@ -81,17 +99,31 @@ export class Step {
 
   async canActivate(direction: StepDirection, previous: Step, options?: StepGuardOptions): Promise<boolean> {
     const can = await this.checkGuard('canActivate', direction, previous, options);
-    this._didActivateOnce = this._didActivateOnce || can;
+    this._touched = this._touched || can;
     return can;
   }
   async canDeactivate(direction: StepDirection, next: Step, options?: StepGuardOptions): Promise<boolean> {
     const can = await this.checkGuard('canDeactivate', direction, next, options);
-    this._didDeactivateOnce = this._didDeactivateOnce || can;
+    this._done = this._done || (this.isLast && can) || (direction === 'forwards' && can);
     return can;
   }
 
   async activate(options?: StepActivateOptions) {
     await this.model?.activate(this, options);
+  }
+
+  markAsDone(): void {
+    this._done = true;
+  }
+  markAsUndone(): void {
+    this._done = false;
+  }
+
+  markAsTouched(): void {
+    this._touched = true;
+  }
+  markAsUntouched(): void {
+    this._touched = false;
   }
 
   protected async checkGuard(

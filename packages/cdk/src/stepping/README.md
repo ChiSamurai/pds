@@ -47,25 +47,26 @@ const steps = new StepModel({
 });
 ```
 
-# Step Control
+## Step Flags
 
-```html
-<div [stepControl]="stepModel" [formGroup]="formGroup">
-  <form step="first">
-    <input formControlName="firstName">
-  </form>
-  <form step="second">
-    <input formControlName="lastName">
-  </form>
-</div>
+Steps within a step model include a few implicit _status_ flags that change based on the activation and deactivation of the step itself. You may check whether a step was `touched`, meaning it did activate successfully at least once. In conjunction, you are also able to see if a step is `done`, basically describing that it did deactivate at least once successfully in a forwards direction.
 
-<div>
-  <div *ngIf="stepModel.previous">
-    <button class="secondary" (click)="stepModel.previous.activate()">Back</button>
-  </div>
-  <div *ngIf="stepModel.next">
-    <button (click)="stepModel.next.activate()">Next</button>
-    <button class="secondary" (click)="stepModel.last.activate({ skipGuards: true })">Skip</button>
-  </div>
-</div>
+```typescript
+steps.get('first').touched;   // true, due to being the initially activated step
+steps.get('second').touched;  // false
+steps.get('first').done;      // false
+
+steps.next.activate();
+steps.last.activate();
+
+steps.get('first').done;      // true
+steps.get('second').touched;  // true
+```
+
+You may also change these _status_ flags manually using the mark functions within the `Step` type.
+
+```typescript
+steps.get('second').markAsDone();
+
+steps.get('second').done;     // true
 ```
