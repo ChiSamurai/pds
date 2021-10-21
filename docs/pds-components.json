@@ -91,6 +91,20 @@
     ]
   },
   {
+    "slug": "form-field",
+    "src": "packages/pds-components/src/form-field/README",
+    "title": "Form Field",
+    "chapter": "components",
+    "description": "Form control container",
+    "examples": [
+      {
+        "title": "Default Form Field",
+        "templateUrl": "examples/form-field/default.html",
+        "imports": ["PdsFormFieldModule","PdsTextBoxModule"]
+      }
+    ]
+  },
+  {
     "slug": "nav",
     "src": "packages/pds-components/src/nav/README",
     "title": "Nav",
@@ -191,6 +205,30 @@
         "contextUrl": "examples/toaster/custom-def.ts",
         "imports": ["PdsToasterModule","PdsBannerModule"],
         "context": "CustomDefToasterExample"
+      }
+    ]
+  },
+  {
+    "slug": "text-box",
+    "src": "packages/pds-components/src/text-box/README",
+    "title": "Textbox",
+    "chapter": "components",
+    "description": "More customizable text input alternative",
+    "examples": [
+      {
+        "title": "Default Textbox",
+        "templateUrl": "examples/text-box/default.html",
+        "imports": ["PdsTextBoxModule","SvgIconModule"]
+      },
+      {
+        "title": "Textbox with Affixing",
+        "templateUrl": "examples/text-box/affixing.html",
+        "imports": ["PdsTextBoxModule","SvgIconModule"]
+      },
+      {
+        "title": "Textbox Classes",
+        "templateUrl": "examples/text-box/classes.html",
+        "imports": ["PdsTextBoxModule","SvgIconModule"]
       }
     ]
   },
