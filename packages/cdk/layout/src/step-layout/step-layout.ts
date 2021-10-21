@@ -6,11 +6,12 @@ import {
   EventEmitter,
   Output,
   QueryList,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 import { PrimitiveBehaviorState } from '@vitagroup/common';
 import { StepDef } from './step-def';
 
+/** @deprecated Use {@link StepModel} instead */
 @Component({
   selector: 'step-layout',
   styles: ['step-layout { display: block; width: 100% }'],

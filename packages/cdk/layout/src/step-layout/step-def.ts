@@ -1,6 +1,7 @@
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { Directive, Input, TemplateRef } from '@angular/core';
 
+/** @deprecated Use {@link StepModel} instead */
 @Directive({ selector: '[stepDef]' })
 export class StepDef {
   private _ignoreInvalid = false;
@@ -28,6 +29,5 @@ export class StepDef {
     return this.ignoreInvalid || this.condition;
   }
 
-  constructor(readonly template: TemplateRef<any>) {
-  }
+  constructor(readonly template: TemplateRef<any>) {}
 }
