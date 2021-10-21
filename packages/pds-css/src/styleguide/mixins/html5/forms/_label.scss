@@ -5,6 +5,6 @@
     display: block;
     user-select: none;
 
-    @include typography-style(--caption);
+    @include typography-style(--body-small);
   }
 }
