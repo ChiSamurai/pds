@@ -55,11 +55,9 @@ export class PdsModal implements AfterContentInit {
 
   readonly shortcuts = new ShortcutManager(this.renderer, this.elementRef);
 
-  /** Gets the {@link PdsModalHeader} component instance, preferring any dynamically added references */
   get header(): PdsModalHeader | null {
     return this._dynamicHeader || this._staticHeader;
   }
-  /** Gets the {@link PdsModalFooter} component instance, preferring any dynamically added references */
   get footer(): PdsModalFooter | null {
     return this._dynamicFooter || this._staticFooter;
   }

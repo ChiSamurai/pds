@@ -12,6 +12,7 @@ export type PdsAvatarSize = 'lg' | 'md' | 'sm';
   `,
 })
 export class PdsAvatar {
+  /** Gets or sets the {@link PdsAvatarSize} value for the instance */
   @Input() size: PdsAvatarSize = 'md';
 
   @HostBinding('style.--avatar-size')

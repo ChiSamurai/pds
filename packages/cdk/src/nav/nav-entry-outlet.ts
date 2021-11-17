@@ -10,10 +10,10 @@ import {
 } from '@angular/core';
 import { merge } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { NavEntryState } from './nav-entry-state';
 import { NavEntry } from './nav-entry';
 import { NavEntryContainer } from './nav-entry-container';
 import { NavEntryDefContext } from './nav-entry-def';
+import { NavEntryState } from './nav-entry-state';
 
 @Component({
   selector: 'nav-entry-outlet',
@@ -45,7 +45,7 @@ export class NavEntryOutlet extends NavEntryContainer {
   protected readonly customState = new NavEntryState();
 
   /** Gets the stream of {@link NavEntry}s that's used for rendering */
-  readonly viewEntries = merge(this.customState, this.state).pipe(
+  readonly viewEntries = merge(this.customState.asObservable(), this.state.asObservable()).pipe(
     map(() => {
       const entries = this.customState.length || !this._inferEntries ? this.customState.snapshot : this.state.snapshot;
       return typeof this.filter === 'function' ? entries.filter(this.filter) : entries;

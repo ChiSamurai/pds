@@ -53,7 +53,8 @@ export class ToastRef<R = unknown> {
 
     this._container.queue.push(this);
 
-    if (this.duration > 0) this._durationTimeout = setTimeout(() => this.dispose(), this.duration);
+    // todo(@janunld): inject a window reference to properly call `setTimeout` here without conflicting typings
+    if (this.duration > 0) this._durationTimeout = window.setTimeout(() => this.dispose(), this.duration);
 
     return this.asObservable();
   }

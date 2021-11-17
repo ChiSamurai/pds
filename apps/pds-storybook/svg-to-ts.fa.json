@@ -1,0 +1,19 @@
+{
+  "conversionType": "constants",
+  "srcFiles": [
+    "../../node_modules/@fortawesome/fontawesome-free/svgs/solid/*.svg"
+  ],
+  "outputDirectory": "./src/icons",
+  "interfaceName": "FaSolidIcon",
+  "typeName": "FaSolidIconNames",
+  "prefix": "faSolidIcon",
+  "fileName": "fa-solid-icons",
+  "delimiter": "KEBAB",
+  "svgoConfig": {
+    "plugins": [
+      {
+        "cleanupAttrs": true
+      }
+    ]
+  }
+}

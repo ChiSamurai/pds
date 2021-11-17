@@ -7,7 +7,7 @@ export function clip<T extends string | number>(value: T, max: number): string {
     return `${Math.min(value, max)}${value <= max ? '' : '+'}`;
   } else if (typeof value === 'string') {
     return `${value.length > max ? value.slice(0, max) : value}${value.length <= max ? '' : ELLIPSIS}`;
-  } else return value?.toString();
+  } else return '';
 }
 
 @Pipe({ name: 'clip' })

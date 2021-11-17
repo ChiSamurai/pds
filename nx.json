@@ -25,29 +25,31 @@
       }
     }
   },
-  "projects": {
-    "cdk": {
-      "tags": []
-    },
-    "common": {
-      "tags": []
-    },
-    "pds-components": {
-      "tags": []
-    },
-    "pds-css": {
-      "tags": []
-    },
-    "pds-docs": {
-      "tags": []
-    },
-    "pds-docs-e2e": {
-      "tags": [],
-      "implicitDependencies": ["pds-docs"]
-    }
-  },
   "workspaceLayout": {
     "libsDir": "packages",
     "appsDir": "apps"
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "generators": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
   }
 }

@@ -33,7 +33,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "common": {
       "projectType": "library",
@@ -67,7 +68,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "pds-components": {
       "projectType": "library",
@@ -101,7 +103,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "pds-css": {
       "root": "packages/pds-css",
@@ -135,7 +138,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": []
     },
     "pds-docs": {
       "projectType": "application",
@@ -250,7 +254,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "pds-docs-e2e": {
       "root": "apps/pds-docs-e2e",
@@ -276,22 +281,128 @@
             "lintFilePatterns": ["apps/pds-docs-e2e/**/*.{js,ts}"]
           }
         }
+      },
+      "tags": [],
+      "implicitDependencies": ["pds-docs"]
+    },
+    "pds-storybook": {
+      "projectType": "application",
+      "root": "apps/pds-storybook",
+      "sourceRoot": "apps/pds-storybook/src",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/pds-storybook",
+            "tsConfig": "apps/pds-storybook/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/pds-storybook/src/favicon.ico",
+              "apps/pds-storybook/src/assets",
+              {
+                "glob": "**/*.{ttf,txt}",
+                "input": "packages/pds-css/assets",
+                "output": "assets"
+              }
+            ],
+            "styles": ["apps/pds-storybook/src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["packages/pds-css/src"]
+            },
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "apps/pds-storybook/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-sb": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/pds-storybook",
+            "config": {
+              "configFolder": "apps/pds-storybook/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
       }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular"
-  },
-  "schematics": {
-    "@nrwl/angular:application": {
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
     },
-    "@nrwl/angular:library": {
-      "unitTestRunner": "jest"
-    },
-    "@nrwl/angular:component": {
-      "style": "scss"
+    "pds-storybook-e2e": {
+      "root": "apps/pds-storybook-e2e",
+      "sourceRoot": "apps/pds-storybook-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/pds-storybook-e2e/cypress.json",
+            "tsConfig": "apps/pds-storybook-e2e/tsconfig.e2e.json",
+            "devServerTarget": "pds-storybook:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "pds-storybook:serve:ci"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/pds-storybook-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["pds-storybook"]
     }
   }
 }

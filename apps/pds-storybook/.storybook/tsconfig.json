@@ -1,0 +1,8 @@
+{
+  "extends": "../../../packages/pds-components/tsconfig.json",
+  "compilerOptions": {
+    "emitDecoratorMetadata": true
+  },
+  "exclude": ["../**/*.spec.ts"],
+  "include": ["../src/**/*", "*.js"]
+}

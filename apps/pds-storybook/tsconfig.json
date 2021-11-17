@@ -4,16 +4,13 @@
   "include": [],
   "references": [
     {
-      "path": "./tsconfig.lib.json"
-    },
-    {
-      "path": "./tsconfig.lib.prod.json"
+      "path": "./tsconfig.app.json"
     },
     {
       "path": "./tsconfig.spec.json"
     },
     {
-      "path": "../../apps/pds-storybook/.storybook/tsconfig.json"
+      "path": "./tsconfig.editor.json"
     }
   ]
 }

@@ -40,3 +40,6 @@ Thumbs.db
 
 # svg-to-ts generated files
 apps/**/src/icons/*-icons.ts
+
+# storybook & compodoc generated files
+packages/**/documentation.json
