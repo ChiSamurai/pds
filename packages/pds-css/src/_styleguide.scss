@@ -102,6 +102,16 @@ $font-family: "PT Sans", sans-serif !default;
   }
 }
 
+/// Includes any foundational form style rules as well as related custom properties
+@mixin forms() {
+  @at-root :root {
+    --input-height: #{$input-height};
+  }
+
+  @include button;
+  @include input;
+}
+
 /// Includes all generally implemented html 5 elements (eg. content sectioning, text content or inline text semantics)
 @mixin html5 {
   // content-sectioning
@@ -123,11 +133,7 @@ $font-family: "PT Sans", sans-serif !default;
   @include label;
 
   // forms
-  @at-root :root {
-    --input-height: #{$input-height};
-  }
-  @include button;
-  @include input;
+  @include forms;
 }
 
 /// Includes the sheet "element" styling class
