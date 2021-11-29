@@ -4,7 +4,11 @@ import { InputDropdownOutletBase } from '@vitagroup/cdk';
 
 @Directive({
   selector: '[pdsInputDropdown]',
-  inputs: ['overlayDef: pdsInputDropdown'],
+  inputs: [
+    'overlayDef: pdsInputDropdown',
+    'preferredPosition: pdsDropdownPreferredPosition',
+    'deactivateOnBlur: pdsDropdownDeactivateOnBlur',
+  ],
 })
 export class PdsInputDropdownOutlet extends InputDropdownOutletBase {
   protected configureOverlay(): OverlayConfig {

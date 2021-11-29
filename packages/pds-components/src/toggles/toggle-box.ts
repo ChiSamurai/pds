@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, NgModule, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ToggleBase } from '@vitagroup/cdk';
+import { PdsToggleLabelAlign } from './toggle-label-align';
 
 @Component({
   selector: 'pds-toggle-box',
@@ -33,7 +34,7 @@ import { ToggleBase } from '@vitagroup/cdk';
 })
 export class PdsToggleBox extends ToggleBase {
   @Input() label?: string;
-  @Input() labelAlign?: 'before' | 'after' = 'after';
+  @Input() labelAlign?: PdsToggleLabelAlign = 'after';
 }
 
 @NgModule({

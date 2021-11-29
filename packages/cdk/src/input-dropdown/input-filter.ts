@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, Inject, InjectionToken, OnDestroy, PipeTransform } from '@angular/core';
+import { ChangeDetectorRef, Inject, Injectable, InjectionToken, OnDestroy, PipeTransform } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ControlInputAccessor, INPUT_ACCESSOR } from './control-input-accessor';
@@ -16,7 +16,7 @@ export const DEFAULT_INPUT_FILTER = new InjectionToken<InputFilterFn<unknown>>('
   },
 });
 
-@Directive()
+@Injectable()
 export abstract class InputFilterBase implements PipeTransform, OnDestroy {
   protected readonly ngDestroys = new Subject();
 

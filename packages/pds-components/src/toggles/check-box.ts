@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, NgModule, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CheckBoxBase } from '@vitagroup/cdk';
+import { PdsToggleLabelAlign } from './toggle-label-align';
 
 @Component({
   selector: 'pds-check-box',
@@ -25,33 +26,33 @@ import { CheckBoxBase } from '@vitagroup/cdk';
     </ng-container>
     <div class="toggle-indicator">
       <!-- the intermediate state is currently handled using the css ":before" pseudo -->
-      <svg viewBox="0 0 16 16">
+      <svg viewBox="0 0 18 18">
         <line
           *ngIf="!checked && intermediate"
           class="intermediate-indicator"
-          x1="4"
-          y1="8"
-          x2="12"
-          y2="8"
+          x1="5"
+          y1="9"
+          x2="13"
+          y2="9"
           [attr.stroke-width]="strokeWidth"
           [attr.stroke-linecap]="strokeLineCap"
           stroke="currentColor"
         />
         <g *ngIf="checked" class="checked-indicator">
           <line
-            x1="1"
-            y1="8"
-            x2="7"
-            y2="13"
+            x1="2"
+            y1="9"
+            x2="8"
+            y2="14"
             [attr.stroke-width]="strokeWidth"
             [attr.stroke-linecap]="strokeLineCap"
             stroke="currentColor"
           />
           <line
-            x1="7"
-            y1="13"
-            x2="15"
-            y2="3"
+            x1="8"
+            y1="14"
+            x2="16"
+            y2="4"
             [attr.stroke-width]="strokeWidth"
             [attr.stroke-linecap]="strokeLineCap"
             stroke="currentColor"
@@ -66,10 +67,10 @@ import { CheckBoxBase } from '@vitagroup/cdk';
   /* eslint-enable max-len */
 })
 export class PdsCheckBox extends CheckBoxBase {
-  @Input() label: string | null;
-  @Input() labelAlign: 'before' | 'after' = 'after';
+  @Input() label: string;
+  @Input() labelAlign: PdsToggleLabelAlign = 'after';
 
-  @Input() strokeLineCap: 'butt' | 'round' | 'square' = 'square';
+  @Input() strokeLineCap: 'round' | 'square' = 'round';
   @Input() strokeWidth = 3;
 }
 

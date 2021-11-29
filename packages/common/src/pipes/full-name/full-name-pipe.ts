@@ -69,11 +69,11 @@ export function formatFullName(obj: any, format: string = 'full', options?: Full
       // first last name letter including a dot:
       ll: (o) => `${resolveObjectPropertySelector(o, lastNameSelector)?.charAt(0) || ''}.`,
       // first name:
-      FF: (o) => `${resolveObjectPropertySelector(o, firstNameSelector) || ''}.`,
+      FF: (o) => `${resolveObjectPropertySelector(o, firstNameSelector) || ''}`,
       // last name:
-      LL: (o) => `${resolveObjectPropertySelector(o, lastNameSelector) || ''}.`,
+      LL: (o) => `${resolveObjectPropertySelector(o, lastNameSelector) || ''}`,
       // title
-      TT: (o) => `${resolveObjectPropertySelector(o, titleSelector) || ''}.`,
+      TT: (o) => `${resolveObjectPropertySelector(o, titleSelector) || ''}`,
     },
     options?.fallback
   );

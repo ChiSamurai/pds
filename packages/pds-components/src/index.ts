@@ -91,5 +91,6 @@ export * from './toggles/radio-box-module';
 export * from './toggles/radio-box';
 export * from './toggles/toggle-box';
 export * from './toggles/radio-group';
+export * from './toggles/toggle-label-align';
 
 export * from './utils';

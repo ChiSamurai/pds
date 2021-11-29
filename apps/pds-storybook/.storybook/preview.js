@@ -7,3 +7,12 @@ import { setCompodocJson } from '@storybook/addon-docs/angular';
 import * as jsonDocs from '../../../packages/pds-components/documentation.json';
 
 setCompodocJson(jsonDocs);
+
+export const parameters = {
+  // layout: 'centered',
+  options: {
+    storySort: {
+      order: ['Getting Started', 'PDS CSS', ['Intro', '*'], 'PDS Components', '*'],
+    },
+  },
+};

@@ -30,7 +30,6 @@ export * from './sort/sort-order';
 export * from './sort/sort-param-parser';
 export * from './sort/property-sort';
 
-export * from './string/string-interpolate';
 export * from './string/string-interpolation-schemes';
 export * from './string/string-interpolator';
 

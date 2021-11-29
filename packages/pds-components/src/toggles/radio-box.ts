@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { RadioBoxBase } from '@vitagroup/cdk';
+import { PdsToggleLabelAlign } from './toggle-label-align';
 
 @Component({
   selector: 'pds-radio-box',
@@ -33,5 +34,5 @@ import { RadioBoxBase } from '@vitagroup/cdk';
 })
 export class PdsRadioBox extends RadioBoxBase {
   @Input() label: string | null;
-  @Input() labelAlign: 'before' | 'after' = 'after';
+  @Input() labelAlign: PdsToggleLabelAlign = 'after';
 }

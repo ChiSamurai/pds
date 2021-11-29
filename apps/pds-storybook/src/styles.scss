@@ -1,8 +1,11 @@
 @use "~@angular/cdk/overlay" as ng;
 
-@use "styleguide" as pds;
+@use "styleguide" as pds with (
+  $background-color: #fff
+);
 
 @include pds.core;
+@include pds.forms;
 // @include pds.html5;
 
 // @include pds.color-classes;

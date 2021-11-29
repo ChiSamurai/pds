@@ -1,26 +1,40 @@
-import { Meta } from '@storybook/angular';
-import { Story } from '@storybook/angular/dist/ts3.4/client';
+import { Meta, Story } from '@storybook/angular';
 import { PdsAvatar } from './avatar';
 
 export default {
-  title: 'Components/Avatar',
+  title: 'PDS Components/Components/Avatar',
   component: PdsAvatar,
 } as Meta;
 
-const Template: Story<PdsAvatar> = (args) => ({
+const template: Story = (args) => ({
   props: args,
   template: `
-    <pds-avatar size="${args.size}">
-      <img src="https://avatars.dicebear.com/api/pixel-art-neutral/pds.svg" alt="Avatar Image" />
+    <pds-avatar [size]="size" ${args.interactive ? 'interactive' : ''} ${args.disabled ? 'disabled' : ''}>
+      <img [src]="img" alt="Avatar Image">
     </pds-avatar>
   `,
 });
 
-export const Medium = Template.bind({});
-Medium.args = { size: 'md' };
-Medium.storyName = 'Medium (default)';
+export const Default = template.bind({});
+Default.args = {
+  size: 'md',
+  disabled: false,
+  interactive: false,
+  img: 'https://avatars.dicebear.com/api/pixel-art-neutral/pds.svg',
+};
 
-export const Large = Template.bind({});
-Large.args = { size: 'lg' };
-export const Small = Template.bind({});
-Small.args = { size: 'sm' };
+export const Interactive = template.bind({});
+Interactive.args = {
+  size: 'md',
+  disabled: false,
+  interactive: true,
+  img: 'https://avatars.dicebear.com/api/pixel-art-neutral/pds.svg',
+};
+
+export const Disabled = template.bind({});
+Disabled.args = {
+  size: 'md',
+  disabled: true,
+  interactive: false,
+  img: 'https://avatars.dicebear.com/api/pixel-art-neutral/pds.svg',
+};

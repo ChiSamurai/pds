@@ -1,9 +1,9 @@
 import { Inject, InjectionToken, NgModule, Pipe, PipeTransform } from '@angular/core';
-import { getStringFormat } from '../../utils/get-string-format';
 import {
   ObjectPropertySelector,
   resolveObjectPropertySelector,
 } from '../../reflection/resolve-object-property-selector';
+import { getStringFormat } from '../../utils/get-string-format';
 
 export interface AddressFormatOptions {
   streetSelector?: ObjectPropertySelector<any>;
@@ -47,7 +47,7 @@ export function formatAddress(obj: any, format: string = 'full', options?: Addre
     additionSelector = (o) => o.addition || o.additional,
     citySelector = (o) => o.cityName || o.city,
     zipSelector = (o) => o.zipCode || o.zip,
-  } = options;
+  } = options || {};
 
   switch (format) {
     case 'street':

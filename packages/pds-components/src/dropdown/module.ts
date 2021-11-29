@@ -1,3 +1,4 @@
+import { OverlayModule } from '@angular/cdk/overlay';
 import { NgModule } from '@angular/core';
 import { PdsDropdown } from './dropdown';
 import { PdsDropdownDef } from './dropdown-def';
@@ -8,6 +9,6 @@ const declarations = [PdsDropdown, PdsDropdownDef, PdsDropdownOutlet];
 @NgModule({
   declarations,
   exports: declarations,
-  imports: [],
+  imports: [OverlayModule],
 })
 export class PdsDropdownModule {}

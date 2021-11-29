@@ -69,17 +69,21 @@ export function formatByteNumber(value: number, locale: string, format: string, 
   const singularNames = getByteNumberUnitNames();
   const [digitInfo, unitFormat] = format.split(/\s+/);
 
-  if (unit != null) {
+  if (unit) {
     const singularName = singularNames[unit];
     const pluralName = pluralNames[unit];
     const bp = breakpoints[unit];
     const n = value / bp;
 
     const nStr = formatNumber(n, locale, digitInfo);
-    return getStringFormat(null, `${nStr} ${unitFormat}`, {
+    const result = getStringFormat(null, `${nStr} ${unitFormat}`, {
       UU: () => (n === 1 ? singularName : pluralName),
       uu: () => unit,
     });
+
+    console.log(result, unitFormat);
+
+    return result;
   } else {
     for (const [unitName, unitBp] of Object.entries(breakpoints)) {
       if (value >= unitBp) return formatByteNumber(value, locale, format, unitName as ByteNumberUnit);

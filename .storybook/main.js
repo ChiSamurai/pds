@@ -13,6 +13,12 @@ module.exports = {
         },
       },
     },
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        transcludeMarkdown: true,
+      },
+    },
     '@storybook/addon-a11y',
     '@storybook/addon-essentials',
   ],

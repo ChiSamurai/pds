@@ -1,1 +1,1 @@
-export * from './spacing';
+export * from './sizing';

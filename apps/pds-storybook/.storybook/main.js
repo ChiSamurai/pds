@@ -4,7 +4,13 @@ module.exports = {
   ...rootMain,
 
   core: { ...rootMain.core, builder: 'webpack5' },
-  stories: [...rootMain.stories, '../../../packages/**/*.mdx', '../../../packages/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: [
+    ...rootMain.stories,
+    '../src/**/*.stories.mdx',
+    '../src/**/*.stories.@(js|jsx|ts|tsx)',
+    '../../../packages/**/*.stories.mdx',
+    '../../../packages/**/*.stories.@(js|jsx|ts|tsx)',
+  ],
   webpackFinal: async (config, { configType }) => {
     // apply any global webpack configs that might have been specified in .storybook/main.js
     if (rootMain.webpackFinal) {
