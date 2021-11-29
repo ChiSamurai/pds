@@ -28,7 +28,7 @@ export abstract class BreadcrumbsBase {
   @Input() stopAt: string;
 
   @Input()
-  set skipEmtpy(value: boolean) {
+  set skipEmpty(value: boolean) {
     this._skipEmpty = coerceBooleanProperty(value);
   }
   get skipEmpty(): boolean {

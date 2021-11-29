@@ -37,7 +37,7 @@ import { SELECTION_VALUE, SelectionValue } from './selection-value';
     'trackBy: selectionTrackBy',
     'allowsMultiple: selectionAllowsMultiple',
   ],
-  outputs: ['modelChange: selectionControlChange', 'change: selectionChange'],
+  outputs: ['modelChange: selectionControlChange', 'changes: selectionChanges'],
 })
 export class SelectionControl<T> extends SelectionModel<T> implements OnInit, OnDestroy, ElementFocusAccessor {
   private _limit: number | null;
@@ -125,7 +125,7 @@ export class SelectionControl<T> extends SelectionModel<T> implements OnInit, On
   }
 
   select(value: T, options?: SelectOptions): void {
-    if ((this.mode === 'preservedSingle' || this.mode === 'single') && !this.isEmpty) {
+    if (!this.allowsMultiple && (this.mode === 'preservedSingle' || this.mode === 'single') && !this.isEmpty) {
       this.deselect({ emitEvent: false });
     }
     if (this._limit == null || this.size < this._limit) {
