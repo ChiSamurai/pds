@@ -15,3 +15,9 @@
 @include pds.browser-scrollbar;
 
 @include ng.overlay;
+
+@at-root .dark {
+  @include pds.theme(pds.$dark-theme);
+
+  background-color: var(--page);
+}
