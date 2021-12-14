@@ -4,6 +4,9 @@ import { PdsRingLoader } from './ring-loader';
 export default {
   title: 'PDS Components/Components/Ring-Loader',
   component: PdsRingLoader,
+  parameters: {
+    layout: 'centered',
+  },
 } as Meta;
 
 const template: Story = (args) => ({

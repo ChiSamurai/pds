@@ -28,6 +28,10 @@ $button-transition: 100ms ease-out !default;
   line-height: 1 !important;
 
   @include typography-style(--button);
+
+  @include util.disabled-state {
+    cursor: default;
+  }
 }
 
 @mixin button-primary {
@@ -83,16 +87,19 @@ $button-transition: 100ms ease-out !default;
     --button-space-y: #{$button-space-y};
 
     @include button-base;
-    @include button-primary;
 
-    @include outer-sibling-spacing(--space-sm);
     @include outer-child-spacing(--button-space-y, x, $trim: true, $justify: true);
     @include inner-spacing(--button-space-x, x);
     @include inner-spacing(--button-space-y, y);
     @include rounding($button-rounding);
 
-    @content;
+    &:not(.block) {
+      @include outer-sibling-spacing(--space-sm);
+    }
 
+    &.primary {
+      @include button-primary;
+    }
     &.secondary {
       @include button-secondary;
     }
@@ -100,6 +107,8 @@ $button-transition: 100ms ease-out !default;
       @include inner-spacing(--button-space-y, x);
     }
     &.block {
+      @include outer-sibling-spacing(--space-xs, y, $trim: true, $justify: true);
+
       width: 100%;
     }
     &.small {
@@ -108,5 +117,7 @@ $button-transition: 100ms ease-out !default;
 
       height: var(--input-height-small, auto);
     }
+
+    @content;
   }
 }

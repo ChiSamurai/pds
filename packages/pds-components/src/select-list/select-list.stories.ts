@@ -16,7 +16,7 @@ const template: Story = (args) => ({
     <pds-select-list [multiple]="multiple" [limit]="limit" #list>
       <pds-select-option *ngFor="let option of options" [value]="option">
         <span>{{ option }}</span>
-        <span *ngIf="list.isSelected(option)">✅</span>
+        <span *ngIf="list.isSelected(option)" pdsAfter>✅</span>
       </pds-select-option>
     </pds-select-list>
   `,

@@ -11,7 +11,15 @@ pds-select-option {
   transition: color 100ms ease-out, background-color 100ms ease-out;
   border: 2px solid transparent;
   align-items: center;
-  cursor: default;
+  cursor: pointer;
+
+  > * {
+    flex-shrink: 0;
+
+    &.pds-select-option-content {
+      flex: 1 0 0;
+    }
+  }
 
   @include util.hover-state {
     color: var(--primary-lighter);

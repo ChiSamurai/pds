@@ -20,11 +20,11 @@ export const BREADCRUMB_TITLE_SELECTOR = new InjectionToken<BreadcrumbTitleSelec
   factory: /* @dynamic */ () => (site) => site.activatedRoute.data?.title,
 });
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class Breadcrumbs extends ArrayBehaviorState<BreadcrumbSiteRef> {
   constructor(
-    readonly sitemap: Sitemap,
     protected router: Router,
+    readonly sitemap: Sitemap,
     @Optional()
     @Inject(BREADCRUMB_TITLE_SELECTOR)
     protected titleSelector?: /* @dynamic */ BreadcrumbTitleSelector

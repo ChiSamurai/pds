@@ -11,7 +11,11 @@ import { SELECTION_VALUE, SelectOptionBase } from '@vitagroup/cdk';
     { provide: SELECTION_VALUE, useExisting: PdsSelectOption },
   ],
   template: `
-    <ng-content></ng-content>
+    <ng-content select="[pdsBefore]"></ng-content>
+    <div class="pds-select-option-content">
+      <ng-content></ng-content>
+    </div>
+    <ng-content select="[pdsAfter]"></ng-content>
   `,
 })
 export class PdsSelectOption<T = any> extends SelectOptionBase<T> {}

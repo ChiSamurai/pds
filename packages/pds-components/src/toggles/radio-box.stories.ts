@@ -45,8 +45,8 @@ const groupTemplate: Story = (args) => ({
   `,
 });
 
-export const Group = groupTemplate.bind({});
-Group.args = {
+export const RadioGroup = groupTemplate.bind({});
+RadioGroup.args = {
   label: 'Label',
   labelAlign: 'after',
   disabled: false,

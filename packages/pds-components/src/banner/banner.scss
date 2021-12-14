@@ -2,10 +2,10 @@
 @use "util";
 
 pds-banner {
-  --banner-space-x: var(--space-md);
-  --banner-space-y: var(--space-sm);
+  --banner-space-x: var(--space-sm);
+  --banner-space-y: var(--space-xs);
 
-  @include pds.outer-child-spacing(--space-md, x, $trim: true, $justify: true);
+  @include pds.outer-child-spacing(--banner-space-x, x, $trim: true, $justify: true);
   @include pds.inner-spacing(--banner-space-x, x);
   @include pds.inner-spacing(--banner-space-y, y);
   @include pds.rounding(--rounding-md);

@@ -15,12 +15,12 @@ export const Default = template.bind({});
 Default.args = {
   space: 'sm',
   vertical: false,
-  size: '240px',
+  size: '',
 };
 
 export const Vertical = template.bind({});
 Vertical.args = {
   space: 'sm',
   vertical: true,
-  size: '240px',
+  size: '',
 };

@@ -1,8 +1,6 @@
 @use "~@angular/cdk/overlay" as ng;
 
-@use "styleguide" as pds with (
-  $background-color: #fff
-);
+@use "styleguide" as pds;
 
 @include pds.core;
 @include pds.forms;
@@ -11,8 +9,8 @@
 // @include pds.color-classes;
 // @include pds.typography-classes;
 
-@include pds.sheet;
-@include pds.browser-scrollbar;
+// @include pds.sheet;
+// @include pds.browser-scrollbar;
 
 @include ng.overlay;
 

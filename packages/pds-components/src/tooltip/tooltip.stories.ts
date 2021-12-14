@@ -15,6 +15,9 @@ export default {
       control: 'select',
     },
   },
+  parameters: {
+    layout: 'centered',
+  },
 } as Meta;
 
 const template: Story = (args) => ({

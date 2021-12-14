@@ -1,6 +1,7 @@
 import { Component, ElementRef, NgModule, Renderer2, ViewEncapsulation } from '@angular/core';
 import { ElementActiveState, ElementDisabledState, ElementFocusState, SVG_ICON_SIZE } from '@vitagroup/cdk';
 
+/** @deprecated Use `<button class="fab">...</button>` instead (included in the pds-css package) */
 @Component({
   selector: 'pds-fab',
   styleUrls: ['./fab.scss'],
@@ -19,6 +20,7 @@ export class PdsFabButton {
   constructor(protected elementRef: ElementRef, protected renderer: Renderer2) {}
 }
 
+/** @deprecated Use `<button class="fab">...</button>` instead (included in the pds-css package) */
 @NgModule({
   declarations: [PdsFabButton],
   exports: [PdsFabButton],
