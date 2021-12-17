@@ -79,7 +79,8 @@ pipeline {
         script {
           withEnv([
             "NPM_USERNAME=${env.ARTIFACTORY_USERNAME}",
-            "NPM_PASSWORD=${env.ARTIFACTORY_PASSWORD_B64}"
+            "NPM_PASSWORD=${env.ARTIFACTORY_PASSWORD_B64}",
+            "FONTAWESOME_NPM_TOKEN=${env.FONTAWESOME_TOKEN}"
           ]) {
             sh 'npm i && npm prune'
             sh '''docker run \
