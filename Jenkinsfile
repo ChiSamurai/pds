@@ -157,7 +157,7 @@ pipeline {
         }
       }
       steps {
-/*         gitlabCommitStatus('Build docker image') { */
+         gitlabCommitStatus('Build docker image') {
           script {
             env.BRANCH_NAME = env.BRANCH_NAME.replaceAll('/', '-')
 
@@ -176,7 +176,7 @@ pipeline {
             }
  */
           }
-/*         } */
+         }
       }
     }
 
@@ -190,7 +190,7 @@ pipeline {
         }
       }
       steps {
-/*         gitlabCommitStatus('Push docker image') { */
+         gitlabCommitStatus('Push docker image') {
           script {
           echo 'Pushing Docker Image'
 /*             withCredentials([usernamePassword(credentialsId: 'artifactory-ci-jenkins', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USERNAME')]) {
@@ -201,10 +201,10 @@ pipeline {
             sh "docker push ${env.TAG_VERSION}"
 
             sh "docker rmi ${env.TAG_LATEST} | true"
-            sh "docker rmi ${env.TAG_VERSION} | true"
-          } */
+            sh "docker rmi ${env.TAG_VERSION} | true" */
+          }
 
-/*         } */
+         }
       }
     }
 
@@ -218,10 +218,10 @@ pipeline {
         }
       }
       steps {
-      echo 'ToDo: Deploy Storybook'
-/*         gitlabCommitStatus('Deploy Demo') { */
+        echo 'ToDo: Deploy Storybook'
+          gitlabCommitStatus('Deploy Demo') {
 /*           sh "helm upgrade --kube-context kube --install -f ./helm-chart/values.yaml --set images.docs.version=${env.LIB_VERSION} -n pen-design-system-demo pen-design-system-demo ./helm-chart" */
-/*         } */
+         }
       }
     }
 
