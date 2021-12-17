@@ -64,7 +64,7 @@ pipeline {
                 sh 'npx nx build cdk --prod --skip-nx-cache'
                 sh 'npx nx build common --prod --skip-nx-cache'
                 sh 'npx nx build pds-components --prod --skip-nx-cache'
-                sh 'npx nx build pds-css --prod --skip-nx-cache'
+                sh 'npx nx build pds-css --skip-nx-cache'
                 sh 'npx nx build storybook --prod --skip-nx-cache'
             }
           }
