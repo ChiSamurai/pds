@@ -40,6 +40,7 @@ pipeline {
       }
 
       steps {
+        gitlabCommitStatus('Build/Test') {
           script {
             withCredentials([
               string(credentialsId: 'fontawesome-pro-npm-auth-token', variable: 'FONTAWESOME_TOKEN'),
@@ -66,25 +67,31 @@ pipeline {
                 sh 'npx nx build pds-components --prod --skip-nx-cache'
                 sh 'npx nx build pds-css --skip-nx-cache'
                 sh 'npx nx build-sb pds-storybook --skip-nx-cache'
+              }
             }
           }
         }
       }
     }
 
-  stage('Dependency check') {
+    stage('Dependency check') {
       steps {
         script {
-          sh 'npm i && npm prune'
-          sh '''docker run \
-                    --network host \
-                    --shm-size=512m \
-                    -v ${pwd}:/tmp/workspace \
-                    -w /tmp/workspace \
-                    openjdk:latest && \
-                    chmod +x run-dependency-check.sh && \
-                    ./run-dependency-check.sh'''
-          sh 'rm -rf node_modules && rm package-lock.json'
+          withEnv([
+            "NPM_USERNAME=${env.ARTIFACTORY_USERNAME}",
+            "NPM_PASSWORD=${env.ARTIFACTORY_PASSWORD_B64}"
+          ]) {
+            sh 'npm i && npm prune'
+            sh '''docker run \
+                      --network host \
+                      --shm-size=512m \
+                      -v ${pwd}:/tmp/workspace \
+                      -w /tmp/workspace \
+                      openjdk:latest && \
+                      chmod +x run-dependency-check.sh && \
+                      ./run-dependency-check.sh'''
+            sh 'rm -rf node_modules && rm package-lock.json'
+          }
         }
       }
     }
