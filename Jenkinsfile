@@ -59,13 +59,13 @@ pipeline {
                 sh 'npm run pds-components:json'
                 sh 'npx nx lint cdk'
                 sh 'npx nx lint common'
-                sh 'npx nx lint components'
-                sh 'npx nx lint css'
+                sh 'npx nx lint pds-components'
+                sh 'npx nx lint pds-css'
 /*                 sh 'npx nx test --coverage --skip-nx-cache' */
                 sh 'npx nx build cdk --prod --skip-nx-cache'
                 sh 'npx nx build common --prod --skip-nx-cache'
-                sh 'npx nx build components --prod --skip-nx-cache'
-                sh 'npx nx build css --prod --skip-nx-cache'
+                sh 'npx nx build pds-components --prod --skip-nx-cache'
+                sh 'npx nx build pds-css --prod --skip-nx-cache'
                 sh 'npx nx build storybook --prod --skip-nx-cache'
             }
           }
