@@ -3,7 +3,7 @@ pipeline {
   agent any
 
   environment {
-    IMAGENAME = 'artifactory.vitasystems.dev/docker-registry/pds'
+    IMAGENAME = 'artifactory.vitasystems.dev/docker-registry/pds-storybook'
   }
 
   options {
@@ -72,24 +72,23 @@ pipeline {
       }
     }
 
-  /*
   stage('Dependency check') {
       steps {
         script {
-          sh 'cd packages/ngx-pen-design-system && npm i && npm prune'
+          sh 'npm i && npm prune'
           sh '''docker run \
                     --network host \
                     --shm-size=512m \
                     -v ${pwd}:/tmp/workspace \
                     -w /tmp/workspace \
                     openjdk:latest && \
-                    cd packages/ngx-pen-design-system && \
                     chmod +x run-dependency-check.sh && \
                     ./run-dependency-check.sh'''
           sh 'rm -rf node_modules && rm package-lock.json'
         }
       }
     }
+  /*
 
     stage('Sonar analysis') {
       agent {
@@ -126,6 +125,7 @@ pipeline {
         }
       }
     }
+    */
 
     stage('Publish Design System library') {
       when {
@@ -136,41 +136,47 @@ pipeline {
         }
       }
       steps {
-        gitlabCommitStatus('Publish library') {
+/*         gitlabCommitStatus('Publish library') { */
           script {
-            sh 'cd ./dist/packages/ngx-pen-design-system && npm publish --registry https://artifactory.vitasystems.dev/artifactory/api/npm/npm/'
+            echo 'publishing to artifactory / npmjs'
+            echo 'TODO: STUB until release strategy is defined'
+/*             sh 'cd ./dist/packages/ngx-pen-design-system && npm publish --registry https://artifactory.vitasystems.dev/artifactory/api/npm/npm/' */
           }
-        }
+/*         } */
       }
     }
 
-    stage('Build demo Docker image') {
+    stage('Build storybook Docker image') {
       when {
         expression {
           script {
-            return env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop'
+/*             return env.BRANCH_NAME == 'master' */
+             return true
+
           }
         }
       }
       steps {
-        gitlabCommitStatus('Build docker image') {
+/*         gitlabCommitStatus('Build docker image') { */
           script {
             env.BRANCH_NAME = env.BRANCH_NAME.replaceAll('/', '-')
 
             env.TAG_LATEST = "${env.IMAGENAME}:latest"
-            env.TAG_VERSION = "${env.IMAGENAME}:${env.LIB_VERSION}"
+            env.TAG_VERSION = "${env.IMAGENAME}:${env.PDS_COMPONENTS_LIB_VERSION}"
 
-            echo "Version: ${env.LIB_VERSION}"
+            echo "Version: ${env.PDS_COMPONENTS_LIB_VERSION}"
 
             echo "Tagging: ${env.TAG_LATEST}"
             echo "Tagging: ${env.TAG_VERSION}"
 
+/*
             withCredentials([usernamePassword(credentialsId: 'artifactory-ci-jenkins', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USERNAME')]) {
               env.ARTIFACTORY_PASSWORD_B64 = ARTIFACTORY_PASSWORD.bytes.encodeBase64().toString();
               sh 'docker build . -t ${TAG_LATEST} -t ${TAG_VERSION}'
             }
+ */
           }
-        }
+/*         } */
       }
     }
 
@@ -178,14 +184,16 @@ pipeline {
       when {
         expression {
           script {
-            return env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop'
+/*             return env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop' */
+            return true
           }
         }
       }
       steps {
-        gitlabCommitStatus('Push docker image') {
+/*         gitlabCommitStatus('Push docker image') { */
           script {
-            withCredentials([usernamePassword(credentialsId: 'artifactory-ci-jenkins', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USERNAME')]) {
+          echo 'Pushing Docker Image'
+/*             withCredentials([usernamePassword(credentialsId: 'artifactory-ci-jenkins', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USERNAME')]) {
               sh 'echo ${ARTIFACTORY_PASSWORD} | docker login artifactory.vitasystems.dev/docker-registry -u ${ARTIFACTORY_USERNAME} --password-stdin'
             }
 
@@ -194,26 +202,28 @@ pipeline {
 
             sh "docker rmi ${env.TAG_LATEST} | true"
             sh "docker rmi ${env.TAG_VERSION} | true"
-          }
+          } */
 
-        }
+/*         } */
       }
     }
 
-    stage('Deploy demo') {
+    stage('Deploy Storybook') {
       when {
         expression {
           script {
-            return env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop'
+/*             return env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop' */
+            return true
           }
         }
       }
       steps {
-        gitlabCommitStatus('Deploy Demo') {
-          sh "helm upgrade --kube-context kube --install -f ./helm-chart/values.yaml --set images.docs.version=${env.LIB_VERSION} -n pen-design-system-demo pen-design-system-demo ./helm-chart"
-        }
+      echo 'ToDo: Deploy Storybook'
+/*         gitlabCommitStatus('Deploy Demo') { */
+/*           sh "helm upgrade --kube-context kube --install -f ./helm-chart/values.yaml --set images.docs.version=${env.LIB_VERSION} -n pen-design-system-demo pen-design-system-demo ./helm-chart" */
+/*         } */
       }
-    } */
+    }
 
   }
 
