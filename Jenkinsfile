@@ -55,8 +55,8 @@ pipeline {
                 sh 'cp .docker/npm/.npmrc .npmrc'
 
                 sh 'npm ci'
-                sh 'npx nx pds-doc-icons-to-ts'
-                sh 'npx nx pds-components:json'
+                sh 'npm run pds-doc-icons-to-ts'
+                sh 'npm run pds-components:json'
                 sh 'npx nx lint'
                 sh 'npx nx test --coverage --skip-nx-cache'
                 sh 'npx nx build cdk --prod --skip-nx-cache'
