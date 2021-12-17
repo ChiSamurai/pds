@@ -13,6 +13,13 @@ pipeline {
 
   stages {
 
+    stage('test') {
+      def packagesList = ["cdk", "common", "pds-components"]
+      for(int i=0; i < list.size(); i++) {
+          echo 'cd packages/$packagesList[i]'
+      }
+    }
+
     stage('Prepare build') {
       steps {
         script {
@@ -87,7 +94,7 @@ pipeline {
               "NPM_PASSWORD=${env.ARTIFACTORY_PASSWORD_B64}",
               "FONTAWESOME_NPM_TOKEN=${env.FONTAWESOME_TOKEN}"
             ]) {
-              packagesList = ["cdk", "common", "pds-components"]
+              def packagesList = ["cdk", "common", "pds-components"]
               for(int i=0; i < list.size(); i++) {
                   sh 'cd packages/$packagesList[i] && npm i && npm prune'
                   sh 'npm i && npm prune'
