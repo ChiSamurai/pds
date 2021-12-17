@@ -30,7 +30,6 @@ pipeline {
         }
       }
     }
-/*
     stage('Build artifacts') {
       agent {
         docker {
@@ -41,7 +40,6 @@ pipeline {
       }
 
       steps {
-        gitlabCommitStatus('Build/Test') {
           script {
             withCredentials([
               string(credentialsId: 'fontawesome-pro-npm-auth-token', variable: 'FONTAWESOME_TOKEN'),
@@ -57,19 +55,23 @@ pipeline {
                 sh 'cp .docker/npm/.npmrc .npmrc'
 
                 sh 'npm ci'
-                sh 'npx nx generate-icons ngx-pen-design-system'
-                sh 'npx nx generate-icons pen-design-system-demo'
+                sh 'npx nx pds-doc-icons-to-ts'
+                sh 'npx nx pds-components:json'
                 sh 'npx nx lint'
                 sh 'npx nx test --coverage --skip-nx-cache'
-                sh 'npx nx build pen-design-system-demo --prod --skip-nx-cache'
-              }
+                sh 'npx nx build cdk --prod --skip-nx-cache'
+                sh 'npx nx build common --prod --skip-nx-cache'
+                sh 'npx nx build components --prod --skip-nx-cache'
+                sh 'npx nx build css --prod --skip-nx-cache'
+                sh 'npx nx build storybook --prod --skip-nx-cache'
             }
           }
         }
       }
     }
 
-    stage('Dependency check') {
+  /*
+  stage('Dependency check') {
       steps {
         script {
           sh 'cd packages/ngx-pen-design-system && npm i && npm prune'
