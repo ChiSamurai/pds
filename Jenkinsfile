@@ -57,8 +57,11 @@ pipeline {
                 sh 'npm ci'
                 sh 'npm run pds-doc-icons-to-ts'
                 sh 'npm run pds-components:json'
-                sh 'npx nx lint'
-                sh 'npx nx test --coverage --skip-nx-cache'
+                sh 'npx nx lint cdk'
+                sh 'npx nx lint common'
+                sh 'npx nx lint components'
+                sh 'npx nx lint css'
+/*                 sh 'npx nx test --coverage --skip-nx-cache' */
                 sh 'npx nx build cdk --prod --skip-nx-cache'
                 sh 'npx nx build common --prod --skip-nx-cache'
                 sh 'npx nx build components --prod --skip-nx-cache'
