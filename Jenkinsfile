@@ -102,17 +102,21 @@ pipeline {
             ]) {
               def packagesList = ["cdk", "common", "pds-components"]
               for(int i=0; i < packagesList.size(); i++) {
-                  sh "cd packages/${packagesList[i]} && npm i && npm prune"
-                  sh 'npm i && npm prune'
-                  sh '''docker run \
-                            --network host \
-                            --shm-size=512m \
-                            -v ${pwd}:/tmp/workspace \
-                            -w /tmp/workspace \
-                            openjdk:latest && \
-                            chmod +x run-dependency-check.sh && \
-                            ./run-dependency-check.sh'''
-                  sh 'rm -rf node_modules && rm package-lock.json'
+                stage(packagesList[i]) {
+                  script{
+                    sh "cd packages/${packagesList[i]} && npm i && npm prune"
+                    sh 'npm i && npm prune'
+                    sh '''docker run \
+                              --network host \
+                              --shm-size=512m \
+                              -v ${pwd}:/tmp/workspace \
+                              -w /tmp/workspace \
+                              openjdk:latest && \
+                              chmod +x run-dependency-check.sh && \
+                              ./run-dependency-check.sh'''
+                    sh 'rm -rf node_modules && rm package-lock.json'
+                  }
+                }
               }
             }
           }
