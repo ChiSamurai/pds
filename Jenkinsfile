@@ -12,6 +12,7 @@ pipeline {
   }
 
   stages {
+/*
 
     stage('test') {
       steps {
@@ -24,6 +25,7 @@ pipeline {
       }
     }
 
+ */
     stage('Prepare build') {
       steps {
         script {
@@ -100,7 +102,7 @@ pipeline {
             ]) {
               def packagesList = ["cdk", "common", "pds-components"]
               for(int i=0; i < packagesList.size(); i++) {
-                  sh 'cd packages/${packagesList[i]} && npm i && npm prune'
+                  sh "cd packages/${packagesList[i]} && npm i && npm prune"
                   sh 'npm i && npm prune'
                   sh '''docker run \
                             --network host \
