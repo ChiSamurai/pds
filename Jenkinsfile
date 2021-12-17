@@ -77,21 +77,27 @@ pipeline {
     stage('Dependency check') {
       steps {
         script {
-          withEnv([
-            "NPM_USERNAME=${env.ARTIFACTORY_USERNAME}",
-            "NPM_PASSWORD=${env.ARTIFACTORY_PASSWORD_B64}",
-            "FONTAWESOME_NPM_TOKEN=${env.FONTAWESOME_TOKEN}"
+          withCredentials([
+            string(credentialsId: 'fontawesome-pro-npm-auth-token', variable: 'FONTAWESOME_TOKEN'),
+            usernamePassword(credentialsId: 'artifactory-ci-jenkins', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USERNAME')
           ]) {
-            sh 'npm i && npm prune'
-            sh '''docker run \
-                      --network host \
-                      --shm-size=512m \
-                      -v ${pwd}:/tmp/workspace \
-                      -w /tmp/workspace \
-                      openjdk:latest && \
-                      chmod +x run-dependency-check.sh && \
-                      ./run-dependency-check.sh'''
-            sh 'rm -rf node_modules && rm package-lock.json'
+            env.ARTIFACTORY_PASSWORD_B64 = ARTIFACTORY_PASSWORD.bytes.encodeBase64().toString();
+            withEnv([
+              "NPM_USERNAME=${env.ARTIFACTORY_USERNAME}",
+              "NPM_PASSWORD=${env.ARTIFACTORY_PASSWORD_B64}",
+              "FONTAWESOME_NPM_TOKEN=${env.FONTAWESOME_TOKEN}"
+            ]) {
+              sh 'npm i && npm prune'
+              sh '''docker run \
+                        --network host \
+                        --shm-size=512m \
+                        -v ${pwd}:/tmp/workspace \
+                        -w /tmp/workspace \
+                        openjdk:latest && \
+                        chmod +x run-dependency-check.sh && \
+                        ./run-dependency-check.sh'''
+              sh 'rm -rf node_modules && rm package-lock.json'
+            }
           }
         }
       }
