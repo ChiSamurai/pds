@@ -14,9 +14,13 @@ pipeline {
   stages {
 
     stage('test') {
-      def packagesList = ["cdk", "common", "pds-components"]
-      for(int i=0; i < list.size(); i++) {
-          echo 'cd packages/$packagesList[i]'
+      steps {
+        script {
+          def packagesList = ["cdk", "common", "pds-components"]
+          for(int i=0; i < packagesList.size(); i++) {
+              echo "cd packages/${packagesList[i]}"
+          }
+        }
       }
     }
 
@@ -95,8 +99,8 @@ pipeline {
               "FONTAWESOME_NPM_TOKEN=${env.FONTAWESOME_TOKEN}"
             ]) {
               def packagesList = ["cdk", "common", "pds-components"]
-              for(int i=0; i < list.size(); i++) {
-                  sh 'cd packages/$packagesList[i] && npm i && npm prune'
+              for(int i=0; i < packagesList.size(); i++) {
+                  sh 'cd packages/${packagesList[i]} && npm i && npm prune'
                   sh 'npm i && npm prune'
                   sh '''docker run \
                             --network host \
