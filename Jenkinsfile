@@ -113,7 +113,6 @@ pipeline {
         }
       }
     }
-  /*
 
     stage('Sonar analysis') {
       agent {
@@ -130,12 +129,12 @@ pipeline {
         script {
           withSonarQubeEnv('Sonar') {
             sh """sonar-scanner \
-                        -Dsonar.host.url=${env.SONAR_HOST_URL} \
-                        -Dsonar.login=${env.SONAR_AUTH_TOKEN} \
-                        -Dsonar.projectVersion=${env.LIB_VERSION} \
-                        -Dsonar.branch.name=${env.BRANCH_NAME} \
-                        -Dsonar.branch.target=${env.SONAR_BRANCH_TARGET}
-                        """
+              -Dsonar.host.url=${env.SONAR_HOST_URL} \
+              -Dsonar.login=${env.SONAR_AUTH_TOKEN} \
+              -Dsonar.projectVersion=${env.LIB_VERSION} \
+              -Dsonar.branch.name=${env.BRANCH_NAME} \
+              -Dsonar.branch.target=${env.SONAR_BRANCH_TARGET}
+              """
           }
         }
       }
@@ -150,7 +149,6 @@ pipeline {
         }
       }
     }
-    */
 
     stage('Publish Design System library') {
       when {
@@ -194,12 +192,10 @@ pipeline {
             echo "Tagging: ${env.TAG_LATEST}"
             echo "Tagging: ${env.TAG_VERSION}"
 
-/*
             withCredentials([usernamePassword(credentialsId: 'artifactory-ci-jenkins', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USERNAME')]) {
               env.ARTIFACTORY_PASSWORD_B64 = ARTIFACTORY_PASSWORD.bytes.encodeBase64().toString();
-              sh 'docker build . -t ${TAG_LATEST} -t ${TAG_VERSION}'
+              sh 'docker build -t ${TAG_LATEST} -t ${TAG_VERSION} - < Dockerfile_storybook'
             }
- */
           }
          }
       }
@@ -218,7 +214,7 @@ pipeline {
          gitlabCommitStatus('Push docker image') {
           script {
           echo 'Pushing Docker Image'
-/*             withCredentials([usernamePassword(credentialsId: 'artifactory-ci-jenkins', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USERNAME')]) {
+              withCredentials([usernamePassword(credentialsId: 'artifactory-ci-jenkins', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USERNAME')]) {
               sh 'echo ${ARTIFACTORY_PASSWORD} | docker login artifactory.vitasystems.dev/docker-registry -u ${ARTIFACTORY_USERNAME} --password-stdin'
             }
 
@@ -226,7 +222,7 @@ pipeline {
             sh "docker push ${env.TAG_VERSION}"
 
             sh "docker rmi ${env.TAG_LATEST} | true"
-            sh "docker rmi ${env.TAG_VERSION} | true" */
+            sh "docker rmi ${env.TAG_VERSION} | true"
           }
 
          }

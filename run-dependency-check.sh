@@ -22,4 +22,6 @@ chmod +x ./odc/tmp/dependency-check/bin/dependency-check.sh
   --exclude "dist/**" \
   --exclude "apps/**" \
   --exclude "docs/**" \
-  --exclude "odc/**"
+  --exclude "odc/**" \
+  --disableYarnAudit \
+  --disableAssembly
