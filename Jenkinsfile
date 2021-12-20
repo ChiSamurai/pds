@@ -100,17 +100,14 @@ pipeline {
               "NPM_PASSWORD=${env.ARTIFACTORY_PASSWORD_B64}",
               "FONTAWESOME_NPM_TOKEN=${env.FONTAWESOME_TOKEN}"
             ]) {
-                  script{
-                    sh '''docker run \
-                              --network host \
-                              --shm-size=512m \
-                              -v ${pwd}:/tmp/workspace \
-                              -w /tmp/workspace \
-                              openjdk:latest && \
-                              chmod +x run-dependency-check.sh && \
-                              ./run-dependency-check.sh'''
-                }
-              }
+                  sh '''docker run \
+                            --network host \
+                            --shm-size=512m \
+                            -v ${pwd}:/tmp/workspace \
+                            -w /tmp/workspace \
+                            openjdk:latest && \
+                            chmod +x run-dependency-check.sh && \
+                            ./run-dependency-check.sh'''
             }
           }
         }
