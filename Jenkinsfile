@@ -196,7 +196,7 @@ pipeline {
 
             withCredentials([usernamePassword(credentialsId: 'artifactory-ci-jenkins', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USERNAME')]) {
               env.ARTIFACTORY_PASSWORD_B64 = ARTIFACTORY_PASSWORD.bytes.encodeBase64().toString();
-              sh 'docker build -t ${TAG_LATEST} -t ${TAG_VERSION} - < Dockerfile_storybook'
+              sh 'docker build -t ${TAG_LATEST} -t ${TAG_VERSION} -f Dockerfile_storybook .'
             }
           }
          }
