@@ -104,8 +104,8 @@ pipeline {
               for(int i=0; i < packagesList.size(); i++) {
                 stage(packagesList[i]) {
                   script{
-                    sh "cd packages/${packagesList[i]} && npm i && npm prune"
                     sh 'npm i && npm prune'
+                    sh "cd packages/${packagesList[i]} && npm i && npm prune"
                     sh '''docker run \
                               --network host \
                               --shm-size=512m \
