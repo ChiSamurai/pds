@@ -87,6 +87,7 @@ pipeline {
       }
     }
 
+/*
     stage('Dependency check') {
       steps {
         script {
@@ -113,11 +114,12 @@ pipeline {
         }
       }
     }
+ */
 
     stage('Sonar analysis') {
       agent {
         docker {
-          image 'docker-registry/alpine-sonarscanner:0.3.1'
+          image 'docker-registry/alpine-sonarscanner:4.6.2-jdk11'
           registryUrl 'https://artifactory.vitasystems.dev'
           registryCredentialsId 'artifactory-ci-jenkins'
           args "-v /var/custom_caches/jenkins/.m2:/var/custom_caches/jenkins/.m2 -v ${env.WORKSPACE}:/tmp/workspace -w /tmp/workspace"

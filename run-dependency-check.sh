@@ -24,4 +24,6 @@ chmod +x ./odc/tmp/dependency-check/bin/dependency-check.sh
   --exclude "docs/**" \
   --exclude "odc/**" \
   --disableYarnAudit \
-  --disableAssembly
+  --disableAssembly \
+  --nodeAuditSkipDevDependencies \
+  --nodePackageSkipDevDependencies
