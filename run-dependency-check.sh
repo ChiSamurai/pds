@@ -19,7 +19,7 @@ chmod +x ./odc/tmp/dependency-check/bin/dependency-check.sh
   --format "HTML" \
   --format "JSON" \
   --out "./odc/reports/global" \
-  --exclude "/dist/"
-  --exclude "/apps/"
-  --exclude "/docs/"
-  --exclude "/odc/"
+  --exclude "dist/**" \
+  --exclude "apps/**" \
+  --exclude "docs/**" \
+  --exclude "odc/**"
