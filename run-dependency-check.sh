@@ -13,9 +13,34 @@ curl -s -L -o odc/tmp/dependency-check.zip "$RELEASE_URL"
 
 chmod +x ./odc/tmp/dependency-check/bin/dependency-check.sh
 ./odc/tmp/dependency-check/bin/dependency-check.sh \
-  --project "PDS Design System" \
+  --project "Global" \
   --scan "./package.json" \
   --format "XML" \
   --format "HTML" \
   --format "JSON" \
   --out "./odc/reports"
+
+./odc/tmp/dependency-check/bin/dependency-check.sh \
+  --project "PDS CDK" \
+  --scan "./packages/cdk/package.json" \
+  --format "XML" \
+  --format "HTML" \
+  --format "JSON" \
+  --out "./odc/reports"
+
+./odc/tmp/dependency-check/bin/dependency-check.sh \
+  --project "PDS common" \
+  --scan "./packages/common/package.json" \
+  --format "XML" \
+  --format "HTML" \
+  --format "JSON" \
+  --out "./odc/reports"
+
+./odc/tmp/dependency-check/bin/dependency-check.sh \
+  --project "PDS components" \
+  --scan "./packages/pds-components/package.json" \
+  --format "XML" \
+  --format "HTML" \
+  --format "JSON" \
+  --out "./odc/reports"
+

@@ -100,12 +100,7 @@ pipeline {
               "NPM_PASSWORD=${env.ARTIFACTORY_PASSWORD_B64}",
               "FONTAWESOME_NPM_TOKEN=${env.FONTAWESOME_TOKEN}"
             ]) {
-              def packagesList = ["cdk", "common", "pds-components"]
-              for(int i=0; i < packagesList.size(); i++) {
-                stage(packagesList[i]) {
                   script{
-                    sh 'npm i && npm prune'
-                    sh "cd packages/${packagesList[i]} && npm i && npm prune"
                     sh '''docker run \
                               --network host \
                               --shm-size=512m \
@@ -114,8 +109,6 @@ pipeline {
                               openjdk:latest && \
                               chmod +x run-dependency-check.sh && \
                               ./run-dependency-check.sh'''
-                    sh 'rm -rf node_modules && rm package-lock.json'
-                  }
                 }
               }
             }
