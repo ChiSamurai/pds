@@ -116,7 +116,7 @@ pipeline {
     }
  */
 
-    stage('Sonar analysis') {
+/*     stage('Sonar analysis') {
       agent {
         docker {
           image 'docker-registry/alpine-sonarscanner:4.6.2-jdk11'
@@ -150,7 +150,7 @@ pipeline {
           }
         }
       }
-    }
+    } */
 
     stage('Publish Design System library') {
       when {
