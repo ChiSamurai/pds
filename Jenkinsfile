@@ -69,17 +69,21 @@ pipeline {
                 sh 'cp .docker/npm/.npmrc .npmrc'
 
                 sh 'npm ci'
+/*
                 sh 'npm run pds-doc-icons-to-ts'
                 sh 'npm run pds-components:json'
                 sh 'npx nx lint cdk'
                 sh 'npx nx lint common'
                 sh 'npx nx lint pds-components'
-/*                 sh 'npx nx test --coverage --skip-nx-cache' */
+ */
+/*                 sh 'npx nx test --coverage --skip-nx-cache' *//*
+
                 sh 'npx nx build cdk --prod --skip-nx-cache'
                 sh 'npx nx build common --prod --skip-nx-cache'
                 sh 'npx nx build pds-components --prod --skip-nx-cache'
                 sh 'npx nx build pds-css --skip-nx-cache'
                 sh 'npx nx build-sb pds-storybook --skip-nx-cache'
+ */
               }
             }
           }
