@@ -18,7 +18,7 @@ chmod +x ./odc/tmp/dependency-check/bin/dependency-check.sh
   --format "XML" \
   --format "HTML" \
   --format "JSON" \
-  --out "./odc/reports"
+  --out "./odc/reports/global"
 
 ./odc/tmp/dependency-check/bin/dependency-check.sh \
   --project "PDS CDK" \
@@ -26,7 +26,7 @@ chmod +x ./odc/tmp/dependency-check/bin/dependency-check.sh
   --format "XML" \
   --format "HTML" \
   --format "JSON" \
-  --out "./odc/reports"
+  --out "./odc/reports/cdk"
 
 ./odc/tmp/dependency-check/bin/dependency-check.sh \
   --project "PDS common" \
@@ -34,7 +34,7 @@ chmod +x ./odc/tmp/dependency-check/bin/dependency-check.sh
   --format "XML" \
   --format "HTML" \
   --format "JSON" \
-  --out "./odc/reports"
+  --out "./odc/reports/common"
 
 ./odc/tmp/dependency-check/bin/dependency-check.sh \
   --project "PDS components" \
@@ -42,5 +42,4 @@ chmod +x ./odc/tmp/dependency-check/bin/dependency-check.sh
   --format "XML" \
   --format "HTML" \
   --format "JSON" \
-  --out "./odc/reports"
-
+  --out "./odc/reports/components"
