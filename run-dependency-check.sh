@@ -18,7 +18,6 @@ chmod +x ./odc/tmp/dependency-check/bin/dependency-check.sh
   --format "XML" \
   --format "HTML" \
   --format "JSON" \
-  --log
   --out "./odc/reports/global"
 
 #./odc/tmp/dependency-check/bin/dependency-check.sh \
