@@ -13,33 +13,13 @@ curl -s -L -o odc/tmp/dependency-check.zip "$RELEASE_URL"
 
 chmod +x ./odc/tmp/dependency-check/bin/dependency-check.sh
 ./odc/tmp/dependency-check/bin/dependency-check.sh \
-  --project "Global" \
-  --scan "./package.json" \
+  --project "PDS" \
+  --scan "./" \
   --format "XML" \
   --format "HTML" \
   --format "JSON" \
-  --out "./odc/reports/global"
-
-#./odc/tmp/dependency-check/bin/dependency-check.sh \
-#  --project "PDS CDK" \
-#  --scan "./packages/cdk/package.json" \
-#  --format "XML" \
-#  --format "HTML" \
-#  --format "JSON" \
-#  --out "./odc/reports/cdk"
-#
-#./odc/tmp/dependency-check/bin/dependency-check.sh \
-#  --project "PDS common" \
-#  --scan "./packages/common/package.json" \
-#  --format "XML" \
-#  --format "HTML" \
-#  --format "JSON" \
-#  --out "./odc/reports/common"
-#
-#./odc/tmp/dependency-check/bin/dependency-check.sh \
-#  --project "PDS components" \
-#  --scan "./packages/pds-components/package.json" \
-#  --format "XML" \
-#  --format "HTML" \
-#  --format "JSON" \
-#  --out "./odc/reports/components"
+  --out "./odc/reports/global" \
+  --exclude "/dist/"
+  --exclude "/apps/"
+  --exclude "/docs/"
+  --exclude "/odc/"

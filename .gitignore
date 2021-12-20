@@ -43,3 +43,4 @@ apps/**/src/icons/*-icons.ts
 
 # storybook & compodoc generated files
 packages/**/documentation.json
+/odc/
