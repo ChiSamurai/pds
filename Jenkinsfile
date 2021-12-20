@@ -87,7 +87,6 @@ pipeline {
       }
     }
 
-/*
     stage('Dependency check') {
       steps {
         script {
@@ -114,7 +113,6 @@ pipeline {
         }
       }
     }
- */
 
 /*     stage('Sonar analysis') {
       agent {
@@ -161,13 +159,13 @@ pipeline {
         }
       }
       steps {
-/*         gitlabCommitStatus('Publish library') { */
+        gitlabCommitStatus('Publish library') {
           script {
             echo 'publishing to artifactory / npmjs'
             echo 'TODO: STUB until release strategy is defined'
 /*             sh 'cd ./dist/packages/ngx-pen-design-system && npm publish --registry https://artifactory.vitasystems.dev/artifactory/api/npm/npm/' */
           }
-/*         } */
+        }
       }
     }
 
@@ -175,14 +173,12 @@ pipeline {
       when {
         expression {
           script {
-/*             return env.BRANCH_NAME == 'master' */
-             return true
-
+             return env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop'
           }
         }
       }
       steps {
-         gitlabCommitStatus('Build docker image') {
+        gitlabCommitStatus('Build storybook docker image') {
           script {
             env.BRANCH_NAME = env.BRANCH_NAME.replaceAll('/', '-')
 
@@ -203,17 +199,16 @@ pipeline {
       }
     }
 
-    stage('Push demo Docker image') {
+    stage('Push demo storybook Docker image') {
       when {
         expression {
           script {
-/*             return env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop' */
-            return true
+             return env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop'
           }
         }
       }
       steps {
-         gitlabCommitStatus('Push docker image') {
+        gitlabCommitStatus('Push storybook docker image') {
           script {
           echo 'Pushing Docker Image'
               withCredentials([usernamePassword(credentialsId: 'artifactory-ci-jenkins', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USERNAME')]) {
@@ -226,24 +221,22 @@ pipeline {
             sh "docker rmi ${env.TAG_LATEST} | true"
             sh "docker rmi ${env.TAG_VERSION} | true"
           }
-
-         }
+        }
       }
     }
 
-    stage('Deploy Storybook') {
+    stage('Deploy Storybook container') {
       when {
         expression {
           script {
-/*             return env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop' */
-            return true
+             return env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop'
           }
         }
       }
       steps {
         echo 'ToDo: Deploy Storybook'
           gitlabCommitStatus('Deploy Demo') {
-/*           sh "helm upgrade --kube-context kube --install -f ./helm-chart/values.yaml --set images.docs.version=${env.LIB_VERSION} -n pen-design-system-demo pen-design-system-demo ./helm-chart" */
+/*            sh "helm upgrade --kube-context kube --install -f ./helm-chart/values.yaml --set images.docs.version=${env.LIB_VERSION} -n pen-design-system-demo pen-design-system-demo ./helm-chart" */
          }
       }
     }
